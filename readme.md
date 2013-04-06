@@ -36,4 +36,4 @@ Want to get involved with the project? You are free to help out on the project, 
 [wiki]: https://github.com/miguelishawt/anax/wiki
 [wiki-install]: https://github.com/miguelishawt/anax/wiki/install.md
 [examples]: https://github.com/miguelishawt/anax-examples
-[logo]: https://raw.github.com/miguelishawt/anax/doc/logo.png
+[logo]: https://raw.github.com/miguelishawt/anax/master/doc/logo.png
