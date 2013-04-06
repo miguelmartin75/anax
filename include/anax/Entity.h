@@ -37,8 +37,83 @@ namespace anax
 {
 	class World;
 	class BaseEntitySystem;
-	class ComponentStorage;
 	class EntityContainer;
+	
+	class Entity;
+	/*
+	class EntityAttributes
+	{		
+	public:
+		
+		/// Default Constructor
+		EntityAttributes();
+		
+		/// Destructor
+		~EntityAttributes();
+		
+		
+		void addComponent(Entity& entity, BaseComponent* component);
+		
+		template <typename TComponent>
+		void addComponent(Entity& entity, TComponent* component);
+		
+		void removeComponent(Entity& entity, );
+		
+		template <typename TComponent>
+		void removeComponent(EntityPtr entity, TComponent* component);
+		
+		/// Removes all the components for an Entity
+		/// \param e The Enitty you wish to remove all the components from
+		void removeAllComponents(EntityPtr entity);
+		
+		template <typename TComponent>
+		TComponent* getComponent(const Entity& entity) const;
+		
+		bool containsComponent(const Entity& e, BaseComponent* component) const;
+		
+		
+		bool containsComponent(const Entity& e, ComponentPtr component, const ComponentType& componentType) const;
+		
+		/// Determines whether an Entity contains a component
+		/// \param e The Entity which contains the component
+		/// \param componentType The class type that the Component is
+		bool containsComponent(ConstEntityPtr e, const ComponentType& componentType) const;
+		
+		/// \param e The Entity you wish to retrieve the entities for
+		/// \return All the components that an Entity contains
+		ComponentArray getComponentsFor(ConstEntityPtr e) const;
+		
+		/// Clears the ComponentStorage
+		/// Removes all Entities and Components that are attached to it.
+		void clear();
+		
+	private:
+		
+        // TODO: Change entirely
+		struct ComponentDeleterFunctor
+		{
+			void operator()(ComponentPtr component) const
+			{
+				delete component; // TODO: Change
+			}
+		};
+		
+		typedef std::unique_ptr<BaseComponent, ComponentDeleterFunctor> SmartComponentPtr;
+		typedef std::vector<SmartComponentPtr> ImplComponentArray;
+		typedef std::vector<ImplComponentArray> ImplComponentEntityArray;
+		
+		
+		/// The components for every entity
+		/// These components are layed out as follows:
+		/// components[ENTITY_ID][COMPONENT_ID]
+		/// That will retrieve the appropriate component for an entity
+		/// \note
+		/// I decided to place the entity's ID first, since there will be less
+		/// "big" calls to resize. Since there is most likely more entities
+		/// in a game than there is component types.
+		ImplComponentEntityArray _componentsForEntities;
+	};
+	*/
 	
 	/// \class Entity
 	/// \brief An Entity that is used for a game
@@ -52,9 +127,17 @@ namespace anax
 	class Entity
 	{
 		friend class World;
+		
+		// TODO: remove
 		friend class EntityFactory;		// To construct an Entity object
+		
+		// TODO: remove
 		friend class BaseEntitySystem;	// To change the SystemBits
+		
+		// TODO: remove
 		friend class ComponentStorage;	// To change the ComponentBits
+		
+		// TODO: remove
 		friend class EntityContainer;	// To assign the ID
 		
 	public:
@@ -99,33 +182,33 @@ namespace anax
 		
 		/// Adds a Component to the Entity
 		/// \param component The component you wish to add
-		void addComponent(ComponentPtr component)
+		void add(ComponentPtr component)
 		{
-			getComponentStorage().addComponent(this, component);
+			getComponentStorage().addComponent(*this, component);
 		}
 		
 		/// Destroys a Component from an Entity
 		/// \tparam T The type of Component you wish to destroy
 		template <typename T>
-		void destroyComponent()
+		void remove()
 		{
-			getComponentStorage().destroyComponent(this, T::GetClass());
+			getComponentStorage().destroyComponent(*this, T::GetClass());
 		}
 		
 		/// Destroys a Component from an Entity
 		/// \param component The component you wish to destroy
-		void destroyComponent(ComponentPtr component)
+		void remove(ComponentPtr component)
 		{
-			getComponentStorage().destroyComponent(this, component);
+			getComponentStorage().destroyComponent(*this, component);
 		}
 		
 		/// Determines whether an Entity contains a Component
 		/// \tparam T The type of Component you wish to check for
 		/// \return true if the Entity contains the Component
 		template <typename T>
-		bool containsComponent() const
+		bool contains() const
 		{
-			return getComponentStorage().containsComponent(this, T::GetClass());
+			return getComponentStorage().containsComponent(*this, T::GetClass());
 		}
 		
 		/// Determines whether an Entity contains a Component
@@ -133,7 +216,7 @@ namespace anax
 		/// \param component The Component you wish to check for
 		/// \return true if the Entity contains the Component
 		template <typename T>
-		bool containsComponent(T* component) const
+		bool contains(T* component) const
 		{
 			return containsComponent(component);
 		}
@@ -142,7 +225,7 @@ namespace anax
 		/// \tparam T The type of component you wish to retrieve
 		/// \return The Component you wish to retrieve, or null if the type does not exsist within the Entity
 		template <typename T>
-		T* getComponent() const
+		T* get() const
 		{
 			return static_cast<T*>(getComponent(T::GetClass()));
 		}
@@ -150,7 +233,7 @@ namespace anax
 		/// Obtains a Component from an Entity
 		/// \param componentType The type of component you wish to retrieve
 		/// \return The Component you wish to retrieve, or null if the type does not exsist within the Entity
-		ComponentPtr getComponent(const ComponentType& componentType) const;
+		ComponentPtr get(const ComponentType& componentType) const;
 		
 		/// \return All the Components that the Entity contains
 		ComponentArray getComponents() const;
@@ -172,6 +255,9 @@ namespace anax
 		/// The scene that the Entity belongs to
 		World* _world;
 		
+		
+		/// TODO: remove
+		
 		/// This determines whether this Entity is within an EntitySystem
 		DynamicBitSet _systemBits;
 		
@@ -181,9 +267,13 @@ namespace anax
 		
 		
 		// Prevent from copying; purposely not defined
+		// TODO: should I remove?
 		Entity(const Entity&);
 		const Entity& operator=(const Entity&);
 	};
+	
+	
+	
 }
 
 #endif // __ANAX_ENTITY_H__

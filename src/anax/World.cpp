@@ -214,7 +214,7 @@ namespace anax
 			}
 			
 			// delete components
-			_componentStorage.destroyAllComponents(entity);
+			_componentStorage.destroyAllComponents(*entity);
 			
 			// erase it from the container
 			_entityContainer.erase(entity);

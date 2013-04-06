@@ -96,14 +96,14 @@ namespace anax
 		return getWorld().isEntityAlive(this);
 	}
 	
-	ComponentPtr Entity::getComponent(const ComponentType& componentType) const
+	ComponentPtr Entity::get(const ComponentType& componentType) const
 	{
-		return getComponentStorage().getComponent(this, componentType);
+		return getComponentStorage().getComponent(*this, componentType);
 	}
 	
 	ComponentArray Entity::getComponents() const
 	{
-		return getWorld().getComponentStorage().getComponentsFor(this);
+		return getWorld().getComponentStorage().getComponentsFor(*this);
 	}
 	
 	ComponentStorage& Entity::getComponentStorage() const

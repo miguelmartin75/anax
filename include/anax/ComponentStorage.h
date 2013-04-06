@@ -60,6 +60,9 @@ namespace anax
 		
 	public:
 		
+		typedef BaseComponent* ComponentPtr;
+		
+		
 		/// Default Constructor
 		ComponentStorage();
 		
@@ -73,7 +76,7 @@ namespace anax
 		/// \param component The component you wish to add to the Entity
 		/// \note
 		/// An Entity may only have one TYPE of a component
-		void addComponent(EntityPtr e, ComponentPtr component);
+		void addComponent(Entity& e, ComponentPtr component);
 		
 		/// Adds a Component to an Entity
 		/// \param e The Entity you wish to add the component to
@@ -85,7 +88,7 @@ namespace anax
 		/// you add it. If you DO know the type of component you are adding,
 		/// use this method instead of the other method, it will be
 		/// SLIGHTLY (no virtual function calls) faster.
-		void addComponent(EntityPtr e, ComponentPtr component, const ComponentType& componentType);
+		void addComponent(Entity& e, ComponentPtr component, const ComponentType& componentType);
 		
 		/// Destroys a Component from an Entity
 		/// \param e The Entity you wish to remove the component from
@@ -93,7 +96,7 @@ namespace anax
 		/// \note
 		/// If the component does not exsist within the Entity it will simply
 		/// be ignored
-		void destroyComponent(EntityPtr e, ComponentPtr component);
+		void destroyComponent(Entity& e, ComponentPtr component);
 		
 		/// Destroys a Component from an Entity
 		/// \param e The Entity you wish to remove the component from
@@ -102,7 +105,7 @@ namespace anax
 		/// \note
 		/// If the component does not exsist within the Entity it will simply
 		/// be ignored
-		void destroyComponent(EntityPtr e, ComponentPtr component, const ComponentType& componentType);
+		void destroyComponent(Entity& e, ComponentPtr component, const ComponentType& componentType);
 		
 		/// Removes a Component from an Entity
 		/// \param e The Entity you wish to remove the component from
@@ -114,36 +117,36 @@ namespace anax
 		/// you add it. If you DO know the type of component you are adding,
 		/// use this method instead of the other method, it will be
 		/// SLIGHTLY (no virtual function calls) faster.
-		void destroyComponent(EntityPtr e, const ComponentType& componentType);
+		void destroyComponent(Entity& e, const ComponentType& componentType);
 		
 		/// Removes all the components for an Entity
 		/// \param e The Enitty you wish to remove all the components from
-		void destroyAllComponents(EntityPtr e);
+		void destroyAllComponents(Entity& e);
 		
 		/// Retrieves a Component from an Entity
 		/// \param e The Entity in which the Component is located
 		/// \param componentType The class type that the Component is
 		/// \return The appropriate component
-		ComponentPtr getComponent(ConstEntityPtr e, const ComponentType& componentType) const;
+		ComponentPtr getComponent(const Entity& e, const ComponentType& componentType) const;
 		
 		/// Determines whether an Entity contains a component type
 		/// \param e The Entity which contains the component
 		/// \param component The component you wish to determine whether the entity has
-		bool containsComponent(ConstEntityPtr e, ComponentPtr component) const;
+		bool containsComponent(const Entity& e, ComponentPtr component) const;
 		
 		/// Determines whether an Entity contains a component type
 		/// \param e The Entity which contains the component
 		/// \param component The component you wish to determine whether the entity has
-		bool containsComponent(ConstEntityPtr e, ComponentPtr component, const ComponentType& componentType) const;
+		bool containsComponent(const Entity& e, ComponentPtr component, const ComponentType& componentType) const;
 		
 		/// Determines whether an Entity contains a component
 		/// \param e The Entity which contains the component
 		/// \param componentType The class type that the Component is
-		bool containsComponent(ConstEntityPtr e, const ComponentType& componentType) const;
+		bool containsComponent(const Entity& e, const ComponentType& componentType) const;
 		
 		/// \param e The Entity you wish to retrieve the entities for
 		/// \return All the components that an Entity contains
-		ComponentArray getComponentsFor(ConstEntityPtr e) const;
+		ComponentArray getComponentsFor(const Entity& e) const;
 		
 		/// Clears the ComponentStorage
 		/// Removes all Entities and Components that are attached to it.

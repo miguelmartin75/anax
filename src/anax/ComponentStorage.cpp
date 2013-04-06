@@ -47,17 +47,15 @@ namespace anax
 	
 	
 	
-	void ComponentStorage::addComponent(EntityPtr e, ComponentPtr component)
+	void ComponentStorage::addComponent(Entity& e, ComponentPtr component)
 	{
 		// add the component
 		addComponent(e, component, component->getClass());
 	}
 	
-	void ComponentStorage::addComponent(EntityPtr e, ComponentPtr component, const ComponentType& componentType)
-	{
-		assert(e != NULL);
-		
-		EntityId entityId = e->getId(); // holds the Entity's ID value
+	void ComponentStorage::addComponent(Entity& e, ComponentPtr component, const ComponentType& componentType)
+	{	
+		EntityId entityId = e.getId(); // holds the Entity's ID value
 		ComponentType::Id componentTypeId = componentType.getId(); // holds the componentType's ID value
 		
 		// Resize the componentsForEntities array, if necesary
@@ -80,7 +78,7 @@ namespace anax
 			componentToAssign.reset(component);
 			
 			// AND set the componentBit in the Entity for the componentType's ID
-			util::AssignBitsetIndexWithAutoResize(e->_componentBits, componentTypeId, true);
+			util::AssignBitsetIndexWithAutoResize(e._componentBits, componentTypeId, true);
 		}
 		// if the component that was passed in isn't the same as the componentToAssign
 		else if(componentToAssign.get() != component)
@@ -90,15 +88,14 @@ namespace anax
 		}
 	}
 	
-	void ComponentStorage::destroyComponent(EntityPtr e, ComponentPtr component)
+	void ComponentStorage::destroyComponent(Entity& e, ComponentPtr component)
 	{
 		destroyComponent(e, component, component->getClass());
 	}
 	
-	void ComponentStorage::destroyComponent(EntityPtr e, ComponentPtr component, const ComponentType& componentType)
+	void ComponentStorage::destroyComponent(Entity& e, ComponentPtr component, const ComponentType& componentType)
 	{
-		assert(e != NULL && e->getId() < _componentsForEntities.size());
-		SmartComponentPtr& componentToRemove = _componentsForEntities[e->getId()][componentType.getId()];
+		SmartComponentPtr& componentToRemove = _componentsForEntities[e.getId()][componentType.getId()];
 		
 		// does the two components have the same address?
 		if(componentToRemove.get() == component)
@@ -107,60 +104,56 @@ namespace anax
 			componentToRemove.reset();
 			
 			// set the bitset in the Entity to false
-			e->_componentBits[componentType.getId()] = false;
+			e._componentBits[componentType.getId()] = false;
 		}
 	}
 	
-	void ComponentStorage::destroyComponent(EntityPtr e, const ComponentType& componentType)
+	void ComponentStorage::destroyComponent(Entity& e, const ComponentType& componentType)
 	{
-		assert(e != NULL && e->getId() < _componentsForEntities.size());
-		
-		EntityId entityId = e->getId(); // holds the Entity's ID
+		EntityId entityId = e.getId(); // holds the Entity's ID
 		ComponentType::Id componentTypeId = componentType.getId(); // holds the ComponentType's ID
 		
 		// get a reference to the component we need to remove and reset the pointer
 		_componentsForEntities[entityId][componentTypeId].reset();
 		
 		// set the bitset in the Entity to false
-		e->_componentBits[componentTypeId] = false;
+		e._componentBits[componentTypeId] = false;
 	}
 	
-	void ComponentStorage::destroyAllComponents(EntityPtr e)
+	void ComponentStorage::destroyAllComponents(Entity& e)
 	{
-		assert(e != NULL && e->getId() <= _componentsForEntities.size());
-		_componentsForEntities[e->getId()].clear();
+		_componentsForEntities[e.getId()].clear();
 		
 		// clear the bits in the Entity's ComponentBits
-		e->_componentBits.clear();
+		e._componentBits.clear();
 	}
 	
 	
-	ComponentPtr ComponentStorage::getComponent(ConstEntityPtr e, const ComponentType& componentType) const
+	ComponentPtr ComponentStorage::getComponent(const Entity& e, const ComponentType& componentType) const
 	{
-		if(e == NULL || e->getComponentBits().size() <= componentType.getId()) return NULL; // doesn't exist
-		return _componentsForEntities[e->getId()][componentType.getId()].get();
+		if(e.getComponentBits().size() <= componentType.getId()) return NULL; // doesn't exist
+		return _componentsForEntities[e.getId()][componentType.getId()].get();
 	}
 	
-	bool ComponentStorage::containsComponent(ConstEntityPtr e, ComponentPtr component) const
+	bool ComponentStorage::containsComponent(const Entity& e, ComponentPtr component) const
 	{
 		return containsComponent(e, component, component->getClass());
 	}
 	
-	bool ComponentStorage::containsComponent(ConstEntityPtr e, ComponentPtr component, const ComponentType& componentType) const
+	bool ComponentStorage::containsComponent(const Entity& e, ComponentPtr component, const ComponentType& componentType) const
 	{
 		return getComponent(e, componentType) == component;
 	}
 	
-	bool ComponentStorage::containsComponent(ConstEntityPtr e, const ComponentType& componentType) const
+	bool ComponentStorage::containsComponent(const Entity& e, const ComponentType& componentType) const
 	{
 		return getComponent(e, componentType) != NULL;
 	}
 	
-	ComponentArray ComponentStorage::getComponentsFor(ConstEntityPtr e) const
+	ComponentArray ComponentStorage::getComponentsFor(const Entity& e) const
 	{
-		assert(e != NULL && e->getId() < _componentsForEntities.size());
 		ComponentArray components;
-		const ImplComponentArray& componentsForEntity = _componentsForEntities[e->getId()];
+		const ImplComponentArray& componentsForEntity = _componentsForEntities[e.getId()];
 		
 		// loop through all the turned on bits in the Component
 		for(ImplComponentArray::const_iterator i = componentsForEntity.begin(); i != componentsForEntity.end(); ++i)
