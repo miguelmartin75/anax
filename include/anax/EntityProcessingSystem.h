@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -29,7 +29,7 @@
 #ifndef __ANAX_ENTITYPROCESSINGSYSTEM_H__
 #define __ANAX_ENTITYPROCESSINGSYSTEM_H__
 
-#include "EntitySystem.h"
+#include "anax/EntitySystem.h"
 
 namespace anax
 {

@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -28,6 +28,8 @@
 
 #ifndef __ANAX_TYPES_H__
 #define __ANAX_TYPES_H__
+
+// TODO: remove
 
 #include <vector>
 #include <boost/dynamic_bitset.hpp>

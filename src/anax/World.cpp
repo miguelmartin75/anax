@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -41,20 +41,6 @@ namespace anax
 	}
 	
 	
-	
-	void World::initialize()
-	{
-		// initialize all the EntitySystem objects in the EntitySystemContainer
-		for(EntitySystemContainer::iterator i = _entitySystemContainer.begin(); i != _entitySystemContainer.end(); ++i)
-		{
-			// is the pointer null?
-			if(*i == NULL)
-				continue;
-			
-			(*i)->initialize();
-		}
-	}
-	
 	void World::update()
 	{
 		// clean the World
@@ -83,9 +69,6 @@ namespace anax
 		
 		// clear the cache
 		clearEntityCache();
-		
-		// clear the cache
-		clearEntityCache();
 	}
 	
 	
@@ -99,7 +82,7 @@ namespace anax
 	
 	void World::addEntity(EntityPtr entity)
 	{
-		// insert it to the
+		// insert it to the world
 		_entityContainer.insert(entity);
 		
 		// add it to the cache, we'll process it later

@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -36,8 +36,8 @@
 #include <vector>
 #include <memory>
 
-#include "Types.h"
-#include "Component.h"
+#include "anax/Types.h"
+#include "anax/Component.h"
 
 namespace anax
 {

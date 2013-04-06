@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -29,9 +29,9 @@
 #ifndef __ANAX_ENTITY_H__
 #define __ANAX_ENTITY_H__
 
-#include "Types.h"
-#include "Component.h"
-#include "ComponentStorage.h"
+#include "anax/Types.h"
+#include "anax/Component.h"
+#include "anax/ComponentStorage.h"
 
 namespace anax
 {

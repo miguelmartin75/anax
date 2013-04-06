@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -29,11 +29,11 @@
 #ifndef __ANAX_ENTITYSYSTEMCONTAINER_H__
 #define __ANAX_ENTITYSYSTEMCONTAINER_H__
 
-#include "IdentifiableArray.h"
+#include "anax/IdentifiableArray.h"
 
-#include "Types.h"
-#include "EntitySystem.h"
-#include "EntityContainer.h"
+#include "anax/Types.h"
+#include "anax/EntitySystem.h"
+#include "anax/EntityContainer.h"
 
 // TODO: remove this all-together
 // handle it in the World class

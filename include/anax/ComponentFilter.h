@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -29,10 +29,10 @@
 #ifndef __ANAX_COMPONENTFILTER_H__
 #define __ANAX_COMPONENTFILTER_H__
 
-#include "util/DynamicArrayUtils.h"
+#include "anax/util/DynamicArrayUtils.h"
 
-#include "Types.h"
-#include "Component.h"
+#include "anax/Types.h"
+#include "anax/Component.h"
 
 namespace anax
 {

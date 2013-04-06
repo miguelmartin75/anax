@@ -1,6 +1,6 @@
 ///
 /// Anax RTTI
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -37,8 +37,8 @@
 
 #define ANAX_RTTI_VERSION ANAX_RTTI_VERSION_MAJOR.ANAX_RTTI_VERSION_MINOR.ANAX_RTTI_VERSION_PATCH
 
-#include "ObjectCreator.h"
-#include "Identifiable.h"
-#include "IdentifiableArray.h"
+#include "anax/ObjectCreator.h"
+#include "anax/Identifiable.h"
+#include "anax/IdentifiableArray.h"
 
 #endif // __ANAX_RTTI_H__

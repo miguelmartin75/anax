@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2012-2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -40,13 +40,10 @@
 
 namespace anax
 {
-	/// \brief A class that resembles a Scene, inside of your game
+	/// \brief The World class; contains entities and systems
 	///
-	/// The Scene class holds and manages Entity objects, EntitySystem objects, EntityManager objects.
-	/// A Scene is much like a World inside your game. The Scene may be updated, initialized and cleared.
+	/// The World class
 	///
-	/// \note
-	/// Typically a Scene will be updated each frame (or whenever you require to update, e.g. 40FPS)
 	///
 	/// \author Miguel Martin
 	class World
@@ -61,26 +58,19 @@ namespace anax
 		/// Destructor
 		~World();
 		
-		/// Initializes the Scene
-		void initialize();
-		
-		
-		/// Updates the Scene
+		/// Updates the World
+		/// \note
+		/// Call this BEFORE using your systems attached to the World
 		void update();
 		
-		/// Clears the Scene
+		/// Clears the World
 		void clear();
-		
-		/// Cleans the Scene from any build-up cache, this method
-		/// should be used when you wish to make sure that all
-		/// Entity objects within the Scene have been succesfully
-		/// destroyed and so on.
-		void clean();
 		
 		/// Creates an Entity and adds it automatically to the Scene
 		/// \return A created Entity, for you to freely use
 		/// \note You should store the return value in a variable, unless you want the Entity to do nothing,
 		/// which doesn't really make any sense.
+		/// TODO: Remove
 		EntityPtr createEntity();
 		
 		/// Inserts an Entity to the Scene
@@ -181,6 +171,12 @@ namespace anax
 	private:
 		
 		// UTILITY FUNCTIONS
+		
+		/// Cleans the World from any build-up cache, this method
+		/// should be used when you wish to make sure that all
+		/// Entity objects within the Scene have been succesfully
+		/// destroyed and so on.
+		void clean();
 		
 		/// Processes the Entity objects that have been activated
 		void processActivatedEntityCache();
