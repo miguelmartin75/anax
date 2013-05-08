@@ -1,4 +1,9 @@
-# Version 0.2.4
+# Version 1.0.x
+
+
+# Version 0.2.x
+
+## Version 0.2.4
 2013-03-25 Miguel Martin <miguel.martin7.5@hotmail.com>
 
 - Renamed to anax
@@ -8,15 +13,8 @@
 - Removed managers, and observer classes
 - Reogranised library and renamed some files in library
 - Changed logo
-- Removed unnecessary pointers to Entities
 
-### NOTE(S):
-> This version is still in development
-
-
----
-
-# Version	0.2.3
+## Version	0.2.3
 2013-01-13 Miguel Martin <miguel.martin7.5@hotmail.com>
 
 - Patch number increased to 3
