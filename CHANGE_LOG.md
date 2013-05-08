@@ -1,9 +1,10 @@
-# Version 1.0.x
+# Change Log - Anax
+The change log was not tracked before version 0.2.3.
 
+## 0.2.x
 
-# Version 0.2.x
+### 0.2.4
 
-## Version 0.2.4
 2013-03-25 Miguel Martin <miguel.martin7.5@hotmail.com>
 
 - Renamed to anax
@@ -14,7 +15,8 @@
 - Reogranised library and renamed some files in library
 - Changed logo
 
-## Version	0.2.3
+### 0.2.3
+
 2013-01-13 Miguel Martin <miguel.martin7.5@hotmail.com>
 
 - Patch number increased to 3
