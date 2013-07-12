@@ -27,11 +27,3 @@
 ///
 
 #include "Component.h"
-
-namespace anax
-{
-	BaseComponent::~BaseComponent()
-	{
-		/* do nothing */
-	}
-}

@@ -26,36 +26,4 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_ANAX_H__
-#define __ANAX_ANAX_H__
-
-/// \brief The namespace in which the library code for the anax library is stored within
-///
-/// This namespace contains all you need to use the anax library.
-///
-/// \author Miguel Martin
-namespace anax
-{
-}
-
-/// \mainpage
-///
-/// \section welcome Welcome
-///
-/// Welcome to the anax documentation, here you may find
-/// detailed documentation on how to use specific classes/methods for the library.
-///
-/// \section resources Extra-resources
-/// You may find more resources to learn about the anax library on
-/// the anax's wiki, hosted on GitHub
-/// <a href="https://github.com/miguelishawt/anax/wiki"> here</a>.
-
-#define ANAX_ENTITY_SYSTEM_VERSION_MAJOR 0
-#define ANAX_ENTITY_SYSTEM_VERSION_MINOR 2
-#define ANAX_ENTITY_SYSTEM_PATCH_NUMBER 4
-
-#define ANAX_ENTITY_SYSTEM_VERSION_NUMBER ANAX_ENTITY_SYSTEM_VERSION_MAJOR.ANAX_ENTITY_SYSTEM_VERSION_MINOR
-
-#include "anax/World.h"
-
-#endif // __ANAX_ANAX_H__
+#include "Entity.h"

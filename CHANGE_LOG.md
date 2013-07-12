@@ -1,13 +1,20 @@
 # Change Log - Anax
-The change log was not tracked before version 0.2.3.
 
-## 0.2.x
+## 1.x
+
+### 1.0
+
+- Changed how Entities are stored
+- Added unit tests - TODO
+- Added CMake support - TODO
+
+
+## 0.x
 
 ### 0.2.4
 
 2013-03-25 Miguel Martin <miguel.martin7.5@hotmail.com>
 
-- Renamed to anax
 - Refractored ac::es to anax namespace
 - Removed examples (placing them in another repository)
 - Renamed Scene to World
@@ -31,3 +38,7 @@ The change log was not tracked before version 0.2.3.
 - Added deltaTime variable in Scene
 - Added Movement example
 - Fixed destruction of Components when calling Entity::kill() or Scene::kill(EntityPtr)
+
+### 0.1 
+
+- Initial version of the library

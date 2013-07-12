@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __anax__Entity__
-#define __anax__Entity__
+#ifndef __anax__config__
+#define __anax__config__
 
 
-#endif // __anax__Entity__
+#endif // __anax__config__

@@ -1,5 +1,5 @@
 ///
-/// Anax RTTI
+/// anax
 /// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
@@ -26,19 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_RTTI_H__
-#define __ANAX_RTTI_H__
+#ifndef __anax__System__
+#define __anax__System__
 
-// TODO: remove depenancy of this
 
-#define ANAX_RTTI_VERSION_MAJOR 0
-#define ANAX_RTTI_VERSION_MINOR 3
-#define ANAX_RTTI_VERSION_PATCH 0
-
-#define ANAX_RTTI_VERSION ANAX_RTTI_VERSION_MAJOR.ANAX_RTTI_VERSION_MINOR.ANAX_RTTI_VERSION_PATCH
-
-#include "anax/ObjectCreator.h"
-#include "anax/Identifiable.h"
-#include "anax/IdentifiableArray.h"
-
-#endif // __ANAX_RTTI_H__
+#endif // __anax__System__

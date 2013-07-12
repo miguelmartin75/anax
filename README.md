@@ -1,18 +1,39 @@
-# anax v1.0
+# anax 1.0
 
 anax, the open source C++ entity system is designed to be a portable, lightweight and an easy to use library for Game Development. Although it is thought that [Entity Systems] are used for MMOGs, it can be in fact used for just about any [video game genre].
 
-## Disclaimer
+## Author
+
+- Miguel Martin - <miguel.martin7.5@hotmail.com>
+
+## License
+Copyright (C) 2013 Miguel Martin. All rights reserved.
+
 This software is provided 'as-is', without any express or implied warranty. 
 In no event will the authors be held liable for any damages arising from the 
 use of this software.
 
-## License
-Please see [LICENCE.txt](LICENCE.txt)
+Permission is hereby granted, free of charge, to any person obtaining a copy 
+of this software and associated documentation files (the "Software"), to deal 
+in the Software without restriction, including without limitation the rights 
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished 
+to do so, subject to the following conditions:
+
+1. The origin of this software must not be misrepresented;
+   you must not claim that you wrote the original software.
+   If you use this software in a product, an acknowledgment
+   in the product documentation would be appreciated but is not required.
+
+2. Altered source versions must be plainly marked as such,
+   and must not be misrepresented as being the original software.
+
+3. The above copyright notice and this permission notice shall be included in 
+   all copies or substantial portions of the Software.
 
 ## Inspiration
 
-This entity system is originally inspired from the Java Framework, [Artemis], which provides an Entity System for the Java programming language.
+This entity system is originally inspired from the Java Framework, [Artemis], which provides an Entity System for the Java programming language. Further inspiration was recieved from [entityx](https://github.com/alecthomas/entityx). Although those two frameworks are good, I felt it was necessary to alter and change them to my liking, mainly for performance reasons and just the right "feel".
 
 ## Dependices
 
@@ -22,7 +43,13 @@ To compile, install, and use anax, the following libraries and C++11 support are
 	- [boost::dynamic_bitset](http://www.boost.org/doc/libs/1_52_0/libs/dynamic_bitset/dynamic_bitset.html)
 - C++11 smart pointers (``std::shared_pointer``, ``std::unique_ptr``)
 
-## Installation
+## Getting Started
+
+### Downloading the Library
+
+There are multiple ways to download the library. You can either [clone](github-mac://openRepo/https://github.com/miguelishawt/anax) the library, or download a tarball ([zip](https://api.github.com/repos/miguelishawt/anax/zipball)/[tar-gz](https://api.github.com/repos/miguelishawt/anax/tarball)).
+
+### Installation
 
 Unfortunately, at this time, this library does _not_ use [CMake](http://www.cmake.org/), since I currently do not know how to use it. Therefore you currently have these options:
 
@@ -31,13 +58,23 @@ Unfortunately, at this time, this library does _not_ use [CMake](http://www.cmak
 
 Either of these methods should work. Please note for the second method, you must have a search path to the `include/` directory.
 
-### **NOTE**
+### **NOTES**
 > 
-> It is worth mentioning that I do have an Xcode project (since I develop with a Mac) within the repo at this current time of Version 0.2, you could use that. However I must mention that build settings may not work. If it doesn't check the build settings and look at the include/library search file paths settings, and change them to the directory in which boost library is located on your machine.
+> 1. It is worth mentioning that I do have an Xcode project (since I develop with a Mac) within the repo at this current time of Version 0.2, you could use that. However I must mention that build settings may not work. If it doesn't check the build settings and look at the include/library search file paths settings, and change them to the directory in which boost library is located on your machine.
+> 2. I __will__ add support for CMake, or an alternative automatic building system for this library
 
-## Getting Started Guide
+### Using the library
 
-TODO
+It is assumed that you know what an entity-system/entity-component-system. If you don't know what one is, I reccomend reading [this]().
+
+ 
+
+
+#### Entities
+
+
+#### World
+
 
 ## Get Involved
 

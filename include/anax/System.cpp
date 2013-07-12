@@ -26,20 +26,4 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_ENTITYSYSTEMCONTAINER_H__
-#define __ANAX_ENTITYSYSTEMCONTAINER_H__
-
-#include "anax/IdentifiableArray.h"
-
-#include "anax/Types.h"
-#include "anax/EntitySystem.h"
-#include "anax/EntityContainer.h"
-
-// TODO: remove this all-together
-// handle it in the World class
-namespace anax
-{
-	typedef IdentifiableArray<BaseEntitySystem> EntitySystemContainer;
-}
-
-#endif // __ANAX_ENTITYSYSTEMCONTAINER_H__
+#include "System.h"

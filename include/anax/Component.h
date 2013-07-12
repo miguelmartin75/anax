@@ -26,52 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_COMPONENT_H__
-#define __ANAX_COMPONENT_H__
+#ifndef __anax__Component__
+#define __anax__Component__
 
-#include "anax/Identifiable.h"
-#include "anax/ObjectCreator.h"
 
-namespace anax
-{
-	/// \class Component
-	/// \brief An abstract class that defines a Component
-	///
-	/// This class is a component, which is used to wrap data
-	/// with, in order to
-	///
-	/// \author Miguel Martin
-	class BaseComponent
-	{
-		ANAX_IDENTIFIABLE_BASE(BaseComponent) // TODO: remove
-		
-	public:
-		
-		/// Pure virtual destructor
-		virtual ~BaseComponent() = 0;
-	};
-	
-	/// Used for readability
-	typedef BaseComponent::Class ComponentType;
-	
-	// inherit from THIS class
-	// e.g.
-	// struct Example : Component<Example>
-	template <typename T>
-	class Component
-		: public BaseComponent
-	{
-		ANAX_IDENTIFIABLE(Component) // TODO: remove
-		
-	public:
-		
-		virtual ~Component() = 0;
-	};
-	
-	template <typename T>
-	Component<T>::~Component()
-	{
-	}
-}
-
-#endif // __ANAX_COMPONENT_H__
+#endif // __anax__Component__
