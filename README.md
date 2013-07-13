@@ -23,12 +23,11 @@ There are multiple ways to download the library. Here are your options:
 
 ## Dependices
 
-To compile, install, and use anax, the following libraries and C++11 support are required:
+To compile, install, and use anax, the following libraries and C++ support is required:
 
- - The following [boost] libraries:
-	- [boost::dynamic_bitset](http://www.boost.org/doc/libs/1_52_0/libs/dynamic_bitset/dynamic_bitset.html)
-- C++11 variadic templates
-- C++11 smart pointers or [boost] alternatives
+- [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html)
+- [`boost::shared_ptr`](http://www.boost.org/doc/libs/1_54_0/libs/smart_ptr/shared_ptr.htm) or [`std::shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr) support
+- C++11 variadic templates (this is optional, but is reccomended)
 
 Unfortunately, at this time, this library does _not_ use [CMake](http://www.cmake.org/), since I currently do not know how to use it. Therefore you currently have these options:
 
