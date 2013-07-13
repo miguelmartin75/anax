@@ -30,6 +30,7 @@
 #define __ANAX_WORLD_H__
 
 #include <vector>
+#include <unordered_map>
 
 #include "Component.h"
 #include "Entity.h"
@@ -41,81 +42,64 @@ namespace anax
 	{
 	public:
 		
-		World()
-		{
-		}
+		World();
 		
-		Entity createEntity()
-		{
-			return Entity(*this, _entityIdPool.create());
-		}
+		/// Creates an Entity
+		/// \return A new entity for which you can use.
+		Entity createEntity();
 		
-		void killEntity(Entity& entity)
-		{
-			// todo:
-			// delay the deletion of an entity
-			_entityIdPool.remove(entity.getId());
-		}
+		/// Kills an Entity
+		/// \param entity The Entity you wish to kill
+		void killEntity(Entity& entity);
 		
-		bool isValid(const Entity& entity) const
-		{
-			return _entityIdPool.isValid(entity.getId());
-		}
+		/// Determines if an Entity is valid.
+		/// \note If the entity is valid it may have components attached to it.
+		/// If the entity is not valid and a component is attempted to be attached
+		/// to the entity, there will be a run-time error (an assertion).
+		/// \return true if the Entity is valid within the World
+		bool isValid(const Entity& entity) const;
 		
 		/// Refreshes the World
 		void refresh();
 		
 	private:
 		
-		
 		class EntityIdPool
 		{
 		public:
 			
-			bool isValid(Entity::Id id) const
-			{
-				return id.counter == _entities[id.index].counter;
-			}
+			/// Creates an Entity ID
+			/// \return The newly created Entity ID
+			Entity::Id create();
 			
-			Entity::Id create()
-			{
-				Entity::Id id;
-				
-				// if we need to add more entities to the pool
-				if(_freeList.empty())
-				{
-					// create a new entity, and assign it the new index
-					id.index = _entities.size();
-					id.counter = 1; // start it off with an initial counter of 1 reference
-					_entities.emplace_back(id);
-					
-					return id;
-				}
-				
-				id = _freeList.front();
-				_freeList.pop_back();
-				
-				return id;
-			}
+			/// Removes an ID from the pool
+			/// \param id The ID you wish to remove
+			void remove(Entity::Id id);
 			
-			void remove(Entity::Id id)
-			{
-				++_entities[id.index].counter; // increment the counter in the cache
-				_freeList.push_back(id); // add the ID to the freeList
-			}
+			/// \param The index you wish to access the Entity::Id at
+			/// \return An Entity::Id at index
+			Entity::Id get(std::size_t index) const;
 			
-			Entity::Id get(std::size_t index) const
-			{
-				return _entities[index];
-			}
+			/// Determines if an Entity ID is valid
+			/// \return true if the ID is valid
+			bool isValid(Entity::Id id) const;
 			
 		private:
 			
+			
+			/// The entities ids that are avaliable to be used 
 			std::vector<Entity::Id> _freeList;
+			
+			/// The Entities that are within the pool
 			std::vector<Entity::Id> _entities;
-		};
+		} _entityIdPool;
 		
-		EntityIdPool _entityIdPool;
+		class EntityAttributes
+		{
+			
+		} _entityAttributes;
+		
+		std::vector<BaseSystem*> _systems;
 	};
 }
 

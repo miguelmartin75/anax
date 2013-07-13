@@ -36,15 +36,22 @@ namespace anax
 	class BaseComponent
 	{
 	public:
+	
+		typedef uint TypeId;
+
 		
 		virtual ~BaseComponent() = 0;
 		
 	protected:
 		
-		/// The next type id for a BaseComponent
 		/// \note
-		/// You should never touch this variable
-		static uint _nextTypeId;
+		/// Do not call this method
+		static TypeId _GetNextTypeId();
+		
+	private:
+		
+		/// The next type id for a BaseComponent
+		static TypeId _nextTypeId;
 	};
 	
 	template <typename T>
@@ -53,9 +60,9 @@ namespace anax
 	{
 	public:
 		
-		static uint GetTypeId()
+		static TypeId GetTypeId()
 		{
-			static uint id = _nextTypeId++;
+			static TypeId id = _nextTypeId++;
 			return id;
 		}
 	};

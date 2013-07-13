@@ -30,7 +30,7 @@
 
 namespace anax
 {
-	uint BaseSystem::_nextTypeId = 0;
+	BaseSystem::TypeId BaseSystem::_nextTypeId = 0;
 	
 	BaseSystem::~BaseSystem()
 	{

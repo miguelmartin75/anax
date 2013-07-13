@@ -30,7 +30,7 @@
 
 namespace anax
 {
-	uint BaseComponent::_nextTypeId = 0;
+	BaseComponent::TypeId BaseComponent::_nextTypeId = 0;
 	
 	BaseComponent::~BaseComponent()
 	{

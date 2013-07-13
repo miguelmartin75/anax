@@ -30,5 +30,63 @@
 
 namespace anax
 {
+	World::World()
+	{
+	}
 	
+	Entity World::createEntity()
+	{
+		return Entity(*this, _entityIdPool.create());
+	}
+	
+	void World::killEntity(Entity &entity)
+	{
+		// todo:
+		// delay the deletion of an entity
+		_entityIdPool.remove(entity.getId());
+	}
+	
+	bool World::isValid(const anax::Entity &entity) const
+	{
+		return _entityIdPool.isValid(entity.getId());
+	}
+	
+	
+	
+	Entity::Id World::EntityIdPool::create()
+	{
+		Entity::Id id;
+		
+		// if we need to add more entities to the pool
+		if(_freeList.empty())
+		{
+			// create a new entity, and assign it the new index
+			id.index = _entities.size();
+			id.counter = 1; // start it off with an initial counter of 1 reference
+			_entities.emplace_back(id);
+			
+			return id;
+		}
+		
+		id = _freeList.front();
+		_freeList.pop_back();
+		
+		return id;
+	}
+	
+	void World::EntityIdPool::remove(Entity::Id id)
+	{
+		++_entities[id.index].counter; // increment the counter in the cache
+		_freeList.push_back(id); // add the ID to the freeList
+	}
+	
+	Entity::Id World::EntityIdPool::get(std::size_t index) const
+	{
+		return _entities[index];
+	}
+	
+	bool World::EntityIdPool::isValid(Entity::Id id) const
+	{
+		return id.counter == _entities[id.index].counter;
+	}
 }

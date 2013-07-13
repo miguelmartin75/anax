@@ -30,12 +30,16 @@
 #define __ANAX_SYSTEM_H__
 
 #include "types.h"
+#include "Entity.h"
 
 namespace anax
 {
 	class BaseSystem
 	{
 	public:
+		
+		typedef uint TypeId;
+		
 		
 		virtual ~BaseSystem() = 0;
 		
@@ -44,7 +48,10 @@ namespace anax
 		/// The next type id for a BaseComponent
 		/// \note
 		/// You should never touch this variable
-		static uint _nextTypeId;
+		static TypeId _nextTypeId;
+		
+		/// The Entities that are attached to this system
+		std::vector<Entity> _entities;
 	};
 	
 	template <typename T>
@@ -53,9 +60,9 @@ namespace anax
 	{
 	public:
 		
-		static uint GetTypeId()
+		static TypeId GetTypeId()
 		{
-			static uint id = _nextTypeId++;
+			static TypeId id = _nextTypeId++;
 			return id;
 		}
 	};
