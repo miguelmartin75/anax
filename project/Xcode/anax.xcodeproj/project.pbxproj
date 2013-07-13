@@ -7,37 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4964E18117914A560013785A /* anax.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E16F17914A560013785A /* anax.h */; };
-		4964E18317914A560013785A /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17117914A560013785A /* Component.h */; };
-		4964E18517914A560013785A /* ComponentFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17317914A560013785A /* ComponentFilter.h */; };
-		4964E18617914A560013785A /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17417914A560013785A /* config.h */; };
-		4964E18817914A560013785A /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17717914A560013785A /* Entity.h */; };
-		4964E18A17914A560013785A /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17917914A560013785A /* System.h */; };
-		4964E18B17914A560013785A /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17A17914A560013785A /* types.h */; };
-		4964E18C17914A560013785A /* DynamicArrayUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17C17914A560013785A /* DynamicArrayUtils.h */; };
-		4964E18E17914A560013785A /* World.h in Headers */ = {isa = PBXBuildFile; fileRef = 4964E17E17914A560013785A /* World.h */; };
 		4964E19417914F260013785A /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E18F17914F260013785A /* Component.cpp */; };
 		4964E19517914F260013785A /* ComponentFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E19017914F260013785A /* ComponentFilter.cpp */; };
 		4964E19617914F260013785A /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E19117914F260013785A /* Entity.cpp */; };
 		4964E19717914F260013785A /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E19217914F260013785A /* System.cpp */; };
 		4964E19817914F260013785A /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E19317914F260013785A /* World.cpp */; };
+		4964E1A5179150DC0013785A /* anax.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19A179150DC0013785A /* anax.hpp */; };
+		4964E1A6179150DC0013785A /* Component.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19B179150DC0013785A /* Component.hpp */; };
+		4964E1A7179150DC0013785A /* ComponentFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19C179150DC0013785A /* ComponentFilter.hpp */; };
+		4964E1A8179150DC0013785A /* config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19D179150DC0013785A /* config.hpp */; };
+		4964E1A9179150DC0013785A /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19F179150DC0013785A /* Entity.hpp */; };
+		4964E1AA179150DC0013785A /* System.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A0179150DC0013785A /* System.hpp */; };
+		4964E1AB179150DC0013785A /* types.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A1179150DC0013785A /* types.hpp */; };
+		4964E1AC179150DC0013785A /* DynamicArrayUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */; };
+		4964E1AD179150DC0013785A /* World.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A4179150DC0013785A /* World.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4964E16F17914A560013785A /* anax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = anax.h; sourceTree = "<group>"; };
-		4964E17117914A560013785A /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
-		4964E17317914A560013785A /* ComponentFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentFilter.h; sourceTree = "<group>"; };
-		4964E17417914A560013785A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		4964E17717914A560013785A /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
-		4964E17917914A560013785A /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
-		4964E17A17914A560013785A /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		4964E17C17914A560013785A /* DynamicArrayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicArrayUtils.h; sourceTree = "<group>"; };
-		4964E17E17914A560013785A /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
 		4964E18F17914F260013785A /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Component.cpp; path = anax/Component.cpp; sourceTree = "<group>"; };
 		4964E19017914F260013785A /* ComponentFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ComponentFilter.cpp; path = anax/ComponentFilter.cpp; sourceTree = "<group>"; };
 		4964E19117914F260013785A /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Entity.cpp; path = anax/Entity.cpp; sourceTree = "<group>"; };
 		4964E19217914F260013785A /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = System.cpp; path = anax/System.cpp; sourceTree = "<group>"; };
 		4964E19317914F260013785A /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = anax/World.cpp; sourceTree = "<group>"; };
+		4964E19A179150DC0013785A /* anax.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = anax.hpp; sourceTree = "<group>"; };
+		4964E19B179150DC0013785A /* Component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
+		4964E19C179150DC0013785A /* ComponentFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ComponentFilter.hpp; sourceTree = "<group>"; };
+		4964E19D179150DC0013785A /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
+		4964E19F179150DC0013785A /* Entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
+		4964E1A0179150DC0013785A /* System.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = System.hpp; sourceTree = "<group>"; };
+		4964E1A1179150DC0013785A /* types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = types.hpp; sourceTree = "<group>"; };
+		4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DynamicArrayUtils.hpp; sourceTree = "<group>"; };
+		4964E1A4179150DC0013785A /* World.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		49D179D116FDCD390028C9E0 /* libanax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanax.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -55,42 +55,10 @@
 		4964E16D17914A560013785A /* include */ = {
 			isa = PBXGroup;
 			children = (
-				4964E16E17914A560013785A /* anax */,
+				4964E199179150DC0013785A /* anax */,
 			);
 			name = include;
 			path = ../../include;
-			sourceTree = "<group>";
-		};
-		4964E16E17914A560013785A /* anax */ = {
-			isa = PBXGroup;
-			children = (
-				4964E16F17914A560013785A /* anax.h */,
-				4964E17117914A560013785A /* Component.h */,
-				4964E17317914A560013785A /* ComponentFilter.h */,
-				4964E17417914A560013785A /* config.h */,
-				4964E17517914A560013785A /* detail */,
-				4964E17717914A560013785A /* Entity.h */,
-				4964E17917914A560013785A /* System.h */,
-				4964E17A17914A560013785A /* types.h */,
-				4964E17B17914A560013785A /* util */,
-				4964E17E17914A560013785A /* World.h */,
-			);
-			path = anax;
-			sourceTree = "<group>";
-		};
-		4964E17517914A560013785A /* detail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = detail;
-			sourceTree = "<group>";
-		};
-		4964E17B17914A560013785A /* util */ = {
-			isa = PBXGroup;
-			children = (
-				4964E17C17914A560013785A /* DynamicArrayUtils.h */,
-			);
-			path = util;
 			sourceTree = "<group>";
 		};
 		4964E17F17914A560013785A /* src */ = {
@@ -112,6 +80,38 @@
 			children = (
 			);
 			path = anax;
+			sourceTree = "<group>";
+		};
+		4964E199179150DC0013785A /* anax */ = {
+			isa = PBXGroup;
+			children = (
+				4964E19A179150DC0013785A /* anax.hpp */,
+				4964E19B179150DC0013785A /* Component.hpp */,
+				4964E19C179150DC0013785A /* ComponentFilter.hpp */,
+				4964E19D179150DC0013785A /* config.hpp */,
+				4964E19E179150DC0013785A /* detail */,
+				4964E19F179150DC0013785A /* Entity.hpp */,
+				4964E1A0179150DC0013785A /* System.hpp */,
+				4964E1A1179150DC0013785A /* types.hpp */,
+				4964E1A2179150DC0013785A /* util */,
+				4964E1A4179150DC0013785A /* World.hpp */,
+			);
+			path = anax;
+			sourceTree = "<group>";
+		};
+		4964E19E179150DC0013785A /* detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		4964E1A2179150DC0013785A /* util */ = {
+			isa = PBXGroup;
+			children = (
+				4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 		49D179C816FDCD390028C9E0 = {
@@ -138,15 +138,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4964E18117914A560013785A /* anax.h in Headers */,
-				4964E18317914A560013785A /* Component.h in Headers */,
-				4964E18517914A560013785A /* ComponentFilter.h in Headers */,
-				4964E18617914A560013785A /* config.h in Headers */,
-				4964E18817914A560013785A /* Entity.h in Headers */,
-				4964E18A17914A560013785A /* System.h in Headers */,
-				4964E18B17914A560013785A /* types.h in Headers */,
-				4964E18C17914A560013785A /* DynamicArrayUtils.h in Headers */,
-				4964E18E17914A560013785A /* World.h in Headers */,
+				4964E1A5179150DC0013785A /* anax.hpp in Headers */,
+				4964E1A6179150DC0013785A /* Component.hpp in Headers */,
+				4964E1A7179150DC0013785A /* ComponentFilter.hpp in Headers */,
+				4964E1A8179150DC0013785A /* config.hpp in Headers */,
+				4964E1A9179150DC0013785A /* Entity.hpp in Headers */,
+				4964E1AA179150DC0013785A /* System.hpp in Headers */,
+				4964E1AB179150DC0013785A /* types.hpp in Headers */,
+				4964E1AC179150DC0013785A /* DynamicArrayUtils.hpp in Headers */,
+				4964E1AD179150DC0013785A /* World.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
