@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2013 Anax Creations. All rights reserved.
+/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -25,7 +25,6 @@
 /// 3. The above copyright notice and this permission notice shall be included in
 ///    all copies or substantial portions of the Software.
 ///
-
 #include "Component.h"
 
 namespace anax
