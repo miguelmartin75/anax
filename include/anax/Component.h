@@ -62,7 +62,7 @@ namespace anax
 		
 		static TypeId GetTypeId()
 		{
-			static TypeId id = _nextTypeId++;
+			static TypeId id = _GetNextTypeId();
 			return id;
 		}
 	};

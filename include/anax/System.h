@@ -29,6 +29,8 @@
 #ifndef __ANAX_SYSTEM_H__
 #define __ANAX_SYSTEM_H__
 
+#include <vector>
+
 #include "types.h"
 #include "Entity.h"
 
@@ -45,13 +47,19 @@ namespace anax
 		
 	protected:
 		
+	private:
+		
+		/// The Entities that are attached to this system
+		std::vector<Entity> _entities;
+		
 		/// The next type id for a BaseComponent
 		/// \note
 		/// You should never touch this variable
 		static TypeId _nextTypeId;
 		
-		/// The Entities that are attached to this system
-		std::vector<Entity> _entities;
+	protected:
+		
+		static TypeId _GetNextTypeId();
 	};
 	
 	template <typename T>
@@ -62,7 +70,7 @@ namespace anax
 		
 		static TypeId GetTypeId()
 		{
-			static TypeId id = _nextTypeId++;
+			static TypeId id = _GetNextTypeId();
 			return id;
 		}
 	};

@@ -25,14 +25,18 @@
 /// 3. The above copyright notice and this permission notice shall be included in
 ///    all copies or substantial portions of the Software.
 ///
-
-#include "System.h"
+#include "Component.h"
 
 namespace anax
 {
-	BaseSystem::TypeId BaseSystem::_nextTypeId = 0;
+	BaseComponent::TypeId BaseComponent::_nextTypeId = 0;
 	
-	BaseSystem::~BaseSystem()
+	BaseComponent::~BaseComponent()
 	{
+	}
+	
+	BaseComponent::TypeId BaseComponent::_GetNextTypeId()
+	{
+		return _nextTypeId++;
 	}
 }
