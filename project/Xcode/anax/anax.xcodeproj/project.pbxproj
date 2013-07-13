@@ -7,41 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		498BA1DC170FECA5002B2DE3 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BA1D5170FECA5002B2DE3 /* Component.cpp */; };
-		498BA1DD170FECA5002B2DE3 /* ComponentStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BA1D6170FECA5002B2DE3 /* ComponentStorage.cpp */; };
-		498BA1DE170FECA5002B2DE3 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BA1D7170FECA5002B2DE3 /* Entity.cpp */; };
-		498BA1DF170FECA5002B2DE3 /* EntityContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BA1D8170FECA5002B2DE3 /* EntityContainer.cpp */; };
-		498BA1E0170FECA5002B2DE3 /* EntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BA1D9170FECA5002B2DE3 /* EntityFactory.cpp */; };
-		498BA1E1170FECA5002B2DE3 /* EntitySystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BA1DA170FECA5002B2DE3 /* EntitySystem.cpp */; };
-		498BA1E2170FECA5002B2DE3 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BA1DB170FECA5002B2DE3 /* World.cpp */; };
+		4980D73E178D71BE007A2648 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4980D73C178D71BE007A2648 /* Entity.cpp */; };
+		4980D73F178D71BE007A2648 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 4980D73D178D71BE007A2648 /* Entity.h */; };
+		4980D742178D71C3007A2648 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4980D740178D71C3007A2648 /* Component.cpp */; };
+		4980D743178D71C3007A2648 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = 4980D741178D71C3007A2648 /* Component.h */; };
+		4980D746178D71C7007A2648 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4980D744178D71C7007A2648 /* World.cpp */; };
+		4980D747178D71C7007A2648 /* World.h in Headers */ = {isa = PBXBuildFile; fileRef = 4980D745178D71C7007A2648 /* World.h */; };
+		4980D74A178D71CB007A2648 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4980D748178D71CB007A2648 /* System.cpp */; };
+		4980D74B178D71CB007A2648 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 4980D749178D71CB007A2648 /* System.h */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4967E50C171805ED00E28815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C5932517100D62009ACA1C /* Tests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 49C1775B16A97ED00047788D;
+			remoteInfo = Tests;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		498BA1C0170FEC9D002B2DE3 /* anax.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = anax.h; sourceTree = "<group>"; };
-		498BA1C1170FEC9D002B2DE3 /* Component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
-		498BA1C2170FEC9D002B2DE3 /* ComponentFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentFilter.h; sourceTree = "<group>"; };
-		498BA1C3170FEC9D002B2DE3 /* ComponentStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentStorage.h; sourceTree = "<group>"; };
-		498BA1C4170FEC9D002B2DE3 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
-		498BA1C5170FEC9D002B2DE3 /* EntityContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityContainer.h; sourceTree = "<group>"; };
-		498BA1C6170FEC9D002B2DE3 /* EntityFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityFactory.h; sourceTree = "<group>"; };
-		498BA1C7170FEC9D002B2DE3 /* EntityProcessingSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityProcessingSystem.h; sourceTree = "<group>"; };
-		498BA1C8170FEC9D002B2DE3 /* EntitySystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntitySystem.h; sourceTree = "<group>"; };
-		498BA1C9170FEC9D002B2DE3 /* EntitySystemContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntitySystemContainer.h; sourceTree = "<group>"; };
-		498BA1CA170FEC9D002B2DE3 /* Identifiable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Identifiable.h; sourceTree = "<group>"; };
-		498BA1CB170FEC9D002B2DE3 /* IdentifiableArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IdentifiableArray.h; sourceTree = "<group>"; };
-		498BA1CC170FEC9D002B2DE3 /* IdentifierPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IdentifierPool.h; sourceTree = "<group>"; };
-		498BA1CD170FEC9D002B2DE3 /* ObjectCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectCreator.h; sourceTree = "<group>"; };
-		498BA1CE170FEC9D002B2DE3 /* rtti.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rtti.h; sourceTree = "<group>"; };
-		498BA1CF170FEC9D002B2DE3 /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
-		498BA1D1170FEC9D002B2DE3 /* DynamicArrayUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicArrayUtils.h; sourceTree = "<group>"; };
-		498BA1D2170FEC9D002B2DE3 /* World.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
-		498BA1D5170FECA5002B2DE3 /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
-		498BA1D6170FECA5002B2DE3 /* ComponentStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentStorage.cpp; sourceTree = "<group>"; };
-		498BA1D7170FECA5002B2DE3 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
-		498BA1D8170FECA5002B2DE3 /* EntityContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityContainer.cpp; sourceTree = "<group>"; };
-		498BA1D9170FECA5002B2DE3 /* EntityFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityFactory.cpp; sourceTree = "<group>"; };
-		498BA1DA170FECA5002B2DE3 /* EntitySystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntitySystem.cpp; sourceTree = "<group>"; };
-		498BA1DB170FECA5002B2DE3 /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
+		4955E372179121AB005E8109 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		4964E14817912BD90013785A /* anax.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = anax.h; sourceTree = "<group>"; };
+		4980D73C178D71BE007A2648 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		4980D73D178D71BE007A2648 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		4980D740178D71C3007A2648 /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
+		4980D741178D71C3007A2648 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
+		4980D744178D71C7007A2648 /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
+		4980D745178D71C7007A2648 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
+		4980D748178D71CB007A2648 /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
+		4980D749178D71CB007A2648 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		4980D74C178D72C4007A2648 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		49C5932517100D62009ACA1C /* Tests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tests.xcodeproj; path = "../../../../anax-examples/Tests/project/xcode/Tests.xcodeproj"; sourceTree = "<group>"; };
 		49D179D116FDCD390028C9E0 /* libanax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanax.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -56,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4967E509171805ED00E28815 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4967E50D171805ED00E28815 /* Tests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		498BA1BE170FEC9D002B2DE3 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,34 +74,19 @@
 		498BA1BF170FEC9D002B2DE3 /* anax */ = {
 			isa = PBXGroup;
 			children = (
-				498BA1C0170FEC9D002B2DE3 /* anax.h */,
-				498BA1C1170FEC9D002B2DE3 /* Component.h */,
-				498BA1C2170FEC9D002B2DE3 /* ComponentFilter.h */,
-				498BA1C3170FEC9D002B2DE3 /* ComponentStorage.h */,
-				498BA1C4170FEC9D002B2DE3 /* Entity.h */,
-				498BA1C5170FEC9D002B2DE3 /* EntityContainer.h */,
-				498BA1C6170FEC9D002B2DE3 /* EntityFactory.h */,
-				498BA1C7170FEC9D002B2DE3 /* EntityProcessingSystem.h */,
-				498BA1C8170FEC9D002B2DE3 /* EntitySystem.h */,
-				498BA1C9170FEC9D002B2DE3 /* EntitySystemContainer.h */,
-				498BA1CA170FEC9D002B2DE3 /* Identifiable.h */,
-				498BA1CB170FEC9D002B2DE3 /* IdentifiableArray.h */,
-				498BA1CC170FEC9D002B2DE3 /* IdentifierPool.h */,
-				498BA1CD170FEC9D002B2DE3 /* ObjectCreator.h */,
-				498BA1CE170FEC9D002B2DE3 /* rtti.h */,
-				498BA1CF170FEC9D002B2DE3 /* Types.h */,
-				498BA1D0170FEC9D002B2DE3 /* util */,
-				498BA1D2170FEC9D002B2DE3 /* World.h */,
+				4980D74C178D72C4007A2648 /* config.h */,
+				4955E372179121AB005E8109 /* types.h */,
+				4980D73C178D71BE007A2648 /* Entity.cpp */,
+				4980D73D178D71BE007A2648 /* Entity.h */,
+				4980D740178D71C3007A2648 /* Component.cpp */,
+				4980D741178D71C3007A2648 /* Component.h */,
+				4980D744178D71C7007A2648 /* World.cpp */,
+				4980D745178D71C7007A2648 /* World.h */,
+				4964E14817912BD90013785A /* anax.h */,
+				4980D748178D71CB007A2648 /* System.cpp */,
+				4980D749178D71CB007A2648 /* System.h */,
 			);
 			path = anax;
-			sourceTree = "<group>";
-		};
-		498BA1D0170FEC9D002B2DE3 /* util */ = {
-			isa = PBXGroup;
-			children = (
-				498BA1D1170FEC9D002B2DE3 /* DynamicArrayUtils.h */,
-			);
-			path = util;
 			sourceTree = "<group>";
 		};
 		498BA1D3170FECA5002B2DE3 /* src */ = {
@@ -110,13 +101,6 @@
 		498BA1D4170FECA5002B2DE3 /* anax */ = {
 			isa = PBXGroup;
 			children = (
-				498BA1D5170FECA5002B2DE3 /* Component.cpp */,
-				498BA1D6170FECA5002B2DE3 /* ComponentStorage.cpp */,
-				498BA1D7170FECA5002B2DE3 /* Entity.cpp */,
-				498BA1D8170FECA5002B2DE3 /* EntityContainer.cpp */,
-				498BA1D9170FECA5002B2DE3 /* EntityFactory.cpp */,
-				498BA1DA170FECA5002B2DE3 /* EntitySystem.cpp */,
-				498BA1DB170FECA5002B2DE3 /* World.cpp */,
 			);
 			path = anax;
 			sourceTree = "<group>";
@@ -124,6 +108,7 @@
 		49D179C816FDCD390028C9E0 = {
 			isa = PBXGroup;
 			children = (
+				49C5932517100D62009ACA1C /* Tests.xcodeproj */,
 				498BA1BE170FEC9D002B2DE3 /* include */,
 				498BA1D3170FECA5002B2DE3 /* src */,
 				49D179D216FDCD390028C9E0 /* Products */,
@@ -145,6 +130,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4980D73F178D71BE007A2648 /* Entity.h in Headers */,
+				4980D743178D71C3007A2648 /* Component.h in Headers */,
+				4980D747178D71C7007A2648 /* World.h in Headers */,
+				4980D74B178D71CB007A2648 /* System.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +176,12 @@
 			mainGroup = 49D179C816FDCD390028C9E0;
 			productRefGroup = 49D179D216FDCD390028C9E0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4967E509171805ED00E28815 /* Products */;
+					ProjectRef = 49C5932517100D62009ACA1C /* Tests.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				49D179D016FDCD390028C9E0 /* anax */,
@@ -194,18 +189,25 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		4967E50D171805ED00E28815 /* Tests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = Tests;
+			remoteRef = 4967E50C171805ED00E28815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXSourcesBuildPhase section */
 		49D179CD16FDCD390028C9E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				498BA1DC170FECA5002B2DE3 /* Component.cpp in Sources */,
-				498BA1DD170FECA5002B2DE3 /* ComponentStorage.cpp in Sources */,
-				498BA1DE170FECA5002B2DE3 /* Entity.cpp in Sources */,
-				498BA1DF170FECA5002B2DE3 /* EntityContainer.cpp in Sources */,
-				498BA1E0170FECA5002B2DE3 /* EntityFactory.cpp in Sources */,
-				498BA1E1170FECA5002B2DE3 /* EntitySystem.cpp in Sources */,
-				498BA1E2170FECA5002B2DE3 /* World.cpp in Sources */,
+				4980D73E178D71BE007A2648 /* Entity.cpp in Sources */,
+				4980D742178D71C3007A2648 /* Component.cpp in Sources */,
+				4980D746178D71C7007A2648 /* World.cpp in Sources */,
+				4980D74A178D71CB007A2648 /* System.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

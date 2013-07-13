@@ -26,8 +26,87 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __anax__Entity__
-#define __anax__Entity__
+#ifndef __ANAX_ENTITY_H__
+#define __ANAX_ENTITY_H__
 
+#include "types.h"
 
-#endif // __anax__Entity__
+namespace anax
+{
+	class World;
+	class Entity
+	{
+	public:
+		
+		// ID for entity is composed of two values:
+		// - a counter variable (16 bits)
+		// - the index to the entity in the pool (48 bits)
+		struct Id
+		{
+			Id()
+				: index(0),
+				  counter(0)
+			{
+			}
+			
+			Id(uint Index, uint Counter)
+				: index(Index),
+				  counter(Counter)
+			{
+			}
+			
+			inline operator uint() const
+			{ return value(); }
+			
+			inline uint value() const
+			{ return (counter << ANAX_ENTITY_ID_COUNTER_BIT_COUNT) | index; }
+			
+			/// Clears the ID by setting the index and counter to 0.
+			void clear() { index = counter = 0; }
+			
+			uint index : ANAX_ENTITY_ID_INDEX_BIT_COUNT;
+			uint counter : ANAX_ENTITY_ID_COUNTER_BIT_COUNT;
+		};
+		
+		/// Resembles a null id for an entity
+		static const Id NULL_ID;
+		
+		
+		Entity();
+		
+		Entity(World& world_, Id id_);
+		
+		/// Determines if this Entity handle is able to be used.
+		/// \note You should only use this for DEBUG builds
+		///		  as checking if an Entity is valid may/may not
+		///		  impact your performance.
+		/// \return true if this Entity is valid, false otherwise
+		bool isValid() const;
+		
+		/// Determines whether this Entity is a null entity
+		/// \note This function should only be called for DEBUG builds.
+		///	      As an Entity is only ever null if it is unassigned.
+		/// \return true if this Entity is a null Entity, false otherwise.
+		bool isNull() const;
+		
+		/// \return The Entity's ID
+		const Id& getId() const;
+		
+		/// \return The World that the Entity belongs to.
+		/// \note This function will fail if the Entity is null.
+		/// \see isNull() To check whether the Entity is null.
+		World& getWorld() const;
+		
+	private:
+		
+		/// The ID of the Entity
+		Id _id;
+		
+		/// The world that this Entity belongs to. This is guarenteed
+		/// to not be null, as long as this entity is not null.
+		/// \see isNull() To determine if the entity is null or not.
+		World* _world;
+	};
+}
+
+#endif // __ANAX_ENTITY_H__

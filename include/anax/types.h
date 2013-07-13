@@ -26,39 +26,23 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_COMPONENT_H__
-#define __ANAX_COMPONENT_H__
+#ifndef __ANAX_TYPES_H__
+#define __ANAX_TYPES_H__
 
-#include "types.h"
+#include "config.h"
 
 namespace anax
 {
-	class BaseComponent
-	{
-	public:
-		
-		virtual ~BaseComponent() = 0;
-		
-	protected:
-		
-		/// The next type id for a BaseComponent
-		/// \note
-		/// You should never touch this variable
-		static uint _nextTypeId;
-	};
+	using std::uint32_t;
+	using std::uint64_t;
+	using std::int64_t;
+	using std::int32_t;
 	
-	template <typename T>
-	class Component
-		: BaseComponent
-	{
-	public:
-		
-		static uint GetTypeId()
-		{
-			static uint id = _nextTypeId++;
-			return id;
-		}
-	};
+#ifdef ANAX_USE_32_BIT_IDS
+	typedef uint32_t uint;
+#else
+	typedef uint64_t uint;
+#endif // ANAX_USE_32_BIT_IDS
 }
 
-#endif // __ANAX_COMPONENT_H__
+#endif // __ANAX_TYPES_H__

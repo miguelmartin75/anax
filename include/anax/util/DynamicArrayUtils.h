@@ -26,45 +26,61 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_ENTITYPROCESSINGSYSTEM_H__
-#define __ANAX_ENTITYPROCESSINGSYSTEM_H__
-
-#include "anax/EntitySystem.h"
+#ifndef __ANAX_UTIL_DYNAMICARRAYUTILS_H__
+#define __ANAX_UTIL_DYNAMICARRAYUTILS_H__
 
 namespace anax
 {
-	/// \class EntityProcessingSystem
-	/// \brief A class that is used to process one Entity at a time
-	///
-	/// If you do not need to control how to loop through Entities that are within an
-	/// EntitySystem, then class is suggested for you.
-	///
-	/// \see BaseEntitySystem for more overrideable methods
-	///
-	/// \author Miguel Martin
-	template <typename T>
-	class EntityProcessingSystem
-		: public EntitySystem<T>
+	namespace util
 	{
-	public:
-		
-		typedef EntityProcessingSystem<T> Base;
-		
-		/// Default Constructor
-		EntityProcessingSystem()
+		template <class T>
+		void AssignVectorIndexWithAutoResize(T& vector, typename T::size_type index, typename T::value_type value)
 		{
+			// if we need to resize
+			if(vector.size() <= index)
+			{
+				// then we shall resize!
+				vector.resize(index + 1);
+			}
+			
+			// assign the requested element
+			vector[index] = value;
 		}
 		
-		/// Constructs an EntitySystem
-		/// \param componentFilter The ComponentFilter you wish to construct the EntitySystem with
-		EntityProcessingSystem(const ComponentFilter& componentFilter)
-			: EntitySystem<T>(componentFilter)
+		template <class T>
+		void EnsureCapacity(T& vector, typename T::size_type index)
 		{
+			// if we need to resize
+			if(vector.size() <= index)
+			{
+				// then we shall resize!
+				vector.resize(index + 1);
+			}
 		}
 		
-		/// Destructor
-		virtual ~EntityProcessingSystem() {}
-	};
+		template <class T>
+		typename T::value_type GetFromIndexWithAutoResize(T& vector, typename T::size_type index)
+		{
+			EnsureCapacity(vector, index);
+			return vector[index];
+		}
+		
+		template <class T>
+		bool GetFromIndexWithAutoResizeBitset(T& bitset, typename T::size_type index)
+		{
+			EnsureCapacity(bitset, index);
+			return bitset[index];
+		}
+		
+		template <class T>
+		void AssignBitsetIndexWithAutoResize(T& bitset, typename T::size_type index, bool value)
+		{
+			// if we need to resize
+			EnsureCapacity(bitset, index);
+			// assign the requested element
+			bitset[index] = value;
+		}
+	}
 }
 
-#endif // __ANAX_ENTITYPROCESSINGSYSTEM_H__
+#endif // __ANAX_UTIL_DYNAMICARRAYUTILS_H__

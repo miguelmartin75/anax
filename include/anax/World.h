@@ -26,8 +26,97 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __anax__World__
-#define __anax__World__
+#ifndef __ANAX_WORLD_H__
+#define __ANAX_WORLD_H__
 
+#include <vector>
 
-#endif // __anax__World__
+#include "Component.h"
+#include "Entity.h"
+#include "System.h"
+
+namespace anax
+{
+	class World
+	{
+	public:
+		
+		World()
+		{
+		}
+		
+		Entity createEntity()
+		{
+			return Entity(*this, _entityIdPool.create());
+		}
+		
+		void killEntity(Entity& entity)
+		{
+			// todo:
+			// delay the deletion of an entity
+			_entityIdPool.remove(entity.getId());
+		}
+		
+		bool isValid(const Entity& entity) const
+		{
+			return _entityIdPool.isValid(entity.getId());
+		}
+		
+		/// Refreshes the World
+		void refresh();
+		
+	private:
+		
+		
+		class EntityIdPool
+		{
+		public:
+			
+			bool isValid(Entity::Id id) const
+			{
+				return id.counter == _entities[id.index].counter;
+			}
+			
+			Entity::Id create()
+			{
+				Entity::Id id;
+				
+				// if we need to add more entities to the pool
+				if(_freeList.empty())
+				{
+					// create a new entity, and assign it the new index
+					id.index = _entities.size();
+					id.counter = 1; // start it off with an initial counter of 1 reference
+					_entities.emplace_back(id);
+					
+					return id;
+				}
+				
+				id = _freeList.front();
+				_freeList.pop_back();
+				
+				return id;
+			}
+			
+			void remove(Entity::Id id)
+			{
+				++_entities[id.index].counter; // increment the counter in the cache
+				_freeList.push_back(id); // add the ID to the freeList
+			}
+			
+			Entity::Id get(std::size_t index) const
+			{
+				return _entities[index];
+			}
+			
+		private:
+			
+			std::vector<Entity::Id> _freeList;
+			std::vector<Entity::Id> _entities;
+		};
+		
+		EntityIdPool _entityIdPool;
+	};
+}
+
+#endif // __ANAX_WORLD_H__

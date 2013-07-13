@@ -27,3 +27,12 @@
 ///
 
 #include "System.h"
+
+namespace anax
+{
+	uint BaseSystem::_nextTypeId = 0;
+	
+	BaseSystem::~BaseSystem()
+	{
+	}
+}

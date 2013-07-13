@@ -26,8 +26,39 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __anax__System__
-#define __anax__System__
+#ifndef __ANAX_SYSTEM_H__
+#define __ANAX_SYSTEM_H__
 
+#include "types.h"
 
-#endif // __anax__System__
+namespace anax
+{
+	class BaseSystem
+	{
+	public:
+		
+		virtual ~BaseSystem() = 0;
+		
+	protected:
+		
+		/// The next type id for a BaseComponent
+		/// \note
+		/// You should never touch this variable
+		static uint _nextTypeId;
+	};
+	
+	template <typename T>
+	class System
+		: BaseSystem
+	{
+	public:
+		
+		static uint GetTypeId()
+		{
+			static uint id = _nextTypeId++;
+			return id;
+		}
+	};
+}
+
+#endif // __ANAX_SYSTEM_H__

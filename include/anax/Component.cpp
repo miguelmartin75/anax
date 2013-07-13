@@ -27,3 +27,12 @@
 ///
 
 #include "Component.h"
+
+namespace anax
+{
+	uint BaseComponent::_nextTypeId = 0;
+	
+	BaseComponent::~BaseComponent()
+	{
+	}
+}

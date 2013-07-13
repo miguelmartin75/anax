@@ -26,62 +26,14 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "EntityFactory.h"
-
-#include <cassert>
+#ifndef __ANAX_H__
+#define __ANAX_H__
 
 #include "World.h"
 
-
 namespace anax
 {
-	EntityFactory::EntityFactory()
-	: _aliveCount(0),
-	_totalCreatedCount(0),
-	_totalDestroyedCount(0)
-	{
-		/* do nothing */
-	}
 	
-	EntityFactory::~EntityFactory()
-	{
-		/* do nothing */
-	}
-	
-	
-	
-	EntityPtr EntityFactory::createEntity(World& world)
-	{		
-		++_totalCreatedCount;
-		++_aliveCount;
-		return new Entity(world);
-	}
-	
-	void EntityFactory::destroyEntity(EntityPtr e)
-	{
-		delete &e;					// delete the entity
-		
-		--_aliveCount;
-		++_totalDestroyedCount;
-	}
-	
-	size_t EntityFactory::getCreatedEntityCount() const
-	{
-		return _totalCreatedCount;
-	}
-	
-	size_t EntityFactory::getDestroyedEntityCount() const
-	{
-		return _totalDestroyedCount;
-	}
-	
-	size_t EntityFactory::getAliveEntityCount() const
-	{
-		return _aliveCount;
-	}
-	
-	void EntityFactory::clearCountData()
-	{
-		_totalCreatedCount = _totalDestroyedCount = _aliveCount = 0;
-	}
 }
+
+#endif // __ANAX_H__

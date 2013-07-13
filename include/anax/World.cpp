@@ -27,3 +27,8 @@
 ///
 
 #include "World.h"
+
+namespace anax
+{
+	
+}

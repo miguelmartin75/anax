@@ -26,8 +26,20 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __anax__config__
-#define __anax__config__
+#ifndef __ANAX_CONFIG_H__
+#define __ANAX_CONFIG_H__
 
+#include <cstdint>
 
-#endif // __anax__config__
+/// Uncomment this for 32 bit IDs for entities
+// #define ANAX_USE_32_BIT_IDS
+
+#ifdef ANAX_USE_32_BIT_IDS
+#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
+#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 12
+#else
+#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 48
+#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 16
+#endif
+
+#endif // __ANAX_CONFIG_H__
