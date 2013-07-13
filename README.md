@@ -6,7 +6,7 @@ anax is an open source C++ entity system designed to be portable, lightweight an
 
 An entity system, or entity component system is a pattern for building complex extensible projects (typically games). It seperates funcality into three major parts: components, systems and entities. Where entities are used to describe an object within the game, components are used to store data for the entities to describe them, and systems are used to contain game logic.
 
-You can read about them further [here](what-is-an-entity-system).
+You can read about them further [here](https://github.com/miguelishawt/anax/wiki/What-is-an-Entity-System%3F).
 
 # Inspiration
 
@@ -202,7 +202,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 3. The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 
-[what-is-an-entity-system]: https://github.com/miguelishawt/anax/wiki/What-is-an-Entity-System%3F
 [wiki]: https://github.com/miguelishawt/anax/wiki
 [wiki-basic-tutorial]: https://github.com/miguelishawt/anax/wiki/Tutorial-Using-the-Library
 [examples]: https://github.com/miguelishawt/anax-examples
