@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -26,50 +26,47 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_SYSTEM_HPP__
-#define __ANAX_SYSTEM_HPP__
-
-#include <cstddef>
-#include <vector>
-
-#include "detail/ClassTypeId.hpp"
-
-#include "Entity.hpp"
-#include "ComponentFilter.hpp"
+#include "EntityIdPool.hpp"
 
 namespace anax
 {
-	class BaseSystem
+	namespace detail
 	{
-	public:
-		
-		typedef std::size_t TypeId;
-		
-		
-		virtual ~BaseSystem() = 0;
-		
-	protected:
-		
-		virtual void onEntityAdded(Entity& entity) {}
-		virtual void onEntityRemoved(Entity& entity) {}
-		
-	private:
-		
-		/// The Entities that are attached to this system
-		std::vector<Entity> _entities;
-	};
-	
-	template <typename T>
-	class System
-		: BaseSystem
-	{
-	public:
-		
-		static TypeId GetTypeId()
+		Entity::Id EntityIdPool::create()
 		{
-			return detail::ClassTypeId<BaseSystem>::GetTypeId<T>();
+			Entity::Id id;
+			
+			// if we need to add more entities to the pool
+			if(_freeList.empty())
+			{
+				// create a new entity, and assign it the new index
+				id.index = _entities.size();
+				id.counter = 1; // start it off with an initial counter of 1 reference
+				_entities.emplace_back(id);
+				
+				return id;
+			}
+			
+			id = _freeList.front();
+			_freeList.pop_back();
+			
+			return id;
 		}
-	};
+		
+		void EntityIdPool::remove(Entity::Id id)
+		{
+			++_entities[id.index].counter; // increment the counter in the cache
+			_freeList.push_back(id); // add the ID to the freeList
+		}
+		
+		Entity::Id EntityIdPool::get(std::size_t index) const
+		{
+			return _entities[index];
+		}
+		
+		bool EntityIdPool::isValid(Entity::Id id) const
+		{
+			return id.counter == _entities[id.index].counter;
+		}
+	}
 }
-
-#endif // __ANAX_SYSTEM_HPP__

@@ -32,6 +32,9 @@
 #include <vector>
 #include <unordered_map>
 
+#include "detail/EntityIdPool.hpp"
+#include "detail/EntityAttributes.hpp"
+
 #include "Component.hpp"
 #include "Entity.hpp"
 #include "System.hpp"
@@ -48,9 +51,20 @@ namespace anax
 		/// \return A new entity for which you can use.
 		Entity createEntity();
 		
-		/// Kills an Entity
+		/// Kills and decativates an Entity
 		/// \param entity The Entity you wish to kill
 		void killEntity(Entity& entity);
+		
+		/// Activates an Entity
+		/// \param entity The Entity you wish to activate
+		void activateEntity(Entity& entity);
+		
+		/// Deactivates an Entity
+		/// \param entity The Entity you wish to deactivate
+		void deactivateEntity(Entity& entity);
+		
+		/// 
+		bool isActivated(Entity& entity);
 		
 		/// Determines if an Entity is valid.
 		/// \note If the entity is valid it may have components attached to it.
@@ -64,41 +78,34 @@ namespace anax
 		
 	private:
 		
-		class EntityIdPool
-		{
-		public:
-			
-			/// Creates an Entity ID
-			/// \return The newly created Entity ID
-			Entity::Id create();
-			
-			/// Removes an ID from the pool
-			/// \param id The ID you wish to remove
-			void remove(Entity::Id id);
-			
-			/// \param The index you wish to access the Entity::Id at
-			/// \return An Entity::Id at index
-			Entity::Id get(std::size_t index) const;
-			
-			/// Determines if an Entity ID is valid
-			/// \return true if the ID is valid
-			bool isValid(Entity::Id id) const;
-			
-		private:
-			
-			/// The entities ids that are avaliable to be used 
-			std::vector<Entity::Id> _freeList;
-			
-			/// The Entities that are within the pool
-			std::vector<Entity::Id> _entities;
-		} _entityIdPool;
+		/// Describes an array of Systems for storage within the world
+		/// The index is the type ID of the system,
+		/// thus systems of the same type can not be stored
+		/// in the same World object.
+		typedef std::unordered_map<detail::TypeId, BaseSystem*> SystemArray;
 		
-		class EntityAttributes
-		{
-			
-		} _entityAttributes;
+		/// Describes an array of Entities
+		typedef std::vector<Entity> EntityArray;
 		
-		std::vector<BaseSystem*> _systems;
+		
+		
+		/// A pool storage of the IDs for the entities within the world
+		detail::EntityIdPool _entityIdPool;
+		
+		/// The attributes of the entities attached to this world
+		detail::EntityAttributes _entityAttributes;
+		
+		/// Systems attached with the world.
+		SystemArray _systems;
+		
+		/// The killed entities for the world
+		EntityArray _killedEntities;
+		
+		/// Temporary storage for activated entities within the World
+		EntityArray _activatedEntities;
+		
+		/// Temporary storage for the deactivate entities within the World
+		EntityArray _deactivatedEntities;
 	};
 }
 

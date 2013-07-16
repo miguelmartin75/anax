@@ -35,12 +35,12 @@ namespace anax
 {
 	namespace detail
 	{
+		typedef std::size_t TypeId;
+
 		template <typename TBase>
 		class ClassTypeId
 		{
 		public:
-			
-			typedef std::size_t TypeId;
 			
 			template <typename T>
 			static TypeId GetTypeId()

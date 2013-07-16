@@ -20,6 +20,8 @@
 		4964E1AA179150DC0013785A /* System.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A0179150DC0013785A /* System.hpp */; };
 		4964E1AC179150DC0013785A /* DynamicArrayUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */; };
 		4964E1AD179150DC0013785A /* World.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A4179150DC0013785A /* World.hpp */; };
+		497EC2DB1795ABBE009F56FC /* EntityIdPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */; };
+		497EC2DF1795ABE8009F56FC /* EntiyAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,10 @@
 		4964E1A0179150DC0013785A /* System.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = System.hpp; sourceTree = "<group>"; };
 		4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DynamicArrayUtils.hpp; sourceTree = "<group>"; };
 		4964E1A4179150DC0013785A /* World.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
+		497EC2D81795AB7F009F56FC /* EntityIdPool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityIdPool.hpp; sourceTree = "<group>"; };
+		497EC2D91795AB95009F56FC /* EntityAttributes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityAttributes.hpp; sourceTree = "<group>"; };
+		497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityIdPool.cpp; path = detail/EntityIdPool.cpp; sourceTree = "<group>"; };
+		497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntiyAttributes.cpp; path = detail/EntiyAttributes.cpp; sourceTree = "<group>"; };
 		49D179D116FDCD390028C9E0 /* libanax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanax.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -72,6 +78,7 @@
 		4964E18017914A560013785A /* anax */ = {
 			isa = PBXGroup;
 			children = (
+				497EC2E01795ABEC009F56FC /* detail */,
 				4964E19017914F260013785A /* ComponentFilter.cpp */,
 				4964E18F17914F260013785A /* Component.cpp */,
 				4964E19117914F260013785A /* Entity.cpp */,
@@ -101,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				491EF83817954D0E00EFD3F1 /* ClassTypeId.hpp */,
+				497EC2D81795AB7F009F56FC /* EntityIdPool.hpp */,
+				497EC2D91795AB95009F56FC /* EntityAttributes.hpp */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -111,6 +120,15 @@
 				4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		497EC2E01795ABEC009F56FC /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */,
+				497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */,
+			);
+			name = detail;
 			sourceTree = "<group>";
 		};
 		49D179C816FDCD390028C9E0 = {
@@ -204,6 +222,8 @@
 				4964E19617914F260013785A /* Entity.cpp in Sources */,
 				4964E19717914F260013785A /* System.cpp in Sources */,
 				4964E19817914F260013785A /* World.cpp in Sources */,
+				497EC2DB1795ABBE009F56FC /* EntityIdPool.cpp in Sources */,
+				497EC2DF1795ABE8009F56FC /* EntiyAttributes.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

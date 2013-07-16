@@ -54,7 +54,7 @@ namespace anax
 	
 	bool Entity::isValid() const
 	{
-		
+		return getWorld().isValid(*this);
 	}
 }
 

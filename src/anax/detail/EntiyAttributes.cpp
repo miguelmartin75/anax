@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -26,50 +26,12 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_SYSTEM_HPP__
-#define __ANAX_SYSTEM_HPP__
-
-#include <cstddef>
-#include <vector>
-
-#include "detail/ClassTypeId.hpp"
-
-#include "Entity.hpp"
-#include "ComponentFilter.hpp"
+#include "EntityAttributes.hpp"
 
 namespace anax
 {
-	class BaseSystem
+	namespace detail
 	{
-	public:
 		
-		typedef std::size_t TypeId;
-		
-		
-		virtual ~BaseSystem() = 0;
-		
-	protected:
-		
-		virtual void onEntityAdded(Entity& entity) {}
-		virtual void onEntityRemoved(Entity& entity) {}
-		
-	private:
-		
-		/// The Entities that are attached to this system
-		std::vector<Entity> _entities;
-	};
-	
-	template <typename T>
-	class System
-		: BaseSystem
-	{
-	public:
-		
-		static TypeId GetTypeId()
-		{
-			return detail::ClassTypeId<BaseSystem>::GetTypeId<T>();
-		}
-	};
+	}
 }
-
-#endif // __ANAX_SYSTEM_HPP__

@@ -131,6 +131,16 @@ namespace anax
 		/// \see isNull() To check whether the Entity is null.
 		World& getWorld() const;
 		
+		bool isActivated() const;
+		
+		void activate();
+		
+		void deactivate();
+		
+		void kill();
+		
+		
+		
 	private:
 		
 		/// \param world The World the entity belongs to
