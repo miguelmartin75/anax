@@ -90,7 +90,7 @@ Entity entity1 = world.createEntity();
 Entity entity2 = entity1;
 ```
 
-There is no problem with that. To destroy/kill an entity, you can either call `World::killEntity` or `Entity::kill`. Once you have killed an entity, other copies of your entity handles will automatically be invalidated and will not be of use. e.g.
+There is no problem with that. To destroy/kill an entity, you can either call `World::killEntity` or `Entity::kill`. e.g.
 
 ```c++
 Entity entity = world.createEntity();
@@ -99,6 +99,19 @@ entity.kill();
 // or
 world.killEntity(entity);
 ```
+
+Once you have killed an entity, other copies of your entity handles will automatically be invalidated and will not be of use (a run-time error will occur (an assertion), in DEBUG builds). e.g.
+
+```c++
+Entity entity1 = world.createEntity();
+Entity entity2 = entity1;
+
+entity1.kill();
+
+// This will cause a run-time error
+entity2.addComponent<Position>(0, 3, 5); // see below for details about this method
+
+``` 
 	
 ### Components
 
@@ -109,6 +122,7 @@ A Component is used to describe data for an Entity, for example: the position, v
 class PositionComponent
 	: public anax::Component<PositionComponent>
 {
+	// ...
 };
 ```
 
@@ -137,6 +151,7 @@ A System is used to contain entities with specific components. It usually is use
 class MovementSystem
 	: public anax::System<MovementSystem>
 {
+	// ...
 };
 ```
 
@@ -154,6 +169,8 @@ public:
 		: Base(ComponentFilter().requires<PositionComponent, VelocityComponent>())
 	{
 	}
+	
+	// ...
 };
 ```
 
