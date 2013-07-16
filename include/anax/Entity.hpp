@@ -29,7 +29,8 @@
 #ifndef __ANAX_ENTITY_H__
 #define __ANAX_ENTITY_H__
 
-#include "types.h"
+#include <cstdint>
+#include "config.hpp"
 
 namespace anax
 {
@@ -43,29 +44,39 @@ namespace anax
 		// - the index to the entity in the pool (48 bits)
 		struct Id
 		{
+			typedef
+
+#	ifdef ANAX_USE_32_BIT_IDS
+			std::uint32_t
+#	else
+			std::uint64_t
+#	endif // ANAX_USE_32_BIT_IDS
+			
+			int_type;
+			
 			Id()
 				: index(0),
 				  counter(0)
 			{
 			}
 			
-			Id(uint Index, uint Counter)
+			Id(int_type Index, int_type Counter)
 				: index(Index),
 				  counter(Counter)
 			{
 			}
 			
-			inline operator unsigned int() const
+			inline operator int_type() const
 			{ return value(); }
 			
-			inline unsigned int value() const
+			inline int_type value() const
 			{ return (counter << ANAX_ENTITY_ID_COUNTER_BIT_COUNT) | index; }
 			
 			/// Clears the ID by setting the index and counter to 0.
 			void clear() { index = counter = 0; }
 			
-			unsigned int index : ANAX_ENTITY_ID_INDEX_BIT_COUNT;
-			unsigned int counter : ANAX_ENTITY_ID_COUNTER_BIT_COUNT;
+			int_type index : ANAX_ENTITY_ID_INDEX_BIT_COUNT;
+			int_type counter : ANAX_ENTITY_ID_COUNTER_BIT_COUNT;
 		};
 		
 		/// Resembles a null id for an entity

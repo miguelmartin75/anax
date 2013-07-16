@@ -29,7 +29,7 @@
 #ifndef __ANAX_COMPONENT_H__
 #define __ANAX_COMPONENT_H__
 
-#include "types.h"
+#include <cstddef>
 
 namespace anax
 {
@@ -37,11 +37,11 @@ namespace anax
 	{
 	public:
 	
-		typedef uint TypeId;
+		typedef std::size_t TypeId;
 
-#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 		virtual ~BaseComponent() = 0;
-#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 		
 	protected:
 		
@@ -61,9 +61,9 @@ namespace anax
 	{
 	public:
 		
-#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-		virtual Component() = 0;
-#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+		virtual ~Component() = 0;
+#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 		
 		static TypeId GetTypeId()
 		{
@@ -72,10 +72,12 @@ namespace anax
 		}
 	};
 	
+#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 	template <typename T>
 	Component<T>::~Component()
 	{
 	}
+#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 }
 
 #endif // __ANAX_COMPONENT_H__

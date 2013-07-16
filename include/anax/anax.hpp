@@ -29,7 +29,7 @@
 #ifndef __ANAX_H__
 #define __ANAX_H__
 
-#include "World.h"
+#include "World.hpp"
 
 namespace anax
 {

@@ -32,9 +32,9 @@
 #include <vector>
 #include <unordered_map>
 
-#include "Component.h"
-#include "Entity.h"
-#include "System.h"
+#include "Component.hpp"
+#include "Entity.hpp"
+#include "System.hpp"
 
 namespace anax
 {

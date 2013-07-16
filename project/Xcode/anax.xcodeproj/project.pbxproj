@@ -18,7 +18,6 @@
 		4964E1A8179150DC0013785A /* config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19D179150DC0013785A /* config.hpp */; };
 		4964E1A9179150DC0013785A /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19F179150DC0013785A /* Entity.hpp */; };
 		4964E1AA179150DC0013785A /* System.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A0179150DC0013785A /* System.hpp */; };
-		4964E1AB179150DC0013785A /* types.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A1179150DC0013785A /* types.hpp */; };
 		4964E1AC179150DC0013785A /* DynamicArrayUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */; };
 		4964E1AD179150DC0013785A /* World.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A4179150DC0013785A /* World.hpp */; };
 /* End PBXBuildFile section */
@@ -35,7 +34,6 @@
 		4964E19D179150DC0013785A /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
 		4964E19F179150DC0013785A /* Entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		4964E1A0179150DC0013785A /* System.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = System.hpp; sourceTree = "<group>"; };
-		4964E1A1179150DC0013785A /* types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = types.hpp; sourceTree = "<group>"; };
 		4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DynamicArrayUtils.hpp; sourceTree = "<group>"; };
 		4964E1A4179150DC0013785A /* World.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		49D179D116FDCD390028C9E0 /* libanax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanax.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +86,6 @@
 				4964E19E179150DC0013785A /* detail */,
 				4964E1A2179150DC0013785A /* util */,
 				4964E19A179150DC0013785A /* anax.hpp */,
-				4964E1A1179150DC0013785A /* types.hpp */,
 				4964E19D179150DC0013785A /* config.hpp */,
 				4964E19C179150DC0013785A /* ComponentFilter.hpp */,
 				4964E19B179150DC0013785A /* Component.hpp */,
@@ -144,7 +141,6 @@
 				4964E1A8179150DC0013785A /* config.hpp in Headers */,
 				4964E1A9179150DC0013785A /* Entity.hpp in Headers */,
 				4964E1AA179150DC0013785A /* System.hpp in Headers */,
-				4964E1AB179150DC0013785A /* types.hpp in Headers */,
 				4964E1AC179150DC0013785A /* DynamicArrayUtils.hpp in Headers */,
 				4964E1AD179150DC0013785A /* World.hpp in Headers */,
 			);

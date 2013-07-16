@@ -29,10 +29,10 @@
 #ifndef __ANAX_SYSTEM_H__
 #define __ANAX_SYSTEM_H__
 
+#include <cstddef>
 #include <vector>
 
-#include "types.h"
-#include "Entity.h"
+#include "Entity.hpp"
 
 namespace anax
 {
@@ -40,7 +40,7 @@ namespace anax
 	{
 	public:
 		
-		typedef uint TypeId;
+		typedef std::size_t TypeId;
 		
 		
 		virtual ~BaseSystem() = 0;

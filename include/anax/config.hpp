@@ -29,8 +29,6 @@
 #ifndef __ANAX_CONFIG_H__
 #define __ANAX_CONFIG_H__
 
-#include <cstdint>
-
 /// Uncomment this for 32 bit IDs for entities
 // #define ANAX_USE_32_BIT_IDS
 

@@ -31,9 +31,11 @@ namespace anax
 {
 	BaseComponent::TypeId BaseComponent::_nextTypeId = 0;
 	
+#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 	BaseComponent::~BaseComponent()
 	{
 	}
+#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 	
 	BaseComponent::TypeId BaseComponent::_GetNextTypeId()
 	{
