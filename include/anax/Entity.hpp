@@ -30,18 +30,34 @@
 #define __ANAX_ENTITY_H__
 
 #include <cstdint>
+
 #include "config.hpp"
 
 namespace anax
 {
 	class World;
+	
+	/// \brief A handle to an Entity within a World
+	///
+	/// This class is used as a handle to an entity within a world.
+	/// The handle can be invalid, as it "handle" no entity at all.
+	///
+	/// \author Miguel Martin
 	class Entity
 	{
 	public:
 		
-		// ID for entity is composed of two values:
-		// - a counter variable (16 bits)
-		// - the index to the entity in the pool (48 bits)
+		/// \brief A class to describe an ID for an entity
+		///
+		/// An ID for entity is composed of two values:
+		/// - an index variable 
+		/// - a counter variable
+		///
+		/// The index variable is used to locate components/location
+		/// in the entity ID pool. The counter variable is used to
+		/// determine if this ID is valid, and has not been killed.
+		///
+		/// \author Miguel Martin
 		struct Id
 		{
 			typedef
@@ -54,51 +70,58 @@ namespace anax
 			
 			int_type;
 			
+			/// Default constructor.
+			/// \note
+			/// This constructor will automatically nullify the ID
 			Id()
 				: index(0),
 				  counter(0)
 			{
 			}
 			
+			/// Sets the index and counter variables of the ID
+			/// \param Index The value for the index you wish to set
+			/// \param Counter The value for the counter you wish to set
 			Id(int_type Index, int_type Counter)
 				: index(Index),
 				  counter(Counter)
 			{
 			}
 			
+			/// \return The value of the ID, as an integer
 			inline operator int_type() const
 			{ return value(); }
 			
+			/// \return The value of the ID, as an integer
 			inline int_type value() const
 			{ return (counter << ANAX_ENTITY_ID_COUNTER_BIT_COUNT) | index; }
 			
 			/// Clears the ID by setting the index and counter to 0.
 			void clear() { index = counter = 0; }
 			
+			/// Determines if the ID is null
+			/// \return true if the ID is null
+			bool isNull() const { return value() == 0; }
+			
 			int_type index : ANAX_ENTITY_ID_INDEX_BIT_COUNT;
 			int_type counter : ANAX_ENTITY_ID_COUNTER_BIT_COUNT;
 		};
 		
-		/// Resembles a null id for an entity
-		static const Id NULL_ID;
-		
-		
+		/// Default constructor
 		Entity();
 		
-		Entity(World& world, Id id);
+		Entity(const Entity&) = default;
+		Entity(Entity&&) = default;
+		Entity& operator=(const Entity&) = default;
+		Entity& operator=(Entity&&) = default;
 		
-		/// Determines if this Entity handle is able to be used.
+		
+		/// Determines if this Entity handle is valid & able to be used.
 		/// \note You should only use this for DEBUG builds
 		///		  as checking if an Entity is valid may/may not
 		///		  impact your performance.
 		/// \return true if this Entity is valid, false otherwise
 		bool isValid() const;
-		
-		/// Determines whether this Entity is a null entity
-		/// \note This function should only be called for DEBUG builds.
-		///	      As an Entity is only ever null if it is unassigned.
-		/// \return true if this Entity is a null Entity, false otherwise.
-		bool isNull() const;
 		
 		/// \return The Entity's ID
 		const Id& getId() const;
@@ -110,6 +133,12 @@ namespace anax
 		
 	private:
 		
+		/// \param world The World the entity belongs to
+		/// \param id The designated ID of the Entity
+		Entity(World& world, Id id);
+		
+		
+		
 		/// The ID of the Entity
 		Id _id;
 		
@@ -117,6 +146,10 @@ namespace anax
 		/// to not be null, as long as this entity is not null.
 		/// \see isNull() To determine if the entity is null or not.
 		World* _world;
+		
+		
+		
+		friend class World;
 	};
 }
 

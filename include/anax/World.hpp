@@ -86,7 +86,6 @@ namespace anax
 			
 		private:
 			
-			
 			/// The entities ids that are avaliable to be used 
 			std::vector<Entity::Id> _freeList;
 			

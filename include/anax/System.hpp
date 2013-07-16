@@ -34,6 +34,7 @@
 
 #include "detail/ClassTypeId.hpp"
 #include "Entity.hpp"
+#include "ComponentFilter.hpp"
 
 namespace anax
 {

@@ -31,13 +31,28 @@
 #include "World.hpp"
 
 namespace anax
-{
+{	
 	Entity::Entity()
 	{
-		
 	}
 	
 	Entity::Entity(World& world, Entity::Id id)
+		: _world(&world),
+		  _id(id)
+	{
+	}
+	
+	World& Entity::getWorld() const
+	{
+		return *_world;
+	}
+	
+	const Entity::Id& Entity::getId() const
+	{
+		return _id;
+	}
+	
+	bool Entity::isValid() const
 	{
 		
 	}
