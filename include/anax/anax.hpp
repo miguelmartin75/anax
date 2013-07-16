@@ -29,11 +29,34 @@
 #ifndef __ANAX_HPP__
 #define __ANAX_HPP__
 
-#include "World.hpp"
-
+/// \brief A namespace that contains all classes/functions for the anax library
+///
+/// This namespace contains all you need to use the anax library.
+///
+/// \author Miguel Martin
 namespace anax
 {
-	
 }
+
+
+/// \mainpage
+///
+/// \section welcome Welcome
+///
+/// Welcome to the anax documentation, here you may find
+/// detailed documentation on how to use specific classes/methods for the library.
+///
+/// \section resources Extra-resources
+/// You may find more resources to learn about the anax library on
+/// the anax's wiki, hosted on GitHub
+/// <a href="https://github.com/miguelishawt/anax/wiki"> here</a>.
+
+#	define ANAX_VERSION_MAJOR 1
+#	define ANAX_VERSION_MINOR 0
+#	define ANAX_PATCH_NUMBER 0
+
+#	define ANAX_VERSION_NUMBER ANAX_VERSION_MAJOR.ANAX_VERSION_MINOR.ANAX_PATCH_NUMBER
+
+#include "World.hpp"
 
 #endif // __ANAX_HPP__
