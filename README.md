@@ -26,7 +26,7 @@ There are multiple ways to download the library. Here are your options:
 To compile, install, and use anax, the following libraries and C++ support is required:
 
 - [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html)
-- [`boost::shared_ptr`](http://www.boost.org/doc/libs/1_54_0/libs/smart_ptr/shared_ptr.htm) or [`std::shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr) support
+- [`boost::shared_ptr`](http://www.boost.org/doc/libs/1_54_0/libs/smart_ptr/shared_ptr.htm) or [`std::shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr)
 - C++11 variadic templates (this is optional, but is reccomended)
 
 Unfortunately, at this time, this library does _not_ use [CMake](http://www.cmake.org/), since I currently do not know how to use it. Therefore you currently have these options:
@@ -128,12 +128,16 @@ class PositionComponent
 
 You may add/remove/get components to entities through the public methods defined in the entity class.
 
+- addComponent
+- removeComponent
+- getComponent
+
 e.g.
 
 ```c++
 // adding components
 entity.addComponent<PositionComponent(2, 3, 5);
-entity.addComponent(std::make_shard<PositionComponent>(3, 5, 6));
+entity.addComponent(std::make_shared<PositionComponent>(3, 5, 6));
 
 // removing components
 entity.removeComponent<PositionComponent>();
@@ -193,12 +197,12 @@ Want to get involved with the project? You are free to help out on the project, 
     - Fix bugs
     - Help create/fix documentation
 - The [wiki]
-	- Create video/written tutorials (be add any links to the [wiki], or write it up on the wiki)
-    - Fix spelling/grammar errors
+	- Create video/written tutorials; this can be done by:
+		- Adding links to tutorials on the [wiki]
+		- Writing a tutorial on the [wiki]
 	- Add examples to the [examples] repo
 
-If you do help out, [email] me and I'll put your name in the contributers file.
-
+If you do help out, [email] me and I'll put your name in the contributers list.
 
 # License
 Copyright (C) 2013 Miguel Martin ([miguel.martin7.5@hotmail.com](email))
