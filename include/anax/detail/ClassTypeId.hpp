@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -25,13 +25,41 @@
 /// 3. The above copyright notice and this permission notice shall be included in
 ///    all copies or substantial portions of the Software.
 ///
-#include "Component.hpp"
+
+#ifndef __ANAX_DETAIL_CLASSTYPEID_HPP__
+#define __ANAX_DETAIL_CLASSTYPEID_HPP__
+
+#include <cstddef>
 
 namespace anax
-{	
-#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-	BaseComponent::~BaseComponent()
+{
+	namespace detail
 	{
+		template <typename TBase>
+		class ClassTypeId
+		{
+		public:
+			
+			typedef std::size_t TypeId;
+			
+			template <typename T>
+			static TypeId GetTypeId()
+			{
+				static const TypeId id = _GetNextTypeId();
+				return id;
+			}
+			
+		private:
+			
+			static TypeId _GetNextTypeId()
+			{
+				return _nextTypeId++;
+			}
+			
+			static TypeId _nextTypeId;
+		};
 	}
-#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 }
+
+
+#endif // __ANAX_DETAIL_CLASSTYPEID_HPP__

@@ -29,15 +29,8 @@
 #include "System.hpp"
 
 namespace anax
-{
-	BaseSystem::TypeId BaseSystem::_nextTypeId = 0;
-	
+{	
 	BaseSystem::~BaseSystem()
 	{
-	}
-	
-	BaseSystem::TypeId BaseSystem::_GetNextTypeId()
-	{
-		return _nextTypeId++;
 	}
 }

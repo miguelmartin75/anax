@@ -31,6 +31,8 @@
 
 #include <cstddef>
 
+#include "detail/ClassTypeId.hpp"
+
 namespace anax
 {
 	class BaseComponent
@@ -42,17 +44,6 @@ namespace anax
 #	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 		virtual ~BaseComponent() = 0;
 #	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-		
-	protected:
-		
-		/// \note
-		/// Do not call this method
-		static TypeId _GetNextTypeId();
-		
-	private:
-		
-		/// The next type id for a BaseComponent
-		static TypeId _nextTypeId;
 	};
 	
 	template <typename T>
@@ -67,8 +58,7 @@ namespace anax
 		
 		static TypeId GetTypeId()
 		{
-			static TypeId id = _GetNextTypeId();
-			return id;
+			return detail::ClassTypeId<BaseComponent>::GetTypeId<T>();
 		}
 	};
 	

@@ -32,6 +32,7 @@
 #include <cstddef>
 #include <vector>
 
+#include "detail/ClassTypeId.hpp"
 #include "Entity.hpp"
 
 namespace anax
@@ -54,15 +55,6 @@ namespace anax
 		
 		/// The Entities that are attached to this system
 		std::vector<Entity> _entities;
-		
-		/// The next type id for a BaseComponent
-		/// \note
-		/// You should never touch this variable
-		static TypeId _nextTypeId;
-		
-	protected:
-		
-		static TypeId _GetNextTypeId();
 	};
 	
 	template <typename T>
@@ -73,8 +65,7 @@ namespace anax
 		
 		static TypeId GetTypeId()
 		{
-			static TypeId id = _GetNextTypeId();
-			return id;
+			return detail::ClassTypeId<BaseSystem>::GetTypeId<T>();
 		}
 	};
 }
