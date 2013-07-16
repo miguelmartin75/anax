@@ -27,3 +27,8 @@
 ///
 
 #include "ComponentFilter.hpp"
+
+namespace anax
+{
+	
+}

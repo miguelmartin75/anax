@@ -29,9 +29,49 @@
 #ifndef __ANAX_COMPONENTFILTER_HPP__
 #define __ANAX_COMPONENTFILTER_HPP__
 
+#include <boost/dynamic_bitset.hpp>
+
+#include "detail/EntityIdPool.hpp"
+
+#include "config.hpp"
+
 namespace anax
 {
-	// TODO
+	struct ComponentFilter
+	{
+		typedef boost::dynamic_bitset<> BitSet;
+		
+		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL keep
+		/// This is used if you want to make sure an Entity WILL have a Component attached to it
+		BitSet requiredComponentsBitSet;
+		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL set as optional
+		/// This is used if you optionally want the Component to be attached
+		BitSet oneOfComponentBitSet;
+		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL filter out
+		/// This is used if you want to make sure a Component is NOT attached to an Entity
+		BitSet excludeComponentBitSet;
+		
+		
+		ComponentFilter() {}
+		ComponentFilter(const ComponentFilter&) = default;
+		ComponentFilter(ComponentFilter&&) = default;
+		ComponentFilter& operator=(const ComponentFilter&) = default;
+		ComponentFilter& operator=(ComponentFilter&&) = default;
+		
+		template <typename TComponent, typename... TComponents>
+		ComponentFilter& requires()
+		{
+			
+			requires<TComponents...>();
+			return *this;
+		}
+		
+		
+		bool matches(const ComponentFilter& componentFilter) const
+		{ return Matches(*this, componentFilter); }
+		
+		static bool Matches(const ComponentFilter& filter1, const ComponentFilter& filter2);
+	};
 }
 
 #endif // __ANAX_COMPONENTFILTER_HPP__

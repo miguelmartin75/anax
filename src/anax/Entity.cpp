@@ -31,7 +31,7 @@
 #include "World.hpp"
 
 namespace anax
-{	
+{
 	Entity::Entity()
 	{
 	}
