@@ -24,11 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4964E18F17914F260013785A /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Component.cpp; path = anax/Component.cpp; sourceTree = "<group>"; };
-		4964E19017914F260013785A /* ComponentFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ComponentFilter.cpp; path = anax/ComponentFilter.cpp; sourceTree = "<group>"; };
-		4964E19117914F260013785A /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Entity.cpp; path = anax/Entity.cpp; sourceTree = "<group>"; };
-		4964E19217914F260013785A /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = System.cpp; path = anax/System.cpp; sourceTree = "<group>"; };
-		4964E19317914F260013785A /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = anax/World.cpp; sourceTree = "<group>"; };
+		4964E18F17914F260013785A /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
+		4964E19017914F260013785A /* ComponentFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentFilter.cpp; sourceTree = "<group>"; };
+		4964E19117914F260013785A /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		4964E19217914F260013785A /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
+		4964E19317914F260013785A /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
 		4964E19A179150DC0013785A /* anax.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = anax.hpp; sourceTree = "<group>"; };
 		4964E19B179150DC0013785A /* Component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
 		4964E19C179150DC0013785A /* ComponentFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ComponentFilter.hpp; sourceTree = "<group>"; };
@@ -64,11 +64,6 @@
 		4964E17F17914A560013785A /* src */ = {
 			isa = PBXGroup;
 			children = (
-				4964E18F17914F260013785A /* Component.cpp */,
-				4964E19017914F260013785A /* ComponentFilter.cpp */,
-				4964E19117914F260013785A /* Entity.cpp */,
-				4964E19217914F260013785A /* System.cpp */,
-				4964E19317914F260013785A /* World.cpp */,
 				4964E18017914A560013785A /* anax */,
 			);
 			name = src;
@@ -78,6 +73,11 @@
 		4964E18017914A560013785A /* anax */ = {
 			isa = PBXGroup;
 			children = (
+				4964E19017914F260013785A /* ComponentFilter.cpp */,
+				4964E18F17914F260013785A /* Component.cpp */,
+				4964E19117914F260013785A /* Entity.cpp */,
+				4964E19217914F260013785A /* System.cpp */,
+				4964E19317914F260013785A /* World.cpp */,
 			);
 			path = anax;
 			sourceTree = "<group>";
@@ -85,15 +85,15 @@
 		4964E199179150DC0013785A /* anax */ = {
 			isa = PBXGroup;
 			children = (
-				4964E19A179150DC0013785A /* anax.hpp */,
-				4964E19B179150DC0013785A /* Component.hpp */,
-				4964E19C179150DC0013785A /* ComponentFilter.hpp */,
-				4964E19D179150DC0013785A /* config.hpp */,
 				4964E19E179150DC0013785A /* detail */,
+				4964E1A2179150DC0013785A /* util */,
+				4964E19A179150DC0013785A /* anax.hpp */,
+				4964E1A1179150DC0013785A /* types.hpp */,
+				4964E19D179150DC0013785A /* config.hpp */,
+				4964E19C179150DC0013785A /* ComponentFilter.hpp */,
+				4964E19B179150DC0013785A /* Component.hpp */,
 				4964E19F179150DC0013785A /* Entity.hpp */,
 				4964E1A0179150DC0013785A /* System.hpp */,
-				4964E1A1179150DC0013785A /* types.hpp */,
-				4964E1A2179150DC0013785A /* util */,
 				4964E1A4179150DC0013785A /* World.hpp */,
 			);
 			path = anax;

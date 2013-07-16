@@ -39,8 +39,9 @@ namespace anax
 	
 		typedef uint TypeId;
 
-		
+#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 		virtual ~BaseComponent() = 0;
+#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 		
 	protected:
 		
@@ -60,12 +61,21 @@ namespace anax
 	{
 	public:
 		
+#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+		virtual Component() = 0;
+#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+		
 		static TypeId GetTypeId()
 		{
 			static TypeId id = _GetNextTypeId();
 			return id;
 		}
 	};
+	
+	template <typename T>
+	Component<T>::~Component()
+	{
+	}
 }
 
 #endif // __ANAX_COMPONENT_H__

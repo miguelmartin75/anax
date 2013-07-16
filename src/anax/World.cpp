@@ -26,7 +26,7 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "World.h"
+#include "World.hpp"
 
 namespace anax
 {

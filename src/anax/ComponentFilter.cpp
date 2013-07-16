@@ -26,4 +26,4 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "ComponentFilter.h"
+#include "ComponentFilter.hpp"

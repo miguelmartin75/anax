@@ -25,7 +25,7 @@
 /// 3. The above copyright notice and this permission notice shall be included in
 ///    all copies or substantial portions of the Software.
 ///
-#include "Component.h"
+#include "Component.hpp"
 
 namespace anax
 {

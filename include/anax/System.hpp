@@ -47,6 +47,9 @@ namespace anax
 		
 	protected:
 		
+		virtual void onEntityAdded(Entity& entity) {}
+		virtual void onEntityRemoved(Entity& entity) {}
+		
 	private:
 		
 		/// The Entities that are attached to this system

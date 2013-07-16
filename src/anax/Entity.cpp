@@ -26,6 +26,20 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "Entity.h"
+#include "Entity.hpp"
 
+#include "World.hpp"
+
+namespace anax
+{
+	Entity::Entity()
+	{
+		
+	}
+	
+	Entity::Entity(World& world, Entity::Id id)
+	{
+		
+	}
+}
 

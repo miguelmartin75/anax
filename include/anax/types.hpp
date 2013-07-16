@@ -37,12 +37,6 @@ namespace anax
 	using std::uint64_t;
 	using std::int64_t;
 	using std::int32_t;
-	
-#ifdef ANAX_USE_32_BIT_IDS
-	typedef uint32_t uint;
-#else
-	typedef uint64_t uint;
-#endif // ANAX_USE_32_BIT_IDS
 }
 
 #endif // __ANAX_TYPES_H__

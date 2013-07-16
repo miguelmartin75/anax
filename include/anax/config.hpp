@@ -34,6 +34,9 @@
 /// Uncomment this for 32 bit IDs for entities
 // #define ANAX_USE_32_BIT_IDS
 
+/// Uncomment this to use virtual destructors for Components
+// #define ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+
 #ifdef ANAX_USE_32_BIT_IDS
 #	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
 #	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 12

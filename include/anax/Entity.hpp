@@ -55,17 +55,17 @@ namespace anax
 			{
 			}
 			
-			inline operator uint() const
+			inline operator unsigned int() const
 			{ return value(); }
 			
-			inline uint value() const
+			inline unsigned int value() const
 			{ return (counter << ANAX_ENTITY_ID_COUNTER_BIT_COUNT) | index; }
 			
 			/// Clears the ID by setting the index and counter to 0.
 			void clear() { index = counter = 0; }
 			
-			uint index : ANAX_ENTITY_ID_INDEX_BIT_COUNT;
-			uint counter : ANAX_ENTITY_ID_COUNTER_BIT_COUNT;
+			unsigned int index : ANAX_ENTITY_ID_INDEX_BIT_COUNT;
+			unsigned int counter : ANAX_ENTITY_ID_COUNTER_BIT_COUNT;
 		};
 		
 		/// Resembles a null id for an entity
@@ -74,7 +74,7 @@ namespace anax
 		
 		Entity();
 		
-		Entity(World& world_, Id id_);
+		Entity(World& world, Id id);
 		
 		/// Determines if this Entity handle is able to be used.
 		/// \note You should only use this for DEBUG builds
