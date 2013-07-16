@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_WORLD_H__
-#define __ANAX_WORLD_H__
+#ifndef __ANAX_WORLD_HPP__
+#define __ANAX_WORLD_HPP__
 
 #include <vector>
 #include <unordered_map>
@@ -102,4 +102,4 @@ namespace anax
 	};
 }
 
-#endif // __ANAX_WORLD_H__
+#endif // __ANAX_WORLD_HPP__

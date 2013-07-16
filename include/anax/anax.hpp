@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_H__
-#define __ANAX_H__
+#ifndef __ANAX_HPP__
+#define __ANAX_HPP__
 
 #include "World.hpp"
 
@@ -36,4 +36,4 @@ namespace anax
 	
 }
 
-#endif // __ANAX_H__
+#endif // __ANAX_HPP__

@@ -26,12 +26,12 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_COMPONENTFILTER_H__
-#define __ANAX_COMPONENTFILTER_H__
+#ifndef __ANAX_COMPONENTFILTER_HPP__
+#define __ANAX_COMPONENTFILTER_HPP__
 
 namespace anax
 {
 	// TODO
 }
 
-#endif // __ANAX_COMPONENTFILTER_H__
+#endif // __ANAX_COMPONENTFILTER_HPP__

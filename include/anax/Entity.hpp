@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_ENTITY_H__
-#define __ANAX_ENTITY_H__
+#ifndef __ANAX_ENTITY_HPP__
+#define __ANAX_ENTITY_HPP__
 
 #include <cstdint>
 
@@ -153,4 +153,4 @@ namespace anax
 	};
 }
 
-#endif // __ANAX_ENTITY_H__
+#endif // __ANAX_ENTITY_HPP__

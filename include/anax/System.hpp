@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_SYSTEM_H__
-#define __ANAX_SYSTEM_H__
+#ifndef __ANAX_SYSTEM_HPP__
+#define __ANAX_SYSTEM_HPP__
 
 #include <cstddef>
 #include <vector>
@@ -71,4 +71,4 @@ namespace anax
 	};
 }
 
-#endif // __ANAX_SYSTEM_H__
+#endif // __ANAX_SYSTEM_HPP__

@@ -26,14 +26,17 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_CONFIG_H__
-#define __ANAX_CONFIG_H__
+#ifndef __ANAX_CONFIG_HPP__
+#define __ANAX_CONFIG_HPP__
 
 /// Uncomment this for 32 bit IDs for entities
 // #define ANAX_USE_32_BIT_IDS
 
 /// Uncomment this to use virtual destructors for Components
 // #define ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+
+/// Uncomment this to use boost::shared_ptr over std::shared_ptr
+// #define ANAX_USE_BOOST_SHARED_PTR
 
 #ifdef ANAX_USE_32_BIT_IDS
 #	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
@@ -43,4 +46,28 @@
 #	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 16
 #endif
 
-#endif // __ANAX_CONFIG_H__
+#ifdef ANAX_USE_BOOST_SHARED_PTR
+
+#	include <boost/shared_ptr.hpp>
+
+namespace anax
+{
+	using boost::shared_ptr;
+	using boost::make_shared;
+	using boost::static_pointer_cast;
+}
+
+#else
+
+#	include <memory>
+
+namespace anax
+{
+	using std::shared_ptr;
+	using std::make_shared;
+	using std::static_pointer_cast;
+}
+
+#endif // ANAX_USE_BOOST_SHARED_PTR
+
+#endif // __ANAX_CONFIG_HPP__

@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_UTIL_DYNAMICARRAYUTILS_H__
-#define __ANAX_UTIL_DYNAMICARRAYUTILS_H__
+#ifndef __ANAX_UTIL_DYNAMICARRAYUTILS_HPP__
+#define __ANAX_UTIL_DYNAMICARRAYUTILS_HPP__
 
 namespace anax
 {
@@ -83,4 +83,4 @@ namespace anax
 	}
 }
 
-#endif // __ANAX_UTIL_DYNAMICARRAYUTILS_H__
+#endif // __ANAX_UTIL_DYNAMICARRAYUTILS_HPP__

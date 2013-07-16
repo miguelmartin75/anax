@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_COMPONENT_H__
-#define __ANAX_COMPONENT_H__
+#ifndef __ANAX_COMPONENT_HPP__
+#define __ANAX_COMPONENT_HPP__
 
 #include <cstddef>
 
@@ -70,4 +70,4 @@ namespace anax
 #endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 }
 
-#endif // __ANAX_COMPONENT_H__
+#endif // __ANAX_COMPONENT_HPP__
