@@ -12,6 +12,11 @@ You can read about them further [here](https://github.com/miguelishawt/anax/wiki
 
 This entity system is originally inspired from the Java Framework, [Artemis], which provides an Entity System for the Java programming language. Further inspiration was recieved from [entityx]. Although those two frameworks are good, I felt it was necessary to alter and change them to my liking, mainly for performance reasons and just the right "feel".
 
+# Features
+
+- Unlimited amount of component types
+- Easy & straight-forward usage
+
 # Getting Started
 
 ## Downloading the Library
