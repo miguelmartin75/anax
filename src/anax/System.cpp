@@ -28,6 +28,8 @@
 
 #include "System.hpp"
 
+#include <algorithm>
+
 namespace anax
 {	
 	BaseSystem::~BaseSystem()
@@ -37,5 +39,29 @@ namespace anax
 	const ComponentFilter& BaseSystem::getComponentFilter() const
 	{
 		return _componentFilter;
+	}
+	
+	World& BaseSystem::getWorld() const
+	{
+		return *_world;
+	}
+	
+	
+	void BaseSystem::add(anax::Entity &entity)
+	{
+		_entities.push_back(entity);
+		onEntityAdded(entity);
+	}
+	
+	void BaseSystem::remove(anax::Entity &entity)
+	{
+		_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
+		onEntityRemoved(entity);
+	}
+	
+	void BaseSystem::setWorld(anax::World &world)
+	{
+		_world = &world;
+		initialize();
 	}
 }

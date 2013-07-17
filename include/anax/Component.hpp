@@ -35,6 +35,11 @@
 
 namespace anax
 {
+	/// \brief Describes the base class for a components
+	///
+	/// A component is a storage for data for entities.
+	///
+	/// \author Miguel Martin
 	class BaseComponent
 	{
 	public:
@@ -44,6 +49,18 @@ namespace anax
 #	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 	};
 	
+	
+	
+	/// \brief A class that follows the CRTP pattern, used to define custom components
+	/// \tparam T The Component you are defining
+	///
+	/// This class uses the CRTP pattern to make a unique identifier for each component
+	/// class
+	///
+	/// \see BaseComponent
+	/// If you wish to store components generically and for further documentation.
+	///
+	/// \author Miguel Martin
 	template <typename T>
 	class Component
 		: public BaseComponent
