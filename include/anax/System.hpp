@@ -39,24 +39,47 @@
 
 namespace anax
 {
+	class World;
 	class BaseSystem
 	{
 	public:
 		
-		typedef std::size_t TypeId;
+		/// Default constructor
+		BaseSystem()
+		{
+		}
 		
+		/// Sets the ComponentFilter
+		BaseSystem(const ComponentFilter& componentFilter)
+			: _componentFilter(componentFilter)
+		{
+		}
 		
+		/// Destructor
 		virtual ~BaseSystem() = 0;
 		
-	protected:
-		
-		virtual void onEntityAdded(Entity& entity) {}
-		virtual void onEntityRemoved(Entity& entity) {}
+		/// \return The Component Filter attached to the System
+		const ComponentFilter& getComponentFilter() const;
 		
 	private:
 		
+		/// Occurs when an Entity is added to the system
+		/// \param entity The Entity that is added to the system
+		virtual void onEntityAdded(Entity& entity) {}
+		
+		/// Occurs when an Entity is removed to the system
+		/// \param entity The Entity that is removed from the system
+		virtual void onEntityRemoved(Entity& entity) {}
+		
+		
+		
+		/// The component filter
+		ComponentFilter _componentFilter;
+		
 		/// The Entities that are attached to this system
 		std::vector<Entity> _entities;
+		
+		friend class World;
 	};
 	
 	template <typename T>
@@ -65,7 +88,19 @@ namespace anax
 	{
 	public:
 		
-		static TypeId GetTypeId()
+		/// A handy typedef for sub-classing the System class
+		typedef System<T> Base;
+		
+		System()
+		{
+		}
+		
+		System(const ComponentFilter& componentFilter)
+			: BaseSystem(componentFilter)
+		{
+		}
+		
+		static detail::TypeId GetTypeId()
 		{
 			return detail::ClassTypeId<BaseSystem>::GetTypeId<T>();
 		}

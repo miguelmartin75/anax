@@ -44,6 +44,7 @@
 		497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityIdPool.cpp; path = detail/EntityIdPool.cpp; sourceTree = "<group>"; };
 		497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntiyAttributes.cpp; path = detail/EntiyAttributes.cpp; sourceTree = "<group>"; };
 		49D179D116FDCD390028C9E0 /* libanax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanax.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		49F15F5E1796657B0002CCCC /* ComponentTypeList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComponentTypeList.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +97,7 @@
 				4964E19A179150DC0013785A /* anax.hpp */,
 				4964E19D179150DC0013785A /* config.hpp */,
 				4964E19C179150DC0013785A /* ComponentFilter.hpp */,
+				49F15F5E1796657B0002CCCC /* ComponentTypeList.hpp */,
 				4964E19B179150DC0013785A /* Component.hpp */,
 				4964E19F179150DC0013785A /* Entity.hpp */,
 				4964E1A0179150DC0013785A /* System.hpp */,

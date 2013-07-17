@@ -33,4 +33,9 @@ namespace anax
 	BaseSystem::~BaseSystem()
 	{
 	}
+	
+	const ComponentFilter& BaseSystem::getComponentFilter() const
+	{
+		return _componentFilter;
+	}
 }

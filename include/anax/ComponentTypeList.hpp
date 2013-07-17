@@ -1,6 +1,6 @@
 ///
 /// anax
-/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+/// Copyright (C) 2013 Anax Creations. All rights reserved.
 ///
 ///
 /// This software is provided 'as-is', without any express or implied warranty.
@@ -26,46 +26,19 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_COMPONENT_HPP__
-#define __ANAX_COMPONENT_HPP__
+#ifndef __ANAX_COMPONENTTYPELIST_HPP__
+#define __ANAX_COMPONENTTYPELIST_HPP__
 
-#include <cstddef>
-
-#include "detail/ClassTypeId.hpp"
+#include <boost/dynamic_bitset.hpp>
 
 namespace anax
 {
-	class BaseComponent
-	{
-	public:
-		
-#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-		virtual ~BaseComponent() = 0;
-#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-	};
-	
-	template <typename T>
-	class Component
-		: public BaseComponent
-	{
-	public:
-		
-#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-		virtual ~Component() = 0;
-#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-		
-		static detail::TypeId GetTypeId()
-		{
-			return detail::ClassTypeId<BaseComponent>::GetTypeId<T>();
-		}
-	};
-	
-#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-	template <typename T>
-	Component<T>::~Component()
-	{
-	}
-#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+	/// A type that describes a component type list
+	/// This is implemented as a dynamic bitset. Where
+	/// the index of the bitset is the TypeId of the component.
+	/// The component type is within the list if the bit at
+	/// the TypeId index is true.
+	typedef boost::dynamic_bitset<> ComponentTypeList;
 }
 
-#endif // __ANAX_COMPONENT_HPP__
+#endif // __ANAX_COMPONENTTYPELIST_HPP__

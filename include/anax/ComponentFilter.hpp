@@ -32,27 +32,26 @@
 #include <boost/dynamic_bitset.hpp>
 
 #include "detail/EntityIdPool.hpp"
-#include "util/ContainerUtils.hpp"
+#include "detail/ContainerUtils.hpp"
 
 #include "config.hpp"
+#include "ComponentTypeList.h"
 
 namespace anax
 {
 	struct ComponentFilter
 	{
-		typedef boost::dynamic_bitset<> BitSet;
-		
 		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL keep
 		/// This is used if you want to make sure an Entity WILL have a Component attached to it
-		BitSet requiredComponentsBitSet;
+		ComponentTypeList requiredComponentsBitSet;
 		
 		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL set as optional
 		/// This is used if you optionally want the Component to be attached
-		BitSet requiresOneOfComponentsBitSet;
+		ComponentTypeList requiresOneOfComponentsBitSet;
 		
 		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL filter out
 		/// This is used if you want to make sure a Component is NOT attached to an Entity
-		BitSet excludeComponentsBitSet;
+		ComponentTypeList excludeComponentsBitSet;
 		
 		
 		ComponentFilter() {}
@@ -99,10 +98,10 @@ namespace anax
 #endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
 		
 		
-		bool matches(const ComponentFilter& componentFilter) const
-		{ return Matches(*this, componentFilter); }
-		
-		static bool Matches(const ComponentFilter& filter1, const ComponentFilter& filter2);
+		/// Determines if a list of component types passes the filter
+		/// \param bitSetOfComponentTypes
+		/// \return true if the list of component types is valid
+		bool passesFilter(const ComponentTypeList& componentType) const;
 	};
 }
 
