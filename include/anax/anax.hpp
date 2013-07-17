@@ -51,11 +51,11 @@ namespace anax
 /// the anax's wiki, hosted on GitHub
 /// <a href="https://github.com/miguelishawt/anax/wiki"> here</a>.
 
-#	define ANAX_VERSION_MAJOR 1
-#	define ANAX_VERSION_MINOR 0
-#	define ANAX_PATCH_NUMBER 0
+#define ANAX_VERSION_MAJOR 1
+#define ANAX_VERSION_MINOR 0
+#define ANAX_PATCH_NUMBER 0
 
-#	define ANAX_VERSION_NUMBER ANAX_VERSION_MAJOR.ANAX_VERSION_MINOR.ANAX_PATCH_NUMBER
+#define ANAX_VERSION_NUMBER ANAX_VERSION_MAJOR.ANAX_VERSION_MINOR.ANAX_PATCH_NUMBER
 
 #include "World.hpp"
 
