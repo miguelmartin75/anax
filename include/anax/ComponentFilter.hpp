@@ -126,7 +126,6 @@ namespace anax
 		
 	private:
 		
-		
 		/// A list of component types that are required
 		ComponentTypeList _requiredComponentsList;
 		

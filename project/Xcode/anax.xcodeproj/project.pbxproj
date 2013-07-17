@@ -20,7 +20,7 @@
 		4964E1AA179150DC0013785A /* System.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A0179150DC0013785A /* System.hpp */; };
 		4964E1AD179150DC0013785A /* World.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A4179150DC0013785A /* World.hpp */; };
 		497EC2DB1795ABBE009F56FC /* EntityIdPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */; };
-		497EC2DF1795ABE8009F56FC /* EntiyAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */; };
+		497EC2DF1795ABE8009F56FC /* EntityComponentStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 497EC2DE1795ABE8009F56FC /* EntityComponentStorage.cpp */; };
 		49F15F6017966C050002CCCC /* ContainerUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 49F15F5F17966C050002CCCC /* ContainerUtils.hpp */; };
 /* End PBXBuildFile section */
 
@@ -39,9 +39,9 @@
 		4964E1A0179150DC0013785A /* System.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = System.hpp; sourceTree = "<group>"; };
 		4964E1A4179150DC0013785A /* World.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		497EC2D81795AB7F009F56FC /* EntityIdPool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityIdPool.hpp; sourceTree = "<group>"; };
-		497EC2D91795AB95009F56FC /* EntityAttributes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityAttributes.hpp; sourceTree = "<group>"; };
+		497EC2D91795AB95009F56FC /* EntityComponentStorage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityComponentStorage.hpp; sourceTree = "<group>"; };
 		497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityIdPool.cpp; path = detail/EntityIdPool.cpp; sourceTree = "<group>"; };
-		497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntiyAttributes.cpp; path = detail/EntiyAttributes.cpp; sourceTree = "<group>"; };
+		497EC2DE1795ABE8009F56FC /* EntityComponentStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityComponentStorage.cpp; path = detail/EntityComponentStorage.cpp; sourceTree = "<group>"; };
 		49D179D116FDCD390028C9E0 /* libanax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanax.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49F15F5E1796657B0002CCCC /* ComponentTypeList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComponentTypeList.hpp; sourceTree = "<group>"; };
 		49F15F5F17966C050002CCCC /* ContainerUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ContainerUtils.hpp; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				491EF83817954D0E00EFD3F1 /* ClassTypeId.hpp */,
 				49F15F5F17966C050002CCCC /* ContainerUtils.hpp */,
 				497EC2D81795AB7F009F56FC /* EntityIdPool.hpp */,
-				497EC2D91795AB95009F56FC /* EntityAttributes.hpp */,
+				497EC2D91795AB95009F56FC /* EntityComponentStorage.hpp */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -119,7 +119,7 @@
 		497EC2E01795ABEC009F56FC /* detail */ = {
 			isa = PBXGroup;
 			children = (
-				497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */,
+				497EC2DE1795ABE8009F56FC /* EntityComponentStorage.cpp */,
 				497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */,
 			);
 			name = detail;
@@ -217,7 +217,7 @@
 				4964E19717914F260013785A /* System.cpp in Sources */,
 				4964E19817914F260013785A /* World.cpp in Sources */,
 				497EC2DB1795ABBE009F56FC /* EntityIdPool.cpp in Sources */,
-				497EC2DF1795ABE8009F56FC /* EntiyAttributes.cpp in Sources */,
+				497EC2DF1795ABE8009F56FC /* EntityComponentStorage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

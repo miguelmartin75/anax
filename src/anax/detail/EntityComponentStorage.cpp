@@ -26,25 +26,12 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __anax__EntityAttributes__
-#define __anax__EntityAttributes__
+#include "EntityComponentStorage.hpp"
 
 namespace anax
 {
 	namespace detail
 	{
-		/// \brief A class to describe the attributes for the Entities within the world
-		///
-		/// Used to describe attributes, such as the components of the entities
-		/// within the World.
-		///
-		/// \author Miguel Martin
-		class EntityAttributes
-		{
-			// TODO
-		};
+		
 	}
 }
-
-
-#endif // __anax__EntityAttributes__

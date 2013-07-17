@@ -26,12 +26,54 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "EntityAttributes.hpp"
+#ifndef __ANAX_ENTITYCOMPONENTSTORAGE_HPP__
+#define __ANAX_ENTITYCOMPONENTSTORAGE_HPP__
+
+#include <vector>
+
+#include "config.hpp"
+#include "Component.hpp"
+#include "ComponentTypeList.hpp"
 
 namespace anax
 {
 	namespace detail
 	{
-		
+		/// \brief A class to store components for entities within a world
+		///
+		///
+		/// Used to store the components 
+		///
+		///
+		/// \author Miguel Martin
+		class EntityComponentStorage
+		{
+		public:
+			
+			// SHOULD I USE RAW POINTERS OR SHOULD I USE A SHARED PTR?
+			
+			//void addComponent(Entity& entity, ComponentPtr component);
+			
+			//ComponentPtr getComponent(Entity& entity, TypeId componentTypeId) const;
+			
+		private:
+			
+			/// \brief A data structure to describe
+			/// storage for the components for an individual entity
+			/// 
+			/// \author Miguel Martin
+			struct ComponentEntry
+			{
+				shared_ptr<BaseComponent> component;
+				ComponentTypeList componentTypeList;
+			};
+			
+			/// All the entries for every entity that has had
+			/// a component attached to it
+			std::vector<ComponentEntry> _componentEntries;
+		};
 	}
 }
+
+
+#endif // __ANAX_ENTITYCOMPONENTSTORAGE_HPP__
