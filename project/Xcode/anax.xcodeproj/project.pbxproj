@@ -18,7 +18,7 @@
 		4964E1A8179150DC0013785A /* config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19D179150DC0013785A /* config.hpp */; };
 		4964E1A9179150DC0013785A /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E19F179150DC0013785A /* Entity.hpp */; };
 		4964E1AA179150DC0013785A /* System.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A0179150DC0013785A /* System.hpp */; };
-		4964E1AC179150DC0013785A /* DynamicArrayUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */; };
+		4964E1AC179150DC0013785A /* ContainerUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A3179150DC0013785A /* ContainerUtils.hpp */; };
 		4964E1AD179150DC0013785A /* World.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4964E1A4179150DC0013785A /* World.hpp */; };
 		497EC2DB1795ABBE009F56FC /* EntityIdPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */; };
 		497EC2DF1795ABE8009F56FC /* EntiyAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 497EC2DE1795ABE8009F56FC /* EntiyAttributes.cpp */; };
@@ -37,7 +37,7 @@
 		4964E19D179150DC0013785A /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
 		4964E19F179150DC0013785A /* Entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		4964E1A0179150DC0013785A /* System.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = System.hpp; sourceTree = "<group>"; };
-		4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DynamicArrayUtils.hpp; sourceTree = "<group>"; };
+		4964E1A3179150DC0013785A /* ContainerUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ContainerUtils.hpp; sourceTree = "<group>"; };
 		4964E1A4179150DC0013785A /* World.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		497EC2D81795AB7F009F56FC /* EntityIdPool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityIdPool.hpp; sourceTree = "<group>"; };
 		497EC2D91795AB95009F56FC /* EntityAttributes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityAttributes.hpp; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		4964E1A2179150DC0013785A /* util */ = {
 			isa = PBXGroup;
 			children = (
-				4964E1A3179150DC0013785A /* DynamicArrayUtils.hpp */,
+				4964E1A3179150DC0013785A /* ContainerUtils.hpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -161,7 +161,7 @@
 				4964E1A8179150DC0013785A /* config.hpp in Headers */,
 				4964E1A9179150DC0013785A /* Entity.hpp in Headers */,
 				4964E1AA179150DC0013785A /* System.hpp in Headers */,
-				4964E1AC179150DC0013785A /* DynamicArrayUtils.hpp in Headers */,
+				4964E1AC179150DC0013785A /* ContainerUtils.hpp in Headers */,
 				4964E1AD179150DC0013785A /* World.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
