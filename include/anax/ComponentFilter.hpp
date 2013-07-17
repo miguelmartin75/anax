@@ -32,6 +32,7 @@
 #include <boost/dynamic_bitset.hpp>
 
 #include "detail/EntityIdPool.hpp"
+#include "util/ContainerUtils.hpp"
 
 #include "config.hpp"
 
@@ -44,12 +45,14 @@ namespace anax
 		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL keep
 		/// This is used if you want to make sure an Entity WILL have a Component attached to it
 		BitSet requiredComponentsBitSet;
+		
 		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL set as optional
 		/// This is used if you optionally want the Component to be attached
-		BitSet oneOfComponentBitSet;
+		BitSet requiresOneOfComponentsBitSet;
+		
 		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL filter out
 		/// This is used if you want to make sure a Component is NOT attached to an Entity
-		BitSet excludeComponentBitSet;
+		BitSet excludeComponentsBitSet;
 		
 		
 		ComponentFilter() {}
@@ -58,13 +61,42 @@ namespace anax
 		ComponentFilter& operator=(const ComponentFilter&) = default;
 		ComponentFilter& operator=(ComponentFilter&&) = default;
 		
+#ifdef ANAX_DONT_USE_VARIADIC_TEMPLATES
+		
 		template <typename TComponent, typename... TComponents>
 		ComponentFilter& requires()
 		{
+			util::EnsureCapacity(requiredComponentsBitSet, TComponent::GetTypeId());
+			requiredComponentsBitSet[TComponent::GetTypeId()] = true;
 			
 			requires<TComponents...>();
+			
 			return *this;
 		}
+		
+		template <typename TComponent, typename... TComponents>
+		ComponentFilter& requiresOneOf()
+		{
+			util::EnsureCapacity(requiresOneOfComponentsBitSet, TComponent::GetTypeId());
+			requiresOneOfComponentsBitSet[TComponent::GetTypeId()] = true;
+			
+			requiresOneOf<TComponents...>();
+			
+			return *this;
+		}
+		
+		template <typename TComponent, typename... TComponents>
+		ComponentFilter& exclude()
+		{
+			util::EnsureCapacity(excludeComponentsBitSet, TComponent::GetTypeId());
+			excludeComponentsBitSet[TComponent::GetTypeId()] = true;
+			
+			exclude<TComponents...>();
+			
+			return *this;
+		}
+		
+#endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
 		
 		
 		bool matches(const ComponentFilter& componentFilter) const

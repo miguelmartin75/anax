@@ -26,24 +26,24 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __ANAX_UTIL_DYNAMICARRAYUTILS_HPP__
-#define __ANAX_UTIL_DYNAMICARRAYUTILS_HPP__
+#ifndef __ANAX_UTIL_CONTAINERUTILS_HPP__
+#define __ANAX_UTIL_CONTAINERUTILS_HPP__
 
 namespace anax
 {
 	namespace util
 	{
-		template <class T>
-		void EnsureCapacity(T& vector, typename T::size_type index)
+		template <class TContainer>
+		void EnsureCapacity(TContainer& container, typename T::size_type index)
 		{
 			// if we need to resize
-			if(vector.size() <= index)
+			if(container.size() <= index)
 			{
 				// then we shall resize!
-				vector.resize(index + 1);
+				container.resize(index + 1);
 			}
 		}
 	}
 }
 
-#endif // __ANAX_UTIL_DYNAMICARRAYUTILS_HPP__
+#endif // __ANAX_UTIL_CONTAINERUTILS_HPP__

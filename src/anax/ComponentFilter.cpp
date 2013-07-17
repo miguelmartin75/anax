@@ -30,5 +30,8 @@
 
 namespace anax
 {
-	
+	bool ComponentFilter::Matches(const anax::ComponentFilter &filter1, const anax::ComponentFilter &filter2)
+	{
+		
+	}
 }

@@ -61,7 +61,7 @@ namespace anax
 	
 	template <typename T>
 	class System
-		: BaseSystem
+		: public BaseSystem
 	{
 	public:
 		

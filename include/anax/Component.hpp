@@ -48,7 +48,7 @@ namespace anax
 	
 	template <typename T>
 	class Component
-		: BaseComponent
+		: public BaseComponent
 	{
 	public:
 		

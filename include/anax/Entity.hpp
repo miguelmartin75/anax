@@ -37,10 +37,14 @@ namespace anax
 {
 	class World;
 	
-	/// \brief A handle to an Entity within a World
+	/// \brief A handle to an Entity within a World.
 	///
 	/// This class is used as a handle to an entity within a world.
 	/// The handle can be invalid, as it "handle" no entity at all.
+	///
+	/// \todo
+	/// Benchmark this against a plain old 64-bit Id (as in just use
+	/// the ID class)
 	///
 	/// \author Miguel Martin
 	class Entity
@@ -138,9 +142,7 @@ namespace anax
 		void deactivate();
 		
 		void kill();
-		
-		
-		
+				
 	private:
 		
 		/// \param world The World the entity belongs to
