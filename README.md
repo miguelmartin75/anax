@@ -10,7 +10,12 @@ You can read about them further [here](https://github.com/miguelishawt/anax/wiki
 
 # Inspiration
 
-This entity system is originally inspired from the Java Framework, [Artemis], which provides an Entity System for the Java programming language. Further inspiration was recieved from [entityx]. Although those two frameworks are good, I felt it was necessary to alter and change them to my liking, mainly for performance reasons and just the right "feel".
+Multiple blog posts/articles about entity systems. Such as:
+
+- [Entity Systems are the Future of MMORPG](http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
+- [Entity Systems](http://www.tomseysdavies.com/2011/01/23/entity-systems/)
+
+The [Artemis] Framework also oringially sparked the idea for this library. And then [entityx] further ignited this inspiration to continue to work on the library.
 
 # Getting Started
 
