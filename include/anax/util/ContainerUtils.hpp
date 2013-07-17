@@ -34,7 +34,7 @@ namespace anax
 	namespace util
 	{
 		template <class TContainer>
-		void EnsureCapacity(TContainer& container, typename T::size_type index)
+		void EnsureCapacity(TContainer& container, typename TContainer::size_type index)
 		{
 			// if we need to resize
 			if(container.size() <= index)
