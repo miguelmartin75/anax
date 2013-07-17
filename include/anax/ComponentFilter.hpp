@@ -39,20 +39,17 @@
 
 namespace anax
 {
-	struct ComponentFilter
+	/// \brief A class used to filter out Components
+	///
+	/// This class was designed to be used in conjuction
+	/// with systems in the entity systems. As it grants
+	/// the ability to filter out entities with specific
+	/// components.
+	///
+	/// \author Miguel Martin
+	class ComponentFilter
 	{
-		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL keep
-		/// This is used if you want to make sure an Entity WILL have a Component attached to it
-		ComponentTypeList requiredComponentsBitSet;
-		
-		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL set as optional
-		/// This is used if you optionally want the Component to be attached
-		ComponentTypeList requiresOneOfComponentsBitSet;
-		
-		/// Contains all the Component IDs (IDs are the index of the BitSet), which the ComponentFilter WILL filter out
-		/// This is used if you want to make sure a Component is NOT attached to an Entity
-		ComponentTypeList excludeComponentsBitSet;
-		
+	public:
 		
 		ComponentFilter() {}
 		ComponentFilter(const ComponentFilter&) = default;
@@ -60,14 +57,42 @@ namespace anax
 		ComponentFilter& operator=(const ComponentFilter&) = default;
 		ComponentFilter& operator=(ComponentFilter&&) = default;
 		
-#ifdef ANAX_DONT_USE_VARIADIC_TEMPLATES
+		// TODO: Documentation
+		
+		template <typename TComponent>
+		ComponentFilter& require()
+		{
+			util::EnsureCapacity(_requiredComponentsList, TComponent::GetTypeId());
+			_requiredComponentsList[TComponent::GetTypeId()] = true;
+			
+			return *this;
+		}
+		
+		template <typename TComponent>
+		ComponentFilter& requireOne()
+		{
+			util::EnsureCapacity(_requiresOneOfComponentsList, TComponent::GetTypeId());
+			_requiresOneOfComponentsList[TComponent::GetTypeId()] = true;
+			
+			return *this;
+		}
+		
+		template <typename TComponent>
+		ComponentFilter& exclude()
+		{
+			util::EnsureCapacity(_excludeComponentsList, TComponent::GetTypeId());
+			_excludeComponentsList[TComponent::GetTypeId()] = true;
+			
+			return *this;
+		}
+		
+		
+#ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES
 		
 		template <typename TComponent, typename... TComponents>
 		ComponentFilter& requires()
 		{
-			util::EnsureCapacity(requiredComponentsBitSet, TComponent::GetTypeId());
-			requiredComponentsBitSet[TComponent::GetTypeId()] = true;
-			
+			require<TComponent>();
 			requires<TComponents...>();
 			
 			return *this;
@@ -76,21 +101,17 @@ namespace anax
 		template <typename TComponent, typename... TComponents>
 		ComponentFilter& requiresOneOf()
 		{
-			util::EnsureCapacity(requiresOneOfComponentsBitSet, TComponent::GetTypeId());
-			requiresOneOfComponentsBitSet[TComponent::GetTypeId()] = true;
-			
+			requireOne<TComponent>();
 			requiresOneOf<TComponents...>();
 			
 			return *this;
 		}
 		
 		template <typename TComponent, typename... TComponents>
-		ComponentFilter& exclude()
+		ComponentFilter& excludes()
 		{
-			util::EnsureCapacity(excludeComponentsBitSet, TComponent::GetTypeId());
-			excludeComponentsBitSet[TComponent::GetTypeId()] = true;
-			
-			exclude<TComponents...>();
+			exclude<TComponent>();
+			excludes<TComponents...>();
 			
 			return *this;
 		}
@@ -99,9 +120,22 @@ namespace anax
 		
 		
 		/// Determines if a list of component types passes the filter
-		/// \param bitSetOfComponentTypes
-		/// \return true if the list of component types is valid
-		bool passesFilter(const ComponentTypeList& componentType) const;
+		/// \param componentTypeList The list of component types you wish to check if it passes through the filter
+		/// \return true if the list of component types passes through the filter (i.e. is valid)
+		bool doesPassFilter(const ComponentTypeList& componentTypeList) const;
+		
+	private:
+		
+		
+		/// A list of component types that are required
+		ComponentTypeList _requiredComponentsList;
+		
+		/// A list of component types that are required
+		/// at least once
+		ComponentTypeList _requiresOneOfComponentsList;
+		
+		/// A list of component types that must be excluded
+		ComponentTypeList _excludeComponentsList;
 	};
 }
 

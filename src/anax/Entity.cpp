@@ -56,5 +56,13 @@ namespace anax
 	{
 		return getWorld().isValid(*this);
 	}
+	
+	
+	
+	
+	bool Entity::operator==(const anax::Entity &entity) const
+	{
+		return _id == entity._id && entity._world == _world;
+	}
 }
 

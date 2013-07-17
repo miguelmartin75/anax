@@ -56,6 +56,7 @@ namespace anax
 	void BaseSystem::remove(anax::Entity &entity)
 	{
 		_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
+		
 		onEntityRemoved(entity);
 	}
 	

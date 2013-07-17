@@ -142,6 +142,9 @@ namespace anax
 		void deactivate();
 		
 		void kill();
+		
+		bool operator==(const Entity& entity) const;
+		bool operator!=(const Entity& entity) const { return !operator==(entity); }
 				
 	private:
 		
