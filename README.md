@@ -10,12 +10,12 @@ You can read about them further [here](https://github.com/miguelishawt/anax/wiki
 
 # Inspiration
 
-Multiple blog posts/articles about entity systems. Such as:
+Multiple blog posts/articles about entity systems inspired me to create my own C++ entity system library. Such as:
 
 - [Entity Systems are the Future of MMORPG](http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
 - [Entity Systems](http://www.tomseysdavies.com/2011/01/23/entity-systems/)
 
-The [Artemis] Framework also oringially sparked the idea for this library. And then [entityx] further ignited this inspiration to continue to work on the library.
+The [Artemis] Framework and [entityx] helped drag this project to what it is at the current moment.
 
 # Getting Started
 
