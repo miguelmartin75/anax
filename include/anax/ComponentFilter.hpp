@@ -35,7 +35,7 @@
 #include "detail/ContainerUtils.hpp"
 
 #include "config.hpp"
-#include "ComponentTypeList.h"
+#include "ComponentTypeList.hpp"
 
 namespace anax
 {
