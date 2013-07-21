@@ -33,7 +33,7 @@
 #include <unordered_map>
 
 #include "detail/EntityIdPool.hpp"
-#include "detail/EntityAttributes.hpp"
+#include "detail/EntityComponentStorage.hpp"
 
 #include "Component.hpp"
 #include "Entity.hpp"
@@ -45,6 +45,7 @@ namespace anax
 	{
 	public:
 		
+		/// Default Constructor
 		World();
 		
 		/// Creates an Entity
@@ -63,8 +64,10 @@ namespace anax
 		/// \param entity The Entity you wish to deactivate
 		void deactivateEntity(Entity& entity);
 		
-		/// 
-		bool isActivated(Entity& entity);
+		/// Determines if the Entity is activated
+		/// \param entity The Entity you wish to check
+		/// \return true if entity is activated
+		bool isActivated(const Entity& entity) const;
 		
 		/// Determines if an Entity is valid.
 		/// \note If the entity is valid it may have components attached to it.
@@ -93,19 +96,27 @@ namespace anax
 		detail::EntityIdPool _entityIdPool;
 		
 		/// The attributes of the entities attached to this world
-		detail::EntityAttributes _entityAttributes;
+		detail::EntityComponentStorage _entityComponentStorage;
 		
 		/// Systems attached with the world.
 		SystemArray _systems;
 		
-		/// The killed entities for the world
-		EntityArray _killedEntities;
-		
-		/// Temporary storage for activated entities within the World
-		EntityArray _activatedEntities;
-		
-		/// Temporary storage for the deactivate entities within the World
-		EntityArray _deactivatedEntities;
+		struct
+		{
+			/// A temporary storage for the killed entities
+			/// for the world. This array gets cleared every call
+			/// to refresh.
+			EntityArray killed;
+			/// A temporary storage for the activated entities
+			/// for the world. This array gets cleared every call
+			/// to refresh.
+			EntityArray activated;
+			/// A temporary storage for the deactivated entities
+			/// for the world. This array gets cleared every call
+			/// to refresh.
+			EntityArray deactivated;
+		}
+		_entityCache;
 	};
 }
 

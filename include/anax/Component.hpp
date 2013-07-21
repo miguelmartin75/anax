@@ -31,7 +31,6 @@
 
 #include <cstddef>
 
-#include "config.hpp"
 #include "detail/ClassTypeId.hpp"
 
 namespace anax
@@ -84,9 +83,6 @@ namespace anax
 	{
 	}
 #endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-	
-	
-	typedef shared_ptr<BaseComponent> ComponentPtr;
 }
 
 #endif // __ANAX_COMPONENT_HPP__

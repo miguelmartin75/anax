@@ -28,6 +28,8 @@
 
 #include "World.hpp"
 
+#include <cassert>
+
 namespace anax
 {
 	World::World()
@@ -41,13 +43,37 @@ namespace anax
 	
 	void World::killEntity(Entity &entity)
 	{
-		// todo:
-		// delay the deletion of an entity
-		_entityIdPool.remove(entity.getId());
+		assert(isValid(entity));
+		
+		_entityCache.killed.push_back(entity);
+	}
+	
+	void World::activateEntity(Entity& entity)
+	{
+		assert(isValid(entity));
+		
+		_entityCache.activated.push_back(entity);
+	}
+	
+	void World::deactivateEntity(Entity& entity)
+	{
+		assert(isValid(entity));
+		
+		_entityCache.deactivated.push_back(entity);
+	}
+	
+	bool World::isActivated(const Entity& entity) const
+	{
+		return false; // TODO
 	}
 	
 	bool World::isValid(const anax::Entity &entity) const
 	{
 		return _entityIdPool.isValid(entity.getId());
+	}
+	
+	void refresh()
+	{
+		// TODO
 	}
 }
