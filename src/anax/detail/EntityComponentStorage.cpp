@@ -32,6 +32,26 @@ namespace anax
 {
 	namespace detail
 	{
+		void EntityComponentStorage::addComponent(Entity &entity, BaseComponent* component)
+		{
+			
+		}
+		
+		void EntityComponentStorage::removeComponent(Entity& entity, BaseComponent* component)
+		{
+			
+		}
+		
+		void EntityComponentStorage::removeComponent(Entity&, TypeId componentTypeId)
+		{
+			
+		}
+		
+		BaseComponent* EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
+		{
+			return nullptr;
+		}
+		
 		
 	}
 }

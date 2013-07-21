@@ -32,6 +32,7 @@
 #include <vector>
 
 #include "config.hpp"
+#include "Entity.hpp"
 #include "Component.hpp"
 #include "ComponentTypeList.hpp"
 
@@ -50,11 +51,17 @@ namespace anax
 		{
 		public:
 			
-			// SHOULD I USE RAW POINTERS OR SHOULD I USE A SHARED PTR?
+			void addComponent(Entity& entity, BaseComponent* component);
 			
-			//void addComponent(Entity& entity, ComponentPtr component);
+			void removeComponent(Entity& entity, BaseComponent* component);
 			
-			//ComponentPtr getComponent(Entity& entity, TypeId componentTypeId) const;
+			void removeComponent(Entity& entity, TypeId componentTypeId);
+			
+			BaseComponent* getComponent(const Entity& entity, TypeId componentTypeId) const;
+			
+			ComponentTypeList getComponentTypeList(const Entity& entity) const;
+			
+			std::vector<BaseComponent*> getComponents(const Entity& entity) const;
 			
 		private:
 			
@@ -76,4 +83,4 @@ namespace anax
 }
 
 
-#endif // __ANAX_ENTITYCOMPONENTSTORAGE_HPP__
+#endif // __ANAX_ENTITYATTRIBUTES_HPP__
