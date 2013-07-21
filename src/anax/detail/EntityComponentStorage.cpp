@@ -32,26 +32,49 @@ namespace anax
 {
 	namespace detail
 	{
+		EntityComponentStorage::EntityComponentStorage()
+		{
+		}
+		
 		void EntityComponentStorage::addComponent(Entity &entity, BaseComponent* component)
 		{
+			assert(entity.isValid());
 			
 		}
 		
 		void EntityComponentStorage::removeComponent(Entity& entity, BaseComponent* component)
 		{
-			
+			assert(entity.isValid());
+
 		}
 		
-		void EntityComponentStorage::removeComponent(Entity&, TypeId componentTypeId)
+		void EntityComponentStorage::removeComponent(Entity& entity, TypeId componentTypeId)
 		{
+			assert(entity.isValid());
 			
 		}
 		
 		BaseComponent* EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
 		{
-			return nullptr;
+			assert(entity.isValid());
+			
+			return getComponents(entity)[componentTypeId];
 		}
 		
+		const std::vector<BaseComponent*>& EntityComponentStorage::getComponents(const Entity& entity)  const
+		{
+			assert(entity.isValid());
+			
+			return _componentEntries[entity.getId().index].components;
+		}
 		
+		bool EntityComponentStorage::hasComponent(const Entity& entity, TypeId componentTypeId) const
+		{
+			assert(entity.isValid());
+
+			auto components = getComponents(entity);
+			
+			return components.size() > componentTypeId && components[componentTypeId] != nullptr;
+		}
 	}
 }

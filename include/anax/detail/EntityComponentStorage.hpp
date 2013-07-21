@@ -51,6 +51,13 @@ namespace anax
 		{
 		public:
 			
+			EntityComponentStorage();
+			
+			EntityComponentStorage(const EntityComponentStorage&) = delete;
+			EntityComponentStorage(EntityComponentStorage&&) = delete;
+			EntityComponentStorage& operator=(const EntityComponentStorage&) = delete;
+			EntityComponentStorage& operator=(EntityComponentStorage&&) = delete;
+						
 			void addComponent(Entity& entity, BaseComponent* component);
 			
 			void removeComponent(Entity& entity, BaseComponent* component);
@@ -61,23 +68,32 @@ namespace anax
 			
 			ComponentTypeList getComponentTypeList(const Entity& entity) const;
 			
-			std::vector<BaseComponent*> getComponents(const Entity& entity) const;
+			const std::vector<BaseComponent*>& getComponents(const Entity& entity) const;
+			
+			bool hasComponent(const Entity& entity, TypeId componentTypeId) const;
 			
 		private:
 			
-			/// \brief A data structure to describe
-			/// storage for the components for an individual entity
+			/// \brief A data structure to describe the components
+			/// within an entity
 			/// 
 			/// \author Miguel Martin
-			struct ComponentEntry
+			struct EntityComponents
 			{
-				shared_ptr<BaseComponent> component;
+				/// The components of an entity. The
+				/// index of this array is the same as the TypeId
+				/// of the component.
+				std::vector<BaseComponent*> components;
+				
+				/// A list of component types, which resembles
+				/// what components an entity has
 				ComponentTypeList componentTypeList;
 			};
 			
-			/// All the entries for every entity that has had
-			/// a component attached to it
-			std::vector<ComponentEntry> _componentEntries;
+			/// All the components for every entity, which has
+			/// an entity. The indices of this array is the same
+			/// as the index component of an entity's ID.
+			std::vector<EntityComponents> _componentEntries;
 		};
 	}
 }

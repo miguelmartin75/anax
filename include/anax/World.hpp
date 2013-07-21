@@ -48,6 +48,12 @@ namespace anax
 		/// Default Constructor
 		World();
 		
+		World(const World& world) = delete;
+		World(World&& world) = delete;
+		World& operator=(const World&) = delete;
+		World& operator=(World&&) = delete;
+		
+		
 		/// Creates an Entity
 		/// \return A new entity for which you can use.
 		Entity createEntity();
