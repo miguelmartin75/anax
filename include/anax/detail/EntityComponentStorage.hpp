@@ -29,6 +29,7 @@
 #ifndef __ANAX_ENTITYCOMPONENTSTORAGE_HPP__
 #define __ANAX_ENTITYCOMPONENTSTORAGE_HPP__
 
+#include <memory>
 #include <vector>
 
 #include "config.hpp"
@@ -57,18 +58,18 @@ namespace anax
 			EntityComponentStorage(EntityComponentStorage&&) = delete;
 			EntityComponentStorage& operator=(const EntityComponentStorage&) = delete;
 			EntityComponentStorage& operator=(EntityComponentStorage&&) = delete;
+			
+			
+			
+			void addComponent(Entity& entity, BaseComponent* component, TypeId componentTypeId);
 						
-			void addComponent(Entity& entity, BaseComponent* component);
-			
-			void removeComponent(Entity& entity, BaseComponent* component);
-			
 			void removeComponent(Entity& entity, TypeId componentTypeId);
 			
 			BaseComponent* getComponent(const Entity& entity, TypeId componentTypeId) const;
 			
 			ComponentTypeList getComponentTypeList(const Entity& entity) const;
 			
-			const std::vector<BaseComponent*>& getComponents(const Entity& entity) const;
+			std::vector<BaseComponent*> getComponents(const Entity& entity) const;
 			
 			bool hasComponent(const Entity& entity, TypeId componentTypeId) const;
 			
@@ -83,7 +84,7 @@ namespace anax
 				/// The components of an entity. The
 				/// index of this array is the same as the TypeId
 				/// of the component.
-				std::vector<BaseComponent*> components;
+				std::vector<std::unique_ptr<BaseComponent> > components;
 				
 				/// A list of component types, which resembles
 				/// what components an entity has

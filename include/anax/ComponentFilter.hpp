@@ -62,7 +62,7 @@ namespace anax
 		template <typename TComponent>
 		ComponentFilter& require()
 		{
-			util::EnsureCapacity(_requiredComponentsList, TComponent::GetTypeId());
+			detail::EnsureCapacity(_requiredComponentsList, TComponent::GetTypeId());
 			_requiredComponentsList[TComponent::GetTypeId()] = true;
 			
 			return *this;
@@ -71,7 +71,7 @@ namespace anax
 		template <typename TComponent>
 		ComponentFilter& requireOne()
 		{
-			util::EnsureCapacity(_requiresOneOfComponentsList, TComponent::GetTypeId());
+			detail::EnsureCapacity(_requiresOneOfComponentsList, TComponent::GetTypeId());
 			_requiresOneOfComponentsList[TComponent::GetTypeId()] = true;
 			
 			return *this;
@@ -80,7 +80,7 @@ namespace anax
 		template <typename TComponent>
 		ComponentFilter& exclude()
 		{
-			util::EnsureCapacity(_excludeComponentsList, TComponent::GetTypeId());
+			detail::EnsureCapacity(_excludeComponentsList, TComponent::GetTypeId());
 			_excludeComponentsList[TComponent::GetTypeId()] = true;
 			
 			return *this;

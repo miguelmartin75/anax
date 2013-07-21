@@ -37,7 +37,7 @@ namespace anax
 {
 	class World;
 	
-	/// \brief A handle to an Entity within a World.
+	/// \brief A handle to an Entity within a World
 	///
 	/// This class is used as a handle to an entity within a world.
 	/// The handle can be invalid, as it "handle" no entity at all.
@@ -74,7 +74,7 @@ namespace anax
 			
 			int_type;
 			
-			/// Default constructor.
+			/// Default constructor
 			/// \note
 			/// This constructor will automatically nullify the ID
 			Id()

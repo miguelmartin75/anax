@@ -28,6 +28,8 @@
 
 #include "EntityComponentStorage.hpp"
 
+#include "ContainerUtils.hpp"
+
 namespace anax
 {
 	namespace detail
@@ -36,22 +38,29 @@ namespace anax
 		{
 		}
 		
-		void EntityComponentStorage::addComponent(Entity &entity, BaseComponent* component)
+		void EntityComponentStorage::addComponent(Entity &entity, BaseComponent* component, TypeId componentTypeId)
 		{
 			assert(entity.isValid());
 			
-		}
-		
-		void EntityComponentStorage::removeComponent(Entity& entity, BaseComponent* component)
-		{
-			assert(entity.isValid());
-
+			auto index = entity.getId().index;
+			auto& componentDataForEntity = _componentEntries[index];
+			
+			detail::EnsureCapacity(componentDataForEntity.components, componentTypeId);
+			componentDataForEntity.components[componentTypeId] = std::unique_ptr<BaseComponent>(component);
+			
+			detail::EnsureCapacity(componentDataForEntity.componentTypeList, componentTypeId);
+			componentDataForEntity.componentTypeList[componentTypeId] = true;
 		}
 		
 		void EntityComponentStorage::removeComponent(Entity& entity, TypeId componentTypeId)
 		{
 			assert(entity.isValid());
 			
+			auto index = entity.getId().index;
+			auto& componentDataForEntity = _componentEntries[index];
+			
+			componentDataForEntity.components[componentTypeId].reset();
+			componentDataForEntity.componentTypeList[componentTypeId] = false;
 		}
 		
 		BaseComponent* EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
@@ -61,11 +70,26 @@ namespace anax
 			return getComponents(entity)[componentTypeId];
 		}
 		
-		const std::vector<BaseComponent*>& EntityComponentStorage::getComponents(const Entity& entity)  const
+		ComponentTypeList EntityComponentStorage::getComponentTypeList(const Entity& entity) const
 		{
 			assert(entity.isValid());
 			
-			return _componentEntries[entity.getId().index].components;
+			return _componentEntries[entity.getId().index].componentTypeList;
+		}
+		
+		std::vector<BaseComponent*> EntityComponentStorage::getComponents(const Entity& entity)  const
+		{
+			assert(entity.isValid());
+			
+			auto& componentsToConvert = _componentEntries[entity.getId().index].components;
+			
+			std::vector<BaseComponent*> temp;
+			temp.reserve(componentsToConvert.size());
+			
+			for(auto& i : componentsToConvert)
+				temp.push_back(i.get());
+			
+			return temp;
 		}
 		
 		bool EntityComponentStorage::hasComponent(const Entity& entity, TypeId componentTypeId) const
