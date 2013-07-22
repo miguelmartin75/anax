@@ -29,12 +29,15 @@
 #ifndef __ANAX_COMPONENTFILTER_HPP__
 #define __ANAX_COMPONENTFILTER_HPP__
 
+#include <type_traits>
+
 #include <boost/dynamic_bitset.hpp>
 
 #include "detail/EntityIdPool.hpp"
 #include "detail/ContainerUtils.hpp"
 
 #include "config.hpp"
+#include "Component.hpp"
 #include "ComponentTypeList.hpp"
 
 namespace anax
@@ -59,29 +62,35 @@ namespace anax
 		
 		// TODO: Documentation
 		
-		template <typename TComponent>
+		template <typename T>
 		ComponentFilter& require()
 		{
-			detail::EnsureCapacity(_requiredComponentsList, TComponent::GetTypeId());
-			_requiredComponentsList[TComponent::GetTypeId()] = true;
+			static_assert(std::is_base_of<BaseComponent, T>(), "T does not inherit from Component");
+
+			detail::EnsureCapacity(_requiredComponentsList, T::GetTypeId());
+			_requiredComponentsList[T::GetTypeId()] = true;
 			
 			return *this;
 		}
 		
-		template <typename TComponent>
+		template <typename T>
 		ComponentFilter& requireOne()
 		{
-			detail::EnsureCapacity(_requiresOneOfComponentsList, TComponent::GetTypeId());
-			_requiresOneOfComponentsList[TComponent::GetTypeId()] = true;
+			static_assert(std::is_base_of<BaseComponent, T>(), "T does not inherit from Component");
+			
+			detail::EnsureCapacity(_requiresOneOfComponentsList, T::GetTypeId());
+			_requiresOneOfComponentsList[T::GetTypeId()] = true;
 			
 			return *this;
 		}
 		
-		template <typename TComponent>
+		template <typename T>
 		ComponentFilter& exclude()
 		{
-			detail::EnsureCapacity(_excludeComponentsList, TComponent::GetTypeId());
-			_excludeComponentsList[TComponent::GetTypeId()] = true;
+			static_assert(std::is_base_of<BaseComponent, T>(), "T does not inherit from Component");
+
+			detail::EnsureCapacity(_excludeComponentsList, T::GetTypeId());
+			_excludeComponentsList[T::GetTypeId()] = true;
 			
 			return *this;
 		}
@@ -89,29 +98,29 @@ namespace anax
 		
 #ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES
 		
-		template <typename TComponent, typename... TComponents>
+		template <typename T, typename... Ts>
 		ComponentFilter& requires()
 		{
-			require<TComponent>();
-			requires<TComponents...>();
+			require<T>();
+			requires<Ts...>();
 			
 			return *this;
 		}
 		
-		template <typename TComponent, typename... TComponents>
+		template <typename T, typename... Ts>
 		ComponentFilter& requiresOneOf()
 		{
-			requireOne<TComponent>();
-			requiresOneOf<TComponents...>();
+			requireOne<T>();
+			requiresOneOf<Ts...>();
 			
 			return *this;
 		}
 		
-		template <typename TComponent, typename... TComponents>
+		template <typename T, typename... Ts>
 		ComponentFilter& excludes()
 		{
-			exclude<TComponent>();
-			excludes<TComponents...>();
+			exclude<T>();
+			excludes<Ts...>();
 			
 			return *this;
 		}
