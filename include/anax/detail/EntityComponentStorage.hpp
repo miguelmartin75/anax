@@ -32,10 +32,12 @@
 #include <memory>
 #include <vector>
 
-#include "config.hpp"
-#include "Entity.hpp"
-#include "Component.hpp"
-#include "ComponentTypeList.hpp"
+#include "../config.hpp"
+#include "../Entity.hpp"
+#include "../Component.hpp"
+#include "../ComponentTypeList.hpp"
+
+#include "ClassTypeId.hpp"
 
 namespace anax
 {
