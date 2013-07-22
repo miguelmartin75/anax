@@ -32,6 +32,11 @@ namespace anax
 {
 	namespace detail
 	{
+		EntityIdPool::EntityIdPool(std::size_t poolSize)
+		{
+			
+		}
+		
 		Entity::Id EntityIdPool::create()
 		{
 			Entity::Id id;

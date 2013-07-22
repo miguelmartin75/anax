@@ -33,6 +33,12 @@
 namespace anax
 {
 	World::World()
+		: World(DEFAULT_ENTITY_POOL_SIZE)
+	{
+	}
+	
+	World::World(std::size_t entityPoolSize)
+		: _entityIdPool(entityPoolSize)
 	{
 	}
 	
@@ -64,7 +70,9 @@ namespace anax
 	
 	bool World::isActivated(const Entity& entity) const
 	{
-		return false; // TODO
+		assert(isValid(entity));
+
+		return _entityAttributes.activated[entity.getId().index];
 	}
 	
 	bool World::isValid(const anax::Entity &entity) const
@@ -72,8 +80,60 @@ namespace anax
 		return _entityIdPool.isValid(entity.getId());
 	}
 	
-	void refresh()
+	void World::refresh()
 	{
-		// TODO
+		// go through all the activated entities from last call to refresh
+		for(auto& i : _entityCache.activated)
+		{
+			// loop through all the systems within the world
+			for(auto& j : _systems)
+			{
+				// if the entity passes the filter the system has
+				if(j.second->getComponentFilter().doesPassFilter(_entityAttributes.componentStorage.getComponentTypeList(i)))
+				{
+					j.second->add(i); // add it to the system
+				}
+			}
+		}
+		
+		
+		// go through all the deactivated entities from last call to refresh
+		for(auto& i : _entityCache.deactivated)
+		{
+			// loop through all the systems within the world
+			for(auto& j : _systems)
+			{
+				// remove the entity from the system
+				// TODO: Make this more efficent?
+				// I could check if the entity is within the system
+				// with a flag, but then I would require a TypeId attribtue
+				// within the system class... So I may/maynot need to add this
+				j.second->remove(i); 
+			}
+		}
+		
+		// go through all the killed entities from last call to refresh
+		for(auto& i : _entityCache.killed)
+		{
+			// destroy all the components it has
+			_entityAttributes.componentStorage.removeAllComponents(i);
+			
+			// remove it from the id pool
+			_entityIdPool.remove(i.getId());
+		}
+	}
+	
+	
+	void World::addSystem(BaseSystem& system, detail::TypeId systemTypeId)
+	{
+		assert(_systems.find(systemTypeId) == _systems.end() && "System is already contained within the world");
+		
+		_systems[systemTypeId] = &system;
+	}
+	
+	void World::removeSystem(detail::TypeId systemTypeId)
+	{
+		assert(_systems.find(systemTypeId) != _systems.end() && "System does not exist in world");
+		_systems.erase(systemTypeId);
 	}
 }

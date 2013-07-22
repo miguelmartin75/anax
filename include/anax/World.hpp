@@ -32,6 +32,8 @@
 #include <vector>
 #include <unordered_map>
 
+#include <boost/dynamic_bitset.hpp>
+
 #include "detail/EntityIdPool.hpp"
 #include "detail/EntityComponentStorage.hpp"
 
@@ -45,14 +47,27 @@ namespace anax
 	{
 	public:
 		
+		static const std::size_t DEFAULT_ENTITY_POOL_SIZE = 1000;
+		
 		/// Default Constructor
 		World();
+		
+		/// Constructs the world with a custom entity pool size
+		/// \param entityPoolSize The amount of entities you wish to have pooled ready to use by default
+		World(std::size_t entityPoolSize);
 		
 		World(const World& world) = delete;
 		World(World&& world) = delete;
 		World& operator=(const World&) = delete;
 		World& operator=(World&&) = delete;
 		
+		
+		
+		template <typename TSystem>
+		void addSystem(TSystem& system) { addSystem(system, TSystem::GetTypeId()); }
+		
+		template <typename TSystem>
+		void removeSystem(TSystem& system) { removeSystem(TSystem::GetTypeId()); }
 		
 		/// Creates an Entity
 		/// \return A new entity for which you can use.
@@ -87,6 +102,11 @@ namespace anax
 		
 	private:
 		
+		void addSystem(BaseSystem& system, detail::TypeId systemTypeId);
+		void removeSystem(detail::TypeId systemTypeId);
+		
+		
+		
 		/// Describes an array of Systems for storage within the world
 		/// The index is the type ID of the system,
 		/// thus systems of the same type can not be stored
@@ -98,14 +118,24 @@ namespace anax
 		
 		
 		
+		/// Systems attached with the world.
+		SystemArray _systems;
+		
 		/// A pool storage of the IDs for the entities within the world
 		detail::EntityIdPool _entityIdPool;
 		
-		/// The attributes of the entities attached to this world
-		detail::EntityComponentStorage _entityComponentStorage;
+		struct
+		{
+			/// A storage of all components that an entity has
+			detail::EntityComponentStorage componentStorage;
+			
+			/// A bitset of activated entities
+			boost::dynamic_bitset<> activated;
+		}
 		
-		/// Systems attached with the world.
-		SystemArray _systems;
+		/// The attributes of the entities attached to this world
+		_entityAttributes;
+		
 		
 		struct
 		{
@@ -123,6 +153,10 @@ namespace anax
 			EntityArray deactivated;
 		}
 		_entityCache;
+		
+		
+		// to access components
+		friend class Entity;
 	};
 }
 

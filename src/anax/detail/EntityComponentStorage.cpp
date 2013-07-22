@@ -63,6 +63,15 @@ namespace anax
 			componentDataForEntity.componentTypeList[componentTypeId] = false;
 		}
 		
+		void EntityComponentStorage::removeAllComponents(Entity &entity)
+		{
+			auto index = entity.getId().index;
+			auto& componentDataForEntity = _componentEntries[index];
+			
+			componentDataForEntity.components.clear();
+			componentDataForEntity.componentTypeList.clear();
+		}
+		
 		BaseComponent* EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
 		{
 			assert(entity.isValid());

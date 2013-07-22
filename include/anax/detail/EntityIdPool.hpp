@@ -46,6 +46,15 @@ namespace anax
 		{
 		public:
 			
+			EntityIdPool(std::size_t poolSize);
+			
+			EntityIdPool(const EntityIdPool&) = delete;
+			EntityIdPool(EntityIdPool&&) = delete;
+			EntityIdPool& operator=(const EntityIdPool&) = delete;
+			EntityIdPool& operator=(EntityIdPool&&) = delete;
+
+			
+			
 			/// Creates an Entity ID
 			/// \return The newly created Entity ID
 			Entity::Id create();
