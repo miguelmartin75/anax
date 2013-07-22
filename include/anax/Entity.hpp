@@ -31,7 +31,11 @@
 
 #include <cstdint>
 
+#include "detail/ClassTypeId.hpp"
+
 #include "config.hpp"
+#include "Component.hpp"
+#include "ComponentTypeList.hpp"
 
 namespace anax
 {
@@ -135,18 +139,78 @@ namespace anax
 		/// \see isNull() To check whether the Entity is null.
 		World& getWorld() const;
 		
+		/// \return true if this Entity is activated
 		bool isActivated() const;
 		
+		/// Activates this Entity
 		void activate();
 		
+		/// Deactivates this Entity
 		void deactivate();
 		
+		/// Kill this Entity
 		void kill();
+		
+		/// Adds a component to the Entity
+		/// \tparam The type of component you wish to add
+		/// \param component The component you wish to add
+		/// \note component must be dynamically allocated with new, as
+		/// it is stored as a unique_ptr. I may change this in the future
+		/// by adding an option to alter how it's stored or something
+		/// along those lines.
+		template <typename T>
+		void addComponent(T* component);
+		
+#	ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES 
+		
+		/// Adds a component to the Entity
+		/// \tparam The type of component you wish to add
+		/// \param args The arguments for the constructor of the component
+		template <typename T, typename... Args>
+		void addComponent(Args&&... args);
+		
+#	endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
+		
+		/// Removes a component
+		/// \tparam The type of component you wish to remove
+		template <typename T>
+		void removeComponent();
+		
+		/// Removes all the components attached to the Entity
+		void removeAllComponents();
+		
+		/// Retrives a component from this Entity
+		/// \tparam The type of component you wish to retrieve
+		/// \return A pointer to the component
+		template <typename T>
+		T* getComponent() const;
+		
+		/// Determines if this Entity has a component or not
+		/// \tparam The type of component you wish to check for
+		/// \return true if this Entity contains a component
+		template <typename T>
+		bool hasComponent() const;
+		
+		/// \return All the components the Entity has
+		std::vector<BaseComponent*> getComponents() const;
+		
+		/// \return A component type list, which resembles the components
+		/// this entity has attached to it
+		ComponentTypeList getComponentTypeList() const;
+		
 		
 		bool operator==(const Entity& entity) const;
 		bool operator!=(const Entity& entity) const { return !operator==(entity); }
-				
+		
 	private:
+		
+		// wrappers to add components
+		// so I may call them from templated public interfaces
+		void addComponent(BaseComponent* component, detail::TypeId componentTypeId);
+		void removeComponent(detail::TypeId typeId);
+		BaseComponent* getComponent(detail::TypeId typeId) const;
+		bool hasComponent(detail::TypeId typeId) const;
+		
 		
 		/// \param world The World the entity belongs to
 		/// \param id The designated ID of the Entity
@@ -166,6 +230,41 @@ namespace anax
 		
 		friend class World;
 	};
+	
+	
+	template <typename T>
+	void Entity::addComponent(T* component)
+	{
+		addComponent(component, T::GetTypeId());
+	}
+	
+#ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES
+
+	template <typename T, typename... Args>
+	void Entity::addComponent(Args&&... args)
+	{
+		addComponent(new T(args...));
+	}
+	
+#endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
+
+	template <typename T>
+	void Entity::removeComponent()
+	{
+		removeComponent(T::GetTypeId());
+	}
+	
+	template <typename T>
+	T* Entity::getComponent() const
+	{
+		return static_cast<T*>(getComponent(T::GetTypeId()));
+	}
+	
+	template <typename T>
+	bool Entity::hasComponent() const
+	{
+		return hasComponent(T::GetTypeId());
+	}
 }
 
 #endif // __ANAX_ENTITY_HPP__

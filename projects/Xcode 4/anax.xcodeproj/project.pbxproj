@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		493F3BC7179D645E0090EC03 /* ClassTypeId.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 493F3BC6179D645E0090EC03 /* ClassTypeId.hpp */; };
 		4964E19417914F260013785A /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E18F17914F260013785A /* Component.cpp */; };
 		4964E19517914F260013785A /* ComponentFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E19017914F260013785A /* ComponentFilter.cpp */; };
 		4964E19617914F260013785A /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4964E19117914F260013785A /* Entity.cpp */; };
@@ -25,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		491EF83817954D0E00EFD3F1 /* ClassTypeId.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClassTypeId.hpp; sourceTree = "<group>"; };
+		493F3BC6179D645E0090EC03 /* ClassTypeId.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClassTypeId.hpp; sourceTree = "<group>"; };
 		4964E18F17914F260013785A /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
 		4964E19017914F260013785A /* ComponentFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentFilter.cpp; sourceTree = "<group>"; };
 		4964E19117914F260013785A /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
@@ -108,7 +109,7 @@
 		4964E19E179150DC0013785A /* detail */ = {
 			isa = PBXGroup;
 			children = (
-				491EF83817954D0E00EFD3F1 /* ClassTypeId.hpp */,
+				493F3BC6179D645E0090EC03 /* ClassTypeId.hpp */,
 				49F15F5F17966C050002CCCC /* ContainerUtils.hpp */,
 				497EC2D81795AB7F009F56FC /* EntityIdPool.hpp */,
 				497EC2D91795AB95009F56FC /* EntityComponentStorage.hpp */,
@@ -157,6 +158,7 @@
 				4964E1AA179150DC0013785A /* System.hpp in Headers */,
 				4964E1AD179150DC0013785A /* World.hpp in Headers */,
 				49F15F6017966C050002CCCC /* ContainerUtils.hpp in Headers */,
+				493F3BC7179D645E0090EC03 /* ClassTypeId.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

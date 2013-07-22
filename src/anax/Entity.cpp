@@ -33,6 +33,7 @@
 namespace anax
 {
 	Entity::Entity()
+		: _world(nullptr)
 	{
 	}
 	
@@ -57,8 +58,35 @@ namespace anax
 		return getWorld().isValid(*this);
 	}
 	
+	bool Entity::isActivated() const
+	{
+		return getWorld().isActivated(*this);
+	}
 	
+	void Entity::activate()
+	{
+		getWorld().activateEntity(*this);
+	}
 	
+	void Entity::deactivate()
+	{
+		getWorld().deactivateEntity(*this);
+	}
+	
+	void Entity::kill()
+	{
+		getWorld().killEntity(*this);
+	}
+	
+	std::vector<BaseComponent*> Entity::getComponents() const
+	{
+		return getWorld()._entityAttributes.componentStorage.getComponents(*this);
+	}
+	
+	ComponentTypeList Entity::getComponentTypeList() const
+	{
+		return getWorld()._entityAttributes.componentStorage.getComponentTypeList(*this);
+	}
 	
 	bool Entity::operator==(const anax::Entity &entity) const
 	{
