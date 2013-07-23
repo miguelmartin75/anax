@@ -30,6 +30,13 @@
 
 namespace anax
 {
+	void ComponentFilter::clear()
+	{
+		_requiredComponentsList.clear();
+		_requiresOneOfComponentsList.clear();
+		_excludeComponentsList.clear();
+	}
+	
 	bool ComponentFilter::doesPassFilter(const ComponentTypeList &componentTypeList) const
 	{
 		// loop through all the component type bits

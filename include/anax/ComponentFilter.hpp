@@ -133,6 +133,9 @@ namespace anax
 		/// \return true if the list of component types passes through the filter (i.e. is valid)
 		bool doesPassFilter(const ComponentTypeList& componentTypeList) const;
 		
+		/// Clears the filter
+		void clear();
+		
 	private:
 		
 		/// A list of component types that are required
