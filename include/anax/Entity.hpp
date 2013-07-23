@@ -29,6 +29,7 @@
 #ifndef __ANAX_ENTITY_HPP__
 #define __ANAX_ENTITY_HPP__
 
+#include <type_traits>
 #include <cstdint>
 
 #include "detail/ClassTypeId.hpp"
@@ -235,6 +236,7 @@ namespace anax
 	template <typename T>
 	void Entity::addComponent(T* component)
 	{
+		static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot add T to entity");
 		addComponent(component, T::GetTypeId());
 	}
 	
@@ -243,7 +245,7 @@ namespace anax
 	template <typename T, typename... Args>
 	void Entity::addComponent(Args&&... args)
 	{
-		addComponent(new T(args...));
+		addComponent<T>(new T(args...));
 	}
 	
 #endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
@@ -251,18 +253,21 @@ namespace anax
 	template <typename T>
 	void Entity::removeComponent()
 	{
+		static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot remove T from entity");
 		removeComponent(T::GetTypeId());
 	}
 	
 	template <typename T>
 	T* Entity::getComponent() const
 	{
+		static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot retrieve T from entity");
 		return static_cast<T*>(getComponent(T::GetTypeId()));
 	}
 	
 	template <typename T>
 	bool Entity::hasComponent() const
 	{
+		static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot determine if entity has T");
 		return hasComponent(T::GetTypeId());
 	}
 }
