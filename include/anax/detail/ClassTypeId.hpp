@@ -60,7 +60,7 @@ namespace anax
 		};
 		
 		template <typename TBase>
-		TypeId ClassTypeId::_nextTypeId = 0;
+		TypeId ClassTypeId<TBase>::_nextTypeId = 0;
 	}
 }
 
