@@ -208,9 +208,9 @@ namespace anax
 		// wrappers to add components
 		// so I may call them from templated public interfaces
 		void addComponent(BaseComponent* component, detail::TypeId componentTypeId);
-		void removeComponent(detail::TypeId typeId);
-		BaseComponent* getComponent(detail::TypeId typeId) const;
-		bool hasComponent(detail::TypeId typeId) const;
+		void removeComponent(detail::TypeId componentTypeId);
+		BaseComponent* getComponent(detail::TypeId componentTypeId) const;
+		bool hasComponent(detail::TypeId componentTypeId) const;
 		
 		
 		/// \param world The World the entity belongs to

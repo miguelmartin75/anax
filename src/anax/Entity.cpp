@@ -78,6 +78,11 @@ namespace anax
 		getWorld().killEntity(*this);
 	}
 	
+	void Entity::removeAllComponents()
+	{
+		getWorld()._entityAttributes.componentStorage.removeAllComponents(*this);
+	}
+	
 	std::vector<BaseComponent*> Entity::getComponents() const
 	{
 		return getWorld()._entityAttributes.componentStorage.getComponents(*this);
@@ -91,6 +96,28 @@ namespace anax
 	bool Entity::operator==(const anax::Entity &entity) const
 	{
 		return _id == entity._id && entity._world == _world;
+	}
+	
+	
+	
+	void Entity::addComponent(BaseComponent* component, detail::TypeId componentTypeId)
+	{
+		getWorld()._entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
+	}
+	
+	void Entity::removeComponent(detail::TypeId componentTypeId)
+	{
+		getWorld()._entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
+	}
+	
+	BaseComponent* Entity::getComponent(detail::TypeId componentTypeId) const
+	{
+		return getWorld()._entityAttributes.componentStorage.getComponent(*this, componentTypeId);
+	}
+	
+	bool Entity::hasComponent(detail::TypeId componentTypeId) const
+	{
+		return getWorld()._entityAttributes.componentStorage.hasComponent(*this, componentTypeId);
 	}
 }
 
