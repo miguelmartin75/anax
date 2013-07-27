@@ -102,7 +102,7 @@ namespace anax
 	
 	void Entity::addComponent(BaseComponent* component, detail::TypeId componentTypeId)
 	{
-		getWorld()._entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
+		getWorld()._entityAttributes.componentStorage.addComponent(*this, component, componentTypeId);
 	}
 	
 	void Entity::removeComponent(detail::TypeId componentTypeId)
