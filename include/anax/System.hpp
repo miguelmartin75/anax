@@ -72,6 +72,9 @@ namespace anax
 		/// \return The World attached to the System
 		World& getWorld() const;
 		
+		/// \return All the entities that are within the System
+		std::vector<Entity> getEntities() const;
+		
 	private:
 		
 		/// Initializes the system, when a world is succesfully

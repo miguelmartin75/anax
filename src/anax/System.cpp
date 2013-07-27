@@ -46,6 +46,11 @@ namespace anax
 		return *_world;
 	}
 	
+	std::vector<Entity> BaseSystem::getEntities() const
+	{
+		return _entities;
+	}
+	
 	
 	void BaseSystem::add(anax::Entity &entity)
 	{
