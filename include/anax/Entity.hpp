@@ -245,7 +245,7 @@ namespace anax
 	template <typename T, typename... Args>
 	void Entity::addComponent(Args&&... args)
 	{
-		addComponent<T>(new T(args...));
+		addComponent<T>(new T{args...});
 	}
 	
 #endif // ANAX_DONT_USE_VARIADIC_TEMPLATES

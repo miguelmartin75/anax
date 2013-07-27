@@ -58,6 +58,9 @@ namespace anax
 			
 			static TypeId _nextTypeId;
 		};
+		
+		template <typename TBase>
+		TypeId ClassTypeId::_nextTypeId = 0;
 	}
 }
 
