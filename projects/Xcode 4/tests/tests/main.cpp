@@ -46,6 +46,8 @@ public:
 			{
 				std::cout << "I fucked up somewhere\n";
 			}
+			
+			e.kill();
 		}
 	}
 	
@@ -82,6 +84,8 @@ int main(int argc, const char * argv[])
 	MovementSystem movementSystem;
 	world.addSystem(movementSystem);
 	
+	world.refresh();
+	movementSystem.update();
 	world.refresh();
 	movementSystem.update();
 	

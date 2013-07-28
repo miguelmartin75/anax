@@ -97,7 +97,7 @@ namespace anax
 					componentTypeList(std::move(e.componentTypeList))
 				{
 				}
-													   
+
 				/// The components of an entity. The
 				/// index of this array is the same as the TypeId
 				/// of the component.

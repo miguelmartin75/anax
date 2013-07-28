@@ -34,8 +34,8 @@ namespace anax
 	{
 		// TODO: fix bugs here
 		EntityIdPool::EntityIdPool(std::size_t poolSize)
+		//: _entities(poolSize) // BUG
 		{
-			
 		}
 		
 		Entity::Id EntityIdPool::create()
@@ -47,7 +47,7 @@ namespace anax
 			{
 				// create a new entity, and assign it the new index
 				id.index = _entities.size();
-				id.counter = 1; // start it off with an initial counter of 1 reference
+				id.counter = 0; // start it off with an initial counter of 0 reference
 				_entities.emplace_back(id);
 				
 				return id;
