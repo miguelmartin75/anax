@@ -115,7 +115,6 @@ entity1.kill();
 
 // This will cause a run-time error
 entity2.addComponent<Position>(0, 3, 5); // see below for details about this method
-
 ``` 
 	
 ### Components
