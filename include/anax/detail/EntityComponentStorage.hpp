@@ -54,7 +54,7 @@ namespace anax
 		{
 		public:
 			
-			EntityComponentStorage();
+			EntityComponentStorage(std::size_t entityAmount);
 			
 			EntityComponentStorage(const EntityComponentStorage&) = delete;
 			EntityComponentStorage(EntityComponentStorage&&) = delete;
@@ -77,6 +77,8 @@ namespace anax
 			
 			bool hasComponent(const Entity& entity, TypeId componentTypeId) const;
 			
+			void resize(std::size_t entityAmount);
+			
 		private:
 			
 			/// \brief A data structure to describe the components
@@ -85,6 +87,17 @@ namespace anax
 			/// \author Miguel Martin
 			struct EntityComponents
 			{
+				EntityComponents() = default;
+				
+				// bug in clang? won't work w/o this
+				// http://stackoverflow.com/questions/8560994/stdmake-shared-stdunique-ptr-and-move-constructors
+				// I think it's due to ComponentTypeList (may have to update boost)
+				EntityComponents(EntityComponents&& e)
+					: components(std::move(e.components)),
+					componentTypeList(std::move(e.componentTypeList))
+				{
+				}
+													   
 				/// The components of an entity. The
 				/// index of this array is the same as the TypeId
 				/// of the component.

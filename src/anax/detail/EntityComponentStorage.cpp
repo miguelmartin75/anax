@@ -34,7 +34,8 @@ namespace anax
 {
 	namespace detail
 	{
-		EntityComponentStorage::EntityComponentStorage()
+		EntityComponentStorage::EntityComponentStorage(std::size_t entityAmount)
+			: _componentEntries(entityAmount)
 		{
 		}
 		
@@ -46,7 +47,7 @@ namespace anax
 			auto& componentDataForEntity = _componentEntries[index];
 			
 			detail::EnsureCapacity(componentDataForEntity.components, componentTypeId);
-			componentDataForEntity.components[componentTypeId] = std::unique_ptr<BaseComponent>(component);
+			componentDataForEntity.components[componentTypeId].reset(component);
 			
 			detail::EnsureCapacity(componentDataForEntity.componentTypeList, componentTypeId);
 			componentDataForEntity.componentTypeList[componentTypeId] = true;
@@ -108,6 +109,11 @@ namespace anax
 			auto components = getComponents(entity);
 			
 			return components.size() > componentTypeId && components[componentTypeId] != nullptr;
+		}
+		
+		void EntityComponentStorage::resize(std::size_t entityAmount)
+		{
+			_componentEntries.resize(entityAmount);
 		}
 	}
 }

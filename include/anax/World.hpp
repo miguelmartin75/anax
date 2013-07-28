@@ -124,20 +124,24 @@ namespace anax
 		/// A pool storage of the IDs for the entities within the world
 		detail::EntityIdPool _entityIdPool;
 		
-		struct
+		struct EntityAttributes
 		{
+			EntityAttributes(std::size_t amountOfEntities) : componentStorage(amountOfEntities), activated(amountOfEntities) {}
+			
 			/// A storage of all components that an entity has
 			detail::EntityComponentStorage componentStorage;
 			
 			/// A bitset of activated entities
 			boost::dynamic_bitset<> activated;
+			
+			void resize(std::size_t amountOfEntities) { componentStorage.resize(amountOfEntities); activated.resize(amountOfEntities); }
 		}
 		
 		/// The attributes of the entities attached to this world
 		_entityAttributes;
 		
 		
-		struct
+		struct EntityCache
 		{
 			/// A temporary storage for the killed entities
 			/// for the world. This array gets cleared every call

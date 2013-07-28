@@ -38,12 +38,14 @@ namespace anax
 	}
 	
 	World::World(std::size_t entityPoolSize)
-		: _entityIdPool(entityPoolSize)
+		: _entityIdPool(entityPoolSize),
+	      _entityAttributes(entityPoolSize)
 	{
 	}
 	
 	Entity World::createEntity()
 	{
+		// Resize attributes?
 		return Entity(*this, _entityIdPool.create());
 	}
 	
@@ -85,6 +87,8 @@ namespace anax
 		// go through all the activated entities from last call to refresh
 		for(auto& i : _entityCache.activated)
 		{
+			_entityAttributes.activated[i.getId().index] = true;
+			
 			// loop through all the systems within the world
 			for(auto& j : _systems)
 			{
@@ -100,6 +104,8 @@ namespace anax
 		// go through all the deactivated entities from last call to refresh
 		for(auto& i : _entityCache.deactivated)
 		{
+			_entityAttributes.activated[i.getId().index] = false;
+
 			// loop through all the systems within the world
 			for(auto& j : _systems)
 			{
