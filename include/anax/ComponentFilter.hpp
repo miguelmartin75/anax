@@ -85,7 +85,7 @@ namespace anax
 		}
 		
 		template <typename C1>
-		ComponentFilter& exclude()
+		ComponentFilter& excludes()
 		{
 			static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
 
