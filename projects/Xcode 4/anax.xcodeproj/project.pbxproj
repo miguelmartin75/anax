@@ -25,6 +25,16 @@
 		49F15F6017966C050002CCCC /* ContainerUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 49F15F5F17966C050002CCCC /* ContainerUtils.hpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		49912E1217A41BA1001199FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49912E0E17A41BA0001199FB /* tests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 49912E0217A41BA0001199FB;
+			remoteInfo = tests;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		493F3BC6179D645E0090EC03 /* ClassTypeId.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClassTypeId.hpp; sourceTree = "<group>"; };
 		4964E18F17914F260013785A /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
@@ -43,6 +53,7 @@
 		497EC2D91795AB95009F56FC /* EntityComponentStorage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityComponentStorage.hpp; sourceTree = "<group>"; };
 		497EC2DA1795ABBE009F56FC /* EntityIdPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityIdPool.cpp; path = detail/EntityIdPool.cpp; sourceTree = "<group>"; };
 		497EC2DE1795ABE8009F56FC /* EntityComponentStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityComponentStorage.cpp; path = detail/EntityComponentStorage.cpp; sourceTree = "<group>"; };
+		49912E0E17A41BA0001199FB /* tests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tests.xcodeproj; path = tests/tests.xcodeproj; sourceTree = "<group>"; };
 		49D179D116FDCD390028C9E0 /* libanax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanax.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49F15F5E1796657B0002CCCC /* ComponentTypeList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComponentTypeList.hpp; sourceTree = "<group>"; };
 		49F15F5F17966C050002CCCC /* ContainerUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ContainerUtils.hpp; sourceTree = "<group>"; };
@@ -126,9 +137,18 @@
 			name = detail;
 			sourceTree = "<group>";
 		};
+		49912E0F17A41BA0001199FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49912E1317A41BA1001199FB /* tests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		49D179C816FDCD390028C9E0 = {
 			isa = PBXGroup;
 			children = (
+				49912E0E17A41BA0001199FB /* tests.xcodeproj */,
 				4964E16D17914A560013785A /* include */,
 				4964E17F17914A560013785A /* src */,
 				49D179D216FDCD390028C9E0 /* Products */,
@@ -201,12 +221,28 @@
 			mainGroup = 49D179C816FDCD390028C9E0;
 			productRefGroup = 49D179D216FDCD390028C9E0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 49912E0F17A41BA0001199FB /* Products */;
+					ProjectRef = 49912E0E17A41BA0001199FB /* tests.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				49D179D016FDCD390028C9E0 /* anax */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		49912E1317A41BA1001199FB /* tests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = tests;
+			remoteRef = 49912E1217A41BA1001199FB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		49D179CD16FDCD390028C9E0 /* Sources */ = {

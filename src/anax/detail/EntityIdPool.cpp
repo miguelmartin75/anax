@@ -32,6 +32,7 @@ namespace anax
 {
 	namespace detail
 	{
+		// TODO: fix bugs here
 		EntityIdPool::EntityIdPool(std::size_t poolSize)
 		{
 			

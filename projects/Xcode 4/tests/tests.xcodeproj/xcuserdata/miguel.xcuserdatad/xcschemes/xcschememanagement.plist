@@ -4,15 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>anax.xcscheme</key>
+		<key>tests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>49D179D016FDCD390028C9E0</key>
+		<key>49912E0117A41BA0001199FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

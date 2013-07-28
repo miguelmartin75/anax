@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		49912E0617A41BA0001199FB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49912E0517A41BA0001199FB /* main.cpp */; };
 		49912E0817A41BA0001199FB /* tests.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 49912E0717A41BA0001199FB /* tests.1 */; };
+		49B05F5217A5584900011335 /* libanax.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49B05F5117A5584900011335 /* libanax.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,7 @@
 		49912E0217A41BA0001199FB /* tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		49912E0517A41BA0001199FB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		49912E0717A41BA0001199FB /* tests.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = tests.1; sourceTree = "<group>"; };
+		49B05F5117A5584900011335 /* libanax.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libanax.a; path = "../../../../../../../Library/Developer/Xcode/DerivedData/anax-dpvrmszqammhlagtlwtyorcxsqqf/Build/Products/Debug/libanax.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49B05F5217A5584900011335 /* libanax.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +47,7 @@
 		49912DF917A41BA0001199FB = {
 			isa = PBXGroup;
 			children = (
+				49B05F5117A5584900011335 /* libanax.a */,
 				49912E0417A41BA0001199FB /* tests */,
 				49912E0317A41BA0001199FB /* Products */,
 			);
@@ -184,6 +188,14 @@
 		49912E0C17A41BA0001199FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					../../../include,
+					/opt/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Library/Developer/Xcode/DerivedData/anax-dpvrmszqammhlagtlwtyorcxsqqf/Build/Products/Debug\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -191,6 +203,14 @@
 		49912E0D17A41BA0001199FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					../../../include,
+					/opt/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Library/Developer/Xcode/DerivedData/anax-dpvrmszqammhlagtlwtyorcxsqqf/Build/Products/Debug\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -214,6 +234,7 @@
 				49912E0D17A41BA0001199FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
