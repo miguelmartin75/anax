@@ -193,7 +193,7 @@ namespace anax
 		bool hasComponent() const;
 		
 		/// \return All the components the Entity has
-		std::vector<BaseComponent*> getComponents() const;
+		ComponentArray getComponents() const;
 		
 		/// \return A component type list, which resembles the components
 		/// this entity has attached to it

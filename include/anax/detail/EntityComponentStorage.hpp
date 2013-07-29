@@ -73,13 +73,15 @@ namespace anax
 			
 			ComponentTypeList getComponentTypeList(const Entity& entity) const;
 			
-			std::vector<BaseComponent*> getComponents(const Entity& entity) const;
+			ComponentArray getComponents(const Entity& entity) const;
 			
 			bool hasComponent(const Entity& entity, TypeId componentTypeId) const;
 			
 			void resize(std::size_t entityAmount);
 			
 		private:
+			
+			typedef std::vector<std::unique_ptr<BaseComponent> > ImplComponentArray;
 			
 			/// \brief A data structure to describe the components
 			/// within an entity
@@ -101,7 +103,7 @@ namespace anax
 				/// The components of an entity. The
 				/// index of this array is the same as the TypeId
 				/// of the component.
-				std::vector<std::unique_ptr<BaseComponent> > components;
+				ImplComponentArray components;
 				
 				/// A list of component types, which resembles
 				/// what components an entity has
@@ -112,6 +114,11 @@ namespace anax
 			/// an entity. The indices of this array is the same
 			/// as the index component of an entity's ID.
 			std::vector<EntityComponents> _componentEntries;
+			
+			
+			
+			ImplComponentArray& getComponentsImpl(const Entity& e);
+			const ImplComponentArray& getComponentsImpl(const Entity& e) const;
 		};
 	}
 }

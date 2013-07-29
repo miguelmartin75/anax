@@ -83,7 +83,7 @@ namespace anax
 		getWorld()._entityAttributes.componentStorage.removeAllComponents(*this);
 	}
 	
-	std::vector<BaseComponent*> Entity::getComponents() const
+	ComponentArray Entity::getComponents() const
 	{
 		return getWorld()._entityAttributes.componentStorage.getComponents(*this);
 	}

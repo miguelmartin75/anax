@@ -77,7 +77,7 @@ namespace anax
 		{
 			assert(entity.isValid() && hasComponent(entity, componentTypeId) && "Entity is not valid or does not contain component");
 			
-			return *getComponents(entity)[componentTypeId];
+			return *getComponentsImpl(entity)[componentTypeId];
 		}
 		
 		ComponentTypeList EntityComponentStorage::getComponentTypeList(const Entity& entity) const
@@ -87,17 +87,17 @@ namespace anax
 			return _componentEntries[entity.getId().index].componentTypeList;
 		}
 		
-		std::vector<BaseComponent*> EntityComponentStorage::getComponents(const Entity& entity)  const
+		ComponentArray EntityComponentStorage::getComponents(const Entity& entity)  const
 		{
 			assert(entity.isValid());
 			
-			auto& componentsToConvert = _componentEntries[entity.getId().index].components;
+			auto& componentsToConvert = getComponentsImpl(entity);
 			
-			std::vector<BaseComponent*> temp;
+			std::vector<std::reference_wrapper<BaseComponent>> temp;
 			temp.reserve(componentsToConvert.size());
 			
 			for(auto& i : componentsToConvert)
-				temp.push_back(i.get());
+				temp.push_back(*i.get());
 			
 			return temp;
 		}
@@ -106,7 +106,7 @@ namespace anax
 		{
 			assert(entity.isValid());
 
-			auto components = getComponents(entity);
+			auto& components = getComponentsImpl(entity);
 			
 			return components.size() > componentTypeId && components[componentTypeId] != nullptr;
 		}
@@ -114,6 +114,16 @@ namespace anax
 		void EntityComponentStorage::resize(std::size_t entityAmount)
 		{
 			_componentEntries.resize(entityAmount);
+		}
+		
+		EntityComponentStorage::ImplComponentArray& EntityComponentStorage::getComponentsImpl(const Entity &e)
+		{
+			return _componentEntries[e.getId().index].components;
+		}
+		
+		const EntityComponentStorage::ImplComponentArray& EntityComponentStorage::getComponentsImpl(const Entity &e) const
+		{
+			return _componentEntries[e.getId().index].components;
 		}
 	}
 }

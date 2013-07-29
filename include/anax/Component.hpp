@@ -30,6 +30,8 @@
 #define __ANAX_COMPONENT_HPP__
 
 #include <cstddef>
+#include <vector>
+#include <functional>
 
 #include "detail/ClassTypeId.hpp"
 
@@ -83,6 +85,8 @@ namespace anax
 	{
 	}
 #endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+	
+	typedef std::vector<std::reference_wrapper<BaseComponent>> ComponentArray;
 }
 
 #endif // __ANAX_COMPONENT_HPP__
