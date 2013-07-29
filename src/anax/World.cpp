@@ -51,8 +51,10 @@ namespace anax
 	
 	void World::killEntity(Entity &entity)
 	{
-		assert(isValid(entity));
+		// deactivate the entity
+		deactivateEntity(entity);
 		
+		// now kill the entity (add it to the killed cache)
 		_entityCache.killed.push_back(entity);
 	}
 	
@@ -127,6 +129,9 @@ namespace anax
 			// remove it from the id pool
 			_entityIdPool.remove(i.getId());
 		}
+		
+		// clear the cache
+		_entityCache.clear();
 	}
 	
 	

@@ -155,6 +155,13 @@ namespace anax
 			/// for the world. This array gets cleared every call
 			/// to refresh.
 			EntityArray deactivated;
+			
+			void clear()
+			{
+				killed.clear();
+				activated.clear();
+				deactivated.clear();
+			}
 		}
 		_entityCache;
 		
