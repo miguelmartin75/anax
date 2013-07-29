@@ -69,7 +69,7 @@ namespace anax
 			
 			void removeAllComponents(Entity& entity);
 			
-			BaseComponent* getComponent(const Entity& entity, TypeId componentTypeId) const;
+			BaseComponent& getComponent(const Entity& entity, TypeId componentTypeId) const;
 			
 			ComponentTypeList getComponentTypeList(const Entity& entity) const;
 			

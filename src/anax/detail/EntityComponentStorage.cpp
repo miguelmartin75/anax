@@ -73,11 +73,11 @@ namespace anax
 			componentDataForEntity.componentTypeList.clear();
 		}
 		
-		BaseComponent* EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
+		BaseComponent& EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
 		{
 			assert(entity.isValid() && hasComponent(entity, componentTypeId) && "Entity is not valid or does not contain component");
 			
-			return getComponents(entity)[componentTypeId];
+			return *getComponents(entity)[componentTypeId];
 		}
 		
 		ComponentTypeList EntityComponentStorage::getComponentTypeList(const Entity& entity) const

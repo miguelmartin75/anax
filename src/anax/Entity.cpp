@@ -110,7 +110,7 @@ namespace anax
 		getWorld()._entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
 	}
 	
-	BaseComponent* Entity::getComponent(detail::TypeId componentTypeId) const
+	BaseComponent& Entity::getComponent(detail::TypeId componentTypeId) const
 	{
 		return getWorld()._entityAttributes.componentStorage.getComponent(*this, componentTypeId);
 	}

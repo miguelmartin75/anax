@@ -34,7 +34,8 @@ namespace anax
 	{
 		// TODO: fix bugs here
 		EntityIdPool::EntityIdPool(std::size_t poolSize)
-		//: _entities(poolSize) // BUG
+			: _entities(poolSize),
+		      _nextId(0)
 		{
 		}
 		
@@ -43,18 +44,15 @@ namespace anax
 			Entity::Id id;
 			
 			// if we need to add more entities to the pool
-			if(_freeList.empty())
+			if(!_freeList.empty())
 			{
-				// create a new entity, and assign it the new index
-				id.index = _entities.size();
-				id.counter = 0; // start it off with an initial counter of 0 reference
-				_entities.emplace_back(id);
-				
-				return id;
+				id = _freeList.front();
+				_freeList.pop_back();
 			}
-			
-			id = _freeList.front();
-			_freeList.pop_back();
+			else
+			{
+				id.index = _nextId++;
+			}
 			
 			return id;
 		}

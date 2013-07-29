@@ -38,9 +38,9 @@ public:
 			auto position = e.getComponent<PositionComponent>();
 			auto velocity = e.getComponent<VelocityComponent>();
 			
-			position->x += velocity->x;
-			position->y += velocity->y;
-			position->z += velocity->z;
+			position.x += velocity.x;
+			position.y += velocity.y;
+			position.z += velocity.z;
 			
 			if(!e.isActivated())
 			{

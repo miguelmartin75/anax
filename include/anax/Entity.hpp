@@ -184,7 +184,7 @@ namespace anax
 		/// \tparam The type of component you wish to retrieve
 		/// \return A pointer to the component
 		template <typename T>
-		T* getComponent() const;
+		T& getComponent() const;
 		
 		/// Determines if this Entity has a component or not
 		/// \tparam The type of component you wish to check for
@@ -209,7 +209,7 @@ namespace anax
 		// so I may call them from templated public interfaces
 		void addComponent(BaseComponent* component, detail::TypeId componentTypeId);
 		void removeComponent(detail::TypeId componentTypeId);
-		BaseComponent* getComponent(detail::TypeId componentTypeId) const;
+		BaseComponent& getComponent(detail::TypeId componentTypeId) const;
 		bool hasComponent(detail::TypeId componentTypeId) const;
 		
 		
@@ -258,10 +258,10 @@ namespace anax
 	}
 	
 	template <typename T>
-	T* Entity::getComponent() const
+	T& Entity::getComponent() const
 	{
 		static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot retrieve T from entity");
-		return static_cast<T*>(getComponent(T::GetTypeId()));
+		return static_cast<T&>(getComponent(T::GetTypeId()));
 	}
 	
 	template <typename T>
