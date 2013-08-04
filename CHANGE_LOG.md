@@ -1,13 +1,16 @@
-# Change Log - Anax
+# CHANGE LOG - anax
 
 ## 1.x
 
 ### 1.0
+2013-08-04 Miguel Martin <miguel.martin7.5@hotmail.com>
 
 - Changed how Entities are stored
 - Added unit tests - TODO
 - Added CMake support - TODO
-
+- Removed virtual process/update method in System classes - as not all systems require to be updated in a particular way
+- Added C++11 support where necessary, e.g. for ComponentFilter
+- Library requires C++11 now - may change in the future
 
 ## 0.x
 
