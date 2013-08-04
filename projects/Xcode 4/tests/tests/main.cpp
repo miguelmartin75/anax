@@ -73,7 +73,6 @@ void createEntities(World& world)
 		e.addComponent<PositionComponent>(1, 2, 3);
 		e.addComponent<VelocityComponent>(3, 2, 1);
 	}
-	
 }
 
 int main(int argc, const char * argv[])

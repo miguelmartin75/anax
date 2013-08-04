@@ -132,16 +132,16 @@ class PositionComponent
 
 You may add/remove/get components to entities through the public methods defined in the entity class.
 
-- addComponent
-- removeComponent
-- getComponent
+- `addComponent`
+- `removeComponent`
+- `getComponent`
 
 e.g.
 
 ```c++
 // adding components
-entity.addComponent<PositionComponent(2, 3, 5);
-entity.addComponent(std::make_shared<PositionComponent>(3, 5, 6));
+entity.addComponent<PositionComponent>(2, 3, 5);
+entity.addComponent(new PositionComponent(2, 3, 5);
 
 // removing components
 entity.removeComponent<PositionComponent>();
@@ -184,8 +184,8 @@ public:
 
 That is, a movement system requires entities with a `PositionComponent` and `VelocityComponent`. You may determine if an entity is removed/added to the system via these two overrideable (virtual) methods:
 
-- onEntityAdded(Entity&)
-- onEntityRemoved(Entity&)
+- `onEntityAdded(Entity&)`
+- `onEntityRemoved(Entity&)`
 
 That's basically it, you can pretty go and code. If you want more detail, check the documentation or [this](wiki-basic-tutorial) getting started guide on the [wiki].
 
