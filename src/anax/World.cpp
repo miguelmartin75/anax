@@ -39,23 +39,52 @@ namespace anax
 	
 	World::World(std::size_t entityPoolSize)
 		: _entityIdPool(entityPoolSize),
-	      _entityAttributes(entityPoolSize)
+	      _entityAttributes(entityPoolSize),
+	      _aliveEntityCount(0)
 	{
 	}
 	
 	Entity World::createEntity()
 	{
-		// Resize attributes?
+		++_aliveEntityCount;
+		checkForResize();
+		
 		return Entity(*this, _entityIdPool.create());
 	}
 	
-	void World::killEntity(Entity &entity)
+	std::vector<Entity> World::createEntities(std::size_t amount)
 	{
+		std::vector<Entity> temp;
+		temp.reserve(amount);
+		
+		_aliveEntityCount += amount;
+		checkForResize();
+		
+		for(decltype(amount) i = 0; i < amount; ++i)
+		{
+			temp.emplace_back(*this, _entityIdPool.create());
+		}
+		
+		return temp;
+	}
+	
+	void World::killEntity(Entity& entity)
+	{
+		--_aliveEntityCount;
+		
 		// deactivate the entity
 		deactivateEntity(entity);
 		
 		// now kill the entity (add it to the killed cache)
 		_entityCache.killed.push_back(entity);
+	}
+	
+	void World::killEntities(std::vector<Entity>& entities)
+	{
+		for(auto& i : entities)
+		{
+			killEntity(i);
+		}
 	}
 	
 	void World::activateEntity(Entity& entity)
@@ -134,6 +163,25 @@ namespace anax
 		_entityCache.clear();
 	}
 	
+	std::size_t World::getAliveEntityCount() const
+	{
+		return _aliveEntityCount;
+	}
+	
+	
+	void World::checkForResize()
+	{
+		if(getAliveEntityCount() > _entityIdPool.getSize())
+		{
+			resize(getAliveEntityCount());
+		}
+	}
+	
+	void World::resize(std::size_t amount)
+	{
+		_entityIdPool.resize(amount);
+		_entityAttributes.resize(amount);
+	}
 	
 	void World::addSystem(BaseSystem& system, detail::TypeId systemTypeId)
 	{

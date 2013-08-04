@@ -72,5 +72,10 @@ namespace anax
 		{
 			return id.counter == _entities[id.index].counter;
 		}
+		
+		void EntityIdPool::resize(std::size_t amount)
+		{
+			_entities.resize(amount);
+		}
 	}
 }

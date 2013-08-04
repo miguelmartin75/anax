@@ -74,6 +74,13 @@ namespace anax
 			/// \return true if the ID is valid
 			bool isValid(Entity::Id id) const;
 			
+			/// \return The amount of entities that this pool can store
+			std::size_t getSize() const { return _entities.size(); }
+			
+			/// Resizes the pool
+			/// \param amount The amount you wish to resize
+			void resize(std::size_t amount);
+			
 		private:
 			
 			std::size_t _nextId;

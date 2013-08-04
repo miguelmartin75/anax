@@ -31,6 +31,7 @@
 
 #include <vector>
 #include <unordered_map>
+#include <type_traits>
 
 #include <boost/dynamic_bitset.hpp>
 
@@ -63,19 +64,33 @@ namespace anax
 		
 		
 		
+		/// Adds a system to the World
+		/// \tparam TSystem The type of system you wish to add
+		/// \param system The system you wish to add
 		template <typename TSystem>
-		void addSystem(TSystem& system) { addSystem(system, TSystem::GetTypeId()); }
+		void addSystem(TSystem& system) { static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); addSystem(system, TSystem::GetTypeId()); }
 		
+		/// Removes a system from the World
+		/// \tparam TSystem The type of system you wish to remove
 		template <typename TSystem>
-		void removeSystem(TSystem& system) { removeSystem(TSystem::GetTypeId()); }
+		void removeSystem() { static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); removeSystem(TSystem::GetTypeId()); }
 		
 		/// Creates an Entity
 		/// \return A new entity for which you can use.
 		Entity createEntity();
 		
+		/// Creates a specific amount of entities
+		/// \param amount The amount of entities you wish to create
+		/// \return The entities you created
+		std::vector<Entity> createEntities(std::size_t amount);
+		
 		/// Kills and decativates an Entity
 		/// \param entity The Entity you wish to kill
 		void killEntity(Entity& entity);
+		
+		/// Kills and deactivates an array of entities
+		/// \param entities The entities you wish to kill
+		void killEntities(std::vector<Entity>& entities);
 		
 		/// Activates an Entity
 		/// \param entity The Entity you wish to activate
@@ -100,12 +115,11 @@ namespace anax
 		/// Refreshes the World
 		void refresh();
 		
+		/// \return The amount of entities that are alive (attached to the world)
+		/// \note This count includes the deactivated entities
+		std::size_t getAliveEntityCount() const;
+		
 	private:
-		
-		void addSystem(BaseSystem& system, detail::TypeId systemTypeId);
-		void removeSystem(detail::TypeId systemTypeId);
-		
-		
 		
 		/// Describes an array of Systems for storage within the world
 		/// The index is the type ID of the system,
@@ -117,6 +131,8 @@ namespace anax
 		typedef std::vector<Entity> EntityArray;
 		
 		
+		/// The amount of entities that are alive within the world
+		std::size_t _aliveEntityCount;
 		
 		/// Systems attached with the world.
 		SystemArray _systems;
@@ -156,6 +172,7 @@ namespace anax
 			/// to refresh.
 			EntityArray deactivated;
 			
+			/// Clears the cache
 			void clear()
 			{
 				killed.clear();
@@ -163,7 +180,16 @@ namespace anax
 				deactivated.clear();
 			}
 		}
+		
+		/// A cache of entities that is used in the refresh() method
 		_entityCache;
+		
+		
+		void checkForResize();
+		void resize(std::size_t amount);
+		
+		void addSystem(BaseSystem& system, detail::TypeId systemTypeId);
+		void removeSystem(detail::TypeId systemTypeId);		
 		
 		
 		// to access components

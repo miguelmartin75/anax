@@ -5,7 +5,7 @@
 #include <anax/anax.hpp>
 using namespace anax;
 
-const int ENTIIES_TO_CREATE = 200;
+const int ENTIIES_TO_CREATE = 1500;
 
 struct PositionComponent : Component<PositionComponent>
 {
@@ -66,9 +66,9 @@ private:
 
 void createEntities(World& world)
 {
-	for(int i = 0; i < ENTIIES_TO_CREATE; ++i)
+	std::vector<Entity> entities = world.createEntities(ENTIIES_TO_CREATE);
+	for(auto& e : entities)
 	{
-		Entity e = world.createEntity();
 		e.activate();
 		e.addComponent<PositionComponent>(1, 2, 3);
 		e.addComponent<VelocityComponent>(3, 2, 1);
@@ -84,10 +84,11 @@ int main(int argc, const char * argv[])
 	MovementSystem movementSystem;
 	world.addSystem(movementSystem);
 	
-	world.refresh();
-	movementSystem.update();
-	world.refresh();
-	movementSystem.update();
+	for(int i = 0; i < 5; ++i)
+	{
+		world.refresh();
+		movementSystem.update();
+	}
 	
     return 0;
 }

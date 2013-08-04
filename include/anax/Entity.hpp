@@ -119,6 +119,11 @@ namespace anax
 		/// Default constructor
 		Entity();
 		
+		/// \param world The World the entity belongs to
+		/// \param id The designated ID of the Entity
+		/// \note You should not call this ctor
+		Entity(World& world, Id id);
+		
 		Entity(const Entity&) = default;
 		Entity(Entity&&) = default;
 		Entity& operator=(const Entity&) = default;
@@ -211,12 +216,6 @@ namespace anax
 		void removeComponent(detail::TypeId componentTypeId);
 		BaseComponent& getComponent(detail::TypeId componentTypeId) const;
 		bool hasComponent(detail::TypeId componentTypeId) const;
-		
-		
-		/// \param world The World the entity belongs to
-		/// \param id The designated ID of the Entity
-		Entity(World& world, Id id);
-		
 		
 		
 		/// The ID of the Entity
