@@ -141,7 +141,7 @@ e.g.
 ```c++
 // adding components
 entity.addComponent<PositionComponent>(2, 3, 5);
-entity.addComponent(new PositionComponent(2, 3, 5);
+entity.addComponent(new PositionComponent(2, 3, 5));
 
 // removing components
 entity.removeComponent<PositionComponent>();
@@ -227,7 +227,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 
 [wiki]: https://github.com/miguelishawt/anax/wiki
-[wiki-basic-tutorial]: https://github.com/miguelishawt/anax/wiki/Tutorial-Using-the-Library
+[wiki-basic-tutorial]: https://github.com/miguelishawt/anax/wiki/Using-the-Library
 [examples]: https://github.com/miguelishawt/anax-examples
 [Entity Systems]:http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
 [Artemis]: http://gamadu.com/artemis/
