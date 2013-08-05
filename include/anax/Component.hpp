@@ -45,10 +45,14 @@ namespace anax
 	class BaseComponent
 	{
 	public:
-		
 #	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-		virtual ~BaseComponent() = 0;
+		virtual
 #	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+		~BaseComponent()
+#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+		  = 0
+#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+		;
 	};
 	
 	

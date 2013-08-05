@@ -29,9 +29,7 @@
 
 namespace anax
 {	
-#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 	BaseComponent::~BaseComponent()
 	{
 	}
-#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
 }
