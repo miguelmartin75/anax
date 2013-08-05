@@ -31,7 +31,7 @@
 
 #include <vector>
 
-#include "../Entity.hpp"
+#include <anax/Entity.hpp>
 
 namespace anax
 {

@@ -57,6 +57,6 @@ namespace anax
 
 #define ANAX_VERSION_NUMBER ANAX_VERSION_MAJOR.ANAX_VERSION_MINOR.ANAX_PATCH_NUMBER
 
-#include "World.hpp"
+#include <anax/World.hpp>
 
 #endif // __ANAX_HPP__

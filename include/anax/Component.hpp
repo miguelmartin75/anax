@@ -33,7 +33,7 @@
 #include <vector>
 #include <functional>
 
-#include "detail/ClassTypeId.hpp"
+#include <anax/detail/ClassTypeId.hpp>
 
 namespace anax
 {

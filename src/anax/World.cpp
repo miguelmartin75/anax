@@ -26,7 +26,7 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "World.hpp"
+#include <anax/World.hpp>
 
 #include <cassert>
 

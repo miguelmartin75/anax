@@ -26,9 +26,9 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "Entity.hpp"
+#include <anax/Entity.hpp>
 
-#include "World.hpp"
+#include <anax/World.hpp>
 
 namespace anax
 {

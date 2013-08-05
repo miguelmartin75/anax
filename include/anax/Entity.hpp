@@ -32,11 +32,11 @@
 #include <type_traits>
 #include <cstdint>
 
-#include "detail/ClassTypeId.hpp"
+#include <anax/detail/ClassTypeId.hpp>
 
-#include "config.hpp"
-#include "Component.hpp"
-#include "ComponentTypeList.hpp"
+#include <anax/config.hpp>
+#include <anax/Component.hpp>
+#include <anax/ComponentTypeList.hpp>
 
 namespace anax
 {

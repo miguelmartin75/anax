@@ -26,13 +26,12 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "EntityIdPool.hpp"
+#include <anax/detail/EntityIdPool.hpp>
 
 namespace anax
 {
 	namespace detail
 	{
-		// TODO: fix bugs here
 		EntityIdPool::EntityIdPool(std::size_t poolSize)
 			: _entities(poolSize),
 		      _nextId(0)

@@ -26,9 +26,9 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "EntityComponentStorage.hpp"
+#include <anax/detail/EntityComponentStorage.hpp>
 
-#include "ContainerUtils.hpp"
+#include <anax/detail/ContainerUtils.hpp>
 
 namespace anax
 {

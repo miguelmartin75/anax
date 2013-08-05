@@ -32,10 +32,10 @@
 #include <cstddef>
 #include <vector>
 
-#include "detail/ClassTypeId.hpp"
+#include <anax/detail/ClassTypeId.hpp>
 
-#include "Entity.hpp"
-#include "ComponentFilter.hpp"
+#include <anax/Entity.hpp>
+#include <anax/ComponentFilter.hpp>
 
 namespace anax
 {

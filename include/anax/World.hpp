@@ -35,12 +35,12 @@
 
 #include <boost/dynamic_bitset.hpp>
 
-#include "detail/EntityIdPool.hpp"
-#include "detail/EntityComponentStorage.hpp"
+#include <anax/detail/EntityIdPool.hpp>
+#include <anax/detail/EntityComponentStorage.hpp>
 
-#include "Component.hpp"
-#include "Entity.hpp"
-#include "System.hpp"
+#include <anax/Component.hpp>
+#include <anax/Entity.hpp>
+#include <anax/System.hpp>
 
 namespace anax
 {

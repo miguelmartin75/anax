@@ -26,7 +26,7 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#include "ComponentFilter.hpp"
+#include <anax/ComponentFilter.hpp>
 
 namespace anax
 {
