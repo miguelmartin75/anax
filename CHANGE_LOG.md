@@ -7,7 +7,7 @@
 
 - Changed how Entities are stored
 - Added unit tests - TODO
-- Added CMake support - TODO
+- Added CMake support
 - Removed virtual process/update method in System classes - as not all systems require to be updated in a particular way
 - Added C++11 support where necessary, e.g. for ComponentFilter
 - Library requires C++11 now - may change in the future

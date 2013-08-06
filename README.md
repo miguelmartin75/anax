@@ -34,30 +34,26 @@ To compile, install, and use anax, the following libraries and C++ support is re
 - [`boost::shared_ptr`](http://www.boost.org/doc/libs/1_54_0/libs/smart_ptr/shared_ptr.htm) or [`std::shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr)
 - C++11 variadic templates (this is optional, but is reccomended)
 
-Unfortunately, at this time, this library does _not_ use [CMake](http://www.cmake.org/), since I currently do not know how to use it. Therefore you currently have these options:
-
-1. Build the project with your own method (i.e. makefile, project files)
-2. Include the source files (under the `include/` and `src/` directories) into your project
-
-Either of these methods should work. Please note for the second method, you must have a search path to the `include/` directory.
-
-### **NOTES**
-> 
-> 1. It is worth mentioning that I do have an Xcode project (since I develop with a Mac) within the repo at this current time of Version 0.2, you could use that. However I must mention that build settings may not work. If it doesn't check the build settings and look at the include/library search file paths settings, and change them to the directory in which boost library is located on your machine.
-> 2. I __will__ add support for CMake, or an alternative automatic building system for this library
 
 ## Installation
 
-Unfortunately, at this time, this library does _not_ use [CMake](http://www.cmake.org/), since I currently do not know how to use it. Therefore you currently have these options:
+To install and build the library, you can use [CMake] or your own method of installation. However, it is reccomended that you do use [CMake].
 
-1. Build the project with your own method (i.e. makefile, project files)
-2. Include the source files (under the `include/` and `src/` directories) into your project
+To build using CMake, use the following commands:
 
-Either of these methods should work. Please note for the second method, you must have a search path to the `include/` directory.
+	mkdir build
+	cd build
+	cmake ..
+	sudo make install
 
-> #### **NOTES**
-> 1. It is worth mentioning that I do have an Xcode project (since I develop with a Mac) within the repo at this current time of Version 0.2, you could use that. However I must mention that build settings may not work. If it doesn't check the build settings and look at the include/library search file paths settings, and change them to the directory in which boost library is located on your machine.
-> 2. I ***will*** add support for CMake, or an alternative automatic building system for this library
+Where the directory build can be anything you wish, it just contains all temporary files CMake creates. 
+
+> #### **NOTES:**
+> 1. This will be different to Windows, as instead of using sudo
+> you just have to run the command line as an administrator.
+> 2. For Windows, you may also have to use the Visual Studio command line in order for it to build.
+> 3. This is just a simple way to install/build the library, you can use the GUI of [CMake], pass arguments to `cmake` or use the command `ccmake` if you wish.
+> 4. A more detailed tutorial on how to install will be avaliable on the [wiki](wiki-getting-started).
 
 # Quick Tutorial
 
@@ -145,7 +141,6 @@ entity.addComponent(new PositionComponent(2, 3, 5));
 
 // removing components
 entity.removeComponent<PositionComponent>();
-entity.removeComponent(myPositionComponent);
 
 // getting components
 auto pos = entity.getComponent<PositionComponent>();
@@ -204,7 +199,6 @@ Want to get involved with the project? You are free to help out on the project, 
 	- Create video/written tutorials; this can be done by:
 		- Adding links to tutorials on the [wiki]
 		- Writing a tutorial on the [wiki]
-	- Add examples to the [examples] repo
 
 If you do help out, [email] me and I'll put your name in the contributers list.
 
@@ -227,8 +221,9 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 
 [wiki]: https://github.com/miguelishawt/anax/wiki
+[wiki-getting-started]: https://github.com/miguelishawt/anax/wiki/Getting-Started
 [wiki-basic-tutorial]: https://github.com/miguelishawt/anax/wiki/Using-the-Library
-[examples]: https://github.com/miguelishawt/anax-examples
+[CMake]: http://www.cmake.org/
 [Entity Systems]:http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
 [Artemis]: http://gamadu.com/artemis/
 [entityx]: https://github.com/alecthomas/entityx
