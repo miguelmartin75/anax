@@ -37,9 +37,8 @@ file(
 
 ADD_DEFINITIONS(
   -std=c++11
-  -stdlib=libc++
 )
-set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+set(CMAKE_CXX_FLAGS "-std=c++11")
 
 # Add the libraries
 add_library(${ANAX_LIBRARY_NAME} SHARED ${ANAX_LIBRARY_SOURCES})
