@@ -29,18 +29,33 @@ if(Boost_FOUND)
 endif()
 
 # Set the source files to compile
-file(
-  GLOB_RECURSE ANAX_LIBRARY_SOURCES src/*.cpp
-)
+file(GLOB_RECURSE ANAX_LIBRARY_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
 # Make sure we're compiling with C++11
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-ADD_DEFINITIONS(
-  -std=c++11
-  -stdlib=libc++
-)
-set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+# Check if were compiling with clang, if we are, we need
+# to add "-stdlib=libc++" to the command line in order for it to compile
+if(CMAKE_CXX_COMPILER MATCHES ".*clang[+][+]" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+# Note: on some platforms (OS X), CMAKE_COMPILER_IS_GNUCXX is true even when CLANG is used
+    #add_definitions(-stdlib=c++)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+endif()
 
-# Add the libraries
 add_library(${ANAX_LIBRARY_NAME} SHARED ${ANAX_LIBRARY_SOURCES})
 add_library(${ANAX_LIBRARY_NAME_STATIC} STATIC ${ANAX_LIBRARY_SOURCES})
+
+
+# Install the library
+file(GLOB_RECURSE ANAX_HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
+
+install(
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
+    DESTINATION . 
+)
+
+install(
+    TARGETS ${ANAX_LIBRARY_NAME_STATIC} ${ANAX_LIBRARY_NAME}
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+)
