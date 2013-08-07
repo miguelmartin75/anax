@@ -26,7 +26,7 @@ There are multiple ways to download the library. Here are your options:
 - [clone] the repo: `git clone https://github.com/miguelishawt/anax.git`
 - Download the library ([zip]/[tar-gz])
 
-## Dependices
+## Dependencies
 
 To compile, install, and use anax, the following libraries and C++ support is required:
 
