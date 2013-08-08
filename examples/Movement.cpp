@@ -5,7 +5,7 @@
 #include <anax/anax.hpp>
 using namespace anax;
 
-const int ENTIIES_TO_CREATE = 1500;
+const int ENTIIES_TO_CREATE = 3;
 
 struct PositionComponent : Component<PositionComponent>
 {
@@ -19,7 +19,8 @@ struct VelocityComponent : Component<VelocityComponent>
 	int x, y, z;
 };
 
-struct MovementSystem : System<MovementSystem>
+class MovementSystem
+	: public System<MovementSystem>
 {
 public:
 	
@@ -33,21 +34,17 @@ public:
 		auto entities = getEntities();
 		for(auto& e : entities)
 		{
-			std::cout << "Updating entity: " << e.getId().index << '\n';
+			std::cout << "Moving entity " << e.getId().index() << '\n';
 			
 			auto position = e.getComponent<PositionComponent>();
 			auto velocity = e.getComponent<VelocityComponent>();
+			std::cout << "From: (" << position.x << ", " << position.y << ", " << position.z << ")\n";
 			
 			position.x += velocity.x;
 			position.y += velocity.y;
 			position.z += velocity.z;
 			
-			if(!e.isActivated())
-			{
-				std::cout << "I fucked up somewhere\n";
-			}
-			
-			e.kill();
+			std::cout << "To: (" << position.x << ", " << position.y << ", " << position.z << ")\n";
 		}
 	}
 	
@@ -64,21 +61,24 @@ private:
 	}
 };
 
-void createEntities(World& world)
+void createMoveableEntities(World& world)
 {
+	const int MAX_POSITION_COMPONENT = 100;
+	const int MAX_VELOCITY_COMPONENT = 10;
+	
 	std::vector<Entity> entities = world.createEntities(ENTIIES_TO_CREATE);
 	for(auto& e : entities)
 	{
 		e.activate();
-		e.addComponent<PositionComponent>(1, 2, 3);
-		e.addComponent<VelocityComponent>(3, 2, 1);
+		e.addComponent<PositionComponent>(rand() % MAX_POSITION_COMPONENT, rand() % MAX_POSITION_COMPONENT, rand() % MAX_POSITION_COMPONENT);
+		e.addComponent<VelocityComponent>(rand() % MAX_VELOCITY_COMPONENT, rand() % MAX_VELOCITY_COMPONENT, rand() % MAX_VELOCITY_COMPONENT);
 	}
 }
 
 int main(int argc, const char * argv[])
 {
 	World world;
-	createEntities(world);
+	createMoveableEntities(world);
 	
 	MovementSystem movementSystem;
 	world.addSystem(movementSystem);

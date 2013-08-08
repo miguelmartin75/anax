@@ -15,6 +15,7 @@ const lest::test specification[] =
 	{
 		anax::World world;
 		MovementSystem movementSystem;
+		world.addSystem(movementSystem);
 		
 		createMoveableEntities(rand() % 100 + 1, world);
 		createPlayers(rand() % 100 + 1, world);
@@ -30,6 +31,7 @@ const lest::test specification[] =
 	{
 		anax::World world;
 		PlayerSystem playerSystem;
+		world.addSystem(playerSystem);
 		
 		createNPCsAndPlayers(rand() % 100 + 1, world);
 		createPlayers(rand() % 100 + 1, world);
@@ -46,6 +48,7 @@ void createMoveableEntities(int amount, World& world)
 	{
 		e.addComponent<PositionComponent>();
 		e.addComponent<VelocityComponent>();
+		e.activate();
 	}
 }
 void createPlayers(int amount, World& world)
@@ -55,8 +58,10 @@ void createPlayers(int amount, World& world)
 	for(std::size_t i = 0; i < entities.size(); ++i)
 	{
 		temp << "Player " << i;
-		e.addComponent<PlayerComponent>().name = temp.str();
+		entities[i].addComponent<PlayerComponent>().name = temp.str();
 		temp.clear();
+		
+		entities[i].activate();
 	}
 }
 void createNPCs(int amount, World& world)
@@ -64,6 +69,7 @@ void createNPCs(int amount, World& world)
 	for(std::size_t i = 0; i < entities.size(); ++i)
 	{
 		e.addComponent<NPCComponent>();
+		e.activate();
 	}
 }
 void createNPCsAndPlayers(int amount, World& world)
@@ -76,5 +82,7 @@ void createNPCsAndPlayers(int amount, World& world)
 		e.addComponent<PlayerComponent>().name = temp.str();
 		temp.clear();
 		e.addComponent<NPCComponent>();
+		
+		entities[i].activate();
 	}
 }
