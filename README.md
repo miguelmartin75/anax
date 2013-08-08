@@ -31,7 +31,7 @@ There are multiple ways to download the library. Here are your options:
 To compile, install, and use anax, the following libraries and C++ support is required:
 
 - [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html)
-- [`boost::shared_ptr`](http://www.boost.org/doc/libs/1_54_0/libs/smart_ptr/shared_ptr.htm) or [`std::shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr)
+- [`std::unique_ptr`](http://en.cppreference.com/w/cpp/memory/unique_ptr)
 - C++11 variadic templates (this is optional, but is reccomended)
 
 
