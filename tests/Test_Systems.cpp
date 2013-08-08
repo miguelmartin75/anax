@@ -1,6 +1,9 @@
 #include "lest.hpp"
 
+#include <sstream>
+
 #include <anax/anax.hpp>
+using namespace anax;
 
 #include "Systems.hpp"
 
@@ -11,7 +14,7 @@ void createNPCsAndPlayers(int amount, World& world);
 
 const lest::test specification[] =
 {
-	"MovementSystem" []
+	"MovementSystem", []
 	{
 		anax::World world;
 		MovementSystem movementSystem;
@@ -23,11 +26,11 @@ const lest::test specification[] =
 		for(int i = 0; i < 5; ++i)
 		{
 			world.refresh();
-			movenetSystem.update();
+			movementSystem.update();
 		}
-	}
+	},
 	
-	"PlayerSystem" []
+	"PlayerSystem", []
 	{
 		anax::World world;
 		PlayerSystem playerSystem;
@@ -66,10 +69,11 @@ void createPlayers(int amount, World& world)
 }
 void createNPCs(int amount, World& world)
 {
+	auto entities = world.createEntities(amount);
 	for(std::size_t i = 0; i < entities.size(); ++i)
 	{
-		e.addComponent<NPCComponent>();
-		e.activate();
+		entities[i].addComponent<NPCComponent>();
+		entities[i].activate();
 	}
 }
 void createNPCsAndPlayers(int amount, World& world)
@@ -79,10 +83,15 @@ void createNPCsAndPlayers(int amount, World& world)
 	for(std::size_t i = 0; i < entities.size(); ++i)
 	{
 		temp << "Player " << i;
-		e.addComponent<PlayerComponent>().name = temp.str();
+		entities[i].addComponent<PlayerComponent>().name = temp.str();
 		temp.clear();
-		e.addComponent<NPCComponent>();
+		entities[i].addComponent<NPCComponent>();
 		
 		entities[i].activate();
 	}
+}
+
+int main()
+{
+	return lest::run(specification);
 }

@@ -14,21 +14,21 @@ public:
 };
 
 class VelocityComponent
-	: public anax::Component<AnotherComponent>
+	: public anax::Component<VelocityComponent>
 {
 public:
 	float x, y, z;
 };
 
 class PlayerComponent
-	: public anax::Component<ExcludeComponent>
+	: public anax::Component<PlayerComponent>
 {
 public:
     std::string name;
 };
 
 class NPCComponent
-	: public anax::Component<ExcludeComponent>
+	: public anax::Component<NPCComponent>
 {
 public:
     std::string name;

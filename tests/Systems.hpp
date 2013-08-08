@@ -36,7 +36,7 @@ private:
 	virtual void onEntityAdded(Entity& e) override
 	{
 		std::cout << "Entity added to MovementSystem: " << e.getId().index << '\n';
-		if(e.doesContain<NPCComponent>())
+		if(e.hasComponent<NPCComponent>())
 		{
 			throw std::logic_error("Player contains NPCComponent :(");
 		}
@@ -56,7 +56,7 @@ class PlayerSystem
 public:
 	
 	PlayerSystem()
-		: Base(anax::ComponentFilter().requires<PlayerSystem>().excludes<NPCComponent>())
+		: Base(anax::ComponentFilter().requires<PlayerComponent>().excludes<NPCComponent>())
 	{
 	}
 	

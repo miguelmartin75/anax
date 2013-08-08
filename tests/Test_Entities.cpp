@@ -15,7 +15,7 @@ const lest::test specification[] =
 		e1.kill(); // kill it
 		
 		EXPECT(e1.isValid());
-	}
+	},
 	
 	"Duplicate invalid (killed) entity handles", []
 	{
@@ -32,7 +32,7 @@ const lest::test specification[] =
 		anax::Entity e2 = e1;
 		
 		EXPECT(!e2.isValid()); // should be invalid
-	}
+	},
 	
 	"Activating and deactivating entities", []
 	{
@@ -41,22 +41,22 @@ const lest::test specification[] =
 		auto e1 = world.createEntity();
 		e1.activate();
 		
-		EXPECT(e1.isActivated());
+		EXPECT(!e1.isActivated()); // should not be activated
 		
 		world.refresh();
 		
-		EXPECT(e1.isActivated());
+		EXPECT(e1.isActivated()); // should be activated
 		
 		e1.deactivate();
 		
-		EXPECT(e1.isActivated());
+		EXPECT(e1.isActivated()); // should be still activated
 
 		world.refresh();
 		
-		EXPECT(!e1.isActivated());
-	}
+		EXPECT(!e1.isActivated()); // should not be activated
+	},
 	
-	"Adding components" []
+	"Adding components", []
 	{
 		anax::World world;
 		
@@ -64,9 +64,9 @@ const lest::test specification[] =
 		e.addComponent<PositionComponent>();
 		
 		EXPECT(e.hasComponent<PositionComponent>());
-	}
+	},
 	
-	"Removing components" []
+	"Removing components", []
 	{
 		anax::World world;
 		
@@ -75,17 +75,19 @@ const lest::test specification[] =
 		e.removeComponent<PositionComponent>();
 		
 		EXPECT(!e.hasComponent<PositionComponent>());
-	}
+	},
 	
-	"Removing all components" []
+	"Removing all components", []
 	{
 		anax::World world;
 		
 		auto e = world.createEntity();
 		e.addComponent<PositionComponent>();
-		e.addComponent<VelocityComponenet();
+		e.addComponent<VelocityComponent>();
 		
-		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponenet>());
+		e.removeAllComponents();
+		
+		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
 	}
 };
 

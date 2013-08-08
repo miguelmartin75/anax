@@ -1,22 +1,24 @@
 #include "lest.hpp"
 
-#include "anax/detail/ClassTypeId.hpp"
+#include <anax/detail/ClassTypeId.hpp>
+
+struct Type {};
 
 const lest::test specification[] =
 {
-	"Incremental IDs for types (succeed)", []
+	"Incremental IDs for types", []
 	{
-		using anax::detail;
+		using namespace anax::detail;
 
-		EXPECT(ClassTypeId<bool>::GetTypeId() == 0);
-		EXPECT(ClassTypeId<char>::GetTypeId() == 1);
-		EXPECT(ClassTypeId<unsigned char>::GetTypeId() == 2);
-		EXPECT(ClassTypeId<short>::GetTypeId() == 3);
-		EXPECT(ClassTypeId<unsigned short>::GetTypeId() == 4);
-		EXPECT(ClassTypeId<int>::GetTypeId() == 5);
-		EXPECT(ClassTypeId<unsigned int>::GetTypeId() == 6);
-		EXPECT(ClassTypeId<float>::GetTypeId() == 7);
-		EXPECT(ClassTypeId<double>::GetTypeId() == 8);
+		EXPECT(ClassTypeId<Type>::GetTypeId<bool>() == 0);
+		EXPECT(ClassTypeId<Type>::GetTypeId<char>() == 1);
+		EXPECT(ClassTypeId<Type>::GetTypeId<unsigned char>() == 2);
+		EXPECT(ClassTypeId<Type>::GetTypeId<short>() == 3);
+		EXPECT(ClassTypeId<Type>::GetTypeId<unsigned short>() == 4);
+		EXPECT(ClassTypeId<Type>::GetTypeId<int>() == 5);
+		EXPECT(ClassTypeId<Type>::GetTypeId<unsigned int>() == 6);
+		EXPECT(ClassTypeId<Type>::GetTypeId<float>() == 7);
+		EXPECT(ClassTypeId<Type>::GetTypeId<double>() == 8);
 	}
 };
 

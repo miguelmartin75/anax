@@ -6,57 +6,57 @@
 
 const lest::test specification[] =
 {
-	"Using require (succeed)" []
+	"Using require", []
 	{
 		anax::ComponentFilter filter;
 		filter.requires<PositionComponent, VelocityComponent>();
 		
-		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[PositionComponent::GetTypeId()] = true;
 		typeList[VelocityComponent::GetTypeId()] = true;
 
 		EXPECT(filter.doesPassFilter(typeList));
-	}
+	},
 	
-	"Using require (fail)" []
+	"Using require", []
 	{
 		anax::ComponentFilter filter;
 		filter.requires<PositionComponent, VelocityComponent>();
 		
-		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[VelocityComponent::GetTypeId()] = true;
 		
-		EXPECT(filter.doesPassFilter(typeList));
-	}
+		EXPECT(!filter.doesPassFilter(typeList));
+	},
 	
-	"Using require and optional (succeed)" []
+	"Using require and requiresOneOf", []
 	{
 		anax::ComponentFilter filter;
-		filter.optional<PositionComponent, VelocityComponent>();
+		filter.requiresOneOf<PositionComponent, VelocityComponent>();
 		
-		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[VelocityComponent::GetTypeId()] = true;
 		
 		EXPECT(filter.doesPassFilter(typeList));
-	}
+	},
 	
-	"Using exclude (succeed)" []
+	"Using exclude", []
 	{
 		anax::ComponentFilter filter;
-		filter.exclude<PositionComponent, VelocityComponent>();
+		filter.excludes<PositionComponent, VelocityComponent>();
 		
-		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[VelocityComponent::GetTypeId()] = true;
 		
-		EXPECT(filter.doesPassFilter(typeList));
+		EXPECT(!filter.doesPassFilter(typeList));
 	}
 };
 
