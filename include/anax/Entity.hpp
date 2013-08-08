@@ -124,6 +124,7 @@ namespace anax
 		/// \note You should not call this ctor
 		Entity(World& world, Id id);
 		
+		/// Default copy/move ctors and assignment operators
 		Entity(const Entity&) = default;
 		Entity(Entity&&) = default;
 		Entity& operator=(const Entity&) = default;
@@ -154,7 +155,8 @@ namespace anax
 		/// Deactivates this Entity
 		void deactivate();
 		
-		/// Kill this Entity
+		/// Kills this Entity
+		/// \see World::killEntity for an alternate way to kill an Entity
 		void kill();
 		
 		/// Adds a component to the Entity
@@ -164,8 +166,9 @@ namespace anax
 		/// it is stored as a unique_ptr. I may change this in the future
 		/// by adding an option to alter how it's stored or something
 		/// along those lines.
+		/// \return The entity you added
 		template <typename T>
-		void addComponent(T* component);
+		T& addComponent(T* component);
 		
 #	ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES 
 		
@@ -173,7 +176,7 @@ namespace anax
 		/// \tparam The type of component you wish to add
 		/// \param args The arguments for the constructor of the component
 		template <typename T, typename... Args>
-		void addComponent(Args&&... args);
+		T& addComponent(Args&&... args);
 		
 #	endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
 		
@@ -205,6 +208,7 @@ namespace anax
 		ComponentTypeList getComponentTypeList() const;
 		
 		
+		/// Comparrision operator
 		bool operator==(const Entity& entity) const;
 		bool operator!=(const Entity& entity) const { return !operator==(entity); }
 		
@@ -233,18 +237,19 @@ namespace anax
 	
 	
 	template <typename T>
-	void Entity::addComponent(T* component)
+	T& Entity::addComponent(T* component)
 	{
 		static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot add T to entity");
 		addComponent(component, T::GetTypeId());
+		return *component;
 	}
 	
 #ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES
 
 	template <typename T, typename... Args>
-	void Entity::addComponent(Args&&... args)
+	T& Entity::addComponent(Args&&... args)
 	{
-		addComponent<T>(new T{args...});
+		return addComponent<T>(new T{args...});
 	}
 	
 #endif // ANAX_DONT_USE_VARIADIC_TEMPLATES

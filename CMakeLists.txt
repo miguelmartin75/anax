@@ -47,8 +47,6 @@ add_library(${ANAX_LIBRARY_NAME_STATIC} STATIC ${ANAX_LIBRARY_SOURCES})
 
 
 # Install the library
-file(GLOB_RECURSE ANAX_HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
-
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
     DESTINATION . 
