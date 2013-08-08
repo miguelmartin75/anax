@@ -1,36 +1,66 @@
-#include "catch.hpp"
-#define CATCH_CONFIG_MAIN
+#include "lest.hpp"
 
-#include "anax/ComponentFilter.hpp"
+#include <anax/ComponentFilter.hpp>
 
+#include "Components.hpp"
 
-class PositionComponent
-	: public anax::Component<PositionComponent>
+const lest::test specification[] =
 {
-public:
-};
+	"Using require (succeed)" []
+	{
+		anax::ComponentFilter filter;
+		filter.requires<PositionComponent, VelocityComponent>();
+		
+		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		
+		typeList[PlayerComponent::GetTypeId()] = true;
+		typeList[PositionComponent::GetTypeId()] = true;
+		typeList[VelocityComponent::GetTypeId()] = true;
 
-class VelocityComponent
-	: public anax::Component<AnotherComponent>
-{
-public:
-	float x, y, z;
-};
-
-class PlayerComponent
-	: public anax::Component<ExcludeComponent>
-{
-public:
-};
-
-
-
-TEST_CASE("Using require", "[ComponentFilter]")
-{
-	anax::ComponentFilter filter;
-	filter.requires<PositionComponent, AnotherComponent>();
+		EXPECT(filter.doesPassFilter(typeList));
+	}
 	
-	REQUIRE(filter.doesPassFilter());
-}
+	"Using require (fail)" []
+	{
+		anax::ComponentFilter filter;
+		filter.requires<PositionComponent, VelocityComponent>();
+		
+		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		
+		typeList[PlayerComponent::GetTypeId()] = true;
+		typeList[VelocityComponent::GetTypeId()] = true;
+		
+		EXPECT(filter.doesPassFilter(typeList));
+	}
+	
+	"Using require and optional (succeed)" []
+	{
+		anax::ComponentFilter filter;
+		filter.optional<PositionComponent, VelocityComponent>();
+		
+		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		
+		typeList[PlayerComponent::GetTypeId()] = true;
+		typeList[VelocityComponent::GetTypeId()] = true;
+		
+		EXPECT(filter.doesPassFilter(typeList));
+	}
+	
+	"Using exclude (succeed)" []
+	{
+		anax::ComponentFilter filter;
+		filter.exclude<PositionComponent, VelocityComponent>();
+		
+		ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		
+		typeList[PlayerComponent::GetTypeId()] = true;
+		typeList[VelocityComponent::GetTypeId()] = true;
+		
+		EXPECT(filter.doesPassFilter(typeList));
+	}
+};
 
-TEST_CASE("Using require and optional", "")
+int main()
+{
+	return lest::run(specification);
+}

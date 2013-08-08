@@ -1,25 +1,27 @@
 #include "lest.hpp"
 
-#include "anax/Entity.hpp"
-#include "anax/World.hpp"
+#include <anax/Entity.hpp>
+#include <anax/World.hpp>
+
+#include "Components.hpp"
 
 const lest::test specification[] =
 {
-	"Invalid entity handles", []
+	"Invalid entity handles (killing entities)", []
 	{
 		anax::World world;
 		
-		anax::Entity e1 = world.createEntity(); // create an entity
+		auto e1 = world.createEntity(); // create an entity
 		e1.kill(); // kill it
 		
 		EXPECT(e1.isValid());
 	}
 	
-	"Duplicate entity handles", []
+	"Duplicate invalid (killed) entity handles", []
 	{
 		anax::World world;
 
-		anax::Entity e1 = world.createEntity(); // create an entity
+		auto e1 = world.createEntity(); // create an entity
 		e1.kill(); // kill it
 		
 		// refresh the world (so that the ID will be invalid)
@@ -36,7 +38,7 @@ const lest::test specification[] =
 	{
 		anax::World world;
 		
-		anax::Entity e1 = world.createEntity();
+		auto e1 = world.createEntity();
 		e1.activate();
 		
 		EXPECT(e1.isActivated());
@@ -44,11 +46,46 @@ const lest::test specification[] =
 		world.refresh();
 		
 		EXPECT(e1.isActivated());
+		
+		e1.deactivate();
+		
+		EXPECT(e1.isActivated());
+
+		world.refresh();
+		
+		EXPECT(!e1.isActivated());
 	}
 	
-	"Adding and removing components" []
+	"Adding components" []
 	{
+		anax::World world;
 		
+		auto e = world.createEntity();
+		e.addComponent<PositionComponent>();
+		
+		EXPECT(e.hasComponent<PositionComponent>());
+	}
+	
+	"Removing components" []
+	{
+		anax::World world;
+		
+		auto e = world.createEntity();
+		e.addComponent<PositionComponent>();
+		e.removeComponent<PositionComponent>();
+		
+		EXPECT(!e.hasComponent<PositionComponent>());
+	}
+	
+	"Removing all components" []
+	{
+		anax::World world;
+		
+		auto e = world.createEntity();
+		e.addComponent<PositionComponent>();
+		e.addComponent<VelocityComponenet();
+		
+		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponenet>());
 	}
 };
 
