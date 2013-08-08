@@ -96,7 +96,7 @@ namespace anax
 		}
 		
 		
-#ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES
+#ifdef ANAX_USE_VARIADIC_TEMPLATES
 		
 		template <typename C1, typename C2, typename... Components>
 		ComponentFilter& requires()
@@ -125,7 +125,7 @@ namespace anax
 			return *this;
 		}
 		
-#endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
+#endif // ANAX_USE_VARIADIC_TEMPLATES
 		
 		
 		/// Determines if a list of component types passes the filter

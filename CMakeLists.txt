@@ -1,21 +1,21 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
-# define a macro that helps defining an option
-macro(set_option var default type docstring)
-    if(NOT DEFINED ${var})
-        set(${var} ${default})
-    endif()
-    set(${var} ${${var}} CACHE ${type} ${docstring} FORCE)
-endmacro()
-
-# set a default build type if none was provided
-# this has to be done before the project() instruction!
-set_option(CMAKE_BUILD_TYPE Release STRING "Choose the type of build (Debug or Release)")
+set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
 
 project (ANAX)
 
 set(ANAX_LIBRARY_NAME "anax")
 set(ANAX_LIBRARY_NAME_STATIC "anax_static")
+
+# Options for library
+set(ANAX_BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
+
+# Config for library
+set(ANAX_USE_32_BIT_IDS_FOR_ENTITY false CACHE BOOL "Enables 32 bit IDs for the entity")
+set(ANAX_COMPONENT_USE_VIRTUAL_DTORS false CACHE BOOL "Enables virtual dtors in components")
+set(ANAX_USE_VARIADIC_TEMPLATES true CACHE BOOL "Enables use of variadic templates where appropriate in the library")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp.inl ${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp)
 
 # Add include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

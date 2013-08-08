@@ -45,13 +45,13 @@ namespace anax
 	class BaseComponent
 	{
 	public:
-#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	ifdef ANAX_COMPONENT_USE_VIRTUAL_DTORS
 		virtual
-#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	endif // ANAX_COMPONENT_USE_VIRTUAL_DTORS
 		~BaseComponent()
-#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-		  = 0
-#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	ifdef ANAX_COMPONENT_USE_VIRTUAL_DTORS
+		= 0
+#	endif
 		;
 	};
 	
@@ -73,9 +73,9 @@ namespace anax
 	{
 	public:
 		
-#	ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	ifdef ANAX_COMPONENT_USE_VIRTUAL_DTORS
 		virtual ~Component() = 0;
-#	endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#	endif // ANAX_COMPONENT_USE_VIRTUAL_DTORS
 		
 		static detail::TypeId GetTypeId()
 		{
@@ -83,12 +83,12 @@ namespace anax
 		}
 	};
 	
-#ifdef ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#ifdef ANAX_COMPONENT_USE_VIRTUAL_DTORS
 	template <typename T>
 	Component<T>::~Component()
 	{
 	}
-#endif // ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
+#endif // ANAX_COMPONENT_USE_VIRTUAL_DTORS
 	
 	typedef std::vector<std::reference_wrapper<BaseComponent>> ComponentArray;
 }

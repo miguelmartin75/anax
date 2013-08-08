@@ -29,48 +29,16 @@
 #ifndef __ANAX_CONFIG_HPP__
 #define __ANAX_CONFIG_HPP__
 
-/// Uncomment this for 32 bit IDs for entities
-// #define ANAX_USE_32_BIT_IDS
+#cmakedefine ANAX_USE_32_BIT_IDS_FOR_ENTITY @ANAX_USE_32_BIT_IDS_FOR_ENTITY@
+#cmakedefine ANAX_COMPONENT_USE_VIRTUAL_DTORS @ANAX_COMPONENT_USE_VIRTUAL_DTORS@
+#cmakedefine ANAX_USE_VARIADIC_TEMPLATES @ANAX_USE_VARIADIC_TEMPLATES@
 
-/// Uncomment this to use virtual destructors for Components
-// #define ANAX_COMPONENT_VIRTUAL_DESTRUCTORS
-
-/// Uncomment this to use boost::shared_ptr over std::shared_ptr
-// #define ANAX_USE_BOOST_SHARED_PTR
-
-/// Uncomment this to not use variadic templates
-// #define ANAX_DONT_USE_VARIADIC_TEMPLATES
-
-#ifdef ANAX_USE_32_BIT_IDS
+#ifdef ANAX_USE_32_BIT_IDS_FOR_ENTITY
 #	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
 #	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 12
 #else
 #	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 48
 #	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 16
 #endif
-
-#ifdef ANAX_USE_BOOST_SHARED_PTR
-
-#	include <boost/shared_ptr.hpp>
-
-namespace anax
-{
-	using boost::shared_ptr;
-	using boost::make_shared;
-	using boost::static_pointer_cast;
-}
-
-#else
-
-#	include <memory>
-
-namespace anax
-{
-	using std::shared_ptr;
-	using std::make_shared;
-	using std::static_pointer_cast;
-}
-
-#endif // ANAX_USE_BOOST_SHARED_PTR
 
 #endif // __ANAX_CONFIG_HPP__

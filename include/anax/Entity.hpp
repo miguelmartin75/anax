@@ -170,7 +170,7 @@ namespace anax
 		template <typename T>
 		T& addComponent(T* component);
 		
-#	ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES 
+#ifdef ANAX_USE_VARIADIC_TEMPLATES
 		
 		/// Adds a component to the Entity
 		/// \tparam The type of component you wish to add
@@ -178,7 +178,7 @@ namespace anax
 		template <typename T, typename... Args>
 		T& addComponent(Args&&... args);
 		
-#	endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
+#	endif // ANAX_USE_VARIADIC_TEMPLATES
 		
 		/// Removes a component
 		/// \tparam The type of component you wish to remove
@@ -244,7 +244,7 @@ namespace anax
 		return *component;
 	}
 	
-#ifndef ANAX_DONT_USE_VARIADIC_TEMPLATES
+#ifdef ANAX_USE_VARIADIC_TEMPLATES
 
 	template <typename T, typename... Args>
 	T& Entity::addComponent(Args&&... args)
@@ -252,7 +252,7 @@ namespace anax
 		return addComponent<T>(new T{args...});
 	}
 	
-#endif // ANAX_DONT_USE_VARIADIC_TEMPLATES
+#endif // ANAX_USE_VARIADIC_TEMPLATES
 
 	template <typename T>
 	void Entity::removeComponent()
