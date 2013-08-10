@@ -71,11 +71,11 @@ namespace anax
 		{
 			typedef
 
-#	ifdef ANAX_USE_32_BIT_IDS
+#	ifdef ANAX_32_BIT_ENTITY_IDS
 			std::uint32_t
 #	else
 			std::uint64_t
-#	endif // ANAX_USE_32_BIT_IDS
+#	endif // ANAX_32_BIT_ENTITY_IDS
 			
 			int_type;
 			

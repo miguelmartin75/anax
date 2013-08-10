@@ -1,20 +1,45 @@
+# ====================================================================== #
+# CMake Build Script for anax               		          	 #
+# Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com) 	 #
+# ====================================================================== #
+
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
-set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
+# ======================== #
+# Set Project Version/Name #
+# ======================= #
 
 project (ANAX)
 
 set(ANAX_LIBRARY_NAME "anax")
-set(ANAX_LIBRARY_NAME_STATIC "anax_static")
+set(ANAX_VERSION_MAJOR 1)
+set(ANAX_VERSION_MINOR 0)
+set(ANAX_VERSION_PATCH 0)
+set(PROJECT_VERSION ${ANAX_VERSION_MAJOR}.${ANAX_VERSION_MINOR}.${ANAX_VERSION_PATCH})
+
+# ====================== #
+# Build Options 	 #
+# ====================== #
+
+set(CMAKE_DEBUG_POSTFIX  "-d")
+
+# default to a debug build if no CMAKE_BUILD_TYPE is defined
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+   message(STATUS "Setting build type to 'Debug' as none was specified.")
+   set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
+   # Set the possible values of build type for cmake-gui
+   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
+     "MinSizeRel" "RelWithDebInfo")
+endif()
 
 # Options for library
-set(ANAX_BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
-
-# Config for library
-set(ANAX_USE_32_BIT_IDS_FOR_ENTITY false CACHE BOOL "Enables 32 bit IDs for the entity")
-set(ANAX_COMPONENT_USE_VIRTUAL_DTORS false CACHE BOOL "Enables virtual dtors in components")
+set(BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
+set(BUILD_SHARED_LIBS true CACHE BOOL "A flag to build shared (dynamic) libs")
 set(ANAX_USE_VARIADIC_TEMPLATES true CACHE BOOL "Enables use of variadic templates where appropriate in the library")
+set(ANAX_32_BIT_ENTITY_IDS false CACHE BOOL "Enables 32 bit IDs for the entity")
+set(ANAX_VIRTUAL_DTORS_IN_COMPONENT false CACHE BOOL "Enables virtual dtors in components")
 
+# set up the configure file for the library
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp.inl ${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp)
 
 # Add include directories
@@ -22,11 +47,20 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/anax)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/detail)
 
+# ======================== #
+# Find dependencies        #
+# ======================== #
+
 # Find boost
 find_package(Boost REQUIRED)
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
 endif()
+
+
+# ====================== #
+# Building	 	 #
+# ====================== #
 
 # Set the source files to compile
 file(GLOB_RECURSE ANAX_LIBRARY_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
@@ -38,27 +72,44 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # to add "-stdlib=libc++" to the command line in order for it to compile
 if(CMAKE_CXX_COMPILER MATCHES ".*clang[+][+]" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 # Note: on some platforms (OS X), CMAKE_COMPILER_IS_GNUCXX is true even when CLANG is used
-    #add_definitions(-stdlib=c++)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif()
 
-add_library(${ANAX_LIBRARY_NAME} SHARED ${ANAX_LIBRARY_SOURCES})
-add_library(${ANAX_LIBRARY_NAME_STATIC} STATIC ${ANAX_LIBRARY_SOURCES})
+if(BUILD_SHARED_LIBS)
+    add_library(${ANAX_LIBRARY_NAME} SHARED ${ANAX_LIBRARY_SOURCES})
+else()
+    add_library(${ANAX_LIBRARY_NAME} STATIC ${ANAX_LIBRARY_SOURCES})
+endif()
 
 # Build tests if we need to
-if(ANAX_BUILD_TESTS)
+if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
 
-# Install the library
+
+# ====================== #
+# Installation	 	 #
+# ====================== #
+
+# Headers for the library
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
-    DESTINATION . 
+    DESTINATION .
 )
 
+# Set properties for the library
+set_target_properties(${NAME} PROPERTIES
+                           VERSION ${PROJECT_VERSION}
+                           SOVERSION ${ANAX_VERSION_MAJOR})
+    
+if(APPLE)
+    set_target_properties(${NAME} PROPERTIES OSX_ARCHITECTURES "i386;x86_64;")
+endif()
+
+# Library files
 install(
-    TARGETS ${ANAX_LIBRARY_NAME_STATIC} ${ANAX_LIBRARY_NAME}
+    TARGETS ${ANAX_LIBRARY_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
 )
