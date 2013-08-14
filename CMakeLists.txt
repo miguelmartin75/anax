@@ -21,8 +21,6 @@ set(PROJECT_VERSION ${ANAX_VERSION_MAJOR}.${ANAX_VERSION_MINOR}.${ANAX_VERSION_P
 # Build Options 	 #
 # ====================== #
 
-set(CMAKE_DEBUG_POSTFIX  "-d")
-
 # default to a debug build if no CMAKE_BUILD_TYPE is defined
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
    message(STATUS "Setting build type to 'Debug' as none was specified.")
@@ -46,6 +44,17 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp.inl ${CMAKE_C
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/anax)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/detail)
+
+# Determine if we're building a shared (dynamic) library
+# And set appropriate suffixes for the executables
+if(BUILD_SHARED_LIBS)
+	set(CMAKE_DEBUG_POSTFIX "_d")
+else()
+	add_definitions(-DSTATIC_LIB)
+	set(CMAKE_DEBUG_POSTFIX "_d_s")
+	set(CMAKE_RELEASE_POSTFIX "_s")
+endif()
+
 
 # ======================== #
 # Find dependencies        #
@@ -75,11 +84,9 @@ if(CMAKE_CXX_COMPILER MATCHES ".*clang[+][+]" OR CMAKE_CXX_COMPILER_ID STREQUAL 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif()
 
-if(BUILD_SHARED_LIBS)
-    add_library(${ANAX_LIBRARY_NAME} SHARED ${ANAX_LIBRARY_SOURCES})
-else()
-    add_library(${ANAX_LIBRARY_NAME} STATIC ${ANAX_LIBRARY_SOURCES})
-endif()
+# Add the library
+add_library(${ANAX_LIBRARY_NAME} STATIC ${ANAX_LIBRARY_SOURCES})
+
 
 # Build tests if we need to
 if(BUILD_TESTS)
