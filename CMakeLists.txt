@@ -85,7 +85,7 @@ if(CMAKE_CXX_COMPILER MATCHES ".*clang[+][+]" OR CMAKE_CXX_COMPILER_ID STREQUAL 
 endif()
 
 # Add the library
-add_library(${ANAX_LIBRARY_NAME} STATIC ${ANAX_LIBRARY_SOURCES})
+add_library(${ANAX_LIBRARY_NAME} ${ANAX_LIBRARY_SOURCES})
 
 
 # Build tests if we need to
