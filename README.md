@@ -37,7 +37,7 @@ To compile, install, and use anax, the following libraries and C++ support is re
 
 ## Installation
 
-To install and build the library, you can use [CMake] or your own method of installation. However, it is reccomended that you do use [CMake].
+To install and build the library, you can use [CMake] or your own method of installation. However, it is recommended that you do use [CMake].
 
 To build using CMake, use the following commands:
 
