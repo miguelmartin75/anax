@@ -49,11 +49,12 @@ To build using CMake, use the following commands:
 Where the directory build can be anything you wish, it just contains all temporary files CMake creates. 
 
 > #### **NOTES:**
-> 1. This will be different to Windows, as instead of using sudo
-> you just have to run the command line as an administrator.
+> 1. This will be different to Windows, as instead of using sudo you just have to run the command line as an administrator.
 > 2. For Windows, you may also have to use the Visual Studio command line in order for it to build.
-> 3. This is just a simple way to install/build the library, you can use the GUI of [CMake], pass arguments to `cmake` or use the command `ccmake` if you wish.
-> 4. A more detailed tutorial on how to install will be avaliable on the [wiki](wiki-getting-started).
+This is just a simple way to install/build the library, you can use the GUI of CMake, pass arguments to cmake or use the CMake command line tool (`ccmake`) if you wish.
+> 3. If you generate project files then you will obviously not be able to `make`
+
+A more detailed tutorial on how to install will be avaliable on the [wiki](wiki-getting-started).
 
 # Quick Tutorial
 
