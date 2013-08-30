@@ -1,7 +1,13 @@
 #include <Systems/CollisionSystem.hpp>
 
+#include <algorithm>
+
 #include <Components/TransformComponent.hpp>
 #include <Components/CollisionComponent.hpp>
+
+CollisionSystem::Listener::~Listener()
+{
+}
 
 static sf::FloatRect getBBoxRectFor(const sf::Transformable& transformable, const sf::FloatRect& bbox)
 {
@@ -45,8 +51,21 @@ void CollisionSystem::update(float deltaTime)
 			if(rect1.intersects(rect2))
 			{
 				// Collision occured
-				
+				for(auto& listener : _listeners)
+				{
+					listener->onCollisionOccured(e1, e2);
+				}
 			}
 		}
 	}
+}
+
+void CollisionSystem::addListener(Listener &listener)
+{
+	_listeners.push_back(&listener);
+}
+
+void CollisionSystem::removeListener(Listener &listener)
+{
+	_listeners.erase(std::remove(_listeners.begin(), _listeners.end(), &listener), _listeners.end());
 }
