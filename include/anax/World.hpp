@@ -63,7 +63,6 @@ namespace anax
 		World& operator=(World&&) = delete;
 		
 		
-		
 		/// Adds a system to the World
 		/// \tparam TSystem The type of system you wish to add
 		/// \param system The system you wish to add
@@ -74,6 +73,9 @@ namespace anax
 		/// \tparam TSystem The type of system you wish to remove
 		template <typename TSystem>
 		void removeSystem() { static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); removeSystem(TSystem::GetTypeId()); }
+		
+		/// Removes all the systems from the world
+		void removeAllSystems();
 		
 		/// Creates an Entity
 		/// \return A new entity for which you can use.
@@ -163,10 +165,12 @@ namespace anax
 			/// for the world. This array gets cleared every call
 			/// to refresh.
 			EntityArray killed;
+			
 			/// A temporary storage for the activated entities
 			/// for the world. This array gets cleared every call
 			/// to refresh.
 			EntityArray activated;
+			
 			/// A temporary storage for the deactivated entities
 			/// for the world. This array gets cleared every call
 			/// to refresh.

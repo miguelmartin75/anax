@@ -44,6 +44,14 @@ namespace anax
 	{
 	}
 	
+	void World::removeAllSystems()
+	{
+		for(auto& j : _systems)
+		{
+			removeSystem(j.first);
+		}
+	}
+	
 	Entity World::createEntity()
 	{
 		++_aliveEntityCount;
@@ -167,8 +175,7 @@ namespace anax
 	{
 		return _aliveEntityCount;
 	}
-	
-	
+
 	void World::checkForResize()
 	{
 		if(getAliveEntityCount() > _entityIdPool.getSize())

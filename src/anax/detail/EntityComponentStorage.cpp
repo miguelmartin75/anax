@@ -39,7 +39,7 @@ namespace anax
 		{
 		}
 		
-		void EntityComponentStorage::addComponent(Entity &entity, BaseComponent* component, TypeId componentTypeId)
+		void EntityComponentStorage::addComponent(Entity& entity, BaseComponent* component, TypeId componentTypeId)
 		{
 			assert(entity.isValid());
 			
