@@ -4,6 +4,9 @@
 
 #include "Components.hpp"
 
+const int MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST = 3;
+
+
 const lest::test specification[] =
 {
 	"Using require", []
@@ -11,7 +14,7 @@ const lest::test specification[] =
 		anax::ComponentFilter filter;
 		filter.requires<PositionComponent, VelocityComponent>();
 		
-		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[PositionComponent::GetTypeId()] = true;
@@ -25,7 +28,7 @@ const lest::test specification[] =
 		anax::ComponentFilter filter;
 		filter.requires<PositionComponent, VelocityComponent>();
 		
-		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[VelocityComponent::GetTypeId()] = true;
@@ -38,7 +41,7 @@ const lest::test specification[] =
 		anax::ComponentFilter filter;
 		filter.requiresOneOf<PositionComponent, VelocityComponent>();
 		
-		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[VelocityComponent::GetTypeId()] = true;
@@ -51,7 +54,7 @@ const lest::test specification[] =
 		anax::ComponentFilter filter;
 		filter.excludes<PositionComponent, VelocityComponent>();
 		
-		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES);
+		anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 		
 		typeList[PlayerComponent::GetTypeId()] = true;
 		typeList[VelocityComponent::GetTypeId()] = true;

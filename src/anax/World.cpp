@@ -192,14 +192,19 @@ namespace anax
 	
 	void World::addSystem(BaseSystem& system, detail::TypeId systemTypeId)
 	{
-		assert(_systems.find(systemTypeId) == _systems.end() && "System is already contained within the world");
+		assert(system._world && "System is already contained within a World");
 		
 		_systems[systemTypeId] = &system;
+		
+		system._world = this;
+		system.initialize();
 	}
 	
 	void World::removeSystem(detail::TypeId systemTypeId)
 	{
 		assert(_systems.find(systemTypeId) != _systems.end() && "System does not exist in world");
+		
+		_systems[systemTypeId]._world = nullptr;
 		_systems.erase(systemTypeId);
 	}
 }

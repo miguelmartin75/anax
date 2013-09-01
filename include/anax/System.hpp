@@ -116,9 +116,7 @@ namespace anax
 		
 		/// The World attached to the system
 		World* _world;
-		
-		
-		
+				
 		friend class World;
 	};
 	

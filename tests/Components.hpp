@@ -4,8 +4,6 @@
 #include <string>
 #include <anax/Component.hpp>
 
-const int MAXIMUM_AMOUNT_OF_COMPONENT_TYPES = 3;
-
 class PositionComponent
 	: public anax::Component<PositionComponent>
 {
