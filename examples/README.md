@@ -7,7 +7,7 @@ Here are the examples that are contained with the library, at the current time:
 - Pong
 - Asteroids
 
-## Dependices
+## Dependencies
 
 In order to compile the examples, you will need to following library(ies):
 
