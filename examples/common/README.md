@@ -1,6 +1,6 @@
 This directory is a common directory that is shared between all examples.
 
-# Desgin
+# Design
 
 This describes the common components and systems that are within this directory.
 
@@ -12,7 +12,7 @@ This describes the common components and systems that are within this directory.
 	- A component which describes the velocity of an entity
 - `SpriteComponent`
 	- A component which describes a sprite for an entity
-- `ColliderComponnet`
+- `ColliderComponent`
 	- A component which describes collision information about the entity
 	
 ## Systems
