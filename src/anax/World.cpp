@@ -201,7 +201,7 @@ namespace anax
 	{
 		assert(_systems.find(systemTypeId) != _systems.end() && "System does not exist in world");
 		
-		_systems[systemTypeId]._world = nullptr;
+		_systems[systemTypeId]->_world = nullptr;
 		_systems.erase(systemTypeId);
 	}
 }
