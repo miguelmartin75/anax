@@ -23,58 +23,46 @@
 /// THE SOFTWARE.
 ///
 
-#include <anax/System.hpp>
+#ifndef __GAME_HPP__
+#define __GAME_HPP__
 
-#include <algorithm>
+#include <map>
 
-namespace anax
+#include <SFML/Graphics.hpp>
+#include <anax/anax.hpp>
+
+#include <Systems/SpriteRenderingSystem.hpp>
+
+#include "BaseGame.hpp"
+
+class Game
+	: public BaseGame
 {
-	BaseSystem::BaseSystem()
-		: _world(nullptr)
-	{
-	}
+public:
 	
-	BaseSystem::BaseSystem(const ComponentFilter& componentFilter)
-		: _componentFilter(componentFilter), _world(nullptr)
-	{
-	}
+	Game(sf::RenderTarget&);
 	
-	BaseSystem::~BaseSystem()
-	{
-	}
+	void init();
 	
-	const ComponentFilter& BaseSystem::getComponentFilter() const
-	{
-		return _componentFilter;
-	}
+	void update(float deltaTime);
 	
-	World& BaseSystem::getWorld() const
-	{
-		return *_world;
-	}
+	void render();
 	
-	std::vector<Entity> BaseSystem::getEntities() const
-	{
-		return _entities;
-	}
+	void handleEvents(sf::Event event);
 	
+	void loadResources();
 	
-	void BaseSystem::add(anax::Entity &entity)
-	{
-		_entities.push_back(entity);
-		onEntityAdded(entity);
-	}
+private:
 	
-	void BaseSystem::remove(anax::Entity &entity)
-	{
-		_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
-		
-		onEntityRemoved(entity);
-	}
+	std::map<std::string, sf::Texture> _textureCache;
 	
-	void BaseSystem::setWorld(anax::World &world)
-	{
-		_world = &world;
-		initialize();
-	}
-}
+	anax::World _world;
+	
+	SpriteRenderingSystem _spriteRenderingSystem;
+	
+	sf::RenderTarget* _renderTarget;
+};
+
+
+
+#endif // __GAME_HPP__

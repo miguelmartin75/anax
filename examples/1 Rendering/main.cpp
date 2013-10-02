@@ -23,58 +23,21 @@
 /// THE SOFTWARE.
 ///
 
-#include <anax/System.hpp>
+#include <SFML/Graphics.hpp>
 
-#include <algorithm>
+#include "RunGame.hpp"
+#include "Game.hpp"
 
-namespace anax
+const unsigned int WINDOW_WIDTH = 640;
+const unsigned int WINDOW_HEIGHT = 480;
+const char* const TITLE = "Example 1 - Rendering";
+
+int main(int argc, char* argv[])
 {
-	BaseSystem::BaseSystem()
-		: _world(nullptr)
-	{
-	}
-	
-	BaseSystem::BaseSystem(const ComponentFilter& componentFilter)
-		: _componentFilter(componentFilter), _world(nullptr)
-	{
-	}
-	
-	BaseSystem::~BaseSystem()
-	{
-	}
-	
-	const ComponentFilter& BaseSystem::getComponentFilter() const
-	{
-		return _componentFilter;
-	}
-	
-	World& BaseSystem::getWorld() const
-	{
-		return *_world;
-	}
-	
-	std::vector<Entity> BaseSystem::getEntities() const
-	{
-		return _entities;
-	}
-	
-	
-	void BaseSystem::add(anax::Entity &entity)
-	{
-		_entities.push_back(entity);
-		onEntityAdded(entity);
-	}
-	
-	void BaseSystem::remove(anax::Entity &entity)
-	{
-		_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), TITLE);
 		
-		onEntityRemoved(entity);
-	}
+	Game game(window);
+	game.init();
 	
-	void BaseSystem::setWorld(anax::World &world)
-	{
-		_world = &world;
-		initialize();
-	}
+	return RunGame(window, game);
 }

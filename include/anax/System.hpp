@@ -49,16 +49,11 @@ namespace anax
 	public:
 		
 		/// Default constructor
-		BaseSystem()
-		{
-		}
+		BaseSystem();
 		
 		/// Sets the ComponentFilter
 		/// \param componentFilter The ComponentFilter you wish the system to have
-		BaseSystem(const ComponentFilter& componentFilter)
-			: _componentFilter(componentFilter)
-		{
-		}
+		BaseSystem(const ComponentFilter& componentFilter);
 		
 		/// Destructor
 		virtual ~BaseSystem() = 0;

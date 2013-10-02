@@ -189,7 +189,7 @@ namespace anax
 	
 	void World::addSystem(BaseSystem& system, detail::TypeId systemTypeId)
 	{
-		assert(system._world && "System is already contained within a World");
+		assert(!system._world && "System is already contained within a World");
 		
 		_systems[systemTypeId] = &system;
 		
