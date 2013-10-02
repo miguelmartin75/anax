@@ -1,6 +1,8 @@
 # Example: 1 Rendering
 
-![image](screenshot.png)
+<p align="center">
+<img src="screenshot.png" alt="Screenshot">
+</div>
 
 This example provides a basic understanding of how to render objects within your game using an entity system approach.
 
