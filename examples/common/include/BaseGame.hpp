@@ -23,49 +23,61 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __SPRITERENDERINGSYSTEM_HPP__
-#define __SPRITERENDERINGSYSTEM_HPP__
+#ifndef __BASEGAME_HPP__
+#define __BASEGAME_HPP__
 
-#include <anax/System.hpp>
+#include <cassert>
 
-#include <SFML/Graphics/RenderTarget.hpp>
-
-/// \brief A system that renders sprites
+/// \brief The base class for Game classes
 ///
-/// This system renders sprites, using SFML.
-/// It uses entities with the following components:
-///		- Transform
-///		- Sprite
+/// This base class provides basic functions that
+/// may be overriden to suit your game. Note that
+/// run-time polymorphism is not used, hence you're
+/// not technically overriding the methods; merely
+/// hiding them.
 ///
 /// \author Miguel Martin
-struct SpriteRenderingSystem : anax::System<SpriteRenderingSystem>
+class BaseGame
 {
-	/// Construct a SpriteRenderingSystem with no render target
-	SpriteRenderingSystem();
+public:
 	
-	/// Construct a SpriteRenderingSystem
-	/// \param renderTarget The render target you wish to render to
-	SpriteRenderingSystem(sf::RenderTarget& renderTarget);
+	/// Default constructor
+	BaseGame()
+		: _isRunning(true)
+	{
+	}
 	
-	/// Renders the system
-	void render();
+	/// Updates the game
+	/// \param deltaTime The change in time
+	/// \note You must define your own update method
+	void update(float deltaTime)
+	{
+		assert(0 && "Implement your own update() function!");
+	}
 	
-	/// Sets the render target
-	/// \param renderTarget
-	void setRenderTarget(sf::RenderTarget& renderTarget);
+	/// Renders the game
+	/// \note You must define your own render method
+	void render()
+	{
+		assert(0 && "Implement your own render() function!");
+	}
 	
-	/// \return The render target this system is rendering to
-	sf::RenderTarget& getRenderTarget() const;
+	/// Handles SFML events
+	/// \note You must define your own handleEvents method
+	void handleEvents(sf::Event events)
+	{
+		assert(0 && "Handle your own darn events!");
+	}
 	
-	/// Determines if this system is valid or not
-	/// \return true if this system is value, false otherwise
-	bool isValid() const;
+	/// \return true if this Game is running
+	bool isRunning() const { return _isRunning; }
+	
+	/// Exits the game
+	void exit() { _isRunning = false; }
 	
 private:
 	
-	/// The render target to render to
-	/// \note This is guarenteed to not be NULL
-	sf::RenderTarget* _renderTarget;
+	bool _isRunning;
 };
 
-#endif // __SPRITERENDERINGSYSTEM_HPP__
+#endif // __BASEGAME_HPP__
