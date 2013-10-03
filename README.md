@@ -27,26 +27,23 @@ There are multiple ways to download the library. Here are your options:
 - Download the library ([zip]/[tar-gz])
 
 ## Dependencies
-
 To compile, install, and use anax, the following libraries and C++ support is required:
 
 - [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html)
-- [`std::unique_ptr`](http://en.cppreference.com/w/cpp/memory/unique_ptr)
 - C++11 variadic templates (this is optional, but is reccomended)
-
 
 ## Installation
 
-To install and build the library, you can use [CMake] or your own method of installation. However, it is recommended that you do use [CMake].
+To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake.
 
 To build using CMake, use the following commands:
 
-	mkdir build
-	cd build
-	cmake ..
-	sudo make install
+    mkdir build
+    cd build
+    cmake ..
+    sudo make install
 
-Where the directory build can be anything you wish, it just contains all temporary files CMake creates. 
+Where the directory build can be anything you wish, it just contains all temporary files CMake creates.
 
 > #### **NOTES:**
 > 1. This will be different to Windows, as instead of using sudo you just have to run the command line as an administrator.
@@ -54,11 +51,11 @@ Where the directory build can be anything you wish, it just contains all tempora
 This is just a simple way to install/build the library, you can use the GUI of CMake, pass arguments to cmake or use the CMake command line tool (`ccmake`) if you wish.
 > 3. If you generate project files then you will obviously not be able to `make`
 
-A more detailed tutorial on how to install will be avaliable on the [wiki](wiki-getting-started).
+A more detailed tutorial on how to install will be avaliable on the [wiki](https://github.com/miguelishawt/anax/wiki/Getting-Started).
 
 # Quick Tutorial
 
-This section will explain how to use the library, but it will not go into much specific detail. If you want a more detailed guide, please refer to this [page](wiki-basic-tutorial) on the [wiki].
+This section will explain how to use the library, but it will not go into much specific detail. If you want a more detailed guide, please refer to this [page](https://github.com/miguelishawt/anax/wiki/Using-the-Library) on the [wiki].
 
 > #### **NOTE:**
 > It is assumed you know what an Entity System is.
@@ -183,7 +180,7 @@ That is, a movement system requires entities with a `PositionComponent` and `Vel
 - `onEntityAdded(Entity&)`
 - `onEntityRemoved(Entity&)`
 
-That's basically it, you can pretty go and code. If you want more detail, check the documentation or [this](wiki-basic-tutorial) getting started guide on the [wiki].
+That's basically it, you can pretty go and code. If you want more detail, check the documentation or [this](https://github.com/miguelishawt/anax/wiki/Using-the-Library) getting started guide on the [wiki].
 
 
 # Get Involved
@@ -225,8 +222,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 [wiki]: https://github.com/miguelishawt/anax/wiki
-[wiki-getting-started]: https://github.com/miguelishawt/anax/wiki/Getting-Started
-[wiki-basic-tutorial]: https://github.com/miguelishawt/anax/wiki/Using-the-Library
 [CMake]: http://www.cmake.org/
 [Entity Systems]:http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
 [Artemis]: http://gamadu.com/artemis/
