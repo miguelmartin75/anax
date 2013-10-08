@@ -23,48 +23,42 @@
 /// THE SOFTWARE.
 ///
 
-#include <Systems/SpriteRenderingSystem.hpp>
+#ifndef __ANIMATIONSYSTEM_HPP__
+#define __ANIMATIONSYSTEM_HPP__
 
-#include <cassert>
+#include <vector>
 
-#include <Components/SpriteComponent.hpp>
-#include <Components/TransformComponent.hpp>
+#include <anax/System.hpp>
 
-SpriteRenderingSystem::SpriteRenderingSystem()
-	: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>())
+/// \brief A system that animates entities
+///
+/// This system animates entities. It uses entities with the following components:
+///		- Sprite
+///		- Animation
+///
+/// \author Miguel Martin
+struct AnimationSystem : anax::System<AnimationSystem>
 {
-}
+public:
+	
+	/// Default constructor
+	AnimationSystem();
+	
+	/// Updates the collision system
+	/// \param deltaTime The change in time
+	void update(float deltaTime);
+	
+	/// Sets the frame-rate at which animation occurs
+	/// \param fps The frames per second you wish to set the frame-rate to
+	void setFps(unsigned int fps) { _fps = fps; }
+	
+	/// \return The frames per second the animation system plays animation
+	unsigned int getFps() const { return _fps; }
+	
+private:
+	
+	/// The frame rate of the animation
+	unsigned int _fps;
+};
 
-SpriteRenderingSystem::SpriteRenderingSystem(sf::RenderTarget& renderTarget)
-	: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>()), 
-	  _renderTarget(&renderTarget)
-{
-}
-
-void SpriteRenderingSystem::render()
-{
-	auto entities = getEntities();
-	for(auto& entity : entities)
-	{
-		auto& sprite = entity.getComponent<SpriteComponent>().sprite;
-		auto& transform = entity.getComponent<TransformComponent>().transform;
-		
-		getRenderTarget().draw(sprite, transform.getTransform());
-	}
-}
-
-void SpriteRenderingSystem::setRenderTarget(sf::RenderTarget& renderTarget)
-{
-	_renderTarget = &renderTarget;
-}
-
-sf::RenderTarget& SpriteRenderingSystem::getRenderTarget() const
-{
-	assert(!isValid() && "Render system is not valid");
-	return *_renderTarget;
-}
-
-bool SpriteRenderingSystem::isValid() const
-{
-	return _renderTarget == nullptr;
-}
+#endif // __ANIMATIONSYSTEM_HPP__

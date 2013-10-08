@@ -35,7 +35,7 @@ const char* const TITLE = "Example 1 - Rendering";
 int main(int argc, char* argv[])
 {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), TITLE);
-		
+	
 	Game game(window);
 	game.init();
 	

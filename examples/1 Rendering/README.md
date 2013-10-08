@@ -8,14 +8,6 @@ This example provides a basic understanding of how to render objects within your
 
 # Details
 
-## Game scene
-
-To look at the details for how the program is ran and intergrated with the anax library, please see the following files:
-
-- [`main.hpp`](main.cpp)
-- [`Game.hpp`](Game.hpp)
-- [`Game.cpp`](Game.cpp)
-
 ## Rendering
 
 To see the details for the rendering functions, please see the following files:
@@ -24,3 +16,11 @@ To see the details for the rendering functions, please see the following files:
 - [`examples/common/include/Components/TransformComponent.hpp`](../common/include/Components/TransformComponent.hpp)
 - [`examples/common/include/Systems/SpriteRenderingSystem.hpp`](../common/include/Systems/SpriteRenderingSystem.hpp)
 - [`examples/common/src/Systems/SpriteRenderingSystem.cpp`](../common/src/Systems/SpriteRenderingSystem.cpp)
+
+## Game scene
+
+To look at the details for how the program is ran and intergrated with the anax library, please see the following files:
+
+- [`main.cpp`](main.cpp)
+- [`Game.hpp`](Game.hpp)
+- [`Game.cpp`](Game.cpp)

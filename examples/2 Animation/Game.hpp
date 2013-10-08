@@ -23,48 +23,71 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __SPRITERENDERINGSYSTEM_HPP__
-#define __SPRITERENDERINGSYSTEM_HPP__
+#ifndef __GAME_HPP__
+#define __GAME_HPP__
 
-#include <anax/System.hpp>
+#include <map>
 
-#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics.hpp>
+#include <anax/anax.hpp>
 
-/// \brief A system that renders sprites
-///
-/// This system renders sprites, using SFML.
-/// It uses entities with the following components:
-///		- Transform
-///		- Sprite
-///
+#include <Systems/SpriteRenderingSystem.hpp>
+#include <Systems/AnimationSystem.hpp>
+
+#include "BaseGame.hpp"
+
+/// \brief A class that the Game
 /// \author Miguel Martin
-struct SpriteRenderingSystem : anax::System<SpriteRenderingSystem>
+class Game
+	: public BaseGame
 {
-	/// Construct a SpriteRenderingSystem with no render target
-	SpriteRenderingSystem();
+public:
 	
-	/// Construct a SpriteRenderingSystem
-	/// \param renderTarget The render target you wish to render to
-	SpriteRenderingSystem(sf::RenderTarget& renderTarget);
+	/// Constructs the Game with a sf::RenderTarget
+	/// \param renderTarget The sf::RenderTarget you wish to set the game up with
+	Game(sf::RenderTarget&);
 	
-	/// Renders the system
+	/// Initializes the game
+	void init();
+	
+	/// Updates the game
+	/// \param deltaTime The change in time
+	void update(float deltaTime);
+	
+	/// Renders the game
 	void render();
 	
-	/// Sets the render target
-	/// \param renderTarget
-	void setRenderTarget(sf::RenderTarget& renderTarget);
+	/// Handles events
+	/// \param event The event that will be handled
+	void handleEvents(sf::Event event);
 	
-	/// \return The render target this system is rendering to
-	sf::RenderTarget& getRenderTarget() const;
-	
-	/// Determines if this system is valid or not
-	/// \return true if this system is value, false otherwise
-	bool isValid() const;
+	/// Loads game resources
+	void loadResources();
 	
 private:
 	
-	/// The render target to render to
+	/// An object that describes a cache of textures
+	typedef std::map<std::string, sf::Texture> TextureCache;
+	
+	/// The render target the game will render to
 	sf::RenderTarget* _renderTarget;
+	
+	/// A texture cache
+	TextureCache _textureCache;
+	
+	/// An anax entity world
+	anax::World _world;
+	
+	/// The rendering system
+	SpriteRenderingSystem _spriteRenderingSystem;
+	
+	/// The animation system
+	AnimationSystem _animationSystem;
+	
+	/// The player of the game
+	anax::Entity _player;
 };
 
-#endif // __SPRITERENDERINGSYSTEM_HPP__
+
+
+#endif // __GAME_HPP__

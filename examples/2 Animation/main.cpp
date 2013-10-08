@@ -23,48 +23,21 @@
 /// THE SOFTWARE.
 ///
 
-#include <Systems/SpriteRenderingSystem.hpp>
+#include <SFML/Graphics.hpp>
 
-#include <cassert>
+#include "RunGame.hpp"
+#include "Game.hpp"
 
-#include <Components/SpriteComponent.hpp>
-#include <Components/TransformComponent.hpp>
+const unsigned int WINDOW_WIDTH = 640;
+const unsigned int WINDOW_HEIGHT = 480;
+const char* const TITLE = "Example 2 - Animation";
 
-SpriteRenderingSystem::SpriteRenderingSystem()
-	: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>())
+int main(int argc, char* argv[])
 {
-}
-
-SpriteRenderingSystem::SpriteRenderingSystem(sf::RenderTarget& renderTarget)
-	: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>()), 
-	  _renderTarget(&renderTarget)
-{
-}
-
-void SpriteRenderingSystem::render()
-{
-	auto entities = getEntities();
-	for(auto& entity : entities)
-	{
-		auto& sprite = entity.getComponent<SpriteComponent>().sprite;
-		auto& transform = entity.getComponent<TransformComponent>().transform;
-		
-		getRenderTarget().draw(sprite, transform.getTransform());
-	}
-}
-
-void SpriteRenderingSystem::setRenderTarget(sf::RenderTarget& renderTarget)
-{
-	_renderTarget = &renderTarget;
-}
-
-sf::RenderTarget& SpriteRenderingSystem::getRenderTarget() const
-{
-	assert(!isValid() && "Render system is not valid");
-	return *_renderTarget;
-}
-
-bool SpriteRenderingSystem::isValid() const
-{
-	return _renderTarget == nullptr;
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), TITLE);
+	
+	Game game(window);
+	game.init();
+	
+	return RunGame(window, game);
 }

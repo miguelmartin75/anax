@@ -72,8 +72,8 @@ public:
 	/// \return true if this Game is running
 	bool isRunning() const { return _isRunning; }
 	
-	/// Exits the game
-	void exit() { _isRunning = false; }
+	/// Quits the game
+	void quit() { _isRunning = false; }
 	
 private:
 	

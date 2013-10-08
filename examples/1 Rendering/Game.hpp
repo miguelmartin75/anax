@@ -40,27 +40,40 @@ class Game
 {
 public:
 	
+	/// Constructs the Game with a sf::RenderTarget
+	/// \param renderTarget The sf::RenderTarget you wish to set the game up with
 	Game(sf::RenderTarget&);
 	
+	/// Initializes the game
 	void init();
 	
+	/// Updates the game
+	/// \param deltaTime The change in time
 	void update(float deltaTime);
 	
+	/// Renders the game
 	void render();
 	
+	/// Handles events
+	/// \param event The event that will be handled
 	void handleEvents(sf::Event event);
 	
+	/// Loads game resources
 	void loadResources();
 	
 private:
 	
+	/// The target the game will render to
+	sf::RenderTarget* _renderTarget;
+	
+	/// A texture cache
 	std::map<std::string, sf::Texture> _textureCache;
 	
+	/// An anax entity world
 	anax::World _world;
 	
+	/// The rendering system
 	SpriteRenderingSystem _spriteRenderingSystem;
-	
-	sf::RenderTarget* _renderTarget;
 };
 
 
