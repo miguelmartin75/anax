@@ -40,5 +40,5 @@ To look at the details for how the program is ran and intergrated with the anax 
 
 To see the animation data and frames, please see the following files:
 
-- [`examples/resources/meta/playerSpriteSheetFrames.txt`](../../resources/meta/playerSpriteSheet.txt)
-- [`examples/resources/textures/playerSpriteSheet.png`](../../resources/meta/playerSpriteSheet.png)
+- [`examples/resources/meta/playerSpriteSheetFrames.txt`](../resources/meta/playerSpriteSheetFrames.txt)
+- [`examples/resources/textures/playerSpriteSheet.png`](../resources/textures/playerSpriteSheet.png)
