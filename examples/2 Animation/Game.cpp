@@ -36,7 +36,7 @@
 
 const std::string PLAYER_TEXTURE_ID{"player"};
 const sf::Color CLEAR_COLOR{60, 60, 60};
-const unsigned int ANIMATION_FPS = 1;
+const unsigned int ANIMATION_FPS = 5;
 
 std::vector<std::string> animationStateNames;
 
@@ -116,7 +116,13 @@ void Game::handleEvents(sf::Event event)
 					{
 						// pause/play animation
 						bool isPlaying = _player.getComponent<AnimationComponent>().isPlaying = !_player.getComponent<AnimationComponent>().isPlaying;
-						std::cout << (isPlaying ? "Playing" : "Stopped") << " animation\n";					
+						std::cout << (isPlaying ? "Playing" : "Paused") << " animation\n";					
+					}
+					break;
+				case sf::Keyboard::Key::S:
+					{
+						std::cout << "Stopped animation\n";
+						_player.getComponent<AnimationComponent>().stop();
 					}
 					break;
 				case sf::Keyboard::Key::R:

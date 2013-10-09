@@ -33,7 +33,7 @@ MovementSystem::MovementSystem()
 {
 }
 
-void MovementSystem::update(float deltaTime)
+void MovementSystem::update(double deltaTime)
 {
 	auto entities = getEntities();
 	for(auto& entity : entities)
@@ -41,6 +41,6 @@ void MovementSystem::update(float deltaTime)
 		auto& transform = entity.getComponent<TransformComponent>().transform;
 		auto& velocity = entity.getComponent<VelocityComponent>().velocity;
 		
-		transform.move(velocity * deltaTime);
+		transform.move(velocity * (float)deltaTime);
 	}
 }

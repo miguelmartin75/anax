@@ -42,7 +42,7 @@ struct MovementSystem : anax::System<MovementSystem>
 	
 	/// Updates the MovementSystem
 	/// \param deltaTime The change in time
-	void update(float deltaTime);
+	void update(double deltaTime);
 };
 
 #endif // __MOVEMENTSYSTEM_HPP__

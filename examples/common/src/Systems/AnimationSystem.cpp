@@ -36,7 +36,7 @@ AnimationSystem::AnimationSystem()
 {
 }
 
-void AnimationSystem::update(float deltaTime)
+void AnimationSystem::update(double deltaTime)
 {
 	auto entities = getEntities();
 	for(auto& e : entities)
@@ -52,6 +52,10 @@ void AnimationSystem::update(float deltaTime)
 		
 		if(animation.isPlaying && animationState)
 		{
+			animation._frameAccumulator += deltaTime * (animationState->frameRate == 0 ? getFps() : animationState->frameRate);
+			animation.currentFrame.x = (int)animation._frameAccumulator;
+			
+			
 			if(animation.currentFrame.x >= animationState->frameAmount.x)
 			{
 				// go to the next row (if necessary)
@@ -73,10 +77,6 @@ void AnimationSystem::update(float deltaTime)
 				
 				animation.isPlaying = animation.repeat;
 			}
-			
-			animation._frameAccumulator += deltaTime * getFps();
-			
-			animation.currentFrame.x = (int)animation._frameAccumulator;
 		}
 		
 		if(animationState)

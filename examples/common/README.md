@@ -8,6 +8,8 @@ This describes the common components and systems that are within this directory.
 
 - `TransformComponent`
 	- A component which describes the transform (position/rotation/scale) of an entity
+- `AnimationComponent`
+	- A component which describes 2d frame-by-frame animation
 - `VelocityComponent`
 	- A component which describes the velocity of an entity
 - `SpriteComponent`
@@ -19,6 +21,8 @@ This describes the common components and systems that are within this directory.
 
 - `SpriteRenderingSystem`
 	- A system to handle sprite rendering
+- `AnimationSystem`
+	- A system which handles animation
 - `CollisionSystem`
 	- A system to handle collisions
 - `MovementSystem`

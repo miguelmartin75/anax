@@ -1,7 +1,7 @@
 # Example: 2 Animation
 
 <p align="center">
-<img src="screenshot.png" alt="Screenshot">
+<img src="animation.gif" alt="Screenshot">
 </div>
 
 This example provides a basic understanding of how frame-by-frame 2D animation can be implemented in an entity system.
@@ -11,8 +11,10 @@ This example provides a basic understanding of how frame-by-frame 2D animation c
 
 - Space
 	- Play/pause animation
+- S
+	- Stop animation
 - R
-	- Toggle repeat mode
+	- Toggle repeat mode (by default this is off)
 - 0-9
 	- Set the animation
 
@@ -33,3 +35,10 @@ To look at the details for how the program is ran and intergrated with the anax 
 - [`main.cpp`](main.cpp)
 - [`Game.hpp`](Game.hpp)
 - [`Game.cpp`](Game.cpp)
+
+## Animation Data
+
+To see the animation data and frames, please see the following files:
+
+- [`examples/resources/meta/playerSpriteSheetFrames.txt`](../../resources/meta/playerSpriteSheet.txt)
+- [`examples/resources/textures/playerSpriteSheet.png`](../../resources/meta/playerSpriteSheet.png)

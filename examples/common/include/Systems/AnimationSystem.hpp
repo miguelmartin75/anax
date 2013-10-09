@@ -46,7 +46,7 @@ public:
 	
 	/// Updates the collision system
 	/// \param deltaTime The change in time
-	void update(float deltaTime);
+	void update(double deltaTime);
 	
 	/// Sets the frame-rate at which animation occurs
 	/// \param fps The frames per second you wish to set the frame-rate to

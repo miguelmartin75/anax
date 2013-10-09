@@ -52,7 +52,7 @@ CollisionSystem::CollisionSystem()
 {
 }
 
-void CollisionSystem::update(float deltaTime)
+void CollisionSystem::update(double deltaTime)
 {
 	auto colliders = getEntities();
 	

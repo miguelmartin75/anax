@@ -53,6 +53,10 @@ struct AnimationComponent : anax::Component<AnimationComponent>
 		
 		/// The amount of frames in each direction
 		sf::Vector2u frameAmount;
+		
+		/// The frame rate you wish to play the state at
+		/// Set this to 0 if you wish to use the animation frame rate
+		unsigned int frameRate;
 	};
 	
 	AnimationComponent()
@@ -116,7 +120,7 @@ struct AnimationComponent : anax::Component<AnimationComponent>
 private:
 	
 	// used in implemenation
-	float _frameAccumulator;
+	double _frameAccumulator;
 	
 	friend class AnimationSystem;
 };

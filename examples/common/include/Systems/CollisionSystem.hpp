@@ -57,7 +57,7 @@ public:
 	
 	/// Updates the collision system
 	/// \param deltaTime The change in time
-	void update(float deltaTime);
+	void update(double deltaTime);
 	
 	/// Adds a Listener to the CollisionSystem
 	/// \param listener The Listener you wish to add

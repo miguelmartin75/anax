@@ -142,7 +142,13 @@ bool AnimationComponent::loadData(std::istream& stream)
 	
 	static const std::map<std::string, std::function<void (State& state, unsigned int value)>> state_variable_assign_map =
 	{
-		
+		{
+			"fps",
+			[](State& state, unsigned int value)
+			{
+				state.frameRate = value;
+			}
+		},
 		{
 			"startx",
 			[](State& state, unsigned int value)

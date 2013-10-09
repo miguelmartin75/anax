@@ -27,17 +27,18 @@
 #define __RUNGAME_HPP__
 
 #include <chrono>
+#include <iostream>
 
 #include <SFML/Graphics.hpp>
 
 /// A typedef that is used to represent a second
-typedef float Seconds;
+typedef double Seconds;
 
 /// \return The systems time now
 inline Seconds GetTimeNow()
 {
 	using namespace std;
-	return chrono::duration_cast<chrono::duration<Seconds, std::ratio<1> > >(chrono::high_resolution_clock::now().time_since_epoch()).count();
+	return chrono::duration_cast<chrono::duration<Seconds>>(chrono::high_resolution_clock::now().time_since_epoch()).count();
 }
 
 /// Runs the game

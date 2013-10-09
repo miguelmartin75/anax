@@ -2,11 +2,13 @@ width= 48
 height= 48
 
 idle:
+    fps= 3
     startX= 0
     startY= 0
     framesX= 3
 
 run:
+    fps= 5
     startX= 0
     startY= 48
     framesX= 3
@@ -20,6 +22,7 @@ shoot:
     startY= 146
 
 shoot_run:
+    fps= 5
     startX= 0
     startY= 98
     framesX= 3
@@ -37,6 +40,7 @@ jump:
     startY= 146
 
 climb_ledge:
+    fps= 3
     startx= 0
     starty= 194
     framesX= 2
