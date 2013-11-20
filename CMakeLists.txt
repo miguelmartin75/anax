@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
 # ======================== #
 # Set Project Version/Name #
-# ======================= #
+# ======================== #
 
 project (ANAX)
 
@@ -17,9 +17,12 @@ set(ANAX_VERSION_MINOR 0)
 set(ANAX_VERSION_PATCH 0)
 set(PROJECT_VERSION ${ANAX_VERSION_MAJOR}.${ANAX_VERSION_MINOR}.${ANAX_VERSION_PATCH})
 
-# ====================== #
-# Build Options 	 #
-# ====================== #
+# ================= #
+# Build Option      #
+# ================= #
+
+# set the module path
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
 # default to a debug build if no CMAKE_BUILD_TYPE is defined
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -73,9 +76,9 @@ if(Boost_FOUND)
 endif()
 
 
-# ====================== #
-# Building	 	 #
-# ====================== #
+# ========== #
+# Building 	 #
+# ========== #
 
 # Set the source files to compile
 file(GLOB_RECURSE ANAX_LIBRARY_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
