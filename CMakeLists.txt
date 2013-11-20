@@ -30,7 +30,15 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
      "MinSizeRel" "RelWithDebInfo")
 endif()
 
+# if the user did not specify an output directory
+# for libraries then we will use "lib" as the output
+if(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+    message(STATUS "Setting library output directory")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib")
+endif()
+
 # Options for library
+set(BUILD_EXAMPLES false CACHE BOOL "Enable to build the examples for anax")
 set(BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
 set(BUILD_SHARED_LIBS true CACHE BOOL "A flag to build shared (dynamic) libs")
 set(ANAX_USE_VARIADIC_TEMPLATES true CACHE BOOL "Enables use of variadic templates where appropriate in the library")
@@ -42,8 +50,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp.inl ${CMAKE_C
 
 # Add include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/anax)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/detail)
 
 # Determine if we're building a shared (dynamic) library
 # And set appropriate suffixes for the executables
@@ -94,6 +100,9 @@ if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 
 # ====================== #
 # Installation	 	 #
@@ -103,6 +112,7 @@ endif()
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
     DESTINATION .
+    FILES_MATCHING PATTERN "*.hpp"
 )
 
 # Set properties for the library
