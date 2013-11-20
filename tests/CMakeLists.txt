@@ -3,7 +3,7 @@ macro(create_test TARGET_NAME SOURCE)
     add_executable(${TARGET_NAME} ${SOURCE})
     target_link_libraries(
         ${TARGET_NAME}
-        ${ANAX_LIBRARY_NAME_STATIC}
+        ${ANAX_LIBRARY_NAME}
     )
     add_test(${TARGET_NAME} ${TARGET_NAME})
 endmacro()
