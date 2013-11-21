@@ -31,9 +31,8 @@
 #include <SFML/Graphics.hpp>
 #include <anax/anax.hpp>
 
+#include <BaseGame.hpp>
 #include <Systems/SpriteRenderingSystem.hpp>
-
-#include "BaseGame.hpp"
 
 class Game
 	: public BaseGame

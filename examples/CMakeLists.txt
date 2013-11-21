@@ -8,22 +8,12 @@ find_package(SFML 2 COMPONENTS system window graphics)
 # include the directories for SMFL
 include_directories(${SFML_INCLUDE_DIR})
 
+# add the common subdirectory
+add_subdirectory(common)
 
-# ====================== #
-# Build Common Library 	 #
-# ====================== #
-
-# set the name for the common library
-set(${ANAX_COMMON_LIBRARY_NAME} "${ANAX_LIBRARY_NAME}_common")
-
-# ensure we are including the correct source files for the common library to compile
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/common/include)
-
-# get the source files required to compile it 
-file(GLOB_RECURSE ANAX_COMMON_LIBRARY_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/common/src/*.cpp)
-
-# create the common library
-add_library(${ANAX_COMMON_LIBRARY_NAME} ${ANAX_COMMON_LIBRARY_SOURCES})
+# ============== #
+# Build Examples #
+# ============== #
 
 # macro used to create an example
 macro(create_example TARGET_NAME SOURCES)

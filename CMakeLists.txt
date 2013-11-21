@@ -96,7 +96,6 @@ endif()
 # Add the library
 add_library(${ANAX_LIBRARY_NAME} ${ANAX_LIBRARY_SOURCES})
 
-
 # Build tests if we need to
 if(BUILD_TESTS)
     enable_testing()
