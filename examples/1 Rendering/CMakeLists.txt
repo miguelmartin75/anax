@@ -1,3 +1,0 @@
-file(GLOB_RECURSE RENDERING_EXAMPLE_SOURCES ./*.cpp)
-
-create_example(Rendering ${RENDERING_EXAMPLE_SOURCES})
