@@ -118,12 +118,12 @@ install(
 )
 
 # Set properties for the library
-set_target_properties(${NAME} PROPERTIES
+set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES
                            VERSION ${PROJECT_VERSION}
                            SOVERSION ${ANAX_VERSION_MAJOR})
     
 if(APPLE)
-    set_target_properties(${NAME} PROPERTIES OSX_ARCHITECTURES "i386;x86_64;")
+    set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES OSX_ARCHITECTURES "i386;x86_64;")
 endif()
 
 # Library files
