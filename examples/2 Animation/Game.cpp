@@ -71,6 +71,9 @@ void Game::init()
 	}
 	
 	auto& playerAnimaton = _player.getComponent<AnimationComponent>();
+    playerAnimaton.repeat = true;
+    playerAnimaton.isPlaying = true;
+    
 	auto& playerTransform = _player.addComponent<TransformComponent>().transform;
 	playerTransform.setPosition(_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, _renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
 	

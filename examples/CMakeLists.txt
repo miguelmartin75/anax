@@ -56,6 +56,14 @@ macro(create_example EXAMPLE_NAME EXAMPLE_SRC_DIR)
 endmacro()
 
 create_example("Rendering" "1 Rendering")
-#add_subdirectory("2 Animation")
-#add_subdirectory("3 Movement")
-#add_subdirectory("4 Collision")
+create_example("Animation" "2 Animation")
+
+
+# ============== #
+# Build Examples #
+# ============== #
+
+# Copy resources to where we built the examples, 
+# as we require the assets to run the examples
+# and doing this manually is tedious
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
