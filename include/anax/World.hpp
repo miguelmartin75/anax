@@ -43,8 +43,19 @@ namespace anax
 {
 	class World
 	{
+    private:
+        
+		/// Describes an array of Systems for storage within the world
+		/// The index is the type ID of the system,
+		/// thus systems of the same type can not be stored
+		/// in the same World object.
+		typedef std::unordered_map<detail::TypeId, BaseSystem*> SystemArray;
+		
 	public:
 		
+		/// Describes an array of Entities
+		typedef std::vector<Entity> EntityArray;
+         
 		static const std::size_t DEFAULT_ENTITY_POOL_SIZE = 1000;
 		
 		/// Default Constructor
@@ -64,12 +75,14 @@ namespace anax
 		/// \tparam TSystem The type of system you wish to add
 		/// \param system The system you wish to add
 		template <typename TSystem>
-		void addSystem(TSystem& system) { static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); addSystem(system, TSystem::GetTypeId()); }
+		void addSystem(TSystem& system)
+        { static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); addSystem(system, TSystem::GetTypeId()); }
 		
 		/// Removes a system from the World
 		/// \tparam TSystem The type of system you wish to remove
 		template <typename TSystem>
-		void removeSystem() { static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); removeSystem(TSystem::GetTypeId()); }
+		void removeSystem() 
+        { static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); removeSystem(TSystem::GetTypeId()); }
 		
 		/// Removes all the systems from the world
 		void removeAllSystems();
@@ -81,7 +94,7 @@ namespace anax
 		/// Creates a specific amount of entities
 		/// \param amount The amount of entities you wish to create
 		/// \return The entities you created
-		std::vector<Entity> createEntities(std::size_t amount);
+		EntityArray createEntities(std::size_t amount);
 		
 		/// Kills and decativates an Entity
 		/// \param entity The Entity you wish to kill
@@ -113,25 +126,19 @@ namespace anax
 		
 		/// Refreshes the World
 		void refresh();
-		
+
+        /// Instantiously clears the world, by removing
+        /// all systems and entities from the world.
+        void clear();
+
 		/// \return The amount of entities that are alive (attached to the world)
 		/// \note This count includes the deactivated entities
-		std::size_t getAliveEntityCount() const;
+		std::size_t getEntityCount() const;
 		
+        /// \return All the entities within the world
+        const EntityArray& getEntities() const;
+        
 	private:
-		
-		/// Describes an array of Systems for storage within the world
-		/// The index is the type ID of the system,
-		/// thus systems of the same type can not be stored
-		/// in the same World object.
-		typedef std::unordered_map<detail::TypeId, BaseSystem*> SystemArray;
-		
-		/// Describes an array of Entities
-		typedef std::vector<Entity> EntityArray;
-		
-		
-		/// The amount of entities that are alive within the world
-		std::size_t _aliveEntityCount;
 		
 		/// Systems attached with the world.
 		SystemArray _systems;
@@ -141,15 +148,34 @@ namespace anax
 		
 		struct EntityAttributes
 		{
-			EntityAttributes(std::size_t amountOfEntities) : componentStorage(amountOfEntities), activated(amountOfEntities) {}
+			EntityAttributes(std::size_t amountOfEntities)
+                : componentStorage(amountOfEntities), 
+                  activated(amountOfEntities)
+            {
+            }
 			
 			/// A storage of all components that an entity has
 			detail::EntityComponentStorage componentStorage;
 			
 			/// A bitset of activated entities
+            /// Used to determine whether an entity is activated or not
 			boost::dynamic_bitset<> activated;
 			
-			void resize(std::size_t amountOfEntities) { componentStorage.resize(amountOfEntities); activated.resize(amountOfEntities); }
+            /// Used on resize to allow room
+            /// for more entities that require to be allocated
+            /// \param amountOfEntities The amount of entities to resize for
+			void resize(std::size_t amountOfEntities) 
+            { 
+                componentStorage.resize(amountOfEntities); 
+                activated.resize(amountOfEntities);
+            }
+
+            /// Clears the attributes for all entities
+            void clear()
+            {
+                componentStorage.clear();
+                activated.clear();
+            }
 		}
 		
 		/// The attributes of the entities attached to this world
@@ -158,6 +184,9 @@ namespace anax
 		
 		struct EntityCache
 		{
+            /// Contains all the alive entities
+            EntityArray alive;
+            
 			/// A temporary storage for the killed entities
 			/// for the world. This array gets cleared every call
 			/// to refresh.
@@ -173,20 +202,29 @@ namespace anax
 			/// to refresh.
 			EntityArray deactivated;
 			
-			/// Clears the cache
-			void clear()
+			/// Clears the temporary cache
+			void clearTemp()
 			{
 				killed.clear();
 				activated.clear();
 				deactivated.clear();
 			}
+            
+            /// Clears everything in the cache
+            void clear()
+            {
+                alive.clear();
+                clearTemp();
+            }
 		}
 		
-		/// A cache of entities that is used in the refresh() method
+		/// A cache of entities, which stores all
+        /// types of entities (killed, alive, activated, etc.)
+        /// within the World.
 		_entityCache;
 		
 		
-		void checkForResize();
+		void checkForResize(std::size_t amountOfEntitiesToBeAllocated);
 		void resize(std::size_t amount);
 		
 		void addSystem(BaseSystem& system, detail::TypeId systemTypeId);

@@ -113,6 +113,11 @@ namespace anax
 			_componentEntries.resize(entityAmount);
 		}
 		
+        void EntityComponentStorage::clear()
+        {
+            _componentEntries.clear();
+        }
+
 		EntityComponentStorage::ImplComponentArray& EntityComponentStorage::getComponentsImpl(const Entity &e)
 		{
 			return _componentEntries[e.getId().index].components;

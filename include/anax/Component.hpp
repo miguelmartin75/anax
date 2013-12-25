@@ -50,6 +50,22 @@ namespace anax
 		= 0
 #	endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
 		;
+        
+        /*
+        BaseComponent(detail::TypeId typeId)
+            : _typeId(typeId)
+        {
+        }
+        
+        detail::TypeId getTypeId() const
+        {
+            return _typeId;
+        }
+        
+    private:
+        
+        detail::TypeId _typeId;
+         */
 	};
 	
 	
@@ -70,6 +86,12 @@ namespace anax
 	{
 	public:
 		
+        /*
+        Component()
+            : BaseComponent{GetTypeId()}
+        {
+        }
+        */
 #	ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT
 		virtual ~Component() = 0;
 #	endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT

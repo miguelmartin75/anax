@@ -26,9 +26,11 @@
 #ifndef __ANAX_CONFIG_HPP__
 #define __ANAX_CONFIG_HPP__
 
+#include <cstddef>
+
 #cmakedefine ANAX_32_BIT_ENTITY_IDS @ANAX_32_BIT_ENTITY_IDS@
+#cmakedefine ANAX_USE_VARIADIC_TEMPLATES @ANAX_USE_VARIADIC_TEMPLATES@
 #cmakedefine ANAX_VIRTUAL_DTORS_IN_COMPONENT @ANAX_VIRTUAL_DTORS_IN_COMPONENT@
-#cmakedefine ANAX_USE_VARIADIC_TEMPLATES @ANAX_VARIADIC_TEMPLATES@
 
 #ifdef ANAX_32_BIT_ENTITY_IDS
 #	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
@@ -37,5 +39,11 @@
 #	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 48
 #	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 16
 #endif
+
+namespace anax
+{
+    /// The default size of a pool within a world  
+    constexpr std::size_t DEFAULT_ENTITY_POOL_SIZE = @ANAX_DEFAULT_ENTITY_POOL_SIZE@;  
+}
 
 #endif // __ANAX_CONFIG_HPP__

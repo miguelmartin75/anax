@@ -74,6 +74,13 @@ namespace anax
 	{
 		getWorld().killEntity(*this);
 	}
+    
+    /*
+    void addComponent(BaseComponent* component)
+    {
+        addComponent(component, component->getTypeId());
+    }
+    */
 	
 	void Entity::removeAllComponents()
 	{

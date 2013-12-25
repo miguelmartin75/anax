@@ -156,6 +156,14 @@ namespace anax
 		/// \see World::killEntity for an alternate way to kill an Entity
 		void kill();
 		
+        /// Adds a component
+		/// \param component The component you wish to add
+		/// \note component must be dynamically allocated with new, as
+		/// it is stored as a unique_ptr. I may change this in the future
+		/// by adding an option to alter how it's stored or something
+		/// along those lines.
+        //void addComponent(BaseComponent* component);
+        
 		/// Adds a component to the Entity
 		/// \tparam The type of component you wish to add
 		/// \param component The component you wish to add

@@ -75,7 +75,9 @@ namespace anax
 			bool hasComponent(const Entity& entity, TypeId componentTypeId) const;
 			
 			void resize(std::size_t entityAmount);
-			
+		
+            void clear();
+            
 		private:
 			
 			typedef std::vector<std::unique_ptr<BaseComponent> > ImplComponentArray;

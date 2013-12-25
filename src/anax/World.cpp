@@ -24,6 +24,7 @@
 ///
 
 #include <anax/World.hpp>
+#include <anax/config.hpp>
 
 #include <cassert>
 
@@ -36,8 +37,7 @@ namespace anax
 	
 	World::World(std::size_t entityPoolSize)
 		: _entityIdPool(entityPoolSize),
-	      _entityAttributes(entityPoolSize),
-	      _aliveEntityCount(0)
+	      _entityAttributes(entityPoolSize)
 	{
 	}
 	
@@ -51,10 +51,10 @@ namespace anax
 	
 	Entity World::createEntity()
 	{
-		++_aliveEntityCount;
-		checkForResize();
+		checkForResize(1);
 		
-		return Entity(*this, _entityIdPool.create());
+        _entityCache.alive.emplace_back(*this, _entityIdPool.create());
+        return _entityCache.alive.back();
 	}
 	
 	std::vector<Entity> World::createEntities(std::size_t amount)
@@ -62,21 +62,20 @@ namespace anax
 		std::vector<Entity> temp;
 		temp.reserve(amount);
 		
-		_aliveEntityCount += amount;
-		checkForResize();
-		
+		checkForResize(amount);
+
 		for(decltype(amount) i = 0; i < amount; ++i)
 		{
-			temp.emplace_back(*this, _entityIdPool.create());
+            Entity e{*this, _entityIdPool.create()};
+            _entityCache.alive.push_back(e);
+            temp.push_back(e);
 		}
-		
+
 		return temp;
 	}
 	
 	void World::killEntity(Entity& entity)
 	{
-		--_aliveEntityCount;
-		
 		// deactivate the entity
 		deactivateEntity(entity);
 		
@@ -131,7 +130,7 @@ namespace anax
 				// if the entity passes the filter the system has
 				if(j.second->getComponentFilter().doesPassFilter(_entityAttributes.componentStorage.getComponentTypeList(i)))
 				{
-					j.second->add(i); // add it to the system
+				    j.second->add(i); // add it to the system
 				}
 			}
 		}
@@ -157,27 +156,47 @@ namespace anax
 		// go through all the killed entities from last call to refresh
 		for(auto& i : _entityCache.killed)
 		{
+            // remove the entity from the alive array
+            _entityCache.alive.erase(std::remove(_entityCache.alive.begin(), _entityCache.alive.end(), i), _entityCache.alive.end()); 
+             
 			// destroy all the components it has
 			_entityAttributes.componentStorage.removeAllComponents(i);
-			
+		     	
 			// remove it from the id pool
 			_entityIdPool.remove(i.getId());
 		}
 		
-		// clear the cache
-		_entityCache.clear();
-	}
-	
-	std::size_t World::getAliveEntityCount() const
-	{
-		return _aliveEntityCount;
+		// clear the temp cache
+		_entityCache.clearTemp();
 	}
 
-	void World::checkForResize()
+    void World::clear()
+    {
+        removeAllSystems(); // remove the systems
+        
+        // clear the attributes for all the entities
+        _entityAttributes.clear();
+
+        // clear the entity cache
+        _entityCache.clear();
+    }
+	
+	std::size_t World::getEntityCount() const
 	{
-		if(getAliveEntityCount() > _entityIdPool.getSize())
+		return _entityCache.alive.size();
+	}
+    
+    const World::EntityArray& World::getEntities() const
+    {
+        return _entityCache.alive;
+    }
+
+	void World::checkForResize(std::size_t amountOfEntitiesToBeAllocated)
+	{
+        auto newSize = getEntityCount() + amountOfEntitiesToBeAllocated;
+		if(newSize > _entityIdPool.getSize())
 		{
-			resize(getAliveEntityCount());
+			resize(newSize);
 		}
 	}
 	
@@ -202,6 +221,7 @@ namespace anax
 		assert(_systems.find(systemTypeId) != _systems.end() && "System does not exist in world");
 		
 		_systems[systemTypeId]->_world = nullptr;
+        _systems[systemTypeId]->_entities.clear();
 		_systems.erase(systemTypeId);
 	}
 }
