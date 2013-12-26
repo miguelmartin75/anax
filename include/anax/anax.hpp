@@ -35,7 +35,6 @@ namespace anax
 {
 }
 
-
 /// \mainpage
 ///
 /// \section welcome Welcome

@@ -119,7 +119,6 @@ if(BUILD_DOCS)
     set(doxy_html_index_file ${CMAKE_CURRENT_BINARY_DIR}/html/index.html )
     set(doxy_output_root     ${CMAKE_CURRENT_BINARY_DIR}                 ) # Pasted into Doxyfile.in
     set(doxy_input           ${PROJECT_SOURCE_DIR}/src                   ) # Pasted into Doxyfile.in
-    set(doxy_extra_files     ${CMAKE_CURRENT_SOURCE_DIR}/doc/mainpage.dox) # Pasted into Doxyfile.in
  
     configure_file(${doxyfile_in} ${doxyfile} @ONLY)
  
@@ -131,7 +130,6 @@ if(BUILD_DOCS)
                          # custom_command for ${doxyfile} generation
                          # but I still have to figure out how...
                          MAIN_DEPENDENCY ${doxyfile} ${doxyfile_in}
-                        # DEPENDS project_targets ${doxy_extra_files}
                          COMMENT "Generating HTML documentation")
  
     add_custom_target(doc ALL DEPENDS ${doxy_html_index_file})
