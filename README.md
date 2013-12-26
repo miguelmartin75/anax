@@ -1,4 +1,4 @@
-# anax v1.0
+# anax
 
 anax is an open source C++ entity system designed to be portable, lightweight and easy to use. It is aimed toward Game Development, however it would be possible to use it for other projects.
 
@@ -38,10 +38,13 @@ To install and build the library, you can use CMake or your own method of instal
 
 To build using CMake, use the following commands:
 
-    mkdir build
-    cd build
-    cmake ..
-    sudo make install
+
+```bash
+mkdir build
+cd build
+cmake ..
+sudo make install
+```
 
 Where the directory build can be anything you wish, it just contains all temporary files CMake creates.
 
@@ -180,7 +183,7 @@ That is, a movement system requires entities with a `PositionComponent` and `Vel
 - `onEntityAdded(Entity&)`
 - `onEntityRemoved(Entity&)`
 
-That's basically it, you can pretty go and code. If you want more detail, check the documentation or [this](https://github.com/miguelishawt/anax/wiki/Using-the-Library) getting started guide on the [wiki].
+That's basically it, you can pretty go and code. If you want more details, check the documentation or [this](https://github.com/miguelishawt/anax/wiki/Using-the-Library) getting started guide on the [wiki].
 
 
 # Get Involved
@@ -201,6 +204,7 @@ Want to get involved with the project? You are free to help out on the project, 
 If you do help out, [email] me and I'll put your name in the contributers list.
 
 # License
+
 Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
