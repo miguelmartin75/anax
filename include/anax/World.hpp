@@ -55,8 +55,6 @@ namespace anax
 		
 		/// Describes an array of Entities
 		typedef std::vector<Entity> EntityArray;
-         
-		static const std::size_t DEFAULT_ENTITY_POOL_SIZE = 1000;
 		
 		/// Default Constructor
 		World();
