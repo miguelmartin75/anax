@@ -183,7 +183,7 @@ namespace anax
         template <typename T, typename... Args>
         T& addComponent(Args&&... args);
         
-#   endif // ANAX_USE_VARIADIC_TEMPLATES
+#endif // ANAX_USE_VARIADIC_TEMPLATES
         
         /// Removes a component
         /// \tparam The type of component you wish to remove
