@@ -1,4 +1,4 @@
-# anax
+# anax [![paypal]][paypal-donate]
 
 anax is an open source C++ entity system designed to be portable, lightweight and easy to use. It is aimed toward Game Development, however it would be possible to use it for other projects.
 
@@ -225,6 +225,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+[paypal-donate]: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=miguel%2emartin7%2e5%40hotmail%2ecom&lc=AU&item_name=anax&no_note=0&currency_code=AUD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
+[paypal]: https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif
 [wiki]: https://github.com/miguelishawt/anax/wiki
 [CMake]: http://www.cmake.org/
 [Entity Systems]:http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
