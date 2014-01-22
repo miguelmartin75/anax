@@ -36,7 +36,7 @@
 struct PlayerComponent : anax::Component<PlayerComponent>
 {
 	PlayerComponent()
-        : state(State::DEFAULT_STATE)
+        : state(State::NO_STATE)
 	{
 	}
 
@@ -46,6 +46,7 @@ struct PlayerComponent : anax::Component<PlayerComponent>
     /// The current state of the player
     enum class State
     {
+        NO_STATE = -1,
         DEFAULT_STATE = 0,
         MOVE_LEFT,
         MOVE_RIGHT,

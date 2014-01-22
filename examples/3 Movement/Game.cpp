@@ -79,7 +79,7 @@ void Game::init()
 	_player.addComponent<VelocityComponent>();
 	
 	auto& playerComp = _player.addComponent<PlayerComponent>();
-	playerComp.baseSpeed = 10;
+	playerComp.baseSpeed = 100;
 
     _player.addComponent<BodyComponent>();
 	
@@ -125,7 +125,68 @@ void Game::loadResources()
 
 void Game::onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state)
 {
-    static const std::string stateNames[] = { "idle", "run", "run", "run_shoot", "run_shoot", "jump", "shoot", "jump_shoot" };
-    if(e.hasComponent<AnimationComponent>())  
-        e.getComponent<AnimationComponent>().playingState = stateNames[static_cast<unsigned int>(state)];
+    std::cout << "state changed called\n";
+    static const std::string stateNames[] = { "idle", "run", "run", "shoot_run", "shoot_run", "jump", "shoot", "shoot_jump" };
+
+    auto& spriteComp = e.getComponent<SpriteComponent>();
+    auto& animationComp = e.getComponent<AnimationComponent>();
+
+    if(e.hasComponent<AnimationComponent>())
+    {
+        auto stateName = stateNames[static_cast<unsigned>(state)];
+        auto& animState = animationComp.states[stateName];
+
+        // should probably simplify this in animationComp or something
+        // (i.e. have a function to compute this for me)
+        auto x = animState.startPosition.x * animationComp.currentFrame.x;
+        auto y = animState.startPosition.y * animationComp.currentFrame.y;
+        auto width = animationComp.frameSize.x;
+        auto height = animationComp.frameSize.y;
+
+        // set the origin of the sprite to the center of the frame
+        // Visual Explanation of the code:
+        //
+        // (x, y)
+        //    *-------*
+        //    |       |
+        //    |       |
+        //    |   O   |
+        //    |       |
+        //    |       | 
+        //    *-------*
+        //              (x + width, y + height)
+        //
+        // As you may (or may not see), the point O (the center of the frame)
+        // is located at (x + 0.5 * width, y + 0.5 * height).
+        spriteComp.sprite.setOrigin(static_cast<unsigned>(x + 0.5 * width), static_cast<unsigned>(y + 0.5 * height)); 
+
+        std::cout << "state changed to: " << stateName << '\n';
+        animationComp.play(stateName);  
+        if(state == PlayerComponent::State::JUMP || state == PlayerComponent::State::JUMP_SHOOT || state == PlayerComponent::State::JUMP_SHOOT)
+        {
+            // don't repeat animation for jumping
+            // or shooting
+            animationComp.repeat = false; 
+        }
+        else
+        {
+            animationComp.repeat = true;
+        }
+    }
+
+    // flip the sprite if necessary
+    // or do anything else specific for a state
+    switch(state)
+    {
+        case PlayerComponent::State::MOVE_LEFT:
+        case PlayerComponent::State::MOVE_LEFT_SHOOT:
+            spriteComp.sprite.setScale(1, 1);
+            break;
+        case PlayerComponent::State::MOVE_RIGHT:
+        case PlayerComponent::State::MOVE_RIGHT_SHOOT:
+            spriteComp.sprite.setScale(-1, 1);
+            break;
+        default:
+            break;
+    }
 }
