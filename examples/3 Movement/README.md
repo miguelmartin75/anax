@@ -4,7 +4,11 @@
 <img src="movement.gif" alt="Movement">
 </div>
 
-This example provides a basic understanding of how to render objects within your game using an entity system approach.
+This example provides a basic understanding of how to handle movement, along with animating your moving objects.
+
+> **NOTE:**
+> 
+> There are multiple ways to solve animating your moving object, don't think that the way this example approaches to solve this is the best way.
 
 # Controls
 
