@@ -249,21 +249,12 @@ namespace anax
     
 #ifdef ANAX_USE_VARIADIC_TEMPLATES
 
-<<<<<<< HEAD
-    template <typename T, typename... Args>
-    T& Entity::addComponent(Args&&... args)
-    {
-        return addComponent<T>(new T{args...});
-    }
-    
-=======
 	template <typename T, typename... Args>
 	T& Entity::addComponent(Args&&... args)
 	{
 		return addComponent<T>(new T{std::forward<Args>(args)...});
 	}
 	
->>>>>>> 6f961930803599b5942ee5f4bf9b6c8a5f61ea34
 #endif // ANAX_USE_VARIADIC_TEMPLATES
 
     template <typename T>
