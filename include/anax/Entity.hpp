@@ -246,7 +246,7 @@ namespace anax
 	template <typename T, typename... Args>
 	T& Entity::addComponent(Args&&... args)
 	{
-		return addComponent<T>(new T{args...});
+		return addComponent<T>(new T{std::forward<Args>(args)...});
 	}
 	
 #endif // ANAX_USE_VARIADIC_TEMPLATES
