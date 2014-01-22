@@ -162,7 +162,7 @@ void Game::onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state)
 
         std::cout << "state changed to: " << stateName << '\n';
         animationComp.play(stateName);  
-        if(state == PlayerComponent::State::JUMP || state == PlayerComponent::State::JUMP_SHOOT || state == PlayerComponent::State::JUMP_SHOOT)
+        if(state == PlayerComponent::State::JUMP || state == PlayerComponent::State::JUMP_SHOOT || state == PlayerComponent::State::SHOOT)
         {
             // don't repeat animation for jumping
             // or shooting
