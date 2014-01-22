@@ -129,10 +129,10 @@ void Game::onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state)
     static const std::string stateNames[] = { "idle", "run", "run", "shoot_run", "shoot_run", "jump", "shoot", "shoot_jump" };
 
     auto& spriteComp = e.getComponent<SpriteComponent>();
-    auto& animationComp = e.getComponent<AnimationComponent>();
 
     if(e.hasComponent<AnimationComponent>())
     {
+        auto& animationComp = e.getComponent<AnimationComponent>();
         auto stateName = stateNames[static_cast<unsigned>(state)];
         auto& animState = animationComp.states[stateName];
 
