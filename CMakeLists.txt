@@ -41,6 +41,7 @@ if(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
 endif()
 
 # Options for library
+set(INSTALL_HEADERS true CACHE BOOL "Enable to install header files")
 set(BUILD_DOCS false CACHE BOOL "Enable to build documentation for anax")
 set(BUILD_EXAMPLES false CACHE BOOL "Enable to build the examples for anax")
 set(BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
@@ -142,11 +143,13 @@ endif()
 # ====================== #
 
 # Headers for the library
-install(
+if(INSTALL_HEADERS)
+    install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
     DESTINATION .
     FILES_MATCHING PATTERN "*.hpp"
-)
+    )
+endif()
 
 # Set properties for the library
 set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES

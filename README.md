@@ -36,17 +36,21 @@ To compile, install, and use anax, the following libraries and C++ support is re
 
 To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake. If you're on Mac/Linux or another Unix variation, then you can install the library quite simply via the [scripts](https://github.com/miguelishawt/clean_install) provided in the repository.
 
-### Step 1
+### Step 1: `cd`
 
-Run the `clean.sh` script (or run `mkdir build`).
+Ensure that the current directory is the repository's directory (i.e. `cd` into the repo). 
 
-### Step 2
+### Step 2: Clean
+
+Run the `clean.sh`.
+
+### Step 3: Configure
 
 Configure the libary via CMake. Whether this be via the command line (`cmake`), the command line GUI (`ccmake`), or the actual CMake GUI.
 
-### Step 3
+### Step 4: Install
 
-Run the `install.sh` script to install the library automatically.
+Run the `install.sh` script to install the library automatically. The install script will build the library four times (two release and debug builds; both static and dynamic binaries) and install the header files once.
 
 > #### **NOTES:**
 > 1. For Windows, you may have to use the Visual Studio command line in order for it to build.
