@@ -72,7 +72,7 @@ namespace anax
 			bool isValid(Entity::Id id) const;
 			
 			/// \return The amount of entities that this pool can store
-			std::size_t getSize() const { return _entities.size(); }
+			std::size_t getSize() const { return m_entities.size(); }
 			
 			/// Resizes the pool
 			/// \param amount The amount you wish to resize
@@ -85,17 +85,17 @@ namespace anax
 		private:
 			
             /// The default pool size
-            std::size_t _defaultPoolSize;
+            std::size_t m_defaultPoolSize;
 
             /// The next ID to be used (if there is no IDs in the freelist)
-			std::size_t _nextId;
+			std::size_t m_nextId;
 			
 			/// The entities ids that are avaliable to be used
-			std::vector<Entity::Id> _freeList;
+			std::vector<Entity::Id> m_freeList;
 			
 			/// The Entities that are within the pool
             /// Stored as a counter and the index is the index part of the ID
-			std::vector<Entity::Id::int_type> _entities;
+			std::vector<Entity::Id::int_type> m_entities;
 		};
 	}
 }

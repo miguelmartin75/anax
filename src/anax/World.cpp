@@ -33,8 +33,8 @@ namespace anax
 {
     void World::SystemDeleter::operator() (BaseSystem* system) const
     {
-        system->_world = nullptr;
-        system->_entities.clear();
+        system->m_world = nullptr;
+        system->m_entities.clear();
     }
 
     World::World()
@@ -43,22 +43,22 @@ namespace anax
     }
 
     World::World(std::size_t entityPoolSize)
-        : _entityIdPool(entityPoolSize),
-        _entityAttributes(entityPoolSize)
+        : m_entityIdPool(entityPoolSize),
+        m_entityAttributes(entityPoolSize)
     {
     }
 
     void World::removeAllSystems()
     {
-        _systems.clear();
+        m_systems.clear();
     }
 
     Entity World::createEntity()
     {
         checkForResize(1);
 
-        _entityCache.alive.emplace_back(*this, _entityIdPool.create());
-        return _entityCache.alive.back();
+        m_entityCache.alive.emplace_back(*this, m_entityIdPool.create());
+        return m_entityCache.alive.back();
     }
 
     std::vector<Entity> World::createEntities(std::size_t amount)
@@ -70,8 +70,8 @@ namespace anax
 
         for(decltype(amount) i = 0; i < amount; ++i)
         {
-            Entity e{*this, _entityIdPool.create()};
-            _entityCache.alive.push_back(e);
+            Entity e{*this, m_entityIdPool.create()};
+            m_entityCache.alive.push_back(e);
             temp.push_back(e);
         }
 
@@ -84,7 +84,7 @@ namespace anax
         deactivateEntity(entity);
 
         // now kill the entity (add it to the killed cache)
-        _entityCache.killed.push_back(entity);
+        m_entityCache.killed.push_back(entity);
     }
 
     void World::killEntities(std::vector<Entity>& entities)
@@ -99,40 +99,40 @@ namespace anax
     {
         assert(isValid(entity));
 
-        _entityCache.activated.push_back(entity);
+        m_entityCache.activated.push_back(entity);
     }
 
     void World::deactivateEntity(Entity& entity)
     {
         assert(isValid(entity));
 
-        _entityCache.deactivated.push_back(entity);
+        m_entityCache.deactivated.push_back(entity);
     }
 
     bool World::isActivated(const Entity& entity) const
     {
         assert(isValid(entity));
 
-        return _entityAttributes.activated[entity.getId().index];
+        return m_entityAttributes.activated[entity.getId().index];
     }
 
     bool World::isValid(const anax::Entity &entity) const
     {
-        return _entityIdPool.isValid(entity.getId());
+        return m_entityIdPool.isValid(entity.getId());
     }
 
     void World::refresh()
     {
         // go through all the activated entities from last call to refresh
-        for(auto& i : _entityCache.activated)
+        for(auto& i : m_entityCache.activated)
         {
-            _entityAttributes.activated[i.getId().index] = true;
+            m_entityAttributes.activated[i.getId().index] = true;
 
             // loop through all the systems within the world
-            for(auto& j : _systems)
+            for(auto& j : m_systems)
             {
                 // if the entity passes the filter the system has
-                if(j.second->getComponentFilter().doesPassFilter(_entityAttributes.componentStorage.getComponentTypeList(i)))
+                if(j.second->getComponentFilter().doesPassFilter(m_entityAttributes.componentStorage.getComponentTypeList(i)))
                 {
                     j.second->add(i); // add it to the system
                 }
@@ -141,12 +141,12 @@ namespace anax
 
 
         // go through all the deactivated entities from last call to refresh
-        for(auto& i : _entityCache.deactivated)
+        for(auto& i : m_entityCache.deactivated)
         {
-            _entityAttributes.activated[i.getId().index] = false;
+            m_entityAttributes.activated[i.getId().index] = false;
 
             // loop through all the systems within the world
-            for(auto& j : _systems)
+            for(auto& j : m_systems)
             {
                 // remove the entity from the system
                 // TODO: Make this more efficent?
@@ -158,20 +158,20 @@ namespace anax
         }
 
         // go through all the killed entities from last call to refresh
-        for(auto& i : _entityCache.killed)
+        for(auto& i : m_entityCache.killed)
         {
             // remove the entity from the alive array
-            _entityCache.alive.erase(std::remove(_entityCache.alive.begin(), _entityCache.alive.end(), i), _entityCache.alive.end()); 
+            m_entityCache.alive.erase(std::remove(m_entityCache.alive.begin(), m_entityCache.alive.end(), i), m_entityCache.alive.end()); 
 
             // destroy all the components it has
-            _entityAttributes.componentStorage.removeAllComponents(i);
+            m_entityAttributes.componentStorage.removeAllComponents(i);
 
             // remove it from the id pool
-            _entityIdPool.remove(i.getId());
+            m_entityIdPool.remove(i.getId());
         }
 
         // clear the temp cache
-        _entityCache.clearTemp();
+        m_entityCache.clearTemp();
     }
 
     void World::clear()
@@ -179,29 +179,29 @@ namespace anax
         removeAllSystems(); // remove the systems
 
         // clear the attributes for all the entities
-        _entityAttributes.clear();
+        m_entityAttributes.clear();
 
         // clear the entity cache
-        _entityCache.clear();
+        m_entityCache.clear();
 
         // clear the id pool
-        _entityIdPool.clear();
+        m_entityIdPool.clear();
     }
 
     std::size_t World::getEntityCount() const
     {
-        return _entityCache.alive.size();
+        return m_entityCache.alive.size();
     }
 
     const World::EntityArray& World::getEntities() const
     {
-        return _entityCache.alive;
+        return m_entityCache.alive;
     }
 
     void World::checkForResize(std::size_t amountOfEntitiesToBeAllocated)
     {
         auto newSize = getEntityCount() + amountOfEntitiesToBeAllocated;
-        if(newSize > _entityIdPool.getSize())
+        if(newSize > m_entityIdPool.getSize())
         {
             resize(newSize);
         }
@@ -209,33 +209,33 @@ namespace anax
 
     void World::resize(std::size_t amount)
     {
-        _entityIdPool.resize(amount);
-        _entityAttributes.resize(amount);
+        m_entityIdPool.resize(amount);
+        m_entityAttributes.resize(amount);
     }
 
     void World::addSystem(BaseSystem& system, detail::TypeId systemTypeId)
     {
-        assert(!system._world && "System is already contained within a World");
+        assert(!system.m_world && "System is already contained within a World");
 
-        _systems[systemTypeId].reset(&system);
+        m_systems[systemTypeId].reset(&system);
 
-        system._world = this;
+        system.m_world = this;
         system.initialize();
     }
 
     void World::removeSystem(detail::TypeId systemTypeId)
     {
         assert(doesSystemExist(systemTypeId) && "System does not exist in world");
-        _systems.erase(systemTypeId);
+        m_systems.erase(systemTypeId);
     }
 
     bool World::doesSystemExist(detail::TypeId systemTypeId) const
     {
-        return _systems.find(systemTypeId) != _systems.end();
+        return m_systems.find(systemTypeId) != m_systems.end();
     }
 
     Entity World::getEntity(std::size_t index)
     {
-        return Entity{*this, _entityIdPool.get(index)};
+        return Entity{*this, m_entityIdPool.get(index)};
     }
 }

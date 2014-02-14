@@ -30,9 +30,9 @@ namespace anax
     namespace detail
     {
         EntityIdPool::EntityIdPool(std::size_t poolSize)
-            : _defaultPoolSize(poolSize),
-            _entities(poolSize),
-            _nextId(0)
+            : m_defaultPoolSize(poolSize),
+            m_entities(poolSize),
+            m_nextId(0)
         {
         }
 
@@ -41,19 +41,19 @@ namespace anax
             Entity::Id id;
 
             // if we need to add more entities to the pool
-            if(!_freeList.empty())
+            if(!m_freeList.empty())
             {
-                id = _freeList.front();
-                _freeList.pop_back();
+                id = m_freeList.front();
+                m_freeList.pop_back();
             }
             else
             {
-                id.index = _nextId++;
+                id.index = m_nextId++;
                 // an ID given out cannot have a counter of 0. 
                 // 0 is an "invalid" counter, thus we must update
                 // the counter within the pool for the corresponding
                 // entity
-                _entities[id.index] = id.counter = 1; 
+                m_entities[id.index] = id.counter = 1; 
             }
 
             return id;
@@ -61,33 +61,33 @@ namespace anax
 
         void EntityIdPool::remove(Entity::Id id)
         {
-            ++_entities[id.index]; // increment the counter in the cache
-            _freeList.push_back(id); // add the ID to the freeList
+            ++m_entities[id.index]; // increment the counter in the cache
+            m_freeList.push_back(id); // add the ID to the freeList
         }
 
         Entity::Id EntityIdPool::get(std::size_t index) const
         {
-            assert(!(_entities[index] == 0) && "Entity ID does not exist");
-            return Entity::Id{index, _entities[index]};
+            assert(!(m_entities[index] == 0) && "Entity ID does not exist");
+            return Entity::Id{index, m_entities[index]};
         }
 
         bool EntityIdPool::isValid(Entity::Id id) const
         {
-            return id.counter == _entities[id.index];
+            return id.counter == m_entities[id.index];
         }
 
         void EntityIdPool::resize(std::size_t amount)
         {
-            _entities.resize(amount);
+            m_entities.resize(amount);
         }
 
         void EntityIdPool::clear()
         {
-            _entities.clear();
-            _freeList.clear();
-            _nextId = 0;
+            m_entities.clear();
+            m_freeList.clear();
+            m_nextId = 0;
 
-            _entities.resize(_defaultPoolSize);
+            m_entities.resize(m_defaultPoolSize);
         }
     }
 }

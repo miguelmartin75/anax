@@ -168,10 +168,10 @@ namespace anax
         private:
 
             /// Systems attached with the world.
-            SystemArray _systems;
+            SystemArray m_systems;
 
             /// A pool storage of the IDs for the entities within the world
-            detail::EntityIdPool _entityIdPool;
+            detail::EntityIdPool m_entityIdPool;
 
             struct EntityAttributes
             {
@@ -206,7 +206,7 @@ namespace anax
             }
 
             /// The attributes of the entities attached to this world
-            _entityAttributes;
+            m_entityAttributes;
 
 
             struct EntityCache
@@ -248,7 +248,7 @@ namespace anax
             /// A cache of entities, which stores all
             /// types of entities (killed, alive, activated, etc.)
             /// within the World.
-            _entityCache;
+            m_entityCache;
 
 
             void checkForResize(std::size_t amountOfEntitiesToBeAllocated);
@@ -287,7 +287,7 @@ namespace anax
         bool World::doesSystemExist(const TSystem& system) const
         { 
             static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
-            return system._world == this && doesSystemExist<TSystem>();
+            return system.m_world == this && doesSystemExist<TSystem>();
         }
 }
 

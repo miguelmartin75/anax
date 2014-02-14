@@ -29,103 +29,103 @@
 
 namespace anax
 {
-	namespace detail
-	{
-		EntityComponentStorage::EntityComponentStorage(std::size_t entityAmount)
-			: _componentEntries(entityAmount)
-		{
-		}
-		
-		void EntityComponentStorage::addComponent(Entity& entity, BaseComponent* component, TypeId componentTypeId)
-		{
-			assert(entity.isValid());
-			
-			auto index = entity.getId().index;
-			auto& componentDataForEntity = _componentEntries[index];
-			
-			detail::EnsureCapacity(componentDataForEntity.components, componentTypeId);
-			componentDataForEntity.components[componentTypeId].reset(component);
-			
-			detail::EnsureCapacity(componentDataForEntity.componentTypeList, componentTypeId);
-			componentDataForEntity.componentTypeList[componentTypeId] = true;
-		}
-		
-		void EntityComponentStorage::removeComponent(Entity& entity, TypeId componentTypeId)
-		{
-			assert(entity.isValid());
-			
-			auto index = entity.getId().index;
-			auto& componentDataForEntity = _componentEntries[index];
-			
-			componentDataForEntity.components[componentTypeId].reset();
-			componentDataForEntity.componentTypeList[componentTypeId] = false;
-		}
-		
-		void EntityComponentStorage::removeAllComponents(Entity &entity)
-		{
-			auto index = entity.getId().index;
-			auto& componentDataForEntity = _componentEntries[index];
-			
-			componentDataForEntity.components.clear();
-			componentDataForEntity.componentTypeList.clear();
-		}
-		
-		BaseComponent& EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
-		{
-			assert(entity.isValid() && hasComponent(entity, componentTypeId) && "Entity is not valid or does not contain component");
-			
-			return *getComponentsImpl(entity)[componentTypeId];
-		}
-		
-		ComponentTypeList EntityComponentStorage::getComponentTypeList(const Entity& entity) const
-		{
-			assert(entity.isValid());
-			
-			return _componentEntries[entity.getId().index].componentTypeList;
-		}
-		
-		ComponentArray EntityComponentStorage::getComponents(const Entity& entity)  const
-		{
-			assert(entity.isValid());
-			
-			auto& componentsToConvert = getComponentsImpl(entity);
-			
-			std::vector<std::reference_wrapper<BaseComponent>> temp;
-			temp.reserve(componentsToConvert.size());
-			
-			for(auto& i : componentsToConvert)
-				temp.push_back(*i.get());
-			
-			return temp;
-		}
-		
-		bool EntityComponentStorage::hasComponent(const Entity& entity, TypeId componentTypeId) const
-		{
-			assert(entity.isValid());
-
-			auto& components = getComponentsImpl(entity);
-			
-			return components.size() > componentTypeId && components[componentTypeId] != nullptr;
-		}
-		
-		void EntityComponentStorage::resize(std::size_t entityAmount)
-		{
-			_componentEntries.resize(entityAmount);
-		}
-		
-        void EntityComponentStorage::clear()
+    namespace detail
+    {
+        EntityComponentStorage::EntityComponentStorage(std::size_t entityAmount)
+            : m_componentEntries(entityAmount)
         {
-            _componentEntries.clear();
         }
 
-		EntityComponentStorage::ImplComponentArray& EntityComponentStorage::getComponentsImpl(const Entity &e)
-		{
-			return _componentEntries[e.getId().index].components;
-		}
-		
-		const EntityComponentStorage::ImplComponentArray& EntityComponentStorage::getComponentsImpl(const Entity &e) const
-		{
-			return _componentEntries[e.getId().index].components;
-		}
-	}
+        void EntityComponentStorage::addComponent(Entity& entity, BaseComponent* component, TypeId componentTypeId)
+        {
+            assert(entity.isValid());
+
+            auto index = entity.getId().index;
+            auto& componentDataForEntity = m_componentEntries[index];
+
+            detail::EnsureCapacity(componentDataForEntity.components, componentTypeId);
+            componentDataForEntity.components[componentTypeId].reset(component);
+
+            detail::EnsureCapacity(componentDataForEntity.componentTypeList, componentTypeId);
+            componentDataForEntity.componentTypeList[componentTypeId] = true;
+        }
+
+        void EntityComponentStorage::removeComponent(Entity& entity, TypeId componentTypeId)
+        {
+            assert(entity.isValid());
+
+            auto index = entity.getId().index;
+            auto& componentDataForEntity = m_componentEntries[index];
+
+            componentDataForEntity.components[componentTypeId].reset();
+            componentDataForEntity.componentTypeList[componentTypeId] = false;
+        }
+
+        void EntityComponentStorage::removeAllComponents(Entity &entity)
+        {
+            auto index = entity.getId().index;
+            auto& componentDataForEntity = m_componentEntries[index];
+
+            componentDataForEntity.components.clear();
+            componentDataForEntity.componentTypeList.clear();
+        }
+
+        BaseComponent& EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
+        {
+            assert(entity.isValid() && hasComponent(entity, componentTypeId) && "Entity is not valid or does not contain component");
+
+            return *getComponentsImpl(entity)[componentTypeId];
+        }
+
+        ComponentTypeList EntityComponentStorage::getComponentTypeList(const Entity& entity) const
+        {
+            assert(entity.isValid());
+
+            return m_componentEntries[entity.getId().index].componentTypeList;
+        }
+
+        ComponentArray EntityComponentStorage::getComponents(const Entity& entity)  const
+        {
+            assert(entity.isValid());
+
+            auto& componentsToConvert = getComponentsImpl(entity);
+
+            std::vector<std::reference_wrapper<BaseComponent>> temp;
+            temp.reserve(componentsToConvert.size());
+
+            for(auto& i : componentsToConvert)
+                temp.push_back(*i.get());
+
+            return temp;
+        }
+
+        bool EntityComponentStorage::hasComponent(const Entity& entity, TypeId componentTypeId) const
+        {
+            assert(entity.isValid());
+
+            auto& components = getComponentsImpl(entity);
+
+            return components.size() > componentTypeId && components[componentTypeId] != nullptr;
+        }
+
+        void EntityComponentStorage::resize(std::size_t entityAmount)
+        {
+            m_componentEntries.resize(entityAmount);
+        }
+
+        void EntityComponentStorage::clear()
+        {
+            m_componentEntries.clear();
+        }
+
+        EntityComponentStorage::ImplComponentArray& EntityComponentStorage::getComponentsImpl(const Entity &e)
+        {
+            return m_componentEntries[e.getId().index].components;
+        }
+
+        const EntityComponentStorage::ImplComponentArray& EntityComponentStorage::getComponentsImpl(const Entity &e) const
+        {
+            return m_componentEntries[e.getId().index].components;
+        }
+    }
 }

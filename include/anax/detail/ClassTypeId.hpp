@@ -42,22 +42,22 @@ namespace anax
 			template <typename T>
 			static TypeId GetTypeId()
 			{
-				static const TypeId id = _GetNextTypeId();
+				static const TypeId id = priv_GetNextTypeId();
 				return id;
 			}
 			
 		private:
 			
-			static TypeId _GetNextTypeId()
+			static TypeId priv_GetNextTypeId()
 			{
-				return _nextTypeId++;
+				return m_nextTypeId++;
 			}
 			
-			static TypeId _nextTypeId;
+			static TypeId m_nextTypeId;
 		};
 		
 		template <typename TBase>
-		TypeId ClassTypeId<TBase>::_nextTypeId = 0;
+		TypeId ClassTypeId<TBase>::m_nextTypeId = 0;
 	}
 }
 

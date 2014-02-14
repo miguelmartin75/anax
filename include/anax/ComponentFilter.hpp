@@ -64,8 +64,8 @@ namespace anax
 		{
 			static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
 			
-			detail::EnsureCapacity(_requiredComponentsList, C1::GetTypeId());
-			_requiredComponentsList[C1::GetTypeId()] = true;
+			detail::EnsureCapacity(m_requiredComponentsList, C1::GetTypeId());
+			m_requiredComponentsList[C1::GetTypeId()] = true;
 			
 			return *this;
 		}
@@ -75,8 +75,8 @@ namespace anax
 		{
 			static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
 			
-			detail::EnsureCapacity(_requiresOneOfComponentsList, C1::GetTypeId());
-			_requiresOneOfComponentsList[C1::GetTypeId()] = true;
+			detail::EnsureCapacity(m_requiresOneOfComponentsList, C1::GetTypeId());
+			m_requiresOneOfComponentsList[C1::GetTypeId()] = true;
 			
 			return *this;
 		}
@@ -86,8 +86,8 @@ namespace anax
 		{
 			static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
 
-			detail::EnsureCapacity(_excludeComponentsList, C1::GetTypeId());
-			_excludeComponentsList[C1::GetTypeId()] = true;
+			detail::EnsureCapacity(m_excludeComponentsList, C1::GetTypeId());
+			m_excludeComponentsList[C1::GetTypeId()] = true;
 			
 			return *this;
 		}
@@ -136,14 +136,14 @@ namespace anax
 	private:
 		
 		/// A list of component types that are required
-		ComponentTypeList _requiredComponentsList;
+		ComponentTypeList m_requiredComponentsList;
 		
 		/// A list of component types that are required
 		/// at least once
-		ComponentTypeList _requiresOneOfComponentsList;
+		ComponentTypeList m_requiresOneOfComponentsList;
 		
 		/// A list of component types that must be excluded
-		ComponentTypeList _excludeComponentsList;
+		ComponentTypeList m_excludeComponentsList;
 	};
 }
 

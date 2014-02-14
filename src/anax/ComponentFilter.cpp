@@ -29,16 +29,16 @@ namespace anax
 {
 	void ComponentFilter::clear()
 	{
-		_requiredComponentsList.clear();
-		_requiresOneOfComponentsList.clear();
-		_excludeComponentsList.clear();
+		m_requiredComponentsList.clear();
+		m_requiresOneOfComponentsList.clear();
+		m_excludeComponentsList.clear();
 	}
 	
 	bool ComponentFilter::doesPassFilter(const ComponentTypeList &componentTypeList) const
 	{
 		// loop through all the component type bits
-		std::size_t index = _requiredComponentsList.find_first();
-		for(; index != ComponentTypeList::npos; index = _requiredComponentsList.find_next(index))
+		std::size_t index = m_requiredComponentsList.find_first();
+		for(; index != ComponentTypeList::npos; index = m_requiredComponentsList.find_next(index))
 		{
 			// ensure that the none of the component types at index
 			// are false (i.e. ensure that it meets all of the requirement list)
@@ -50,9 +50,9 @@ namespace anax
 		}
 		
 		// if the optional bitset is not empty
-		if(!_requiresOneOfComponentsList.empty())
+		if(!m_requiresOneOfComponentsList.empty())
 		{
-			if(!_requiresOneOfComponentsList.intersects(componentTypeList))
+			if(!m_requiresOneOfComponentsList.intersects(componentTypeList))
 			{
 				return false;
 			}
@@ -62,12 +62,12 @@ namespace anax
 		// then...
 		
 		// check if the exclude bitset is not empty
-		if(!_excludeComponentsList.empty())
+		if(!m_excludeComponentsList.empty())
 		{
 			// if there is AT LEAST one bit that interesects the excludeBitSet
 			// then we shall set returnValue to false, indicating that it is NOT
 			// interested in the Entity
-			if(_excludeComponentsList.intersects(componentTypeList))
+			if(m_excludeComponentsList.intersects(componentTypeList))
 			{
 				return false;
 			}

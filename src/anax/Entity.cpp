@@ -30,24 +30,24 @@
 namespace anax
 {
 	Entity::Entity()
-		: _world(nullptr)
+		: m_world(nullptr)
 	{
 	}
 	
 	Entity::Entity(World& world, Entity::Id id)
-		: _world(&world),
-		  _id(id)
+		: m_world(&world),
+		  m_id(id)
 	{
 	}
 	
 	World& Entity::getWorld() const
 	{
-		return *_world;
+		return *m_world;
 	}
 	
 	const Entity::Id& Entity::getId() const
 	{
-		return _id;
+		return m_id;
 	}
 	
 	bool Entity::isValid() const
@@ -84,44 +84,44 @@ namespace anax
 	
 	void Entity::removeAllComponents()
 	{
-		getWorld()._entityAttributes.componentStorage.removeAllComponents(*this);
+		getWorld().m_entityAttributes.componentStorage.removeAllComponents(*this);
 	}
 	
 	ComponentArray Entity::getComponents() const
 	{
-		return getWorld()._entityAttributes.componentStorage.getComponents(*this);
+		return getWorld().m_entityAttributes.componentStorage.getComponents(*this);
 	}
 	
 	ComponentTypeList Entity::getComponentTypeList() const
 	{
-		return getWorld()._entityAttributes.componentStorage.getComponentTypeList(*this);
+		return getWorld().m_entityAttributes.componentStorage.getComponentTypeList(*this);
 	}
 	
 	bool Entity::operator==(const anax::Entity &entity) const
 	{
-		return _id == entity._id && entity._world == _world;
+		return m_id == entity.m_id && entity.m_world == m_world;
 	}
 	
 	
 	
 	void Entity::addComponent(BaseComponent* component, detail::TypeId componentTypeId)
 	{
-		getWorld()._entityAttributes.componentStorage.addComponent(*this, component, componentTypeId);
+		getWorld().m_entityAttributes.componentStorage.addComponent(*this, component, componentTypeId);
 	}
 	
 	void Entity::removeComponent(detail::TypeId componentTypeId)
 	{
-		getWorld()._entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
+		getWorld().m_entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
 	}
 	
 	BaseComponent& Entity::getComponent(detail::TypeId componentTypeId) const
 	{
-		return getWorld()._entityAttributes.componentStorage.getComponent(*this, componentTypeId);
+		return getWorld().m_entityAttributes.componentStorage.getComponent(*this, componentTypeId);
 	}
 	
 	bool Entity::hasComponent(detail::TypeId componentTypeId) const
 	{
-		return getWorld()._entityAttributes.componentStorage.hasComponent(*this, componentTypeId);
+		return getWorld().m_entityAttributes.componentStorage.hasComponent(*this, componentTypeId);
 	}
 }
 

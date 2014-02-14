@@ -30,12 +30,12 @@
 namespace anax
 {
 	BaseSystem::BaseSystem()
-		: _world(nullptr)
+		: m_world(nullptr)
 	{
 	}
 	
 	BaseSystem::BaseSystem(const ComponentFilter& componentFilter)
-		: _componentFilter(componentFilter), _world(nullptr)
+		: m_componentFilter(componentFilter), m_world(nullptr)
 	{
 	}
 	
@@ -45,36 +45,36 @@ namespace anax
 	
 	const ComponentFilter& BaseSystem::getComponentFilter() const
 	{
-		return _componentFilter;
+		return m_componentFilter;
 	}
 	
 	World& BaseSystem::getWorld() const
 	{
-		return *_world;
+		return *m_world;
 	}
 	
 	std::vector<Entity> BaseSystem::getEntities() const
 	{
-		return _entities;
+		return m_entities;
 	}
 	
 	
 	void BaseSystem::add(anax::Entity &entity)
 	{
-		_entities.push_back(entity);
+		m_entities.push_back(entity);
 		onEntityAdded(entity);
 	}
 	
 	void BaseSystem::remove(anax::Entity &entity)
 	{
-		_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
+		m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
 		
 		onEntityRemoved(entity);
 	}
 	
 	void BaseSystem::setWorld(anax::World &world)
 	{
-		_world = &world;
+		m_world = &world;
 		initialize();
 	}
 }

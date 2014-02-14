@@ -101,13 +101,13 @@ namespace anax
 		
 		
 		/// The component filter
-		ComponentFilter _componentFilter;
+		ComponentFilter m_componentFilter;
 		
 		/// The Entities that are attached to this system
-		std::vector<Entity> _entities;
+		std::vector<Entity> m_entities;
 		
 		/// The World attached to the system
-		World* _world;
+		World* m_world;
 				
 		friend class World;
 	};

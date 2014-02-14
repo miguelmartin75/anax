@@ -228,14 +228,12 @@ namespace anax
         
         
         /// The ID of the Entity
-        Id _id;
+        Id m_id;
         
         /// The world that this Entity belongs to. This is guarenteed
         /// to not be null, as long as this entity is not null.
         /// \see isNull() To determine if the entity is null or not.
-        World* _world;
-        
-        //friend class World;
+        World* m_world;
     };
     
     
