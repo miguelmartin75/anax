@@ -34,25 +34,23 @@ To compile, install, and use anax, the following libraries and C++ support is re
 
 ## Installation
 
-To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake.
+To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake. If you're on Mac/Linux or another Unix variation, then you can install the library quite simply via the [scripts](https://github.com/miguelishawt/clean_install) provided in the repository.
 
-To build using CMake, use the following commands:
+### Step 1
 
+Run the `clean.sh` script (or run `mkdir build`).
 
-```bash
-mkdir build
-cd build
-cmake ..
-sudo make install
-```
+### Step 2
 
-Where the directory build can be anything you wish, it just contains all temporary files CMake creates.
+Configure the libary via CMake. Whether this be via the command line (`cmake`), the command line GUI (`ccmake`), or the actual CMake GUI.
+
+### Step 3
+
+Run the `install.sh` script to install the library automatically.
 
 > #### **NOTES:**
-> 1. This will be different to Windows, as instead of using sudo you just have to run the command line as an administrator.
-> 2. For Windows, you may also have to use the Visual Studio command line in order for it to build.
-This is just a simple way to install/build the library, you can use the GUI of CMake, pass arguments to cmake or use the CMake command line tool (`ccmake`) if you wish.
-> 3. If you generate project files then you will obviously not be able to `make`
+> 1. For Windows, you may have to use the Visual Studio command line in order for it to build.
+> 2. In Windows, unless you have a bash command line, you cannot run the scripts provided in the repository (sorry; if someone wants to add batch scripts to do what I have done above, that would be appreciated).
 
 A more detailed tutorial on how to install will be avaliable on the [wiki](https://github.com/miguelishawt/anax/wiki/Getting-Started).
 
