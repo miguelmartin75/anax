@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __VELOCITYCOMPONENT_HPP__
-#define __VELOCITYCOMPONENT_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_COMPONENTS_VELOCITYCOMPONENT_HPP
+#define ANAX_EXAMPLES_COMMON_COMPONENTS_VELOCITYCOMPONENT_HPP
 
 #include <anax/Component.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -37,4 +37,4 @@ struct VelocityComponent : anax::Component<VelocityComponent>
 	sf::Vector2f velocity;
 };
 
-#endif // __VELOCITYCOMPONENT_HPP__
+#endif // ANAX_EXAMPLES_COMMON_COMPONENTS_VELOCITYCOMPONENT_HPP

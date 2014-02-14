@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __COLLIDERCOMPONENT_HPP__
-#define __COLLIDERCOMPONENT_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_COMPONENTS_COLLIDERCOMPONENT_HPP
+#define ANAX_EXAMPLES_COMMON_COMPONENTS_COLLIDERCOMPONENT_HPP
 
 #include <anax/Component.hpp>
 
@@ -40,4 +40,4 @@ struct CollisionComponent : anax::Component<CollisionComponent>
 	bool causesEvents;
 };
 
-#endif // __COLLIDERCOMPONENT_HPP__
+#endif // ANAX_EXAMPLES_COMMON_COMPONENTS_COLLIDERCOMPONENT_HPP

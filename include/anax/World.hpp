@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_WORLD_HPP__
-#define __ANAX_WORLD_HPP__
+#ifndef ANAX_WORLD_HPP
+#define ANAX_WORLD_HPP
 
 #include <memory>
 #include <vector>
@@ -291,4 +291,4 @@ namespace anax
         }
 }
 
-#endif // __ANAX_WORLD_HPP__
+#endif // ANAX_WORLD_HPP

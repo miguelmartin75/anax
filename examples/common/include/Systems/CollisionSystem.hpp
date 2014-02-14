@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __COLLISIONSYSTEM_HPP__
-#define __COLLISIONSYSTEM_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_SYSTEMS_COLLISIONSYSTEM_HPP
+#define ANAX_EXAMPLES_COMMON_SYSTEMS_COLLISIONSYSTEM_HPP
 
 #include <vector>
 
@@ -73,4 +73,4 @@ private:
 	std::vector<Listener*> _listeners;
 };
 
-#endif // __COLLISIONSYSTEM_HPP__
+#endif // ANAX_EXAMPLES_COMMON_SYSTEMS_COLLISIONSYSTEM_HPP

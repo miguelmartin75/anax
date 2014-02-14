@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_COMPONENTTYPELIST_HPP__
-#define __ANAX_COMPONENTTYPELIST_HPP__
+#ifndef ANAX_COMPONENTTYPELIST_HPP
+#define ANAX_COMPONENTTYPELIST_HPP
 
 #include <boost/dynamic_bitset.hpp>
 
@@ -38,4 +38,4 @@ namespace anax
 	typedef boost::dynamic_bitset<> ComponentTypeList;
 }
 
-#endif // __ANAX_COMPONENTTYPELIST_HPP__
+#endif // ANAX_COMPONENTTYPELIST_HPP

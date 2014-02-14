@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __PLAYERINPUTSYSTEM_HPP__
-#define __PLAYERINPUTSYSTEM_HPP__
+#ifndef ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP
+#define ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP
 
 #include <anax/System.hpp>
 
@@ -57,4 +57,4 @@ private:
     std::vector<Listener*> _listeners;
 };
 
-#endif // __PLAYERINPUTSYSTEM_HPP__
+#endif // ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP

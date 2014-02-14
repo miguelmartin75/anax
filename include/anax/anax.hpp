@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_HPP__
-#define __ANAX_HPP__
+#ifndef ANAX_HPP
+#define ANAX_HPP
 
 /// \brief A namespace that contains all classes/functions for the anax library
 ///
@@ -55,4 +55,4 @@ namespace anax
 
 #include <anax/World.hpp>
 
-#endif // __ANAX_HPP__
+#endif // ANAX_HPP

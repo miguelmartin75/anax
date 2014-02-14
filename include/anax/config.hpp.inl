@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_CONFIG_HPP__
-#define __ANAX_CONFIG_HPP__
+#ifndef ANAX_CONFIG_HPP
+#define ANAX_CONFIG_HPP
 
 #include <cstddef>
 
@@ -46,4 +46,4 @@ namespace anax
     constexpr std::size_t DEFAULT_ENTITY_POOL_SIZE = @ANAX_DEFAULT_ENTITY_POOL_SIZE@;  
 }
 
-#endif // __ANAX_CONFIG_HPP__
+#endif // ANAX_CONFIG_HPP

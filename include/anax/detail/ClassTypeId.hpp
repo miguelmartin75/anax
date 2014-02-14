@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_DETAIL_CLASSTYPEID_HPP__
-#define __ANAX_DETAIL_CLASSTYPEID_HPP__
+#ifndef ANAX_DETAIL_CLASSTYPEID_HPP
+#define ANAX_DETAIL_CLASSTYPEID_HPP
 
 #include <cstddef>
 
@@ -62,4 +62,4 @@ namespace anax
 }
 
 
-#endif // __ANAX_DETAIL_CLASSTYPEID_HPP__
+#endif // ANAX_DETAIL_CLASSTYPEID_HPP

@@ -1,5 +1,5 @@
 ///
-/// anax
+/// anax tests
 /// An open source C++ entity system.
 ///
 /// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __COMPONENTS_HPP__
-#define __COMPONENTS_HPP__
+#ifndef ANAX_TESTS_COMPONENTS_HPP
+#define ANAX_TESTS_COMPONENTS_HPP
 
 #include <string>
 #include <anax/Component.hpp>
@@ -64,4 +64,4 @@ public:
 	} type;
 };
 
-#endif // __COMPONENTS_HPP__
+#endif // ANAX_TESTS_COMPONENTS_HPP

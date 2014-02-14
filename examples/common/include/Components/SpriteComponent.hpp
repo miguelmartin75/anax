@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __SPRITECOMPONENT_HPP__
-#define __SPRITECOMPONENT_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_COMPONENTS_SPRITECOMPONENT_HPP
+#define ANAX_EXAMPLES_COMMON_COMPONENTS_SPRITECOMPONENT_HPP
 
 #include <anax/Component.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -37,4 +37,4 @@ struct SpriteComponent : anax::Component<SpriteComponent>
 	sf::Sprite sprite;
 };
 
-#endif // __SPRITECOMPONENT_HPP__
+#endif // ANAX_EXAMPLES_COMMON_COMPONENTS_SPRITECOMPONENT_HPP

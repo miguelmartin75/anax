@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __MOVEMENTSYSTEM_HPP__
-#define __MOVEMENTSYSTEM_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_SYSTEMS_MOVEMENTSYSTEM_HPP
+#define ANAX_EXAMPLES_COMMON_SYSTEMS_MOVEMENTSYSTEM_HPP
 
 #include <anax/System.hpp>
 
@@ -45,4 +45,4 @@ struct MovementSystem : anax::System<MovementSystem>
 	void update(double deltaTime);
 };
 
-#endif // __MOVEMENTSYSTEM_HPP__
+#endif // ANAX_EXAMPLES_COMMON_SYSTEMS_MOVEMENTSYSTEM_HPP

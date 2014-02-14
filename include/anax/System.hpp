@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_SYSTEM_HPP__
-#define __ANAX_SYSTEM_HPP__
+#ifndef ANAX_SYSTEM_HPP
+#define ANAX_SYSTEM_HPP
 
 #include <cstddef>
 #include <vector>
@@ -151,4 +151,4 @@ namespace anax
 	};
 }
 
-#endif // __ANAX_SYSTEM_HPP__
+#endif // ANAX_SYSTEM_HPP

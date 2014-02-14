@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_ENTITY_HPP__
-#define __ANAX_ENTITY_HPP__
+#ifndef ANAX_ENTITY_HPP
+#define ANAX_ENTITY_HPP
 
 #include <type_traits>
 #include <cstdint>
@@ -279,4 +279,4 @@ namespace anax
     }
 }
 
-#endif // __ANAX_ENTITY_HPP__
+#endif // ANAX_ENTITY_HPP

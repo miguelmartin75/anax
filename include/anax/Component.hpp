@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_COMPONENT_HPP__
-#define __ANAX_COMPONENT_HPP__
+#ifndef ANAX_COMPONENT_HPP
+#define ANAX_COMPONENT_HPP
 
 #include <cstddef>
 #include <vector>
@@ -112,4 +112,4 @@ namespace anax
 	typedef std::vector<std::reference_wrapper<BaseComponent>> ComponentArray;
 }
 
-#endif // __ANAX_COMPONENT_HPP__
+#endif // ANAX_COMPONENT_HPP

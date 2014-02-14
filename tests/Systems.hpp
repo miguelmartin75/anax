@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __SYSTEMS_HPP__
-#define __SYSTEMS_HPP__
+#ifndef ANAX_TESTS_SYSTEMS_HPP
+#define ANAX_TESTS_SYSTEMS_HPP
 
 #include <exception>
 
@@ -95,4 +95,4 @@ private:
 	}
 };
 
-#endif // __SYSTEMS_HPP__
+#endif // ANAX_TESTS_SYSTEMS_HPP

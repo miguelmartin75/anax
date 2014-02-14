@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_COMPONENTFILTER_HPP__
-#define __ANAX_COMPONENTFILTER_HPP__
+#ifndef ANAX_COMPONENTFILTER_HPP
+#define ANAX_COMPONENTFILTER_HPP
 
 #include <type_traits>
 
@@ -147,4 +147,4 @@ namespace anax
 	};
 }
 
-#endif // __ANAX_COMPONENTFILTER_HPP__
+#endif // ANAX_COMPONENTFILTER_HPP

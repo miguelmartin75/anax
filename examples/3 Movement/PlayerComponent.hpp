@@ -26,8 +26,8 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef __PLAYERCOMPONENT_HPP__
-#define __PLAYERCOMPONENT_HPP__
+#ifndef ANAX_EXAMPLES_MOVEMENT_PLAYERCOMPONENT_HPP
+#define ANAX_EXAMPLES_MOVEMENT_PLAYERCOMPONENT_HPP
 
 #include <anax/Component.hpp>
 
@@ -83,4 +83,4 @@ struct PlayerComponent : anax::Component<PlayerComponent>
 	} controls;
 };
 
-#endif // __PLAYERCOMPONENT_HPP__
+#endif // ANAX_EXAMPLES_MOVEMENT_PLAYERCOMPONENT_HPP

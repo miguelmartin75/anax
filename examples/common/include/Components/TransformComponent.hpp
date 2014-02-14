@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __TRANSFORMCOMPONENT_HPP__
-#define __TRANSFORMCOMPONENT_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_COMPONENTS_TRANSFORMCOMPONENT_HPP
+#define ANAX_EXAMPLES_COMMON_COMPONENTS_TRANSFORMCOMPONENT_HPP
 
 #include <anax/Component.hpp>
 #include <SFML/Graphics/Transformable.hpp>
@@ -37,4 +37,4 @@ struct TransformComponent : anax::Component<TransformComponent>
 	sf::Transformable transform;
 };
 
-#endif // __TRANSFORMCOMPONENT_HPP__
+#endif // ANAX_EXAMPLES_COMMON_COMPONENTS_TRANSFORMCOMPONENT_HPP

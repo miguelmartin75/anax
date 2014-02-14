@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __ANAX_DETAIL_ENTITYIDPOOL_HPP__
-#define __ANAX_DETAIL_ENTITYIDPOOL_HPP__
+#ifndef ANAX_DETAIL_ENTITYIDPOOL_HPP
+#define ANAX_DETAIL_ENTITYIDPOOL_HPP
 
 #include <vector>
 
@@ -100,4 +100,4 @@ namespace anax
 	}
 }
 
-#endif // __ANAX_DETAIL_ENTITYIDPOOL_HPP__
+#endif // ANAX_DETAIL_ENTITYIDPOOL_HPP

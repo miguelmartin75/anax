@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __GAME_HPP__
-#define __GAME_HPP__
+#ifndef ANAX_EXAMPLES_MOVEMENT_GAME_HPP
+#define ANAX_EXAMPLES_MOVEMENT_GAME_HPP
 
 #include <map>
 
@@ -102,4 +102,4 @@ private:
 
 
 
-#endif // __GAME_HPP__
+#endif // ANAX_EXAMPLES_MOVEMENT_GAME_HPP

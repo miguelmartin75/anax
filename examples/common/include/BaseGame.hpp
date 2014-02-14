@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __BASEGAME_HPP__
-#define __BASEGAME_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_BASEGAME_HPP
+#define ANAX_EXAMPLES_COMMON_BASEGAME_HPP
 
 #include <cassert>
 
@@ -80,4 +80,4 @@ private:
 	bool _isRunning;
 };
 
-#endif // __BASEGAME_HPP__
+#endif // ANAX_EXAMPLES_COMMON_BASEGAME_HPP

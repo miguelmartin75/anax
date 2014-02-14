@@ -23,8 +23,8 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef __RUNGAME_HPP__
-#define __RUNGAME_HPP__
+#ifndef ANAX_EXAMPLES_COMMON_RUNGAME_HPP
+#define ANAX_EXAMPLES_COMMON_RUNGAME_HPP
 
 #include <chrono>
 #include <iostream>
@@ -89,4 +89,4 @@ int RunGame(sf::RenderWindow& window, TGameConcept& game)
 }
 
 
-#endif // __RUNGAME_HPP__
+#endif // ANAX_EXAMPLES_COMMON_RUNGAME_HPP
