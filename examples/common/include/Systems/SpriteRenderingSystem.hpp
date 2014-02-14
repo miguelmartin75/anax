@@ -64,7 +64,7 @@ struct SpriteRenderingSystem : anax::System<SpriteRenderingSystem>
 private:
 	
 	/// The render target to render to
-	sf::RenderTarget* _renderTarget;
+	sf::RenderTarget* m_renderTarget;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_SYSTEMS_SPRITERENDERINGSYSTEM_HPP

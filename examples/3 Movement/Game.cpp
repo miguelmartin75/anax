@@ -39,8 +39,8 @@ const std::string PLAYER_TEXTURE_ID{"player"};
 const sf::Color CLEAR_COLOR{60, 60, 60};
 
 Game::Game(sf::RenderTarget& renderTarget)
-	: _renderTarget(&renderTarget),
-	  _spriteRenderingSystem(renderTarget)
+	: m_renderTarget(&renderTarget),
+	  m_spriteRenderingSystem(renderTarget)
 {
 }
 
@@ -50,52 +50,52 @@ void Game::init()
 	loadResources();
 	
 	// add the necessary systems to the world
-	_world.addSystem(_spriteRenderingSystem);
-	_world.addSystem(_animationSystem);
-	_world.addSystem(_playerInputSystem);
-    _world.addSystem(_movementSystem);
+	m_world.addSystem(m_spriteRenderingSystem);
+	m_world.addSystem(m_animationSystem);
+	m_world.addSystem(m_playerInputSystem);
+    m_world.addSystem(m_movementSystem);
 
-    _playerInputSystem.addListener(this);
+    m_playerInputSystem.addListener(this);
 
 	// create the player
-	_player = _world.createEntity();
+	m_player = m_world.createEntity();
 	
-	auto& playerSprite = _player.addComponent<SpriteComponent>().sprite;
-	playerSprite.setTexture(_textureCache[PLAYER_TEXTURE_ID]);
+	auto& playerSprite = m_player.addComponent<SpriteComponent>().sprite;
+	playerSprite.setTexture(m_textureCache[PLAYER_TEXTURE_ID]);
 	
 	// load the animations
-	if(!_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
+	if(!m_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
 	{
 		std::cerr << "Failed to load animation data\n";
 		quit();
 	}
 	
-	auto& playerAnimaton = _player.getComponent<AnimationComponent>();
-	auto& playerTransform = _player.addComponent<TransformComponent>().transform;
-	playerTransform.setPosition(_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, _renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
+	auto& playerAnimaton = m_player.getComponent<AnimationComponent>();
+	auto& playerTransform = m_player.addComponent<TransformComponent>().transform;
+	playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, m_renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
 	
-	_player.addComponent<VelocityComponent>();
+	m_player.addComponent<VelocityComponent>();
 	
-	auto& playerComp = _player.addComponent<PlayerComponent>();
+	auto& playerComp = m_player.addComponent<PlayerComponent>();
 	playerComp.baseSpeed = 100;
 
 	// activate the player
-	_player.activate();
+	m_player.activate();
 }
 
 void Game::update(float deltaTime)
 {
-	_world.refresh();
+	m_world.refresh();
 
-    _playerInputSystem.update(deltaTime);
-	_movementSystem.update(deltaTime);
-	_animationSystem.update(deltaTime);
+    m_playerInputSystem.update(deltaTime);
+	m_movementSystem.update(deltaTime);
+	m_animationSystem.update(deltaTime);
 }
 
 void Game::render()
 {
-	_renderTarget->clear(CLEAR_COLOR);
-	_spriteRenderingSystem.render();
+	m_renderTarget->clear(CLEAR_COLOR);
+	m_spriteRenderingSystem.render();
 }
 
 void Game::handleEvents(sf::Event event)
@@ -112,7 +112,7 @@ void Game::handleEvents(sf::Event event)
 
 void Game::loadResources()
 {
-	if(!_textureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
+	if(!m_textureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
 	{
 		std::cerr << "Failed to load spritesheet\n";
 		quit();

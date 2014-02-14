@@ -120,7 +120,7 @@ struct AnimationComponent : anax::Component<AnimationComponent>
 private:
 	
 	// used in implemenation
-	double _frameAccumulator;
+	double m_frameAccumulator;
 	
 	friend class AnimationSystem;
 };

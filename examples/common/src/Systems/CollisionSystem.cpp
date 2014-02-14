@@ -82,7 +82,7 @@ void CollisionSystem::update(double deltaTime)
 			// Check for the collision
 			if(rect1.intersects(rect2))
 			{
-				for(auto& listener : _listeners)
+				for(auto& listener : m_listeners)
 					listener->onCollisionOccured(e1, e2);
 			}
 		}
@@ -139,10 +139,10 @@ void CollisionSystem::update(double deltaTime)
 
 void CollisionSystem::addListener(Listener &listener)
 {
-	_listeners.push_back(&listener);
+	m_listeners.push_back(&listener);
 }
 
 void CollisionSystem::removeListener(Listener &listener)
 {
-	_listeners.erase(std::remove(_listeners.begin(), _listeners.end(), &listener), _listeners.end());
+	m_listeners.erase(std::remove(m_listeners.begin(), m_listeners.end(), &listener), m_listeners.end());
 }

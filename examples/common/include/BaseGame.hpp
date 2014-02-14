@@ -43,7 +43,7 @@ public:
 	
 	/// Default constructor
 	BaseGame()
-		: _isRunning(true)
+		: m_isRunning(true)
 	{
 	}
 	
@@ -70,14 +70,14 @@ public:
 	}
 	
 	/// \return true if this Game is running
-	bool isRunning() const { return _isRunning; }
+	bool isRunning() const { return m_isRunning; }
 	
 	/// Quits the game
-	void quit() { _isRunning = false; }
+	void quit() { m_isRunning = false; }
 	
 private:
 	
-	bool _isRunning;
+	bool m_isRunning;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_BASEGAME_HPP

@@ -89,7 +89,7 @@ void PlayerInputSystem::setPlayerState(anax::Entity& e, PlayerComponent& p, Play
         return;
 
     p.state = state;
-    for(auto& l : _listeners)
+    for(auto& l : m_listeners)
     {
         l->onPlayerStateChanged(e, state);
     }

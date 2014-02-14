@@ -41,8 +41,8 @@ const unsigned int ANIMATION_FPS = 5;
 std::vector<std::string> animationStateNames;
 
 Game::Game(sf::RenderTarget& renderTarget)
-	: _renderTarget(&renderTarget),
-	  _spriteRenderingSystem(renderTarget)
+	: m_renderTarget(&renderTarget),
+	  m_spriteRenderingSystem(renderTarget)
 {
 }
 
@@ -52,54 +52,54 @@ void Game::init()
 	loadResources();
 	
 	// add the necessary systems to the world
-	_world.addSystem(_spriteRenderingSystem);
-	_world.addSystem(_animationSystem);
+	m_world.addSystem(m_spriteRenderingSystem);
+	m_world.addSystem(m_animationSystem);
 	
-	_animationSystem.setFps(ANIMATION_FPS);
+	m_animationSystem.setFps(ANIMATION_FPS);
 	
 	// create the player
-	_player = _world.createEntity();
+	m_player = m_world.createEntity();
 	
-	auto& playerSprite = _player.addComponent<SpriteComponent>().sprite;
-	playerSprite.setTexture(_textureCache[PLAYER_TEXTURE_ID]);
+	auto& playerSprite = m_player.addComponent<SpriteComponent>().sprite;
+	playerSprite.setTexture(m_textureCache[PLAYER_TEXTURE_ID]);
 	
 	// load the animations
-	if(!_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
+	if(!m_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
 	{
 		std::cerr << "Failed to load animation data\n";
 		quit();
 	}
 	
-	auto& playerAnimaton = _player.getComponent<AnimationComponent>();
+	auto& playerAnimaton = m_player.getComponent<AnimationComponent>();
     playerAnimaton.repeat = true;
     playerAnimaton.isPlaying = true;
     
-	auto& playerTransform = _player.addComponent<TransformComponent>().transform;
-	playerTransform.setPosition(_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, _renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
+	auto& playerTransform = m_player.addComponent<TransformComponent>().transform;
+	playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, m_renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
 	
-	animationStateNames.reserve(_player.getComponent<AnimationComponent>().states.size());
-	for(auto& state : _player.getComponent<AnimationComponent>().states)
+	animationStateNames.reserve(m_player.getComponent<AnimationComponent>().states.size());
+	for(auto& state : m_player.getComponent<AnimationComponent>().states)
 	{
 		animationStateNames.emplace_back(state.first);
 	}
 	
 	// activate the player
-	_player.activate();
+	m_player.activate();
 	
 	playerAnimaton.playingState = animationStateNames[0];
 }
 
 void Game::update(float deltaTime)
 {
-	_world.refresh();
+	m_world.refresh();
 	
-	_animationSystem.update(deltaTime);
+	m_animationSystem.update(deltaTime);
 }
 
 void Game::render()
 {
-	_renderTarget->clear(CLEAR_COLOR);
-	_spriteRenderingSystem.render();
+	m_renderTarget->clear(CLEAR_COLOR);
+	m_spriteRenderingSystem.render();
 }
 
 void Game::handleEvents(sf::Event event)
@@ -118,20 +118,20 @@ void Game::handleEvents(sf::Event event)
 				case sf::Keyboard::Key::Space:
 					{
 						// pause/play animation
-						bool isPlaying = _player.getComponent<AnimationComponent>().isPlaying = !_player.getComponent<AnimationComponent>().isPlaying;
+						bool isPlaying = m_player.getComponent<AnimationComponent>().isPlaying = !m_player.getComponent<AnimationComponent>().isPlaying;
 						std::cout << (isPlaying ? "Playing" : "Paused") << " animation\n";					
 					}
 					break;
 				case sf::Keyboard::Key::S:
 					{
 						std::cout << "Stopped animation\n";
-						_player.getComponent<AnimationComponent>().stop();
+						m_player.getComponent<AnimationComponent>().stop();
 					}
 					break;
 				case sf::Keyboard::Key::R:
 					{
 						// toggle repeat
-						bool repeat = _player.getComponent<AnimationComponent>().repeat = !_player.getComponent<AnimationComponent>().repeat;
+						bool repeat = m_player.getComponent<AnimationComponent>().repeat = !m_player.getComponent<AnimationComponent>().repeat;
 						std::cout << "Turned repeat " << (repeat ? "on" : "off") << '\n';
 					}
 					break;
@@ -151,8 +151,8 @@ void Game::handleEvents(sf::Event event)
 					if(index >= animationStateNames.size()) index = animationStateNames.size() - 1;
 					std::cout << "Set animation: " << index <<  " - " << animationStateNames[index] << '\n';
 					
-					_player.getComponent<AnimationComponent>().playingState = animationStateNames[index];
-					_player.getComponent<AnimationComponent>().reset();
+					m_player.getComponent<AnimationComponent>().playingState = animationStateNames[index];
+					m_player.getComponent<AnimationComponent>().reset();
 					break;
 			}
 			break;
@@ -163,7 +163,7 @@ void Game::handleEvents(sf::Event event)
 
 void Game::loadResources()
 {
-	if(!_textureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
+	if(!m_textureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
 	{
 		std::cerr << "Failed to load spritesheet\n";
 		quit();

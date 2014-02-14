@@ -47,14 +47,14 @@ public:
 	
 	void update(double deltaTime);
 
-    void addListener(Listener* listener) { _listeners.push_back(listener); }
-    void removeListener(Listener* listener) { _listeners.erase(std::remove(_listeners.begin(), _listeners.end(), listener), _listeners.end()); }
+    void addListener(Listener* listener) { m_listeners.push_back(listener); }
+    void removeListener(Listener* listener) { m_listeners.erase(std::remove(m_listeners.begin(), m_listeners.end(), listener), m_listeners.end()); }
 
 private:
 
     void setPlayerState(anax::Entity& e, PlayerComponent&, PlayerComponent::State);
 
-    std::vector<Listener*> _listeners;
+    std::vector<Listener*> m_listeners;
 };
 
 #endif // ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP

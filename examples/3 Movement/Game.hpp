@@ -76,28 +76,28 @@ private:
 	typedef std::map<std::string, sf::Texture> TextureCache;
 	
 	/// The render target the game will render to
-	sf::RenderTarget* _renderTarget;
+	sf::RenderTarget* m_renderTarget;
 	
 	/// A texture cache
-	TextureCache _textureCache;
+	TextureCache m_textureCache;
 	
 	/// An anax entity world
-	anax::World _world;
+	anax::World m_world;
 	
 	/// The rendering system
-	SpriteRenderingSystem _spriteRenderingSystem;
+	SpriteRenderingSystem m_spriteRenderingSystem;
 	
 	/// The movement system
-	MovementSystem _movementSystem;
+	MovementSystem m_movementSystem;
 	
 	/// The animation system
-	AnimationSystem _animationSystem;
+	AnimationSystem m_animationSystem;
 
     /// The player input system
-    PlayerInputSystem _playerInputSystem;
+    PlayerInputSystem m_playerInputSystem;
 
 	/// The player of the game
-	anax::Entity _player;
+	anax::Entity m_player;
 };
 
 

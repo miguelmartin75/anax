@@ -70,7 +70,7 @@ public:
 private:
 	
 	/// The listeners apart of the CollisionSystem
-	std::vector<Listener*> _listeners;
+	std::vector<Listener*> m_listeners;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_SYSTEMS_COLLISIONSYSTEM_HPP

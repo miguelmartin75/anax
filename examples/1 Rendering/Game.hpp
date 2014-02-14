@@ -63,16 +63,16 @@ public:
 private:
 	
 	/// The target the game will render to
-	sf::RenderTarget* _renderTarget;
+	sf::RenderTarget* m_renderTarget;
 	
 	/// A texture cache
-	std::map<std::string, sf::Texture> _textureCache;
+	std::map<std::string, sf::Texture> m_textureCache;
 	
 	/// An anax entity world
-	anax::World _world;
+	anax::World m_world;
 	
 	/// The rendering system
-	SpriteRenderingSystem _spriteRenderingSystem;
+	SpriteRenderingSystem m_spriteRenderingSystem;
 };
 
 

@@ -32,7 +32,7 @@
 
 AnimationSystem::AnimationSystem()
 	: Base(anax::ComponentFilter().requires<SpriteComponent, AnimationComponent>()),
-      _fps(60)
+      m_fps(60)
 {
 }
 
@@ -52,8 +52,8 @@ void AnimationSystem::update(double deltaTime)
 		
 		if(animation.isPlaying && animationState)
 		{
-			animation._frameAccumulator += deltaTime * (animationState->frameRate == 0 ? getFps() : animationState->frameRate);
-			animation.currentFrame.x = (int)animation._frameAccumulator;
+			animation.m_frameAccumulator += deltaTime * (animationState->frameRate == 0 ? getFps() : animationState->frameRate);
+			animation.currentFrame.x = (int)animation.m_frameAccumulator;
 			
 			
 			if(animation.currentFrame.x >= animationState->frameAmount.x)
@@ -73,7 +73,7 @@ void AnimationSystem::update(double deltaTime)
 				
 				// reset the animation
 				animation.currentFrame.x = 0;
-				animation._frameAccumulator = 0;
+				animation.m_frameAccumulator = 0;
 				
 				animation.isPlaying = animation.repeat;
 			}

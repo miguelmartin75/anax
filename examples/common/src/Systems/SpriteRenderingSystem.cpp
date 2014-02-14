@@ -37,7 +37,7 @@ SpriteRenderingSystem::SpriteRenderingSystem()
 
 SpriteRenderingSystem::SpriteRenderingSystem(sf::RenderTarget& renderTarget)
 	: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>()), 
-	  _renderTarget(&renderTarget)
+	  m_renderTarget(&renderTarget)
 {
 }
 
@@ -55,16 +55,16 @@ void SpriteRenderingSystem::render()
 
 void SpriteRenderingSystem::setRenderTarget(sf::RenderTarget& renderTarget)
 {
-	_renderTarget = &renderTarget;
+	m_renderTarget = &renderTarget;
 }
 
 sf::RenderTarget& SpriteRenderingSystem::getRenderTarget() const
 {
 	assert(!isValid() && "Render system is not valid");
-	return *_renderTarget;
+	return *m_renderTarget;
 }
 
 bool SpriteRenderingSystem::isValid() const
 {
-	return _renderTarget == nullptr;
+	return m_renderTarget == nullptr;
 }
