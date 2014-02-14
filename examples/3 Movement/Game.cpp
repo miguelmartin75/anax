@@ -34,7 +34,6 @@
 #include <Components/SpriteComponent.hpp>
 #include <Components/AnimationComponent.hpp>
 #include <Components/VelocityComponent.hpp>
-#include "BodyComponent.hpp"
 #include "PlayerComponent.hpp"
 
 const std::string PLAYER_TEXTURE_ID{"player"};
