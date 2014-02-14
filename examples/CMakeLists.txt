@@ -26,7 +26,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/common/include)
 file(GLOB_RECURSE ANAX_COMMON_LIBRARY_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/common/src/*.cpp)
 
 # create the common library
-add_library(${ANAX_COMMON_LIBRARY_NAME}  ${ANAX_COMMON_LIBRARY_SOURCES})
+add_library(${ANAX_COMMON_LIBRARY_NAME} ${ANAX_COMMON_LIBRARY_SOURCES})
 
 # link it with anax and SFML
 target_link_libraries(

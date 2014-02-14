@@ -66,7 +66,67 @@ const lest::test specification[] =
 		createNPCs(rand() % 100 + 1, world);
 		
 		world.refresh();
-	}
+	},
+
+    "Testing if a system exists", []
+    {
+        anax::World world;
+        PlayerSystem playerSystem;
+
+        EXPECT(!world.doesSystemExist<PlayerSystem>());
+        EXPECT(!world.doesSystemExist(playerSystem));
+
+        world.addSystem(playerSystem);
+
+        EXPECT(world.doesSystemExist<PlayerSystem>());
+        EXPECT(world.doesSystemExist(playerSystem));
+    },
+   
+    "Testing if a system exists (clearing the world)", []
+    {
+        anax::World world;
+        PlayerSystem playerSystem;
+		MovementSystem movementSystem;
+
+        EXPECT(!world.doesSystemExist<PlayerSystem>());
+        EXPECT(!world.doesSystemExist(playerSystem));
+        EXPECT(!world.doesSystemExist<MovementSystem>());
+        EXPECT(!world.doesSystemExist(movementSystem));
+
+        world.addSystem(playerSystem);
+        world.addSystem(movementSystem);
+
+        EXPECT(world.doesSystemExist<PlayerSystem>());
+        EXPECT(world.doesSystemExist(playerSystem));
+        EXPECT(world.doesSystemExist<MovementSystem>());
+        EXPECT(world.doesSystemExist(movementSystem));
+
+        world.clear();
+
+        EXPECT(!world.doesSystemExist<PlayerSystem>());
+        EXPECT(!world.doesSystemExist(playerSystem));
+        EXPECT(!world.doesSystemExist<MovementSystem>());
+        EXPECT(!world.doesSystemExist(movementSystem));
+    }, 
+
+    "Testing if a system exists (removing the system)", []
+    {
+        anax::World world;
+        PlayerSystem playerSystem;
+
+        EXPECT(!world.doesSystemExist<PlayerSystem>());
+        EXPECT(!world.doesSystemExist(playerSystem));
+
+        world.addSystem(playerSystem);
+
+        EXPECT(world.doesSystemExist<PlayerSystem>());
+        EXPECT(world.doesSystemExist(playerSystem));
+
+        world.removeSystem<PlayerSystem>();
+
+        EXPECT(!world.doesSystemExist<PlayerSystem>());
+        EXPECT(!world.doesSystemExist(playerSystem));
+    }
 };
 
 void createMoveableEntities(int amount, World& world)

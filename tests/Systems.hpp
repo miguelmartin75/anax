@@ -60,7 +60,6 @@ private:
 	
 	virtual void onEntityAdded(Entity& e) override
 	{
-		std::cout << "Entity added to MovementSystem: " << e.getId().index << '\n';
 		if(e.hasComponent<NPCComponent>())
 		{
 			throw std::logic_error("Player contains NPCComponent :(");
@@ -69,7 +68,6 @@ private:
 	
 	virtual void onEntityRemoved(Entity& e) override
 	{
-		std::cout << "Entity removed from MovementSystem: " << e.getId().index << '\n';
 	}
 };
 
@@ -89,13 +87,11 @@ private:
 	
 	virtual void onEntityAdded(Entity& e) override
 	{
-		std::cout << "Player added: " << e.getComponent<PlayerComponent>().name << '\n';
 	}
 	
 	
 	virtual void onEntityRemoved(Entity& e) override
 	{
-		std::cout << "Player removed: " << e.getComponent<PlayerComponent>().name << '\n';
 	}
 };
 

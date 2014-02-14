@@ -27,51 +27,67 @@
 
 namespace anax
 {
-	namespace detail
-	{
-		EntityIdPool::EntityIdPool(std::size_t poolSize)
-			: _entities(poolSize),
-		      _nextId(0)
-		{
-		}
-		
-		Entity::Id EntityIdPool::create()
-		{
-			Entity::Id id;
-			
-			// if we need to add more entities to the pool
-			if(!_freeList.empty())
-			{
-				id = _freeList.front();
-				_freeList.pop_back();
-			}
-			else
-			{
-				id.index = _nextId++;
-			}
-			
-			return id;
-		}
-		
-		void EntityIdPool::remove(Entity::Id id)
-		{
-			++_entities[id.index].counter; // increment the counter in the cache
-			_freeList.push_back(id); // add the ID to the freeList
-		}
-		
-		Entity::Id EntityIdPool::get(std::size_t index) const
-		{
-			return _entities[index];
-		}
-		
-		bool EntityIdPool::isValid(Entity::Id id) const
-		{
-			return id.counter == _entities[id.index].counter;
-		}
-		
-		void EntityIdPool::resize(std::size_t amount)
-		{
-			_entities.resize(amount);
-		}
-	}
+    namespace detail
+    {
+        EntityIdPool::EntityIdPool(std::size_t poolSize)
+            : _defaultPoolSize(poolSize),
+            _entities(poolSize),
+            _nextId(0)
+        {
+        }
+
+        Entity::Id EntityIdPool::create()
+        {
+            Entity::Id id;
+
+            // if we need to add more entities to the pool
+            if(!_freeList.empty())
+            {
+                id = _freeList.front();
+                _freeList.pop_back();
+            }
+            else
+            {
+                id.index = _nextId++;
+                // an ID given out cannot have a counter of 0. 
+                // 0 is an "invalid" counter, thus we must update
+                // the counter within the pool for the corresponding
+                // entity
+                _entities[id.index] = id.counter = 1; 
+            }
+
+            return id;
+        }
+
+        void EntityIdPool::remove(Entity::Id id)
+        {
+            ++_entities[id.index]; // increment the counter in the cache
+            _freeList.push_back(id); // add the ID to the freeList
+        }
+
+        Entity::Id EntityIdPool::get(std::size_t index) const
+        {
+            assert(!(_entities[index] == 0) && "Entity ID does not exist");
+            return Entity::Id{index, _entities[index]};
+        }
+
+        bool EntityIdPool::isValid(Entity::Id id) const
+        {
+            return id.counter == _entities[id.index];
+        }
+
+        void EntityIdPool::resize(std::size_t amount)
+        {
+            _entities.resize(amount);
+        }
+
+        void EntityIdPool::clear()
+        {
+            _entities.clear();
+            _freeList.clear();
+            _nextId = 0;
+
+            _entities.resize(_defaultPoolSize);
+        }
+    }
 }

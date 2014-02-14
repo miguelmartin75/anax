@@ -77,16 +77,25 @@ namespace anax
 			/// Resizes the pool
 			/// \param amount The amount you wish to resize
 			void resize(std::size_t amount);
+
+            /// Clears the pool
+            /// \note This will invalidate every entity ID given out
+            void clear();
 			
 		private:
 			
+            /// The default pool size
+            std::size_t _defaultPoolSize;
+
+            /// The next ID to be used (if there is no IDs in the freelist)
 			std::size_t _nextId;
 			
 			/// The entities ids that are avaliable to be used
 			std::vector<Entity::Id> _freeList;
 			
 			/// The Entities that are within the pool
-			std::vector<Entity::Id> _entities;
+            /// Stored as a counter and the index is the index part of the ID
+			std::vector<Entity::Id::int_type> _entities;
 		};
 	}
 }

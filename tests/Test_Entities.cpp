@@ -40,7 +40,25 @@ const lest::test specification[] =
 		e1.kill(); // kill it
 		
 		EXPECT(e1.isValid());
+
+        world.refresh();
+        
+        EXPECT(!e1.isValid());
 	},
+
+    "Invalid entity handles (clearing world)", []
+    {
+        anax::World world;
+
+        auto e1 = world.createEntity();
+        world.clear();
+
+        EXPECT(!e1.isValid()); // I expect this to not be valid (until you create another entity)
+
+        auto e2 = world.createEntity();
+
+        EXPECT(e1.isValid()); // now e1 should be valid
+    },
 	
 	"Duplicate invalid (killed) entity handles", []
 	{
@@ -113,7 +131,18 @@ const lest::test specification[] =
 		e.removeAllComponents();
 		
 		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
-	}
+	},
+
+    "Retrieving an Entity via ID index", []
+    {
+        anax::World world;
+
+        auto e1 = world.createEntity();
+        auto e2 = world.getEntity(e1.getId().index);
+
+        EXPECT(e1.isValid() && e2.isValid());
+        EXPECT(e1 == e2);
+    }
 };
 
 int main()
