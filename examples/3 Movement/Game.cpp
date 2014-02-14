@@ -34,7 +34,6 @@
 #include <Components/SpriteComponent.hpp>
 #include <Components/AnimationComponent.hpp>
 #include <Components/VelocityComponent.hpp>
-#include "PlayerComponent.hpp"
 
 const std::string PLAYER_TEXTURE_ID{"player"};
 const sf::Color CLEAR_COLOR{60, 60, 60};
@@ -80,8 +79,6 @@ void Game::init()
 	auto& playerComp = _player.addComponent<PlayerComponent>();
 	playerComp.baseSpeed = 100;
 
-    _player.addComponent<BodyComponent>();
-	
 	// activate the player
 	_player.activate();
 }
