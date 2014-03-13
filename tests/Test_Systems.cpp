@@ -44,13 +44,15 @@ const lest::test specification[] =
 		anax::World world;
 		MovementSystem movementSystem;
 		world.addSystem(movementSystem);
-		
+
 		createMoveableEntities(rand() % 100 + 1, world);
 		createPlayers(rand() % 100 + 1, world);
-		
+
+        world.refresh();
+
+        // update it a couple of times..
 		for(int i = 0; i < 5; ++i)
 		{
-			world.refresh();
 			movementSystem.update();
 		}
 	},
@@ -68,7 +70,7 @@ const lest::test specification[] =
 		world.refresh();
 	},
 
-    "Testing if a system exists", []
+    "if a system exists", []
     {
         anax::World world;
         PlayerSystem playerSystem;
@@ -82,7 +84,7 @@ const lest::test specification[] =
         EXPECT(world.doesSystemExist(playerSystem));
     },
    
-    "Testing if a system exists (clearing the world)", []
+    "if a system exists (clearing the world)", []
     {
         anax::World world;
         PlayerSystem playerSystem;
@@ -109,7 +111,7 @@ const lest::test specification[] =
         EXPECT(!world.doesSystemExist(movementSystem));
     }, 
 
-    "Testing if a system exists (removing the system)", []
+    "if a system exists (removing the system)", []
     {
         anax::World world;
         PlayerSystem playerSystem;

@@ -99,7 +99,6 @@ namespace anax
 		void setWorld(World& world);
 		
 		
-		
 		/// The component filter
 		ComponentFilter m_componentFilter;
 		

@@ -35,8 +35,8 @@ namespace anax
 	}
 	
 	Entity::Entity(World& world, Entity::Id id)
-		: m_world(&world),
-		  m_id(id)
+		: m_id(id),
+          m_world(&world)
 	{
 	}
 	

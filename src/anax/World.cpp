@@ -28,7 +28,6 @@
 
 #include <cassert>
 
-
 namespace anax
 {
     void World::SystemDeleter::operator() (BaseSystem* system) const
@@ -113,7 +112,7 @@ namespace anax
     {
         assert(isValid(entity));
 
-        return m_entityAttributes.activated[entity.getId().index];
+        return m_entityAttributes.attributes[entity.getId().index].activated;
     }
 
     bool World::isValid(const anax::Entity &entity) const
@@ -124,50 +123,70 @@ namespace anax
     void World::refresh()
     {
         // go through all the activated entities from last call to refresh
-        for(auto& i : m_entityCache.activated)
+        for(auto& entity : m_entityCache.activated)
         {
-            m_entityAttributes.activated[i.getId().index] = true;
+            auto& attribute = m_entityAttributes.attributes[entity.getId().index]; 
+            attribute.activated = true;
 
             // loop through all the systems within the world
-            for(auto& j : m_systems)
+            for(auto& i : m_systems)
             {
+                auto systemIndex = i.first;
+
                 // if the entity passes the filter the system has
-                if(j.second->getComponentFilter().doesPassFilter(m_entityAttributes.componentStorage.getComponentTypeList(i)))
+                if(i.second->getComponentFilter().doesPassFilter(m_entityAttributes.componentStorage.getComponentTypeList(entity)))
                 {
-                    j.second->add(i); // add it to the system
+                    i.second->add(entity); // add it to the system
+
+                    detail::EnsureCapacity(attribute.systems, systemIndex); 
+                    attribute.systems[systemIndex] = true;
+                }
+                // otherwise if the entity is within the system 
+                // and is not relevant to the system anymore...
+                // note: the entity has already failed the filter
+                else if(attribute.systems.size() > systemIndex && attribute.systems[systemIndex])
+                {
+                    std::cout << "removing self from system in activated\n";
+                    // duplicate code (1)
+                    i.second->remove(entity); 
+                    attribute.systems[systemIndex] = false;
                 }
             }
         }
 
 
         // go through all the deactivated entities from last call to refresh
-        for(auto& i : m_entityCache.deactivated)
+        for(auto& entity : m_entityCache.deactivated)
         {
-            m_entityAttributes.activated[i.getId().index] = false;
+            auto& attribute = m_entityAttributes.attributes[entity.getId().index]; 
+            attribute.activated = false;
 
             // loop through all the systems within the world
-            for(auto& j : m_systems)
+            for(auto& i : m_systems)
             {
-                // remove the entity from the system
-                // TODO: Make this more efficent?
-                // I could check if the entity is within the system
-                // with a flag, but then I would require a TypeId attribtue
-                // within the system class... So I may/maynot need to add this
-                j.second->remove(i); 
+                auto systemIndex = i.first;
+                if(attribute.systems.size() <= systemIndex) continue;
+
+                if(attribute.systems[systemIndex])
+                {
+                    // duplicate code ...(1)
+                    i.second->remove(entity); 
+                    attribute.systems[systemIndex] = false;
+                }
             }
         }
 
         // go through all the killed entities from last call to refresh
-        for(auto& i : m_entityCache.killed)
+        for(auto& entity : m_entityCache.killed)
         {
             // remove the entity from the alive array
-            m_entityCache.alive.erase(std::remove(m_entityCache.alive.begin(), m_entityCache.alive.end(), i), m_entityCache.alive.end()); 
+            m_entityCache.alive.erase(std::remove(m_entityCache.alive.begin(), m_entityCache.alive.end(), entity), m_entityCache.alive.end()); 
 
             // destroy all the components it has
-            m_entityAttributes.componentStorage.removeAllComponents(i);
+            m_entityAttributes.componentStorage.removeAllComponents(entity);
 
             // remove it from the id pool
-            m_entityIdPool.remove(i.getId());
+            m_entityIdPool.remove(entity.getId());
         }
 
         // clear the temp cache
