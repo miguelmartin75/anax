@@ -146,7 +146,6 @@ namespace anax
                 // note: the entity has already failed the filter
                 else if(attribute.systems.size() > systemIndex && attribute.systems[systemIndex])
                 {
-                    std::cout << "removing self from system in activated\n";
                     // duplicate code (1)
                     i.second->remove(entity); 
                     attribute.systems[systemIndex] = false;
