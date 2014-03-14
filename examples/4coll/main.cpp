@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
-//#include "RunGame.hpp"
-//#include "Game.hpp"
+#include "RunGame.hpp"
+#include "Game.hpp"
 
 const unsigned int WINDOW_WIDTH = 640;
 const unsigned int WINDOW_HEIGHT = 480;

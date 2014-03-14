@@ -7,6 +7,8 @@
 #include <anax/anax.hpp>
 
 #include <BaseGame.hpp>
+
+#include <Systems/AnimationSystem.hpp>
 #include <Systems/SpriteRenderingSystem.hpp>
 
 class Game
@@ -37,6 +39,11 @@ private:
 	anax::World mWorld;
 
 	SpriteRenderingSystem mSpriteRenderingSystem;
+
+	AnimationSystem mAnimationSystem;
+
+	//the player of the game
+	anax::Entity mPlayer;
 };
 
 #endif
