@@ -55,8 +55,8 @@ namespace anax
 	bool Entity::isValid() const
 	{
 		//Allows an empty Entity handle to be checked.
-        if(m_world == nullptr)
-            return false;
+        	if(m_world == nullptr)
+            		return false;
 			
 		return getWorld().isValid(*this);
 	}
