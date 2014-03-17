@@ -23,12 +23,15 @@
 /// THE SOFTWARE.
 ///
 
+#include <iostream>
+
 #include "lest.hpp"
 
 #include <anax/Entity.hpp>
 #include <anax/World.hpp>
 
 #include "Components.hpp"
+#include "Systems.hpp"
 
 const lest::test specification[] =
 {
@@ -56,7 +59,8 @@ const lest::test specification[] =
         EXPECT(!e1.isValid()); // I expect this to not be valid (until you create another entity)
 
         auto e2 = world.createEntity();
-
+        e2.getId(); // to silence warning
+        
         EXPECT(e1.isValid()); // now e1 should be valid
     },
 	
@@ -131,6 +135,61 @@ const lest::test specification[] =
 		e.removeAllComponents();
 		
 		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
+	},
+
+	"Removing components with a system attached to the world", []
+	{
+		anax::World world;
+        MovementSystem moveSystem;
+
+        world.addSystem(moveSystem);
+		
+		auto e = world.createEntity();
+		e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+        e.activate();
+
+        std::cout << "added components to entity\n";
+
+        world.refresh();
+        moveSystem.update(); 
+
+        std::cout << "updated movement system & refreshed world\n";
+
+		e.removeComponent<PositionComponent>();
+        e.activate();
+        std::cout << "removed component and activated entity\n";
+		
+		EXPECT(!e.hasComponent<PositionComponent>());
+
+        std::cout << "refreshed world\n";
+
+        world.refresh();
+        moveSystem.update();
+	},
+	
+	"Removing all components with a system attached to the world", []
+	{
+		anax::World world;
+        MovementSystem moveSystem;
+
+        world.addSystem(moveSystem);	
+
+		auto e = world.createEntity();
+		e.addComponent<PositionComponent>();
+		e.addComponent<VelocityComponent>();
+
+        e.activate();
+        world.refresh();
+		
+		e.removeAllComponents();
+        e.activate();
+        world.refresh();
+		
+		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
+
+        world.refresh();
+        moveSystem.update();
 	},
 
     "Retrieving an Entity via ID index", []

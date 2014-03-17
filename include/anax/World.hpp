@@ -175,18 +175,31 @@ namespace anax
 
             struct EntityAttributes
             {
+                // todo: possibly move component storage to single attribute?
+                // compare performance.
+                struct Attribute
+                {
+                    /// determines if the entity is activated
+                    bool activated;
+
+                    /// a bitset that resembles if the entity
+                    /// exists in a specific system.
+                    /// The index specifies what system, 0 resembles
+                    /// it is in the system, 1 is out of the system
+                    boost::dynamic_bitset<> systems;
+                };
+
                 EntityAttributes(std::size_t amountOfEntities)
                     : componentStorage(amountOfEntities), 
-                    activated(amountOfEntities)
+                    attributes(amountOfEntities)
                 {
                 }
 
                 /// A storage of all components that an entity has
                 detail::EntityComponentStorage componentStorage;
 
-                /// A bitset of activated entities
-                /// Used to determine whether an entity is activated or not
-                boost::dynamic_bitset<> activated;
+                /// the attributes of each entity
+                std::vector<Attribute> attributes;
 
                 /// Used on resize to allow room
                 /// for more entities that require to be allocated
@@ -194,14 +207,14 @@ namespace anax
                 void resize(std::size_t amountOfEntities) 
                 { 
                     componentStorage.resize(amountOfEntities); 
-                    activated.resize(amountOfEntities);
+                    attributes.resize(amountOfEntities);
                 }
 
                 /// Clears the attributes for all entities
                 void clear()
                 {
                     componentStorage.clear();
-                    activated.clear();
+                    attributes.clear();
                 }
             }
 

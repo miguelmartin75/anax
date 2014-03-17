@@ -26,6 +26,7 @@
 #ifndef ANAX_TESTS_SYSTEMS_HPP
 #define ANAX_TESTS_SYSTEMS_HPP
 
+#include <iostream>
 #include <exception>
 
 #include <anax/System.hpp>
@@ -58,16 +59,18 @@ public:
 	
 private:
 	
-	virtual void onEntityAdded(Entity& e) override
+	virtual void onEntityAdded(anax::Entity& e) override
 	{
+        std::cout << "Entity added to MovementSystem\n";
 		if(e.hasComponent<NPCComponent>())
 		{
 			throw std::logic_error("Player contains NPCComponent :(");
 		}
 	}
 	
-	virtual void onEntityRemoved(Entity& e) override
+	virtual void onEntityRemoved(anax::Entity& e) override
 	{
+        std::cout << "Entity removed from MovementSystem\n";
 	}
 };
 
@@ -85,13 +88,15 @@ public:
 	
 private:
 	
-	virtual void onEntityAdded(Entity& e) override
+	virtual void onEntityAdded(anax::Entity& e) override
 	{
+        std::cout << "Entity added to PlayerSystem\n";
 	}
 	
 	
-	virtual void onEntityRemoved(Entity& e) override
+	virtual void onEntityRemoved(anax::Entity& e) override
 	{
+        std::cout << "Entity removed from PlayerSystem\n";
 	}
 };
 
