@@ -42,6 +42,8 @@ namespace anax
 	
 	World& Entity::getWorld() const
 	{
+		assert(m_world != nullptr);
+
 		return *m_world;
 	}
 	
@@ -52,6 +54,10 @@ namespace anax
 	
 	bool Entity::isValid() const
 	{
+		//Allows an empty Entity handle to be checked.
+        if(m_world == nullptr)
+            return false;
+			
 		return getWorld().isValid(*this);
 	}
 	
@@ -101,8 +107,6 @@ namespace anax
 	{
 		return m_id == entity.m_id && entity.m_world == m_world;
 	}
-	
-	
 	
 	void Entity::addComponent(BaseComponent* component, detail::TypeId componentTypeId)
 	{
