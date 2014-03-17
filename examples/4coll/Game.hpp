@@ -10,9 +10,13 @@
 
 #include <Systems/AnimationSystem.hpp>
 #include <Systems/SpriteRenderingSystem.hpp>
+#include <Systems/MovementSystem.hpp>
+
+#include "PlayerInputSystem.hpp"
 
 class Game
-	: public BaseGame
+	: public BaseGame,
+	  public PlayerInputSystem::Listener
 {
 public:
 	/// Constructs Game with sf::RenderTarget
@@ -29,6 +33,9 @@ public:
 	void loadResources();
 
 private:
+
+	virtual void onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state) override;
+
 	/// Window for game to render to
 	sf::RenderTarget* mRenderTarget;
 		
@@ -41,6 +48,10 @@ private:
 	SpriteRenderingSystem mSpriteRenderingSystem;
 
 	AnimationSystem mAnimationSystem;
+
+	MovementSystem mMovementSystem;
+
+	PlayerInputSystem mPlayerInputSystem;
 
 	//the player of the game
 	anax::Entity mPlayer;

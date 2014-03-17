@@ -5,12 +5,11 @@
 #include <Components/TransformComponent.hpp>
 #include <Components/SpriteComponent.hpp>
 #include <Components/AnimationComponent.hpp>
+#include <Components/VelocityComponent.hpp>
 
 const std::string PLAYER_TEXTURE_ID{"player"};
 const sf::Color CLEAR_COLOR{ 60, 60, 60 };
 const unsigned int ANIMATION_FPS = 5;
-
-std::vector<std::string> animationStateNames;
 
 Game::Game(sf::RenderTarget& renderTarget)
 	: mRenderTarget(&renderTarget),
@@ -28,6 +27,10 @@ void Game::init()
 	//add systems to world
 	mWorld.addSystem(mSpriteRenderingSystem);
 	mWorld.addSystem(mAnimationSystem);
+	mWorld.addSystem(mPlayerInputSystem);
+	mWorld.addSystem(mMovementSystem);	
+	
+	mPlayerInputSystem.addListener(this);
 
 	mAnimationSystem.setFps(ANIMATION_FPS);
 	
@@ -44,29 +47,25 @@ void Game::init()
 	}
 
 	auto& playerAnimation = mPlayer.getComponent<AnimationComponent>();
-	playerAnimation.repeat = true;
-	playerAnimation.isPlaying = true;
-
 	auto& playerTransform = mPlayer.addComponent<TransformComponent>().transform;
 	
 	//set player position to be in middle of screen
-	playerTransform.setPosition(mRenderTarget->getView().getSize().x / 2 - playerSprite.getLocalBounds().width / 2, mRenderTarget->getView().getSize().y / 2 - playerSprite.getLocalBounds().height / 2);
+	playerTransform.setPosition(mRenderTarget->getView().getSize().x / 2 - playerAnimation.frameSize.x / 2, mRenderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2);
 
-	animationStateNames.reserve(mPlayer.getComponent<AnimationComponent>().states.size());
-	for(auto& state : mPlayer.getComponent<AnimationComponent>().states)
-	{
-		animationStateNames.emplace_back(state.first);
-	}
+	mPlayer.addComponent<VelocityComponent>();
+	auto& playerComp = mPlayer.addComponent<PlayerComponent>();
+	playerComp.baseSpeed = 100;
 
 	//activate player	
 	mPlayer.activate();
-
-	playerAnimation.playingState = animationStateNames[0];
 }
 
 void Game::update(float deltaTime)
 {
 	mWorld.refresh();
+
+	mPlayerInputSystem.update(deltaTime);
+	mMovementSystem.update(deltaTime);
 	mAnimationSystem.update(deltaTime);
 }
 
@@ -92,54 +91,7 @@ void Game::handleEvents(sf::Event event)
 				case sf::Keyboard::Key::Escape:
 					quit();
 					break;
-				default:
-					break;
-				case sf::Keyboard::Key::Space:
-				{
-					// pause or play animation
-					bool isPlaying = mPlayer.getComponent<AnimationComponent>().isPlaying = !mPlayer.getComponent<AnimationComponent>().isPlaying;
-					std::cout << (isPlaying ? "Playing" : "Paused") << " animation\n";
-				}
-					break;
-				case sf::Keyboard::Key::S:
-				{
-					std::cout << "Stoppped animation\n";
-					mPlayer.getComponent<AnimationComponent>().stop();
-				}
-					break;
-
-				case sf::Keyboard::Key::R:
-				{
-					//toggle repeat
-					bool repeat = mPlayer.getComponent<AnimationComponent>().repeat = !mPlayer.getComponent<AnimationComponent>().repeat;
-					std::cout << "Turned repeat " << (repeat ? "on" : "off") << "\n";
-				}
-					break;
-
-				case sf::Keyboard::Key::Num0:
-				case sf::Keyboard::Key::Num1:
-				case sf::Keyboard::Key::Num2:
-				case sf::Keyboard::Key::Num3:
-				case sf::Keyboard::Key::Num4:
-				case sf::Keyboard::Key::Num5:
-				case sf::Keyboard::Key::Num6:
-				case sf::Keyboard::Key::Num7:			
-				case sf::Keyboard::Key::Num8:
-				case sf::Keyboard::Key::Num9:
-					unsigned int index = event.key.code - sf::Keyboard::Key::Num0;
-
-					if(index >= animationStateNames.size())
-						index = animationStateNames.size() - 1;
-
-					std::cout << "Set anim: " << index << " - " << animationStateNames[index] << "\n";
-
-					mPlayer.getComponent<AnimationComponent>().playingState = animationStateNames[index];
-					mPlayer.getComponent<AnimationComponent>().reset();
-					break;
 			}
-			break;
-		default:
-			break;
 	}
 }
 
@@ -149,5 +101,53 @@ void Game::loadResources()
 	{
 		std::cerr << "Failed to load spritesheet\n";
 		quit();
+	}
+}
+
+void Game::onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state)
+{
+	std::cout << "State change called\n";
+	static const std::string stateNames[] = { "idle", "run", "run", "shoot_run", "shoot_run", "jump", "shoot", "shoot_jump" };
+
+	auto& spriteComp = e.getComponent<SpriteComponent>();
+	
+	if(e.hasComponent<AnimationComponent>())
+	{
+		auto& animationComp = e.getComponent<AnimationComponent>();
+		auto stateName = stateNames[static_cast<unsigned>(state)];
+		auto& animState = animationComp.states[stateName];
+
+		auto x = animState.startPosition.x * animationComp.currentFrame.x;
+		auto y = animState.startPosition.y * animationComp.currentFrame.y;
+		auto width = animationComp.frameSize.x;
+		auto height = animationComp.frameSize.y;
+
+		spriteComp.sprite.setOrigin(static_cast<unsigned>(x + 0.5 * width), static_cast<unsigned>(y + 0.5 * height));
+
+		std::cout << "state changed to: " << stateName << "\n";
+		animationComp.play(stateName);
+		if(state == PlayerComponent::State::JUMP || state == PlayerComponent::State::JUMP_SHOOT || state == PlayerComponent::State::SHOOT)
+		{
+			//dont repeat animation
+			animationComp.repeat = false;
+		}
+		else
+		{
+			animationComp.repeat = true;
+		}
+	}
+
+	switch(state)
+	{
+		case PlayerComponent::State::MOVE_LEFT:
+		case PlayerComponent::State::MOVE_LEFT_SHOOT:
+			spriteComp.sprite.setScale(1, 1);
+			break;
+		case PlayerComponent::State::MOVE_RIGHT:
+		case PlayerComponent::State::MOVE_RIGHT_SHOOT:
+			spriteComp.sprite.setScale(-1, 1);
+			break;
+		default:
+			break;
 	}
 }
