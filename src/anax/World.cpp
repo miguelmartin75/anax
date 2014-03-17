@@ -132,23 +132,26 @@ namespace anax
             for(auto& i : m_systems)
             {
                 auto systemIndex = i.first;
-
-                // if the entity passes the filter the system has
+                
+                // if the entity passes the filter the system has and is not already part of the system
                 if(i.second->getComponentFilter().doesPassFilter(m_entityAttributes.componentStorage.getComponentTypeList(entity)))
                 {
-                    i.second->add(entity); // add it to the system
+			if(attribute.systems.size() <= systemIndex || !attribute.systems[systemIndex])
+			{
+				i.second->add(entity); // add it to the system
 
-                    detail::EnsureCapacity(attribute.systems, systemIndex); 
-                    attribute.systems[systemIndex] = true;
+				detail::EnsureCapacity(attribute.systems, systemIndex); 
+				attribute.systems[systemIndex] = true;
+			}
                 }
                 // otherwise if the entity is within the system 
                 // and is not relevant to the system anymore...
                 // note: the entity has already failed the filter
                 else if(attribute.systems.size() > systemIndex && attribute.systems[systemIndex])
                 {
-                    // duplicate code (1)
-                    i.second->remove(entity); 
-                    attribute.systems[systemIndex] = false;
+			// duplicate code (1)
+			i.second->remove(entity); 
+			attribute.systems[systemIndex] = false;
                 }
             }
         }

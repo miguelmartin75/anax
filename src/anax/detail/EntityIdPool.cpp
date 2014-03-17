@@ -43,8 +43,11 @@ namespace anax
             // if we need to add more entities to the pool
             if(!m_freeList.empty())
             {
-                id = m_freeList.front();
+                id = m_freeList.back();
                 m_freeList.pop_back();
+				
+                // Update the ID counter before issuing
+                id.counter = m_entities[id.index];
             }
             else
             {
