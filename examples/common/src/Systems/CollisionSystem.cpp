@@ -25,6 +25,7 @@
 
 #include <Systems/CollisionSystem.hpp>
 
+#include <iostream>
 #include <algorithm>
 
 #include <Components/TransformComponent.hpp>
@@ -55,11 +56,10 @@ CollisionSystem::CollisionSystem()
 void CollisionSystem::update(double deltaTime)
 {
 	auto colliders = getEntities();
-	
+
 	// Temporary values for rectangles (to check collision)
 	sf::FloatRect rect1;
-	sf::FloatRect rect2;
-	
+	sf::FloatRect rect2;	
 	
 	// NOTES:
 	// 1. This is quite inefficent, however this is just a simple example.
@@ -74,11 +74,15 @@ void CollisionSystem::update(double deltaTime)
 			continue;
 		}
 		
-		for(std::size_t j = i; j < colliders.size(); ++j)
+		for(std::size_t j = i+1; j < colliders.size(); ++j)
 		{
 			auto& e2 = colliders[j];
 			rect2 = getBBoxRectFor(e2);
-			
+
+//			std::cout << "R1left:" << rect1.left << " R1top:" << rect1.top << " R1width:" << rect1.width << " R1height:" << rect1.height << "\n"; 	
+
+//			std::cout << "R2left:" << rect2.left << " R2top:" << rect2.top << " R2width:" << rect2.width << " R2height:" << rect2.height << "\n"; 	
+
 			// Check for the collision
 			if(rect1.intersects(rect2))
 			{

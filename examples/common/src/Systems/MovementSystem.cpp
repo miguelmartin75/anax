@@ -40,7 +40,9 @@ void MovementSystem::update(double deltaTime)
 	{
 		auto& transform = entity.getComponent<TransformComponent>().transform;
 		auto& velocity = entity.getComponent<VelocityComponent>().velocity;
-		
-		transform.move(velocity * (float)deltaTime);
+	
+		velocity *= (float)deltaTime;		
+
+		transform.move(velocity);
 	}
 }

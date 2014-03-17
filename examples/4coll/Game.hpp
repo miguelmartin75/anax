@@ -11,12 +11,14 @@
 #include <Systems/AnimationSystem.hpp>
 #include <Systems/SpriteRenderingSystem.hpp>
 #include <Systems/MovementSystem.hpp>
+#include <Systems/CollisionSystem.hpp>
 
 #include "PlayerInputSystem.hpp"
 
 class Game
 	: public BaseGame,
-	  public PlayerInputSystem::Listener
+	  public PlayerInputSystem::Listener,
+	  public CollisionSystem::Listener
 {
 public:
 	/// Constructs Game with sf::RenderTarget
@@ -36,6 +38,8 @@ private:
 
 	virtual void onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state) override;
 
+	virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) override;
+
 	/// Window for game to render to
 	sf::RenderTarget* mRenderTarget;
 		
@@ -53,8 +57,13 @@ private:
 
 	PlayerInputSystem mPlayerInputSystem;
 
+	CollisionSystem mCollisionSystem;
+
 	//the player of the game
 	anax::Entity mPlayer;
+	
+	//collidable object
+	anax::Entity mWall;
 };
 
 #endif
