@@ -52,87 +52,87 @@ include examples/CMakeFiles/Collision.dir/progress.make
 # Include the compile flags for this target's objects.
 include examples/CMakeFiles/Collision.dir/flags.make
 
-examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o: examples/CMakeFiles/Collision.dir/flags.make
-examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o: ../examples/4coll/PlayerInputSystem.cpp
+examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o: examples/CMakeFiles/Collision.dir/flags.make
+examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o: ../examples/4\ Collision/PlayerInputSystem.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/administrator/libraries/anax/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o -c /home/administrator/libraries/anax/examples/4coll/PlayerInputSystem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o -c "/home/administrator/libraries/anax/examples/4 Collision/PlayerInputSystem.cpp"
 
-examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.i"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/administrator/libraries/anax/examples/4coll/PlayerInputSystem.cpp > CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.i
+examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.i"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/administrator/libraries/anax/examples/4 Collision/PlayerInputSystem.cpp" > CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.i
 
-examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.s"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/administrator/libraries/anax/examples/4coll/PlayerInputSystem.cpp -o CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.s
+examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.s"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/administrator/libraries/anax/examples/4 Collision/PlayerInputSystem.cpp" -o CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.s
 
-examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.requires:
-.PHONY : examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.requires
+examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.requires:
+.PHONY : examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.requires
 
-examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.provides: examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.requires
-	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.provides.build
-.PHONY : examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.provides
+examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.provides: examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.requires
+	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.provides.build
+.PHONY : examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.provides
 
-examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.provides.build: examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o
+examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.provides.build: examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o
 
-examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o: examples/CMakeFiles/Collision.dir/flags.make
-examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o: ../examples/4coll/Game.cpp
+examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o: examples/CMakeFiles/Collision.dir/flags.make
+examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o: ../examples/4\ Collision/Game.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/administrator/libraries/anax/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Collision.dir/4coll/Game.cpp.o -c /home/administrator/libraries/anax/examples/4coll/Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Collision.dir/4_Collision/Game.cpp.o -c "/home/administrator/libraries/anax/examples/4 Collision/Game.cpp"
 
-examples/CMakeFiles/Collision.dir/4coll/Game.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Collision.dir/4coll/Game.cpp.i"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/administrator/libraries/anax/examples/4coll/Game.cpp > CMakeFiles/Collision.dir/4coll/Game.cpp.i
+examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Collision.dir/4_Collision/Game.cpp.i"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/administrator/libraries/anax/examples/4 Collision/Game.cpp" > CMakeFiles/Collision.dir/4_Collision/Game.cpp.i
 
-examples/CMakeFiles/Collision.dir/4coll/Game.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Collision.dir/4coll/Game.cpp.s"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/administrator/libraries/anax/examples/4coll/Game.cpp -o CMakeFiles/Collision.dir/4coll/Game.cpp.s
+examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Collision.dir/4_Collision/Game.cpp.s"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/administrator/libraries/anax/examples/4 Collision/Game.cpp" -o CMakeFiles/Collision.dir/4_Collision/Game.cpp.s
 
-examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.requires:
-.PHONY : examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.requires
+examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.requires:
+.PHONY : examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.requires
 
-examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.provides: examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.requires
-	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.provides.build
-.PHONY : examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.provides
+examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.provides: examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.requires
+	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.provides.build
+.PHONY : examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.provides
 
-examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.provides.build: examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o
+examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.provides.build: examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o
 
-examples/CMakeFiles/Collision.dir/4coll/main.cpp.o: examples/CMakeFiles/Collision.dir/flags.make
-examples/CMakeFiles/Collision.dir/4coll/main.cpp.o: ../examples/4coll/main.cpp
+examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o: examples/CMakeFiles/Collision.dir/flags.make
+examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o: ../examples/4\ Collision/main.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/administrator/libraries/anax/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object examples/CMakeFiles/Collision.dir/4coll/main.cpp.o"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Collision.dir/4coll/main.cpp.o -c /home/administrator/libraries/anax/examples/4coll/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Collision.dir/4_Collision/main.cpp.o -c "/home/administrator/libraries/anax/examples/4 Collision/main.cpp"
 
-examples/CMakeFiles/Collision.dir/4coll/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Collision.dir/4coll/main.cpp.i"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/administrator/libraries/anax/examples/4coll/main.cpp > CMakeFiles/Collision.dir/4coll/main.cpp.i
+examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Collision.dir/4_Collision/main.cpp.i"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/administrator/libraries/anax/examples/4 Collision/main.cpp" > CMakeFiles/Collision.dir/4_Collision/main.cpp.i
 
-examples/CMakeFiles/Collision.dir/4coll/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Collision.dir/4coll/main.cpp.s"
-	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/administrator/libraries/anax/examples/4coll/main.cpp -o CMakeFiles/Collision.dir/4coll/main.cpp.s
+examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Collision.dir/4_Collision/main.cpp.s"
+	cd /home/administrator/libraries/anax/build/examples && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/administrator/libraries/anax/examples/4 Collision/main.cpp" -o CMakeFiles/Collision.dir/4_Collision/main.cpp.s
 
-examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.requires:
-.PHONY : examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.requires
+examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.requires:
+.PHONY : examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.requires
 
-examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.provides: examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.requires
-	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.provides.build
-.PHONY : examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.provides
+examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.provides: examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.requires
+	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.provides.build
+.PHONY : examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.provides
 
-examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.provides.build: examples/CMakeFiles/Collision.dir/4coll/main.cpp.o
+examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.provides.build: examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o
 
 # Object files for target Collision
 Collision_OBJECTS = \
-"CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o" \
-"CMakeFiles/Collision.dir/4coll/Game.cpp.o" \
-"CMakeFiles/Collision.dir/4coll/main.cpp.o"
+"CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o" \
+"CMakeFiles/Collision.dir/4_Collision/Game.cpp.o" \
+"CMakeFiles/Collision.dir/4_Collision/main.cpp.o"
 
 # External object files for target Collision
 Collision_EXTERNAL_OBJECTS =
 
-examples/Collision: examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o
-examples/Collision: examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o
-examples/Collision: examples/CMakeFiles/Collision.dir/4coll/main.cpp.o
+examples/Collision: examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o
+examples/Collision: examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o
+examples/Collision: examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o
 examples/Collision: examples/CMakeFiles/Collision.dir/build.make
 examples/Collision: lib/libanax_d.so.1.0.0
 examples/Collision: examples/lib/libanax_common_d.so
@@ -148,9 +148,9 @@ examples/Collision: examples/CMakeFiles/Collision.dir/link.txt
 examples/CMakeFiles/Collision.dir/build: examples/Collision
 .PHONY : examples/CMakeFiles/Collision.dir/build
 
-examples/CMakeFiles/Collision.dir/requires: examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o.requires
-examples/CMakeFiles/Collision.dir/requires: examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o.requires
-examples/CMakeFiles/Collision.dir/requires: examples/CMakeFiles/Collision.dir/4coll/main.cpp.o.requires
+examples/CMakeFiles/Collision.dir/requires: examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o.requires
+examples/CMakeFiles/Collision.dir/requires: examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o.requires
+examples/CMakeFiles/Collision.dir/requires: examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o.requires
 .PHONY : examples/CMakeFiles/Collision.dir/requires
 
 examples/CMakeFiles/Collision.dir/clean:

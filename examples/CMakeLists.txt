@@ -58,7 +58,7 @@ endmacro()
 #create_example("Rendering" "1 Rendering")
 #create_example("Animation" "2 Animation")
 create_example("Movement" "3 Movement")
-create_example("Collision" "4coll")
+create_example("Collision" "4 Collision")
 
 # ============== #
 # Build Examples #

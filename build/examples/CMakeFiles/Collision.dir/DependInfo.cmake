@@ -4,9 +4,9 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/administrator/libraries/anax/examples/4coll/Game.cpp" "/home/administrator/libraries/anax/build/examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o"
-  "/home/administrator/libraries/anax/examples/4coll/PlayerInputSystem.cpp" "/home/administrator/libraries/anax/build/examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o"
-  "/home/administrator/libraries/anax/examples/4coll/main.cpp" "/home/administrator/libraries/anax/build/examples/CMakeFiles/Collision.dir/4coll/main.cpp.o"
+  "/home/administrator/libraries/anax/examples/4 Collision/Game.cpp" "/home/administrator/libraries/anax/build/examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o"
+  "/home/administrator/libraries/anax/examples/4 Collision/PlayerInputSystem.cpp" "/home/administrator/libraries/anax/build/examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o"
+  "/home/administrator/libraries/anax/examples/4 Collision/main.cpp" "/home/administrator/libraries/anax/build/examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

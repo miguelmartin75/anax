@@ -256,77 +256,77 @@ anax_common/fast:
 	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Movement.dir/build.make examples/CMakeFiles/Movement.dir/3_Movement/main.cpp.s
 .PHONY : 3_Movement/main.cpp.s
 
-4coll/Game.o: 4coll/Game.cpp.o
-.PHONY : 4coll/Game.o
+4_Collision/Game.o: 4_Collision/Game.cpp.o
+.PHONY : 4_Collision/Game.o
 
 # target to build an object file
-4coll/Game.cpp.o:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/Game.cpp.o
-.PHONY : 4coll/Game.cpp.o
+4_Collision/Game.cpp.o:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.o
+.PHONY : 4_Collision/Game.cpp.o
 
-4coll/Game.i: 4coll/Game.cpp.i
-.PHONY : 4coll/Game.i
+4_Collision/Game.i: 4_Collision/Game.cpp.i
+.PHONY : 4_Collision/Game.i
 
 # target to preprocess a source file
-4coll/Game.cpp.i:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/Game.cpp.i
-.PHONY : 4coll/Game.cpp.i
+4_Collision/Game.cpp.i:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.i
+.PHONY : 4_Collision/Game.cpp.i
 
-4coll/Game.s: 4coll/Game.cpp.s
-.PHONY : 4coll/Game.s
+4_Collision/Game.s: 4_Collision/Game.cpp.s
+.PHONY : 4_Collision/Game.s
 
 # target to generate assembly for a file
-4coll/Game.cpp.s:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/Game.cpp.s
-.PHONY : 4coll/Game.cpp.s
+4_Collision/Game.cpp.s:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/Game.cpp.s
+.PHONY : 4_Collision/Game.cpp.s
 
-4coll/PlayerInputSystem.o: 4coll/PlayerInputSystem.cpp.o
-.PHONY : 4coll/PlayerInputSystem.o
+4_Collision/PlayerInputSystem.o: 4_Collision/PlayerInputSystem.cpp.o
+.PHONY : 4_Collision/PlayerInputSystem.o
 
 # target to build an object file
-4coll/PlayerInputSystem.cpp.o:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o
-.PHONY : 4coll/PlayerInputSystem.cpp.o
+4_Collision/PlayerInputSystem.cpp.o:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o
+.PHONY : 4_Collision/PlayerInputSystem.cpp.o
 
-4coll/PlayerInputSystem.i: 4coll/PlayerInputSystem.cpp.i
-.PHONY : 4coll/PlayerInputSystem.i
+4_Collision/PlayerInputSystem.i: 4_Collision/PlayerInputSystem.cpp.i
+.PHONY : 4_Collision/PlayerInputSystem.i
 
 # target to preprocess a source file
-4coll/PlayerInputSystem.cpp.i:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.i
-.PHONY : 4coll/PlayerInputSystem.cpp.i
+4_Collision/PlayerInputSystem.cpp.i:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.i
+.PHONY : 4_Collision/PlayerInputSystem.cpp.i
 
-4coll/PlayerInputSystem.s: 4coll/PlayerInputSystem.cpp.s
-.PHONY : 4coll/PlayerInputSystem.s
+4_Collision/PlayerInputSystem.s: 4_Collision/PlayerInputSystem.cpp.s
+.PHONY : 4_Collision/PlayerInputSystem.s
 
 # target to generate assembly for a file
-4coll/PlayerInputSystem.cpp.s:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.s
-.PHONY : 4coll/PlayerInputSystem.cpp.s
+4_Collision/PlayerInputSystem.cpp.s:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.s
+.PHONY : 4_Collision/PlayerInputSystem.cpp.s
 
-4coll/main.o: 4coll/main.cpp.o
-.PHONY : 4coll/main.o
+4_Collision/main.o: 4_Collision/main.cpp.o
+.PHONY : 4_Collision/main.o
 
 # target to build an object file
-4coll/main.cpp.o:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/main.cpp.o
-.PHONY : 4coll/main.cpp.o
+4_Collision/main.cpp.o:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.o
+.PHONY : 4_Collision/main.cpp.o
 
-4coll/main.i: 4coll/main.cpp.i
-.PHONY : 4coll/main.i
+4_Collision/main.i: 4_Collision/main.cpp.i
+.PHONY : 4_Collision/main.i
 
 # target to preprocess a source file
-4coll/main.cpp.i:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/main.cpp.i
-.PHONY : 4coll/main.cpp.i
+4_Collision/main.cpp.i:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.i
+.PHONY : 4_Collision/main.cpp.i
 
-4coll/main.s: 4coll/main.cpp.s
-.PHONY : 4coll/main.s
+4_Collision/main.s: 4_Collision/main.cpp.s
+.PHONY : 4_Collision/main.s
 
 # target to generate assembly for a file
-4coll/main.cpp.s:
-	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4coll/main.cpp.s
-.PHONY : 4coll/main.cpp.s
+4_Collision/main.cpp.s:
+	cd /home/administrator/libraries/anax/build && $(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/4_Collision/main.cpp.s
+.PHONY : 4_Collision/main.cpp.s
 
 common/src/Components/AnimationComponent.o: common/src/Components/AnimationComponent.cpp.o
 .PHONY : common/src/Components/AnimationComponent.o
@@ -472,15 +472,15 @@ help:
 	@echo "... 3_Movement/main.o"
 	@echo "... 3_Movement/main.i"
 	@echo "... 3_Movement/main.s"
-	@echo "... 4coll/Game.o"
-	@echo "... 4coll/Game.i"
-	@echo "... 4coll/Game.s"
-	@echo "... 4coll/PlayerInputSystem.o"
-	@echo "... 4coll/PlayerInputSystem.i"
-	@echo "... 4coll/PlayerInputSystem.s"
-	@echo "... 4coll/main.o"
-	@echo "... 4coll/main.i"
-	@echo "... 4coll/main.s"
+	@echo "... 4_Collision/Game.o"
+	@echo "... 4_Collision/Game.i"
+	@echo "... 4_Collision/Game.s"
+	@echo "... 4_Collision/PlayerInputSystem.o"
+	@echo "... 4_Collision/PlayerInputSystem.i"
+	@echo "... 4_Collision/PlayerInputSystem.s"
+	@echo "... 4_Collision/main.o"
+	@echo "... 4_Collision/main.i"
+	@echo "... 4_Collision/main.s"
 	@echo "... common/src/Components/AnimationComponent.o"
 	@echo "... common/src/Components/AnimationComponent.i"
 	@echo "... common/src/Components/AnimationComponent.s"

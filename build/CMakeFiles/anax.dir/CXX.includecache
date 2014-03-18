@@ -116,14 +116,6 @@ vector
 anax/Entity.hpp
 -
 
-/home/administrator/libraries/anax/src/anax/Component.cpp
-anax/Component.hpp
--
-
-/home/administrator/libraries/anax/src/anax/ComponentFilter.cpp
-anax/ComponentFilter.hpp
--
-
 /home/administrator/libraries/anax/src/anax/Entity.cpp
 anax/Entity.hpp
 -
@@ -142,16 +134,6 @@ anax/World.hpp
 anax/config.hpp
 -
 cassert
--
-
-/home/administrator/libraries/anax/src/anax/detail/EntityComponentStorage.cpp
-anax/detail/EntityComponentStorage.hpp
--
-anax/detail/ContainerUtils.hpp
--
-
-/home/administrator/libraries/anax/src/anax/detail/EntityIdPool.cpp
-anax/detail/EntityIdPool.hpp
 -
 
 /home/administrator/libraries/boost_1_55_0/boost/config.hpp

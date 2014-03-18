@@ -1,7 +1,7 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/Collision.dir/4coll/PlayerInputSystem.cpp.o"
-  "CMakeFiles/Collision.dir/4coll/Game.cpp.o"
-  "CMakeFiles/Collision.dir/4coll/main.cpp.o"
+  "CMakeFiles/Collision.dir/4_Collision/PlayerInputSystem.cpp.o"
+  "CMakeFiles/Collision.dir/4_Collision/Game.cpp.o"
+  "CMakeFiles/Collision.dir/4_Collision/main.cpp.o"
   "Collision.pdb"
   "Collision"
 )

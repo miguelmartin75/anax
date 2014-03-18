@@ -113,8 +113,8 @@ examples/preinstall:
 # Target rules for target examples/CMakeFiles/Collision.dir
 
 # All Build rule for target.
-examples/CMakeFiles/Collision.dir/all: CMakeFiles/anax.dir/all
 examples/CMakeFiles/Collision.dir/all: examples/CMakeFiles/anax_common.dir/all
+examples/CMakeFiles/Collision.dir/all: CMakeFiles/anax.dir/all
 	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/depend
 	$(MAKE) -f examples/CMakeFiles/Collision.dir/build.make examples/CMakeFiles/Collision.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/administrator/libraries/anax/build/CMakeFiles  1 2 3
@@ -149,8 +149,8 @@ clean: examples/CMakeFiles/Collision.dir/clean
 # Target rules for target examples/CMakeFiles/Movement.dir
 
 # All Build rule for target.
-examples/CMakeFiles/Movement.dir/all: CMakeFiles/anax.dir/all
 examples/CMakeFiles/Movement.dir/all: examples/CMakeFiles/anax_common.dir/all
+examples/CMakeFiles/Movement.dir/all: CMakeFiles/anax.dir/all
 	$(MAKE) -f examples/CMakeFiles/Movement.dir/build.make examples/CMakeFiles/Movement.dir/depend
 	$(MAKE) -f examples/CMakeFiles/Movement.dir/build.make examples/CMakeFiles/Movement.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/administrator/libraries/anax/build/CMakeFiles  4 5 6
