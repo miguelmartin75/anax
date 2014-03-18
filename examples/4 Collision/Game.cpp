@@ -89,8 +89,8 @@ void Game::init()
 	wallCollision.BBox.width = wallSprite.getLocalBounds().width;
 	wallCollision.BBox.height = wallSprite.getLocalBounds().height;
 
-	//set wall position to be 3/4 to the right of screen
-	wallTransform.setPosition(mRenderTarget->getView().getSize().x * 0.75 - wallSprite.getLocalBounds().width / 2, mRenderTarget->getView().getSize().y * 0.47 - wallSprite.getLocalBounds().height / 2);
+	//set wall position to be 3/4 to the right of screen, and on the same level as player
+	wallTransform.setPosition(mRenderTarget->getView().getSize().x * 0.75 - wallSprite.getLocalBounds().width / 2, (mRenderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2) - wallCollision.BBox.height / 2);
 
 	mWall.activate();
 }
@@ -198,12 +198,13 @@ void Game::onCollisionOccured(anax::Entity& e1, anax::Entity& e2)
 {
 	std::cout << "Collision fired!\n";
 	
-	//get velocity components from each entity
+	//get velocity component information from e1
 	auto& velocityE1 = e1.getComponent<VelocityComponent>().velocity;
 
 	auto xVel = velocityE1.x;
 	auto yVel = velocityE1.y;
 		
+	//move backwards if a collision is detected
 	auto& transformE1 = e1.getComponent<TransformComponent>().transform;
 	transformE1.move(-xVel, -yVel);
 }
