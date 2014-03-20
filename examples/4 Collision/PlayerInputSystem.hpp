@@ -18,14 +18,14 @@ public:
 	
 	void update(double deltaTime);
 	
-	void addListener(Listener* listener) { mListeners.push_back(listener); }
-	void removeListener(Listener* listener) { mListeners.erase(std::remove(mListeners.begin(), mListeners.end(), listener), mListeners.end()); }
+	void addListener(Listener* listener) { m_Listeners.push_back(listener); }
+	void removeListener(Listener* listener) { m_Listeners.erase(std::remove(m_Listeners.begin(), m_Listeners.end(), listener), m_Listeners.end()); }
 
 private:
 	
 	void setPlayerState(anax::Entity& e, PlayerComponent& pc, PlayerComponent::State);
 
-	std::vector<Listener*> mListeners;
+	std::vector<Listener*> m_Listeners;
 };
 
 #endif

@@ -15,8 +15,8 @@ const sf::Color CLEAR_COLOR{ 60, 60, 60 };
 const unsigned int ANIMATION_FPS = 5;
 
 Game::Game(sf::RenderTarget& renderTarget)
-	: mRenderTarget(&renderTarget),
-	  mSpriteRenderingSystem(renderTarget)
+	: m_RenderTarget(&renderTarget),
+	  m_SpriteRenderingSystem(renderTarget)
 {
 }
 
@@ -25,93 +25,93 @@ void Game::init()
 	loadResources();
 	
 	//create player
-	mPlayer = mWorld.createEntity();
+	m_Player = m_World.createEntity();
 
 	//add systems to world
-	mWorld.addSystem(mSpriteRenderingSystem);
-	mWorld.addSystem(mAnimationSystem);
-	mWorld.addSystem(mPlayerInputSystem);
-	mWorld.addSystem(mMovementSystem);	
-	mWorld.addSystem(mCollisionSystem);
+	m_World.addSystem(m_SpriteRenderingSystem);
+	m_World.addSystem(m_AnimationSystem);
+	m_World.addSystem(m_PlayerInputSystem);
+	m_World.addSystem(m_MovementSystem);	
+	m_World.addSystem(m_CollisionSystem);
 	
 	//add this world to appropriate listener lists
-	mPlayerInputSystem.addListener(this);
-	mCollisionSystem.addListener(*this);	
+	m_PlayerInputSystem.addListener(this);
+	m_CollisionSystem.addListener(*this);	
 
-	mAnimationSystem.setFps(ANIMATION_FPS);
+	m_AnimationSystem.setFps(ANIMATION_FPS);
 	
-	auto& playerSprite = mPlayer.addComponent<SpriteComponent>().sprite;
+	auto& playerSprite = m_Player.addComponent<SpriteComponent>().sprite;
 	
 	//set sprite texture
-	playerSprite.setTexture(mTextureCache[PLAYER_TEXTURE_ID]);
+	playerSprite.setTexture(m_TextureCache[PLAYER_TEXTURE_ID]);
 
 	//load animations
-	if(!mPlayer.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
+	if(!m_Player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
 	{	
 		std::cerr < "Failed to load animation data\n";
 		quit();
 	}
 
-	auto& playerAnimation = mPlayer.getComponent<AnimationComponent>();
-	auto& playerTransform = mPlayer.addComponent<TransformComponent>().transform;
+	auto& playerAnimation = m_Player.getComponent<AnimationComponent>();
+	auto& playerTransform = m_Player.addComponent<TransformComponent>().transform;
 
 	//add collision component
-	auto& playerCollision = mPlayer.addComponent<CollisionComponent>();
+	auto& playerCollision = m_Player.addComponent<CollisionComponent>();
 	playerCollision.causesEvents = true;
 	playerCollision.BBox.width = playerAnimation.frameSize.x;
 	playerCollision.BBox.height = playerAnimation.frameSize.y;
 	
 	//set player position to be in middle of screen
-	playerTransform.setPosition(mRenderTarget->getView().getSize().x / 2 - playerAnimation.frameSize.x / 2, mRenderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2);
+	playerTransform.setPosition(m_RenderTarget->getView().getSize().x / 2 - playerAnimation.frameSize.x / 2, m_RenderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2);
 
-	mPlayer.addComponent<VelocityComponent>();
-	auto& playerComp = mPlayer.addComponent<PlayerComponent>();
+	m_Player.addComponent<VelocityComponent>();
+	auto& playerComp = m_Player.addComponent<PlayerComponent>();
 	playerComp.baseSpeed = 100;
 
 	//activate player	
-	mPlayer.activate();
+	m_Player.activate();
 
 	//create wall
-	mWall = mWorld.createEntity();
+	m_Wall = m_World.createEntity();
 	
 	//get wall sprite
-	auto& wallSprite = mWall.addComponent<SpriteComponent>().sprite;
+	auto& wallSprite = m_Wall.addComponent<SpriteComponent>().sprite;
 
 	//set wall sprite texture
-	wallSprite.setTexture(mTextureCache[WALL_TEXTURE_ID]);
+	wallSprite.setTexture(m_TextureCache[WALL_TEXTURE_ID]);
 
 	//create wall position component
-	auto& wallTransform = mWall.addComponent<TransformComponent>().transform;
+	auto& wallTransform = m_Wall.addComponent<TransformComponent>().transform;
 		
 	//create wall collision component
-	auto& wallCollision = mWall.addComponent<CollisionComponent>();
+	auto& wallCollision = m_Wall.addComponent<CollisionComponent>();
 	wallCollision.causesEvents = true;
 	wallCollision.BBox.width = wallSprite.getLocalBounds().width;
 	wallCollision.BBox.height = wallSprite.getLocalBounds().height;
 
 	//set wall position to be 3/4 to the right of screen, and on the same level as player
-	wallTransform.setPosition(mRenderTarget->getView().getSize().x * 0.75 - wallSprite.getLocalBounds().width / 2, (mRenderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2) - wallCollision.BBox.height / 2);
+	wallTransform.setPosition(m_RenderTarget->getView().getSize().x * 0.75 - wallSprite.getLocalBounds().width / 2, (m_RenderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2) - wallCollision.BBox.height / 2);
 
-	mWall.activate();
+	m_Wall.activate();
 }
 
 void Game::update(float deltaTime)
 {
-	mWorld.refresh();
+	m_World.refresh();
 
-	mPlayerInputSystem.update(deltaTime);
-	mMovementSystem.update(deltaTime);
-	mAnimationSystem.update(deltaTime);
-	mCollisionSystem.update(deltaTime);	
+	m_PlayerInputSystem.update(deltaTime);
+	m_MovementSystem.update(deltaTime);
+	m_AnimationSystem.update(deltaTime);
+	m_CollisionSystem.update(deltaTime);	
 }
 
 void Game::render()
 {
 	//prepare screen for redraw
-	mRenderTarget->clear(CLEAR_COLOR);
+	m_RenderTarget->clear(CLEAR_COLOR);
 	
 	//render all entities in mSpriteRenderingSystem
-	mSpriteRenderingSystem.render();
+	m_SpriteRenderingSystem.render();
 }
 
 void Game::handleEvents(sf::Event event)
@@ -133,13 +133,13 @@ void Game::handleEvents(sf::Event event)
 
 void Game::loadResources()
 {
-	if(!mTextureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
+	if(!m_TextureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
 	{
 		std::cerr << "Failed to load spritesheet\n";
 		quit();
 	}
 
-	if(!mTextureCache[WALL_TEXTURE_ID].loadFromFile("resources/textures/w.png"))
+	if(!m_TextureCache[WALL_TEXTURE_ID].loadFromFile("resources/textures/w.png"))
 	{
 		std::cerr < "Failed to load wall sprite\n";
 		quit();
