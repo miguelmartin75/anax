@@ -10,6 +10,8 @@ Here are the examples that are contained with the library, at the current time:
 	- An example that shows how to implement simple 2D frame-by-frame animation.
 3. Movement
 	- An example that shows how to move objects around.
+4. Collision
+	- An example that shows basic bounding box collision.
 
 > #### **NOTES**
 > 1. An example may or may not use the previous example cocepts (e.g. to see movement you must know how to render objects). 
@@ -29,15 +31,13 @@ It is reccomended that you understand how to use SFML, even though it is quite s
 
 These are the following examples that will be present in the library in the future.
 
-1. Collision
-	- An example that shows how to handle collision in an entity system.
-2. AI Follow
+1. AI Follow
 	- An example that shows some simple AI within an entity system.
-3. Simple Shooter
+2. Simple Shooter
 	- An extremely simple game with all of the concepts gathered from previous examples. This example also has AI that will shoot at the player.
-4. Serialisation
+3. Serialisation
 	- An example that shows a way to serialize your entities within your game
-5. Networking
+4. Networking
 	- Integrating networking with anax
 
 [SFML]: http://www.sfml-dev.org/

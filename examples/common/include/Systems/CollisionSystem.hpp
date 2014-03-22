@@ -49,7 +49,7 @@ public:
 		/// \param e1 The first entity that has been collided with
 		/// \param e2 The second entity that has been collided with
 		/// \note e1 Is guarenteed to have the causesEvent flag to be true
-		virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) {}
+		virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) = 0;
 	};
 	
 	/// Default constructor

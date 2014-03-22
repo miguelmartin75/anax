@@ -11,6 +11,9 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project (ANAX)
 
+set(SFML_ROOT "/usr/local/lib/SFML-2.1")
+set(CMAKE_MODULE_PATH "/usr/local/lib/SFML-2.1/share/SFML/cmake/Modules")
+
 set(ANAX_LIBRARY_NAME "anax")
 set(ANAX_VERSION_MAJOR 1)
 set(ANAX_VERSION_MINOR 0)
