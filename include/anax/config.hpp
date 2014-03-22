@@ -23,26 +23,27 @@
 /// THE SOFTWARE.
 ///
 
-#include <Systems/MovementSystem.hpp>
+#ifndef ANAX_CONFIG_HPP
+#define ANAX_CONFIG_HPP
 
-#include <Components/VelocityComponent.hpp>
-#include <Components/TransformComponent.hpp>
+#include <cstddef>
 
-MovementSystem::MovementSystem()
-	: Base(anax::ComponentFilter().requires<VelocityComponent, TransformComponent>())
+/* #undef ANAX_32_BIT_ENTITY_IDS */
+#define ANAX_USE_VARIADIC_TEMPLATES true
+/* #undef ANAX_VIRTUAL_DTORS_IN_COMPONENT */
+
+#ifdef ANAX_32_BIT_ENTITY_IDS
+#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
+#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 12
+#else
+#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 48
+#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 16
+#endif
+
+namespace anax
 {
+    /// The default size of a pool within a world  
+    constexpr std::size_t DEFAULT_ENTITY_POOL_SIZE = 1000;  
 }
 
-void MovementSystem::update(double deltaTime)
-{
-	auto entities = getEntities();
-	for(auto& entity : entities)
-	{
-		auto& transform = entity.getComponent<TransformComponent>().transform;
-		auto& velocity = entity.getComponent<VelocityComponent>().velocity;
-	
-		velocity *= (float)deltaTime;		
-
-		transform.move(velocity);
-	}
-}
+#endif // ANAX_CONFIG_HPP
