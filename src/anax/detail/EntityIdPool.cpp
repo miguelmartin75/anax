@@ -47,7 +47,7 @@ namespace anax
                 m_freeList.pop_back();
 				
                 // Update the ID counter before issuing
-                id.counter = m_entities[id.index];
+                //id.counter = m_entities[id.index];
             }
             else
             {
@@ -65,7 +65,7 @@ namespace anax
         void EntityIdPool::remove(Entity::Id id)
         {
             ++m_entities[id.index]; // increment the counter in the cache
-            m_freeList.push_back(id); // add the ID to the freeList
+            m_freeList.emplace_back(id.index, m_entities[id.index]); // add the ID to the freeList
         }
 
         Entity::Id EntityIdPool::get(std::size_t index) const
