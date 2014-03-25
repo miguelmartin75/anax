@@ -48,7 +48,7 @@ void Game::init()
 	//load animations
 	if(!m_Player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
 	{	
-		std::cerr < "Failed to load animation data\n";
+		std::cerr << "Failed to load animation data\n";
 		quit();
 	}
 
@@ -141,7 +141,7 @@ void Game::loadResources()
 
 	if(!m_TextureCache[WALL_TEXTURE_ID].loadFromFile("resources/textures/w.png"))
 	{
-		std::cerr < "Failed to load wall sprite\n";
+		std::cerr << "Failed to load wall sprite\n";
 		quit();
 	}
 }
