@@ -81,11 +81,11 @@ void AnimationSystem::update(double deltaTime)
 		
 		if(animationState)
 		{
-			sf::IntRect rect{
-				sf::Vector2i{animationState->startPosition.x + animation.frameSize.x * (int)animation.currentFrame.x,
-				animationState->startPosition.y + animation.frameSize.y * (int)animation.currentFrame.y},
+			sf::IntRect rect(
+				sf::Vector2i(animationState->startPosition.x + animation.frameSize.x * (int)animation.currentFrame.x,
+				animationState->startPosition.y + animation.frameSize.y * (int)animation.currentFrame.y),
 				
-				sf::Vector2i{animation.frameSize}};
+				sf::Vector2i(animation.frameSize));
 			sprite.setTextureRect(rect);
 		}
 	}
