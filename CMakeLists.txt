@@ -51,7 +51,7 @@ set(BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
 set(BUILD_SHARED_LIBS true CACHE BOOL "A flag to build shared (dynamic) libs")
 set(ANAX_USE_VARIADIC_TEMPLATES true CACHE BOOL "Enables use of variadic templates where appropriate in the library")
 set(ANAX_32_BIT_ENTITY_IDS false CACHE BOOL "Enables 32 bit IDs for the entity")
-set(ANAX_VIRTUAL_DTORS_IN_COMPONENT false CACHE BOOL "Enables virtual dtors in components")
+set(ANAX_VIRTUAL_DTORS_IN_COMPONENT true CACHE BOOL "Enables virtual dtors in components")
 set(ANAX_DEFAULT_ENTITY_POOL_SIZE 1000 CACHE INTEGER "The default entity pool size, within a World object")
 
 # set up the configure file for the library
