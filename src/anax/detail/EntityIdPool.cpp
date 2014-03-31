@@ -31,8 +31,8 @@ namespace anax
     {
         EntityIdPool::EntityIdPool(std::size_t poolSize)
             : m_defaultPoolSize(poolSize),
-            m_entities(poolSize),
-            m_nextId(0)
+                m_nextId(0),
+                m_entities(poolSize)
         {
         }
 
