@@ -207,7 +207,7 @@ If you do help out, [email] me and I'll put your name in the contributers list.
 
 # License
 
-Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+Copyright (C) 2013-2014 Miguel Martin (miguel@miguel-martin.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

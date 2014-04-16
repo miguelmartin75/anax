@@ -1,6 +1,6 @@
 # ====================================================================== #
 # CMake Build Script for anax                        		          	 #
-# Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)    	 #
+# Copyright (C) 2013-2014 Miguel Martin (miguel@miguel-martin.com)    	 #
 # ====================================================================== #
 
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)

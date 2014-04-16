@@ -2,7 +2,7 @@
 /// anax
 /// An open source C++ entity system.
 ///
-/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+/// Copyright (C) 2013-2014 Miguel Martin (miguel@miguel-martin.com)
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -79,13 +79,13 @@ void CollisionSystem::update(double deltaTime)
 			auto& e2 = colliders[j];
 			rect2 = getBBoxRectFor(e2);
 
-//			std::cout << "R1left:" << rect1.left << " R1top:" << rect1.top << " R1width:" << rect1.width << " R1height:" << rect1.height << "\n"; 	
-
-//			std::cout << "R2left:" << rect2.left << " R2top:" << rect2.top << " R2width:" << rect2.width << " R2height:" << rect2.height << "\n"; 	
-
 			// Check for the collision
 			if(rect1.intersects(rect2))
 			{
+
+			std::cout << "R1left:" << rect1.left << " R1top:" << rect1.top << " R1width:" << rect1.width << " R1height:" << rect1.height << "\n"; 	
+			std::cout << "R2left:" << rect2.left << " R2top:" << rect2.top << " R2width:" << rect2.width << " R2height:" << rect2.height << "\n"; 	
+
 				for(auto& listener : m_listeners)
 					listener->onCollisionOccured(e1, e2);
 			}
