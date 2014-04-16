@@ -30,11 +30,12 @@
 #include <vector>
 #include <map>
 
+#include <anax/config.hpp>
 #include <anax/Component.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 
-class AnimationSystem;
+struct AnimationSystem;
 /// \brief A component used to describe animation
 ///
 /// \note This component assumes that all frames are equal size.
@@ -60,10 +61,13 @@ struct AnimationComponent : anax::Component<AnimationComponent>
 	};
 	
 	AnimationComponent()
-		: isPlaying(false), repeat(false), currentFrame(0, 0)
+		: currentFrame(0, 0), isPlaying(false), repeat(false)
 	{
 	}
-	
+#ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT
+	virtual ~AnimationComponent() { }
+#endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
+    
 	/// Plays an animation
 	void play(const std::string& state)
 	{
@@ -122,7 +126,7 @@ private:
 	// used in implemenation
 	double m_frameAccumulator;
 	
-	friend class AnimationSystem;
+	friend struct AnimationSystem;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_COMPONENTS_ANIMATIONCOMPONENT_HPP

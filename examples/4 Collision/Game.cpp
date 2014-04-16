@@ -47,7 +47,7 @@ void Game::init()
 
 	//load animations
 	if(!m_Player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
-	{	
+    {	
 		std::cerr << "Failed to load animation data\n";
 		quit();
 	}
@@ -58,8 +58,8 @@ void Game::init()
 	//add collision component
 	auto& playerCollision = m_Player.addComponent<CollisionComponent>();
 	playerCollision.causesEvents = true;
-	playerCollision.BBox.width = playerAnimation.frameSize.x;
-	playerCollision.BBox.height = playerAnimation.frameSize.y;
+	playerCollision.BBox = { 0, 0, (float)playerAnimation.frameSize.x, (float)playerAnimation.frameSize.y };
+    std::cout << "player animation framesize: " << playerAnimation.frameSize.x << ", " << playerAnimation.frameSize.y << '\n';
 	
 	//set player position to be in middle of screen
 	playerTransform.setPosition(m_RenderTarget->getView().getSize().x / 2 - playerAnimation.frameSize.x / 2, m_RenderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2);
@@ -82,7 +82,7 @@ void Game::init()
 
 	//create wall position component
 	auto& wallTransform = m_Wall.addComponent<TransformComponent>().transform;
-		
+	
 	//create wall collision component
 	auto& wallCollision = m_Wall.addComponent<CollisionComponent>();
 	wallCollision.causesEvents = true;
@@ -127,7 +127,11 @@ void Game::handleEvents(sf::Event event)
 				case sf::Keyboard::Key::Escape:
 					quit();
 					break;
+                default:
+                    break;
 			}
+        default:
+            break;
 	}
 }
 
@@ -198,13 +202,10 @@ void Game::onCollisionOccured(anax::Entity& e1, anax::Entity& e2)
 {
 	std::cout << "Collision fired!\n";
 	
-	//get velocity component information from e1
+	// get velocity component information from e1
 	auto& velocityE1 = e1.getComponent<VelocityComponent>().velocity;
 
-	auto xVel = velocityE1.x;
-	auto yVel = velocityE1.y;
-		
-	//move backwards if a collision is detected
+	// move backwards if a collision is detected
 	auto& transformE1 = e1.getComponent<TransformComponent>().transform;
-	transformE1.move(-xVel, -yVel);
+	transformE1.move(-velocityE1);
 }
