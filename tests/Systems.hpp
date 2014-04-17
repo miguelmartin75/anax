@@ -1,8 +1,8 @@
 ///
-/// anax
+/// anax tests
 /// An open source C++ entity system.
 ///
-/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+/// Copyright (C) 2013-2014 Miguel Martin (miguel@miguel-martin.com)
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +33,7 @@
 
 #include "Components.hpp"
 
-class MovementSystem
-: public anax::System<MovementSystem>
+class MovementSystem : public anax::System<MovementSystem>
 {
 public:
 
@@ -76,8 +75,7 @@ private:
 
 // note: this is a useless system, but I just made it for testing
 // purposes
-class PlayerSystem
-: public anax::System<PlayerSystem>
+class PlayerSystem : public anax::System<PlayerSystem>
 {
 public:
 

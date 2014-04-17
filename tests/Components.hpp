@@ -29,29 +29,25 @@
 #include <string>
 #include <anax/Component.hpp>
 
-class PositionComponent
-: public anax::Component<PositionComponent>
+class PositionComponent : public anax::Component<PositionComponent>
 {
 public:
     float x, y, z;
 };
 
-class VelocityComponent
-: public anax::Component<VelocityComponent>
+class VelocityComponent : public anax::Component<VelocityComponent>
 {
 public:
     float x, y, z;
 };
 
-class PlayerComponent
-: public anax::Component<PlayerComponent>
+class PlayerComponent : public anax::Component<PlayerComponent>
 {
 public:
     std::string name;
 };
 
-class NPCComponent
-: public anax::Component<NPCComponent>
+class NPCComponent : public anax::Component<NPCComponent>
 {
 public:
     std::string name;
