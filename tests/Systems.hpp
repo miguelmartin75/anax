@@ -34,70 +34,70 @@
 #include "Components.hpp"
 
 class MovementSystem
-	: public anax::System<MovementSystem>
+: public anax::System<MovementSystem>
 {
 public:
-	
-	MovementSystem()
-		: Base(anax::ComponentFilter().requires<PositionComponent, VelocityComponent>())
-	{
-	}
-	
-	void update()
-	{
-		auto entities = getEntities();
-		for(auto& e : entities)
-		{			
-			auto position = e.getComponent<PositionComponent>();
-			auto velocity = e.getComponent<VelocityComponent>();
-			
-			position.x += velocity.x;
-			position.y += velocity.y;
-			position.z += velocity.z;
-		}
-	}
-	
+
+    MovementSystem()
+    : Base(anax::ComponentFilter().requires<PositionComponent, VelocityComponent>())
+    {
+    }
+
+    void update()
+    {
+        auto entities = getEntities();
+        for(auto& e : entities)
+        {			
+            auto position = e.getComponent<PositionComponent>();
+            auto velocity = e.getComponent<VelocityComponent>();
+
+            position.x += velocity.x;
+            position.y += velocity.y;
+            position.z += velocity.z;
+        }
+    }
+
 private:
-	
-	virtual void onEntityAdded(anax::Entity& e) override
-	{
+
+    virtual void onEntityAdded(anax::Entity& e) override
+    {
         std::cout << "Entity added to MovementSystem\n";
-		if(e.hasComponent<NPCComponent>())
-		{
-			throw std::logic_error("Player contains NPCComponent :(");
-		}
-	}
-	
-	virtual void onEntityRemoved(anax::Entity& e) override
-	{
+        if(e.hasComponent<NPCComponent>())
+        {
+            throw std::logic_error("Player contains NPCComponent :(");
+        }
+    }
+
+    virtual void onEntityRemoved(anax::Entity& e) override
+    {
         std::cout << "Entity removed from MovementSystem\n";
-	}
+    }
 };
 
 // note: this is a useless system, but I just made it for testing
 // purposes
 class PlayerSystem
-	: public anax::System<PlayerSystem>
+: public anax::System<PlayerSystem>
 {
 public:
-	
-	PlayerSystem()
-		: Base(anax::ComponentFilter().requires<PlayerComponent>().excludes<NPCComponent>())
-	{
-	}
-	
+
+    PlayerSystem()
+    : Base(anax::ComponentFilter().requires<PlayerComponent>().excludes<NPCComponent>())
+    {
+    }
+
 private:
-	
-	virtual void onEntityAdded(anax::Entity& e) override
-	{
+
+    virtual void onEntityAdded(anax::Entity& e) override
+    {
         std::cout << "Entity added to PlayerSystem\n";
-	}
-	
-	
-	virtual void onEntityRemoved(anax::Entity& e) override
-	{
+    }
+
+
+    virtual void onEntityRemoved(anax::Entity& e) override
+    {
         std::cout << "Entity removed from PlayerSystem\n";
-	}
+    }
 };
 
 #endif // ANAX_TESTS_SYSTEMS_HPP

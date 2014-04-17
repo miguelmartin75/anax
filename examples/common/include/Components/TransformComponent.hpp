@@ -34,7 +34,7 @@
 /// \author Miguel Martin
 struct TransformComponent : anax::Component<TransformComponent>
 {
-	sf::Transformable transform;
+    sf::Transformable transform;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_COMPONENTS_TRANSFORMCOMPONENT_HPP

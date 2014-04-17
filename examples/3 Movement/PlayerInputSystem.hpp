@@ -36,16 +36,16 @@
 struct PlayerInputSystem : anax::System<PlayerInputSystem>
 {
 public:
-    
+
     struct Listener
     {
         virtual void onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state) = 0;
     };
 
 
-	PlayerInputSystem();
-	
-	void update(double deltaTime);
+    PlayerInputSystem();
+
+    void update(double deltaTime);
 
     void addListener(Listener* listener) { m_listeners.push_back(listener); }
     void removeListener(Listener* listener) { m_listeners.erase(std::remove(m_listeners.begin(), m_listeners.end(), listener), m_listeners.end()); }

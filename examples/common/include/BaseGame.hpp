@@ -40,44 +40,44 @@
 class BaseGame
 {
 public:
-	
-	/// Default constructor
-	BaseGame()
-		: m_isRunning(true)
-	{
-	}
-	
-	/// Updates the game
-	/// \param deltaTime The change in time
-	/// \note You must define your own update method
-	void update(float deltaTime)
-	{
-		assert(0 && "Implement your own update() function!");
-	}
-	
-	/// Renders the game
-	/// \note You must define your own render method
-	void render()
-	{
-		assert(0 && "Implement your own render() function!");
-	}
-	
-	/// Handles SFML events
-	/// \note You must define your own handleEvents method
-	void handleEvents(sf::Event events)
-	{
-		assert(0 && "Handle your own darn events!");
-	}
-	
-	/// \return true if this Game is running
-	bool isRunning() const { return m_isRunning; }
-	
-	/// Quits the game
-	void quit() { m_isRunning = false; }
-	
+
+    /// Default constructor
+    BaseGame()
+    : m_isRunning(true)
+    {
+    }
+
+    /// Updates the game
+    /// \param deltaTime The change in time
+    /// \note You must define your own update method
+    void update(float deltaTime)
+    {
+        assert(0 && "Implement your own update() function!");
+    }
+
+    /// Renders the game
+    /// \note You must define your own render method
+    void render()
+    {
+        assert(0 && "Implement your own render() function!");
+    }
+
+    /// Handles SFML events
+    /// \note You must define your own handleEvents method
+    void handleEvents(sf::Event events)
+    {
+        assert(0 && "Handle your own darn events!");
+    }
+
+    /// \return true if this Game is running
+    bool isRunning() const { return m_isRunning; }
+
+    /// Quits the game
+    void quit() { m_isRunning = false; }
+
 private:
-	
-	bool m_isRunning;
+
+    bool m_isRunning;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_BASEGAME_HPP

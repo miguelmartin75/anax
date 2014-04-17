@@ -34,10 +34,10 @@ const char* const TITLE = "Example 4 - Collision";
 
 int main(int argc, char* argv[])
 {
-	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), TITLE);
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), TITLE);
 
-	Game game(window);
-	game.init();
+    Game game(window);
+    game.init();
 
-	return RunGame(window, game);
+    return RunGame(window, game);
 }

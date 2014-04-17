@@ -30,63 +30,63 @@
 #include <Components/SpriteComponent.hpp>
 #include <Components/AnimationComponent.hpp>
 
-AnimationSystem::AnimationSystem()
-	: Base(anax::ComponentFilter().requires<SpriteComponent, AnimationComponent>()),
-      m_fps(60)
+    AnimationSystem::AnimationSystem()
+: Base(anax::ComponentFilter().requires<SpriteComponent, AnimationComponent>()),
+    m_fps(60)
 {
 }
 
 void AnimationSystem::update(double deltaTime)
 {
-	auto entities = getEntities();
-	for(auto& e : entities)
-	{		
-		auto& animation = e.getComponent<AnimationComponent>();
-		auto& sprite = e.getComponent<SpriteComponent>().sprite;
-		
-		AnimationComponent::State* animationState = nullptr;
-		if(!animation.playingState.empty())
-		{
-			animationState = &animation.states[animation.playingState];
-		}
-		
-		if(animation.isPlaying && animationState)
-		{
-			animation.m_frameAccumulator += deltaTime * (animationState->frameRate == 0 ? getFps() : animationState->frameRate);
-			animation.currentFrame.x = (int)animation.m_frameAccumulator;
-			
-			
-			if(animation.currentFrame.x >= animationState->frameAmount.x)
-			{
-				// go to the next row (if necessary)
-				if(animationState->frameAmount.y)
-				{
-					if(animation.currentFrame.y >= animationState->frameAmount.y)
-					{
-						animation.currentFrame.y = 0;
-					}
-					else
-					{
-						++animation.currentFrame.y;
-					}
-				}
-				
-				// reset the animation
-				animation.currentFrame.x = 0;
-				animation.m_frameAccumulator = 0;
-				
-				animation.isPlaying = animation.repeat;
-			}
-		}
-		
-		if(animationState)
-		{
-			sf::IntRect rect(
-				sf::Vector2i(animationState->startPosition.x + animation.frameSize.x * (int)animation.currentFrame.x,
-				animationState->startPosition.y + animation.frameSize.y * (int)animation.currentFrame.y),
-				
-				sf::Vector2i(animation.frameSize));
-			sprite.setTextureRect(rect);
-		}
-	}
+    auto entities = getEntities();
+    for(auto& e : entities)
+    {		
+        auto& animation = e.getComponent<AnimationComponent>();
+        auto& sprite = e.getComponent<SpriteComponent>().sprite;
+
+        AnimationComponent::State* animationState = nullptr;
+        if(!animation.playingState.empty())
+        {
+            animationState = &animation.states[animation.playingState];
+        }
+
+        if(animation.isPlaying && animationState)
+        {
+            animation.m_frameAccumulator += deltaTime * (animationState->frameRate == 0 ? getFps() : animationState->frameRate);
+            animation.currentFrame.x = (int)animation.m_frameAccumulator;
+
+
+            if(animation.currentFrame.x >= animationState->frameAmount.x)
+            {
+                // go to the next row (if necessary)
+                if(animationState->frameAmount.y)
+                {
+                    if(animation.currentFrame.y >= animationState->frameAmount.y)
+                    {
+                        animation.currentFrame.y = 0;
+                    }
+                    else
+                    {
+                        ++animation.currentFrame.y;
+                    }
+                }
+
+                // reset the animation
+                animation.currentFrame.x = 0;
+                animation.m_frameAccumulator = 0;
+
+                animation.isPlaying = animation.repeat;
+            }
+        }
+
+        if(animationState)
+        {
+            sf::IntRect rect(
+                    sf::Vector2i(animationState->startPosition.x + animation.frameSize.x * (int)animation.currentFrame.x,
+                        animationState->startPosition.y + animation.frameSize.y * (int)animation.currentFrame.y),
+
+                    sf::Vector2i(animation.frameSize));
+            sprite.setTextureRect(rect);
+        }
+    }
 }

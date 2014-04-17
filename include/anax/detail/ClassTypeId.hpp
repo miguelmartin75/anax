@@ -30,35 +30,35 @@
 
 namespace anax
 {
-	namespace detail
-	{
-		typedef std::size_t TypeId;
+    namespace detail
+    {
+        typedef std::size_t TypeId;
 
-		template <typename TBase>
-		class ClassTypeId
-		{
-		public:
-			
-			template <typename T>
-			static TypeId GetTypeId()
-			{
-				static const TypeId id = priv_GetNextTypeId();
-				return id;
-			}
-			
-		private:
-			
-			static TypeId priv_GetNextTypeId()
-			{
-				return m_nextTypeId++;
-			}
-			
-			static TypeId m_nextTypeId;
-		};
-		
-		template <typename TBase>
-		TypeId ClassTypeId<TBase>::m_nextTypeId = 0;
-	}
+        template <typename TBase>
+        class ClassTypeId
+        {
+        public:
+
+            template <typename T>
+            static TypeId GetTypeId()
+            {
+                static const TypeId id = priv_GetNextTypeId();
+                return id;
+            }
+
+        private:
+
+            static TypeId priv_GetNextTypeId()
+            {
+                return m_nextTypeId++;
+            }
+
+            static TypeId m_nextTypeId;
+        };
+
+        template <typename TBase>
+        TypeId ClassTypeId<TBase>::m_nextTypeId = 0;
+    }
 }
 
 

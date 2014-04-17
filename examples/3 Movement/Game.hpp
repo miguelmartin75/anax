@@ -42,62 +42,62 @@
 /// \brief A class that the Game
 /// \author Miguel Martin
 class Game
-	: public BaseGame,
-      public PlayerInputSystem::Listener
+: public BaseGame,
+    public PlayerInputSystem::Listener
 {
 public:
-	
-	/// Constructs the Game with a sf::RenderTarget
-	/// \param renderTarget The sf::RenderTarget you wish to set the game up with
-	Game(sf::RenderTarget&);
-	
-	/// Initializes the game
-	void init();
-	
-	/// Updates the game
-	/// \param deltaTime The change in time
-	void update(float deltaTime);
-	
-	/// Renders the game
-	void render();
-	
-	/// Handles events
-	/// \param event The event that will be handled
-	void handleEvents(sf::Event event);
-	
-	/// Loads game resources
-	void loadResources();
-	
+
+    /// Constructs the Game with a sf::RenderTarget
+    /// \param renderTarget The sf::RenderTarget you wish to set the game up with
+    Game(sf::RenderTarget&);
+
+    /// Initializes the game
+    void init();
+
+    /// Updates the game
+    /// \param deltaTime The change in time
+    void update(float deltaTime);
+
+    /// Renders the game
+    void render();
+
+    /// Handles events
+    /// \param event The event that will be handled
+    void handleEvents(sf::Event event);
+
+    /// Loads game resources
+    void loadResources();
+
 private:
-	
+
     virtual void onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state) override;
 
-	/// An object that describes a cache of textures
-	typedef std::map<std::string, sf::Texture> TextureCache;
-	
-	/// The render target the game will render to
-	sf::RenderTarget* m_renderTarget;
-	
-	/// A texture cache
-	TextureCache m_textureCache;
-	
-	/// An anax entity world
-	anax::World m_world;
-	
-	/// The rendering system
-	SpriteRenderingSystem m_spriteRenderingSystem;
-	
-	/// The movement system
-	MovementSystem m_movementSystem;
-	
-	/// The animation system
-	AnimationSystem m_animationSystem;
+    /// An object that describes a cache of textures
+    typedef std::map<std::string, sf::Texture> TextureCache;
+
+    /// The render target the game will render to
+    sf::RenderTarget* m_renderTarget;
+
+    /// A texture cache
+    TextureCache m_textureCache;
+
+    /// An anax entity world
+    anax::World m_world;
+
+    /// The rendering system
+    SpriteRenderingSystem m_spriteRenderingSystem;
+
+    /// The movement system
+    MovementSystem m_movementSystem;
+
+    /// The animation system
+    AnimationSystem m_animationSystem;
 
     /// The player input system
     PlayerInputSystem m_playerInputSystem;
 
-	/// The player of the game
-	anax::Entity m_player;
+    /// The player of the game
+    anax::Entity m_player;
 };
 
 

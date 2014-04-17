@@ -27,53 +27,53 @@
 
 namespace anax
 {
-	void ComponentFilter::clear()
-	{
-		m_requiredComponentsList.clear();
-		m_requiresOneOfComponentsList.clear();
-		m_excludeComponentsList.clear();
-	}
-	
-	bool ComponentFilter::doesPassFilter(const ComponentTypeList &componentTypeList) const
-	{
-		// loop through all the component type bits
-		std::size_t index = m_requiredComponentsList.find_first();
-		for(; index != ComponentTypeList::npos; index = m_requiredComponentsList.find_next(index))
-		{
-			// ensure that the none of the component types at index
-			// are false (i.e. ensure that it meets all of the requirement list)
-			if(index >= componentTypeList.size() || componentTypeList[index] == false)
-			{
-				// we'll return false
-				return false;
-			}
-		}
-		
-		// if the optional bitset is not empty
-		if(!m_requiresOneOfComponentsList.empty())
-		{
-			if(!m_requiresOneOfComponentsList.intersects(componentTypeList))
-			{
-				return false;
-			}
-		}
-		
-		// however if we got this far...
-		// then...
-		
-		// check if the exclude bitset is not empty
-		if(!m_excludeComponentsList.empty())
-		{
-			// if there is AT LEAST one bit that interesects the excludeBitSet
-			// then we shall set returnValue to false, indicating that it is NOT
-			// interested in the Entity
-			if(m_excludeComponentsList.intersects(componentTypeList))
-			{
-				return false;
-			}
-		}
-		
-		// otherwise, everything passed the test, so we will return true
-		return true;
-	}
+    void ComponentFilter::clear()
+    {
+        m_requiredComponentsList.clear();
+        m_requiresOneOfComponentsList.clear();
+        m_excludeComponentsList.clear();
+    }
+
+    bool ComponentFilter::doesPassFilter(const ComponentTypeList &componentTypeList) const
+    {
+        // loop through all the component type bits
+        std::size_t index = m_requiredComponentsList.find_first();
+        for(; index != ComponentTypeList::npos; index = m_requiredComponentsList.find_next(index))
+        {
+            // ensure that the none of the component types at index
+            // are false (i.e. ensure that it meets all of the requirement list)
+            if(index >= componentTypeList.size() || componentTypeList[index] == false)
+            {
+                // we'll return false
+                return false;
+            }
+        }
+
+        // if the optional bitset is not empty
+        if(!m_requiresOneOfComponentsList.empty())
+        {
+            if(!m_requiresOneOfComponentsList.intersects(componentTypeList))
+            {
+                return false;
+            }
+        }
+
+        // however if we got this far...
+        // then...
+
+        // check if the exclude bitset is not empty
+        if(!m_excludeComponentsList.empty())
+        {
+            // if there is AT LEAST one bit that interesects the excludeBitSet
+            // then we shall set returnValue to false, indicating that it is NOT
+            // interested in the Entity
+            if(m_excludeComponentsList.intersects(componentTypeList))
+            {
+                return false;
+            }
+        }
+
+        // otherwise, everything passed the test, so we will return true
+        return true;
+    }
 }

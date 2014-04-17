@@ -39,112 +39,112 @@
 
 namespace anax
 {
-	/// \brief A class used to filter out Components
-	///
-	/// This class was designed to be used in conjuction
-	/// with systems in the entity systems. As it grants
-	/// the ability to filter out entities with specific
-	/// components.
-	///
-	/// \author Miguel Martin
-	class ComponentFilter
-	{
-	public:
-		
-		ComponentFilter() {}
-		ComponentFilter(const ComponentFilter&) = default;
-		ComponentFilter(ComponentFilter&&) = default;
-		ComponentFilter& operator=(const ComponentFilter&) = default;
-		ComponentFilter& operator=(ComponentFilter&&) = default;
-		
-		// TODO: Documentation
-		
-		template <typename C1>
-		ComponentFilter& requires()
-		{
-			static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
-			
-			detail::EnsureCapacity(m_requiredComponentsList, C1::GetTypeId());
-			m_requiredComponentsList[C1::GetTypeId()] = true;
-			
-			return *this;
-		}
-		
-		template <typename C1>
-		ComponentFilter& requiresOneOf()
-		{
-			static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
-			
-			detail::EnsureCapacity(m_requiresOneOfComponentsList, C1::GetTypeId());
-			m_requiresOneOfComponentsList[C1::GetTypeId()] = true;
-			
-			return *this;
-		}
-		
-		template <typename C1>
-		ComponentFilter& excludes()
-		{
-			static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
+    /// \brief A class used to filter out Components
+    ///
+    /// This class was designed to be used in conjuction
+    /// with systems in the entity systems. As it grants
+    /// the ability to filter out entities with specific
+    /// components.
+    ///
+    /// \author Miguel Martin
+    class ComponentFilter
+    {
+    public:
 
-			detail::EnsureCapacity(m_excludeComponentsList, C1::GetTypeId());
-			m_excludeComponentsList[C1::GetTypeId()] = true;
-			
-			return *this;
-		}
-		
-		
+        ComponentFilter() {}
+        ComponentFilter(const ComponentFilter&) = default;
+        ComponentFilter(ComponentFilter&&) = default;
+        ComponentFilter& operator=(const ComponentFilter&) = default;
+        ComponentFilter& operator=(ComponentFilter&&) = default;
+
+        // TODO: Documentation
+
+        template <typename C1>
+        ComponentFilter& requires()
+        {
+            static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
+
+            detail::EnsureCapacity(m_requiredComponentsList, C1::GetTypeId());
+            m_requiredComponentsList[C1::GetTypeId()] = true;
+
+            return *this;
+        }
+
+        template <typename C1>
+        ComponentFilter& requiresOneOf()
+        {
+            static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
+
+            detail::EnsureCapacity(m_requiresOneOfComponentsList, C1::GetTypeId());
+            m_requiresOneOfComponentsList[C1::GetTypeId()] = true;
+
+            return *this;
+        }
+
+        template <typename C1>
+        ComponentFilter& excludes()
+        {
+            static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
+
+            detail::EnsureCapacity(m_excludeComponentsList, C1::GetTypeId());
+            m_excludeComponentsList[C1::GetTypeId()] = true;
+
+            return *this;
+        }
+
+
 #ifdef ANAX_USE_VARIADIC_TEMPLATES
-		
-		template <typename C1, typename C2, typename... Components>
-		ComponentFilter& requires()
-		{
-			requires<C1>();
-			requires<C2, Components...>();
-			
-			return *this;
-		}
-		
-		template <typename C1, typename C2, typename... Components>
-		ComponentFilter& requiresOneOf()
-		{
-			requiresOneOf<C1>();
-			requiresOneOf<C2, Components...>();
-			
-			return *this;
-		}
-		
-		template <typename C1, typename C2, typename... Components>
-		ComponentFilter& excludes()
-		{
-			excludes<C1>();
-			excludes<C2, Components...>();
-			
-			return *this;
-		}
-		
+
+        template <typename C1, typename C2, typename... Components>
+        ComponentFilter& requires()
+        {
+            requires<C1>();
+            requires<C2, Components...>();
+
+            return *this;
+        }
+
+        template <typename C1, typename C2, typename... Components>
+        ComponentFilter& requiresOneOf()
+        {
+            requiresOneOf<C1>();
+            requiresOneOf<C2, Components...>();
+
+            return *this;
+        }
+
+        template <typename C1, typename C2, typename... Components>
+        ComponentFilter& excludes()
+        {
+            excludes<C1>();
+            excludes<C2, Components...>();
+
+            return *this;
+        }
+
 #endif // ANAX_USE_VARIADIC_TEMPLATES
-		
-		
-		/// Determines if a list of component types passes the filter
-		/// \param componentTypeList The list of component types you wish to check if it passes through the filter
-		/// \return true if the list of component types passes through the filter (i.e. is valid)
-		bool doesPassFilter(const ComponentTypeList& componentTypeList) const;
-		
-		/// Clears the filter
-		void clear();
-		
-	private:
-		
-		/// A list of component types that are required
-		ComponentTypeList m_requiredComponentsList;
-		
-		/// A list of component types that are required
-		/// at least once
-		ComponentTypeList m_requiresOneOfComponentsList;
-		
-		/// A list of component types that must be excluded
-		ComponentTypeList m_excludeComponentsList;
-	};
+
+
+        /// Determines if a list of component types passes the filter
+        /// \param componentTypeList The list of component types you wish to check if it passes through the filter
+        /// \return true if the list of component types passes through the filter (i.e. is valid)
+        bool doesPassFilter(const ComponentTypeList& componentTypeList) const;
+
+        /// Clears the filter
+        void clear();
+
+    private:
+
+        /// A list of component types that are required
+        ComponentTypeList m_requiredComponentsList;
+
+        /// A list of component types that are required
+        /// at least once
+        ComponentTypeList m_requiresOneOfComponentsList;
+
+        /// A list of component types that must be excluded
+        ComponentTypeList m_excludeComponentsList;
+    };
 }
 
 #endif // ANAX_COMPONENTFILTER_HPP

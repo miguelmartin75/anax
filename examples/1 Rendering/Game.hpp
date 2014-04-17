@@ -35,44 +35,44 @@
 #include <Systems/SpriteRenderingSystem.hpp>
 
 class Game
-	: public BaseGame
+: public BaseGame
 {
 public:
-	
-	/// Constructs the Game with a sf::RenderTarget
-	/// \param renderTarget The sf::RenderTarget you wish to set the game up with
-	Game(sf::RenderTarget&);
-	
-	/// Initializes the game
-	void init();
-	
-	/// Updates the game
-	/// \param deltaTime The change in time
-	void update(float deltaTime);
-	
-	/// Renders the game
-	void render();
-	
-	/// Handles events
-	/// \param event The event that will be handled
-	void handleEvents(sf::Event event);
-	
-	/// Loads game resources
-	void loadResources();
-	
+
+    /// Constructs the Game with a sf::RenderTarget
+    /// \param renderTarget The sf::RenderTarget you wish to set the game up with
+    Game(sf::RenderTarget&);
+
+    /// Initializes the game
+    void init();
+
+    /// Updates the game
+    /// \param deltaTime The change in time
+    void update(float deltaTime);
+
+    /// Renders the game
+    void render();
+
+    /// Handles events
+    /// \param event The event that will be handled
+    void handleEvents(sf::Event event);
+
+    /// Loads game resources
+    void loadResources();
+
 private:
-	
-	/// The target the game will render to
-	sf::RenderTarget* m_renderTarget;
-	
-	/// A texture cache
-	std::map<std::string, sf::Texture> m_textureCache;
-	
-	/// An anax entity world
-	anax::World m_world;
-	
-	/// The rendering system
-	SpriteRenderingSystem m_spriteRenderingSystem;
+
+    /// The target the game will render to
+    sf::RenderTarget* m_renderTarget;
+
+    /// A texture cache
+    std::map<std::string, sf::Texture> m_textureCache;
+
+    /// An anax entity world
+    anax::World m_world;
+
+    /// The rendering system
+    SpriteRenderingSystem m_spriteRenderingSystem;
 };
 
 

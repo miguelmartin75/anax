@@ -39,36 +39,36 @@ void createNPCsAndPlayers(int amount, World& world);
 
 const lest::test specification[] =
 {
-	"MovementSystem", []
-	{
-		anax::World world;
-		MovementSystem movementSystem;
-		world.addSystem(movementSystem);
+    "MovementSystem", []
+    {
+        anax::World world;
+        MovementSystem movementSystem;
+        world.addSystem(movementSystem);
 
-		createMoveableEntities(rand() % 100 + 1, world);
-		createPlayers(rand() % 100 + 1, world);
+        createMoveableEntities(rand() % 100 + 1, world);
+        createPlayers(rand() % 100 + 1, world);
 
         world.refresh();
 
         // update it a couple of times..
-		for(int i = 0; i < 5; ++i)
-		{
-			movementSystem.update();
-		}
-	},
-	
-	"PlayerSystem", []
-	{
-		anax::World world;
-		PlayerSystem playerSystem;
-		world.addSystem(playerSystem);
-		
-		createNPCsAndPlayers(rand() % 100 + 1, world);
-		createPlayers(rand() % 100 + 1, world);
-		createNPCs(rand() % 100 + 1, world);
-		
-		world.refresh();
-	},
+        for(int i = 0; i < 5; ++i)
+        {
+            movementSystem.update();
+        }
+    },
+
+    "PlayerSystem", []
+    {
+        anax::World world;
+        PlayerSystem playerSystem;
+        world.addSystem(playerSystem);
+
+        createNPCsAndPlayers(rand() % 100 + 1, world);
+        createPlayers(rand() % 100 + 1, world);
+        createNPCs(rand() % 100 + 1, world);
+
+        world.refresh();
+    },
 
     "if a system exists", []
     {
@@ -83,12 +83,12 @@ const lest::test specification[] =
         EXPECT(world.doesSystemExist<PlayerSystem>());
         EXPECT(world.doesSystemExist(playerSystem));
     },
-   
+
     "if a system exists (clearing the world)", []
     {
         anax::World world;
         PlayerSystem playerSystem;
-		MovementSystem movementSystem;
+        MovementSystem movementSystem;
 
         EXPECT(!world.doesSystemExist<PlayerSystem>());
         EXPECT(!world.doesSystemExist(playerSystem));
@@ -133,52 +133,52 @@ const lest::test specification[] =
 
 void createMoveableEntities(int amount, World& world)
 {
-	auto entities = world.createEntities(amount);
-	for(auto e : entities)
-	{
-		e.addComponent<PositionComponent>();
-		e.addComponent<VelocityComponent>();
-		e.activate();
-	}
+    auto entities = world.createEntities(amount);
+    for(auto e : entities)
+    {
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+        e.activate();
+    }
 }
 void createPlayers(int amount, World& world)
 {
-	std::ostringstream temp;
-	auto entities = world.createEntities(amount);
-	for(std::size_t i = 0; i < entities.size(); ++i)
-	{
-		temp << "Player " << i;
-		entities[i].addComponent<PlayerComponent>().name = temp.str();
-		temp.clear();
-		
-		entities[i].activate();
-	}
+    std::ostringstream temp;
+    auto entities = world.createEntities(amount);
+    for(std::size_t i = 0; i < entities.size(); ++i)
+    {
+        temp << "Player " << i;
+        entities[i].addComponent<PlayerComponent>().name = temp.str();
+        temp.clear();
+
+        entities[i].activate();
+    }
 }
 void createNPCs(int amount, World& world)
 {
-	auto entities = world.createEntities(amount);
-	for(std::size_t i = 0; i < entities.size(); ++i)
-	{
-		entities[i].addComponent<NPCComponent>();
-		entities[i].activate();
-	}
+    auto entities = world.createEntities(amount);
+    for(std::size_t i = 0; i < entities.size(); ++i)
+    {
+        entities[i].addComponent<NPCComponent>();
+        entities[i].activate();
+    }
 }
 void createNPCsAndPlayers(int amount, World& world)
 {
-	std::ostringstream temp;
-	auto entities = world.createEntities(amount);
-	for(std::size_t i = 0; i < entities.size(); ++i)
-	{
-		temp << "Player " << i;
-		entities[i].addComponent<PlayerComponent>().name = temp.str();
-		temp.clear();
-		entities[i].addComponent<NPCComponent>();
-		
-		entities[i].activate();
-	}
+    std::ostringstream temp;
+    auto entities = world.createEntities(amount);
+    for(std::size_t i = 0; i < entities.size(); ++i)
+    {
+        temp << "Player " << i;
+        entities[i].addComponent<PlayerComponent>().name = temp.str();
+        temp.clear();
+        entities[i].addComponent<NPCComponent>();
+
+        entities[i].activate();
+    }
 }
 
 int main()
 {
-	return lest::run(specification);
+    return lest::run(specification);
 }

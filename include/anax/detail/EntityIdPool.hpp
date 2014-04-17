@@ -32,72 +32,72 @@
 
 namespace anax
 {
-	namespace detail
-	{
-		/// \brief A pool of entity IDs
-		///
-		/// Used to pool entity IDs, so they can be re-used.
-		///
-		/// \author Miguel Martin
-		class EntityIdPool
-		{
-		public:
-			
-			EntityIdPool(std::size_t poolSize);
-			
-			EntityIdPool(const EntityIdPool&) = delete;
-			EntityIdPool(EntityIdPool&&) = delete;
-			EntityIdPool& operator=(const EntityIdPool&) = delete;
-			EntityIdPool& operator=(EntityIdPool&&) = delete;
+    namespace detail
+    {
+        /// \brief A pool of entity IDs
+        ///
+        /// Used to pool entity IDs, so they can be re-used.
+        ///
+        /// \author Miguel Martin
+        class EntityIdPool
+        {
+        public:
 
-			
-			
-			/// Creates an Entity ID
-			/// \return The newly created Entity ID
-			Entity::Id create();
-			
-			/// Removes an ID from the pool
-			/// \param id The ID you wish to remove
-			/// \note
-			/// The ID will be invalidated automatically
-			/// once the entity ID is removed.
-			void remove(Entity::Id id);
-			
-			/// \param The index you wish to access the Entity::Id at
-			/// \return An Entity::Id at index
-			Entity::Id get(std::size_t index) const;
-			
-			/// Determines if an Entity ID is valid
-			/// \return true if the ID is valid
-			bool isValid(Entity::Id id) const;
-			
-			/// \return The amount of entities that this pool can store
-			std::size_t getSize() const { return m_entities.size(); }
-			
-			/// Resizes the pool
-			/// \param amount The amount you wish to resize
-			void resize(std::size_t amount);
+            EntityIdPool(std::size_t poolSize);
+
+            EntityIdPool(const EntityIdPool&) = delete;
+            EntityIdPool(EntityIdPool&&) = delete;
+            EntityIdPool& operator=(const EntityIdPool&) = delete;
+            EntityIdPool& operator=(EntityIdPool&&) = delete;
+
+
+
+            /// Creates an Entity ID
+            /// \return The newly created Entity ID
+            Entity::Id create();
+
+            /// Removes an ID from the pool
+            /// \param id The ID you wish to remove
+            /// \note
+            /// The ID will be invalidated automatically
+            /// once the entity ID is removed.
+            void remove(Entity::Id id);
+
+            /// \param The index you wish to access the Entity::Id at
+            /// \return An Entity::Id at index
+            Entity::Id get(std::size_t index) const;
+
+            /// Determines if an Entity ID is valid
+            /// \return true if the ID is valid
+            bool isValid(Entity::Id id) const;
+
+            /// \return The amount of entities that this pool can store
+            std::size_t getSize() const { return m_entities.size(); }
+
+            /// Resizes the pool
+            /// \param amount The amount you wish to resize
+            void resize(std::size_t amount);
 
             /// Clears the pool
             /// \note This will invalidate every entity ID given out
             void clear();
-			
-		private:
-			
+
+        private:
+
             /// The default pool size
             std::size_t m_defaultPoolSize;
 
             /// The next ID to be used (if there is no IDs in the freelist)
-			std::size_t m_nextId;
-			
-			/// The entities ids that are avaliable to be used
-			std::vector<Entity::Id> m_freeList;
-			
-			/// The Entities that are within the pool
+            std::size_t m_nextId;
+
+            /// The entities ids that are avaliable to be used
+            std::vector<Entity::Id> m_freeList;
+
+            /// The Entities that are within the pool
             /// Stored as a counter and the index is the index part of the ID
-			std::vector<Entity::Id::int_type> m_entities;
-		};
-	}
+            std::vector<Entity::Id::int_type> m_entities;
+        };
+    }
 }
 
 #endif // ANAX_DETAIL_ENTITYIDPOOL_HPP

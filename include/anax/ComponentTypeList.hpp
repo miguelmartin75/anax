@@ -30,12 +30,12 @@
 
 namespace anax
 {
-	/// A type that describes a component type list
-	/// This is implemented as a dynamic bitset. Where
-	/// the index of the bitset is the TypeId of the component.
-	/// The component type is within the list if the bit at
-	/// the TypeId index is true.
-	typedef boost::dynamic_bitset<> ComponentTypeList;
+    /// A type that describes a component type list
+    /// This is implemented as a dynamic bitset. Where
+    /// the index of the bitset is the TypeId of the component.
+    /// The component type is within the list if the bit at
+    /// the TypeId index is true.
+    typedef boost::dynamic_bitset<> ComponentTypeList;
 }
 
 #endif // ANAX_COMPONENTTYPELIST_HPP

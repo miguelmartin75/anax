@@ -34,69 +34,69 @@
 
 namespace anax
 {
-	/// \brief Describes the base class for a components
-	///
-	/// A component is a storage for data for entities.
-	///
-	/// \author Miguel Martin
-	class BaseComponent
-	{
-	public:
+    /// \brief Describes the base class for a components
+    ///
+    /// A component is a storage for data for entities.
+    ///
+    /// \author Miguel Martin
+    class BaseComponent
+    {
+    public:
 #	ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT
-		virtual
+        virtual
 #	endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
-        
-		~BaseComponent() {}
-        
+
+        ~BaseComponent() {}
+
         /*
-        BaseComponent(detail::TypeId typeId)
-            : _typeId(typeId)
-        {
-        }
-        
-        detail::TypeId getTypeId() const
-        {
-            return _typeId;
-        }
-        
-    private:
-        
-        detail::TypeId _typeId;
-         */
-	};
-	
-	
-	
-	/// \brief A class that follows the CRTP pattern, used to define custom components
-	/// \tparam T The Component you are defining
-	///
-	/// This class uses the CRTP pattern to make a unique identifier for each component
-	/// class
-	///
-	/// \see BaseComponent
-	/// If you wish to store components generically and for further documentation.
-	///
-	/// \author Miguel Martin
-	template <typename T>
-	class Component
-		: public BaseComponent
-	{
-	public:
-		
+           BaseComponent(detail::TypeId typeId)
+           : _typeId(typeId)
+           {
+           }
+
+           detail::TypeId getTypeId() const
+           {
+           return _typeId;
+           }
+
+           private:
+
+           detail::TypeId _typeId;
+           */
+    };
+
+
+
+    /// \brief A class that follows the CRTP pattern, used to define custom components
+    /// \tparam T The Component you are defining
+    ///
+    /// This class uses the CRTP pattern to make a unique identifier for each component
+    /// class
+    ///
+    /// \see BaseComponent
+    /// If you wish to store components generically and for further documentation.
+    ///
+    /// \author Miguel Martin
+    template <typename T>
+    class Component
+    : public BaseComponent
+    {
+    public:
+
         /*
-        Component()
-            : BaseComponent{GetTypeId()}
+           Component()
+           : BaseComponent{GetTypeId()}
+           {
+           }
+           */
+
+        static detail::TypeId GetTypeId()
         {
+            return detail::ClassTypeId<BaseComponent>::GetTypeId<T>();
         }
-        */
-		
-		static detail::TypeId GetTypeId()
-		{
-			return detail::ClassTypeId<BaseComponent>::GetTypeId<T>();
-		}
-	};
-	
-	typedef std::vector<std::reference_wrapper<BaseComponent>> ComponentArray;
+    };
+
+    typedef std::vector<std::reference_wrapper<BaseComponent>> ComponentArray;
 }
 
 #endif // ANAX_COMPONENT_HPP

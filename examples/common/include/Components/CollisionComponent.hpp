@@ -33,11 +33,11 @@
 /// \author Miguel Martin
 struct CollisionComponent : anax::Component<CollisionComponent>
 {
-	/// The BBox rectangle for collision
-	sf::FloatRect BBox;
-	
-	/// A dirty flag to determine whether this object causes events or not
-	bool causesEvents;
+    /// The BBox rectangle for collision
+    sf::FloatRect BBox;
+
+    /// A dirty flag to determine whether this object causes events or not
+    bool causesEvents;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_COMPONENTS_COLLIDERCOMPONENT_HPP

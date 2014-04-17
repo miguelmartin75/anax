@@ -31,8 +31,8 @@ namespace anax
 {
     namespace detail
     {
-        EntityComponentStorage::EntityComponentStorage(std::size_t entityAmount)
-            : m_componentEntries(entityAmount)
+        EntityComponentStorage::EntityComponentStorage(std::size_t entityAmount) : 
+            m_componentEntries(entityAmount)
         {
         }
 

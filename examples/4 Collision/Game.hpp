@@ -41,54 +41,54 @@
 #include "PlayerInputSystem.hpp"
 
 class Game
-	: public BaseGame,
-	  public PlayerInputSystem::Listener,
-	  public CollisionSystem::Listener
+: public BaseGame,
+    public PlayerInputSystem::Listener,
+    public CollisionSystem::Listener
 {
 public:
-	/// Constructs Game with sf::RenderTarget
-	Game(sf::RenderTarget& renderTarget);
+    /// Constructs Game with sf::RenderTarget
+    Game(sf::RenderTarget& renderTarget);
 
-	void init();
+    void init();
 
-	void update(float deltaTime);
-	
-	void render();
+    void update(float deltaTime);
 
-	void handleEvents(sf::Event event);
-		
-	void loadResources();
+    void render();
+
+    void handleEvents(sf::Event event);
+
+    void loadResources();
 
 private:
 
-	virtual void onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state) override;
+    virtual void onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state) override;
 
-	virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) override;
+    virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) override;
 
-	/// Window for game to render to
-	sf::RenderTarget* m_RenderTarget;
-		
-	/// A texture cache
-	std::map<std::string, sf::Texture> m_TextureCache;
+    /// Window for game to render to
+    sf::RenderTarget* m_RenderTarget;
 
-	/// An anax entity world
-	anax::World m_World;
+    /// A texture cache
+    std::map<std::string, sf::Texture> m_TextureCache;
 
-	SpriteRenderingSystem m_SpriteRenderingSystem;
+    /// An anax entity world
+    anax::World m_World;
 
-	AnimationSystem m_AnimationSystem;
+    SpriteRenderingSystem m_SpriteRenderingSystem;
 
-	MovementSystem m_MovementSystem;
+    AnimationSystem m_AnimationSystem;
 
-	PlayerInputSystem m_PlayerInputSystem;
+    MovementSystem m_MovementSystem;
 
-	CollisionSystem m_CollisionSystem;
+    PlayerInputSystem m_PlayerInputSystem;
 
-	//the player of the game
-	anax::Entity m_Player;
-	
-	//Object we'll collide into
-	anax::Entity m_Wall;
+    CollisionSystem m_CollisionSystem;
+
+    //the player of the game
+    anax::Entity m_Player;
+
+    //Object we'll collide into
+    anax::Entity m_Wall;
 };
 
 #endif

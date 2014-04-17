@@ -2,7 +2,7 @@
 /// anax tests
 /// An open source C++ entity system.
 ///
-/// Copyright (C) 2013 Miguel Martin (miguel.martin7.5@hotmail.com)
+/// Copyright (C) 2013-2014 Miguel Martin (miguel@miguel-martin.com)
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,38 +30,38 @@
 #include <anax/Component.hpp>
 
 class PositionComponent
-	: public anax::Component<PositionComponent>
+: public anax::Component<PositionComponent>
 {
 public:
     float x, y, z;
 };
 
 class VelocityComponent
-	: public anax::Component<VelocityComponent>
+: public anax::Component<VelocityComponent>
 {
 public:
-	float x, y, z;
+    float x, y, z;
 };
 
 class PlayerComponent
-	: public anax::Component<PlayerComponent>
+: public anax::Component<PlayerComponent>
 {
 public:
     std::string name;
 };
 
 class NPCComponent
-	: public anax::Component<NPCComponent>
+: public anax::Component<NPCComponent>
 {
 public:
     std::string name;
-	
-	enum Type
-	{
-		MOVING = 0,
-		STILL,
-		MAGICAL
-	} type;
+
+    enum Type
+    {
+        MOVING = 0,
+        STILL,
+        MAGICAL
+    } type;
 };
 
 #endif // ANAX_TESTS_COMPONENTS_HPP

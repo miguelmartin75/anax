@@ -29,52 +29,53 @@
 
 namespace anax
 {
-	BaseSystem::BaseSystem()
-		: m_world(nullptr)
-	{
-	}
-	
-	BaseSystem::BaseSystem(const ComponentFilter& componentFilter)
-		: m_componentFilter(componentFilter), m_world(nullptr)
-	{
-	}
-	
-	BaseSystem::~BaseSystem()
-	{
-	}
-	
-	const ComponentFilter& BaseSystem::getComponentFilter() const
-	{
-		return m_componentFilter;
-	}
-	
-	World& BaseSystem::getWorld() const
-	{
-		return *m_world;
-	}
-	
-	std::vector<Entity> BaseSystem::getEntities() const
-	{
-		return m_entities;
-	}
-	
-	
-	void BaseSystem::add(anax::Entity &entity)
-	{
-		m_entities.push_back(entity);
-		onEntityAdded(entity);
-	}
-	
-	void BaseSystem::remove(anax::Entity &entity)
-	{
-		m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
-		
-		onEntityRemoved(entity);
-	}
-	
-	void BaseSystem::setWorld(anax::World &world)
-	{
-		m_world = &world;
-		initialize();
-	}
+    BaseSystem::BaseSystem() : 
+        m_world(nullptr)
+    {
+    }
+
+    BaseSystem::BaseSystem(const ComponentFilter& componentFilter) : 
+        m_componentFilter(componentFilter), 
+        m_world(nullptr)
+    {
+    }
+
+    BaseSystem::~BaseSystem()
+    {
+    }
+
+    const ComponentFilter& BaseSystem::getComponentFilter() const
+    {
+        return m_componentFilter;
+    }
+
+    World& BaseSystem::getWorld() const
+    {
+        return *m_world;
+    }
+
+    std::vector<Entity> BaseSystem::getEntities() const
+    {
+        return m_entities;
+    }
+
+
+    void BaseSystem::add(anax::Entity &entity)
+    {
+        m_entities.push_back(entity);
+        onEntityAdded(entity);
+    }
+
+    void BaseSystem::remove(anax::Entity &entity)
+    {
+        m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
+
+        onEntityRemoved(entity);
+    }
+
+    void BaseSystem::setWorld(anax::World &world)
+    {
+        m_world = &world;
+        initialize();
+    }
 }

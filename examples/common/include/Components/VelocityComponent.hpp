@@ -34,7 +34,7 @@
 /// \author Miguel Martin
 struct VelocityComponent : anax::Component<VelocityComponent>
 {
-	sf::Vector2f velocity;
+    sf::Vector2f velocity;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_COMPONENTS_VELOCITYCOMPONENT_HPP

@@ -34,7 +34,7 @@
 /// \author Miguel Martin
 struct SpriteComponent : anax::Component<SpriteComponent>
 {
-	sf::Sprite sprite;
+    sf::Sprite sprite;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_COMPONENTS_SPRITECOMPONENT_HPP

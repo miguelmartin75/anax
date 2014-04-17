@@ -28,19 +28,19 @@
 
 namespace anax
 {
-	namespace detail
-	{
-		template <class TContainer>
-		void EnsureCapacity(TContainer& container, typename TContainer::size_type index)
-		{
-			// if we need to resize
-			if(container.size() <= index)
-			{
-				// then we shall resize!
-				container.resize(index + 1);
-			}
-		}
-	}
+    namespace detail
+    {
+        template <class TContainer>
+        void EnsureCapacity(TContainer& container, typename TContainer::size_type index)
+        {
+            // if we need to resize
+            if(container.size() <= index)
+            {
+                // then we shall resize!
+                container.resize(index + 1);
+            }
+        }
+    }
 }
 
 #endif // __ANAX_UTIL_CONTAINERUTILS_HPP__

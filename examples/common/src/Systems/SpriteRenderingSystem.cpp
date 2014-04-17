@@ -30,41 +30,41 @@
 #include <Components/SpriteComponent.hpp>
 #include <Components/TransformComponent.hpp>
 
-SpriteRenderingSystem::SpriteRenderingSystem()
-	: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>())
+    SpriteRenderingSystem::SpriteRenderingSystem()
+: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>())
 {
 }
 
-SpriteRenderingSystem::SpriteRenderingSystem(sf::RenderTarget& renderTarget)
-	: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>()), 
-	  m_renderTarget(&renderTarget)
+    SpriteRenderingSystem::SpriteRenderingSystem(sf::RenderTarget& renderTarget)
+: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>()), 
+    m_renderTarget(&renderTarget)
 {
 }
 
 void SpriteRenderingSystem::render()
 {
-	auto entities = getEntities();
-	for(auto& entity : entities)
-	{
-		auto& sprite = entity.getComponent<SpriteComponent>().sprite;
-		auto& transform = entity.getComponent<TransformComponent>().transform;
-		
-		getRenderTarget().draw(sprite, transform.getTransform());
-	}
+    auto entities = getEntities();
+    for(auto& entity : entities)
+    {
+        auto& sprite = entity.getComponent<SpriteComponent>().sprite;
+        auto& transform = entity.getComponent<TransformComponent>().transform;
+
+        getRenderTarget().draw(sprite, transform.getTransform());
+    }
 }
 
 void SpriteRenderingSystem::setRenderTarget(sf::RenderTarget& renderTarget)
 {
-	m_renderTarget = &renderTarget;
+    m_renderTarget = &renderTarget;
 }
 
 sf::RenderTarget& SpriteRenderingSystem::getRenderTarget() const
 {
-	assert(!isValid() && "Render system is not valid");
-	return *m_renderTarget;
+    assert(!isValid() && "Render system is not valid");
+    return *m_renderTarget;
 }
 
 bool SpriteRenderingSystem::isValid() const
 {
-	return m_renderTarget == nullptr;
+    return m_renderTarget == nullptr;
 }

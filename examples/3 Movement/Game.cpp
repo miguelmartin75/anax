@@ -38,85 +38,85 @@
 const std::string PLAYER_TEXTURE_ID{"player"};
 const sf::Color CLEAR_COLOR{60, 60, 60};
 
-Game::Game(sf::RenderTarget& renderTarget)
-	: m_renderTarget(&renderTarget),
-	  m_spriteRenderingSystem(renderTarget)
+    Game::Game(sf::RenderTarget& renderTarget)
+: m_renderTarget(&renderTarget),
+    m_spriteRenderingSystem(renderTarget)
 {
 }
 
 void Game::init()
 {
-	// load any resources we may require
-	loadResources();
-	
-	// add the necessary systems to the world
-	m_world.addSystem(m_spriteRenderingSystem);
-	m_world.addSystem(m_animationSystem);
-	m_world.addSystem(m_playerInputSystem);
+    // load any resources we may require
+    loadResources();
+
+    // add the necessary systems to the world
+    m_world.addSystem(m_spriteRenderingSystem);
+    m_world.addSystem(m_animationSystem);
+    m_world.addSystem(m_playerInputSystem);
     m_world.addSystem(m_movementSystem);
 
     m_playerInputSystem.addListener(this);
 
-	// create the player
-	m_player = m_world.createEntity();
-	
-	auto& playerSprite = m_player.addComponent<SpriteComponent>().sprite;
-	playerSprite.setTexture(m_textureCache[PLAYER_TEXTURE_ID]);
-	
-	// load the animations
-	if(!m_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
-	{
-		std::cerr << "Failed to load animation data\n";
-		quit();
-	}
-	
-	auto& playerAnimaton = m_player.getComponent<AnimationComponent>();
-	auto& playerTransform = m_player.addComponent<TransformComponent>().transform;
-	playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, m_renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
-	
-	m_player.addComponent<VelocityComponent>();
-	
-	auto& playerComp = m_player.addComponent<PlayerComponent>();
-	playerComp.baseSpeed = 100;
+    // create the player
+    m_player = m_world.createEntity();
 
-	// activate the player
-	m_player.activate();
+    auto& playerSprite = m_player.addComponent<SpriteComponent>().sprite;
+    playerSprite.setTexture(m_textureCache[PLAYER_TEXTURE_ID]);
+
+    // load the animations
+    if(!m_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
+    {
+        std::cerr << "Failed to load animation data\n";
+        quit();
+    }
+
+    auto& playerAnimaton = m_player.getComponent<AnimationComponent>();
+    auto& playerTransform = m_player.addComponent<TransformComponent>().transform;
+    playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, m_renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
+
+    m_player.addComponent<VelocityComponent>();
+
+    auto& playerComp = m_player.addComponent<PlayerComponent>();
+    playerComp.baseSpeed = 100;
+
+    // activate the player
+    m_player.activate();
 }
 
 void Game::update(float deltaTime)
 {
-	m_world.refresh();
+    m_world.refresh();
 
     m_playerInputSystem.update(deltaTime);
-	m_movementSystem.update(deltaTime);
-	m_animationSystem.update(deltaTime);
+    m_movementSystem.update(deltaTime);
+    m_animationSystem.update(deltaTime);
 }
 
 void Game::render()
 {
-	m_renderTarget->clear(CLEAR_COLOR);
-	m_spriteRenderingSystem.render();
+    m_renderTarget->clear(CLEAR_COLOR);
+    m_spriteRenderingSystem.render();
 }
 
 void Game::handleEvents(sf::Event event)
 {
-	switch(event.type)
-	{
-		case sf::Event::Closed:
-			quit();
-			break;
-		default:
-			break;
-	}
+    switch(event.type)
+    {
+        case sf::Event::Closed:
+            quit();
+            break;
+        default:
+            break;
+    }
 }
 
 void Game::loadResources()
 {
-	if(!m_textureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
-	{
-		std::cerr << "Failed to load spritesheet\n";
-		quit();
-	}
+    if(!m_textureCache[PLAYER_TEXTURE_ID].loadFromFile("resources/textures/playerSpriteSheet.png"))
+    {
+        std::cerr << "Failed to load spritesheet\n";
+        quit();
+    }
 }
 
 void Game::onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state)

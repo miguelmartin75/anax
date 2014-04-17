@@ -35,13 +35,13 @@
 
 struct PlayerComponent : anax::Component<PlayerComponent>
 {
-	PlayerComponent()
-        : state(State::NO_STATE)
-	{
-	}
+    PlayerComponent()
+    : state(State::NO_STATE)
+    {
+    }
 
     /// The base speed of the player
-	float baseSpeed;
+    float baseSpeed;
 
     /// The current state of the player
     enum class State
@@ -59,28 +59,28 @@ struct PlayerComponent : anax::Component<PlayerComponent>
 
 
     /// The controls the player has
-	struct Controls
-	{
-		typedef sf::Keyboard::Key Key;
-		
-		Controls()
-		    : left(sf::Keyboard::Key::A),
-		      right(sf::Keyboard::Key::D),
-		      jump(sf::Keyboard::Key::W),
-		      shoot(sf::Keyboard::Key::Space)
-		{
-		}
-		
-		Controls(Key Left, Key Right, Key Jump, Key Shoot)
-		    : left(Left),
-		      right(Right),
-	      	  jump(Jump),
-		      shoot(Shoot)
-		{
-		}
-		
-		Key left, right, jump, shoot;
-	} controls;
+    struct Controls
+    {
+        typedef sf::Keyboard::Key Key;
+
+        Controls()
+        : left(sf::Keyboard::Key::A),
+        right(sf::Keyboard::Key::D),
+        jump(sf::Keyboard::Key::W),
+        shoot(sf::Keyboard::Key::Space)
+        {
+        }
+
+        Controls(Key Left, Key Right, Key Jump, Key Shoot)
+        : left(Left),
+        right(Right),
+        jump(Jump),
+        shoot(Shoot)
+        {
+        }
+
+        Key left, right, jump, shoot;
+    } controls;
 };
 
 #endif // ANAX_EXAMPLES_MOVEMENT_PLAYERCOMPONENT_HPP

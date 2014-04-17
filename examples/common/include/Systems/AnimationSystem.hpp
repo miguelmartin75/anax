@@ -40,25 +40,25 @@
 struct AnimationSystem : anax::System<AnimationSystem>
 {
 public:
-	
-	/// Default constructor
-	AnimationSystem();
-	
-	/// Updates the collision system
-	/// \param deltaTime The change in time
-	void update(double deltaTime);
-	
-	/// Sets the frame-rate at which animation occurs
-	/// \param fps The frames per second you wish to set the frame-rate to
-	void setFps(unsigned int fps) { m_fps = fps; }
-	
-	/// \return The frames per second the animation system plays animation
-	unsigned int getFps() const { return m_fps; }
-	
+
+    /// Default constructor
+    AnimationSystem();
+
+    /// Updates the collision system
+    /// \param deltaTime The change in time
+    void update(double deltaTime);
+
+    /// Sets the frame-rate at which animation occurs
+    /// \param fps The frames per second you wish to set the frame-rate to
+    void setFps(unsigned int fps) { m_fps = fps; }
+
+    /// \return The frames per second the animation system plays animation
+    unsigned int getFps() const { return m_fps; }
+
 private:
-	
-	/// The frame rate of the animation
-	unsigned int m_fps;
+
+    /// The frame rate of the animation
+    unsigned int m_fps;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_SYSTEMS_ANIMATIONSYSTEM_HPP

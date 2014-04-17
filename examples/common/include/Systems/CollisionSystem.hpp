@@ -40,37 +40,37 @@
 struct CollisionSystem : anax::System<CollisionSystem>
 {
 public:
-	
-	struct Listener
-	{
-		virtual ~Listener() = 0;
-		
-		/// Occurs when an Entity has collided with another entity
-		/// \param e1 The first entity that has been collided with
-		/// \param e2 The second entity that has been collided with
-		/// \note e1 Is guarenteed to have the causesEvent flag to be true
-		virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) = 0;
-	};
-	
-	/// Default constructor
-	CollisionSystem();
-	
-	/// Updates the collision system
-	/// \param deltaTime The change in time
-	void update(double deltaTime);
-	
-	/// Adds a Listener to the CollisionSystem
-	/// \param listener The Listener you wish to add
-	void addListener(Listener& listener);
-	
-	/// Removes a Listener from the CollisionSystem
-	/// \param listener The Listener you wish to remove
-	void removeListener(Listener& listener);
-	
+
+    struct Listener
+    {
+        virtual ~Listener() = 0;
+
+        /// Occurs when an Entity has collided with another entity
+        /// \param e1 The first entity that has been collided with
+        /// \param e2 The second entity that has been collided with
+        /// \note e1 Is guarenteed to have the causesEvent flag to be true
+        virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) = 0;
+    };
+
+    /// Default constructor
+    CollisionSystem();
+
+    /// Updates the collision system
+    /// \param deltaTime The change in time
+    void update(double deltaTime);
+
+    /// Adds a Listener to the CollisionSystem
+    /// \param listener The Listener you wish to add
+    void addListener(Listener& listener);
+
+    /// Removes a Listener from the CollisionSystem
+    /// \param listener The Listener you wish to remove
+    void removeListener(Listener& listener);
+
 private:
-	
-	/// The listeners apart of the CollisionSystem
-	std::vector<Listener*> m_listeners;
+
+    /// The listeners apart of the CollisionSystem
+    std::vector<Listener*> m_listeners;
 };
 
 #endif // ANAX_EXAMPLES_COMMON_SYSTEMS_COLLISIONSYSTEM_HPP

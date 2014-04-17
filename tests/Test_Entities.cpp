@@ -35,19 +35,19 @@
 
 const lest::test specification[] =
 {
-	"Invalid entity handles (killing entities)", []
-	{
-		anax::World world;
-		
-		auto e1 = world.createEntity(); // create an entity
-		e1.kill(); // kill it
-		
-		EXPECT(e1.isValid());
+    "Invalid entity handles (killing entities)", []
+    {
+        anax::World world;
+
+        auto e1 = world.createEntity(); // create an entity
+        e1.kill(); // kill it
+
+        EXPECT(e1.isValid());
 
         world.refresh();
-        
+
         EXPECT(!e1.isValid());
-	},
+    },
 
     "Invalid entity handles (clearing world)", []
     {
@@ -60,92 +60,92 @@ const lest::test specification[] =
 
         auto e2 = world.createEntity();
         e2.getId(); // to silence warning
-        
+
         EXPECT(e1.isValid()); // now e1 should be valid
     },
-	
-	"Duplicate invalid (killed) entity handles", []
-	{
-		anax::World world;
 
-		auto e1 = world.createEntity(); // create an entity
-		e1.kill(); // kill it
-		
-		// refresh the world (so that the ID will be invalid)
-		world.refresh();
-		
-		// create another handle,
-		// that is the same as the previous
-		anax::Entity e2 = e1;
-		
-		EXPECT(!e2.isValid()); // should be invalid
-	},
-	
-	"Activating and deactivating entities", []
-	{
-		anax::World world;
-		
-		auto e1 = world.createEntity();
-		e1.activate();
-		
-		EXPECT(!e1.isActivated()); // should not be activated
-		
-		world.refresh();
-		
-		EXPECT(e1.isActivated()); // should be activated
-		
-		e1.deactivate();
-		
-		EXPECT(e1.isActivated()); // should be still activated
+    "Duplicate invalid (killed) entity handles", []
+    {
+        anax::World world;
 
-		world.refresh();
-		
-		EXPECT(!e1.isActivated()); // should not be activated
-	},
-	
-	"Adding components", []
-	{
-		anax::World world;
-		
-		auto e = world.createEntity();
-		e.addComponent<PositionComponent>();
-		
-		EXPECT(e.hasComponent<PositionComponent>());
-	},
-	
-	"Removing components", []
-	{
-		anax::World world;
-		
-		auto e = world.createEntity();
-		e.addComponent<PositionComponent>();
-		e.removeComponent<PositionComponent>();
-		
-		EXPECT(!e.hasComponent<PositionComponent>());
-	},
-	
-	"Removing all components", []
-	{
-		anax::World world;
-		
-		auto e = world.createEntity();
-		e.addComponent<PositionComponent>();
-		e.addComponent<VelocityComponent>();
-		
-		e.removeAllComponents();
-		
-		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
-	},
+        auto e1 = world.createEntity(); // create an entity
+        e1.kill(); // kill it
 
-	"Removing components with a system attached to the world", []
-	{
-		anax::World world;
+        // refresh the world (so that the ID will be invalid)
+        world.refresh();
+
+        // create another handle,
+        // that is the same as the previous
+        anax::Entity e2 = e1;
+
+        EXPECT(!e2.isValid()); // should be invalid
+    },
+
+    "Activating and deactivating entities", []
+    {
+        anax::World world;
+
+        auto e1 = world.createEntity();
+        e1.activate();
+
+        EXPECT(!e1.isActivated()); // should not be activated
+
+        world.refresh();
+
+        EXPECT(e1.isActivated()); // should be activated
+
+        e1.deactivate();
+
+        EXPECT(e1.isActivated()); // should be still activated
+
+        world.refresh();
+
+        EXPECT(!e1.isActivated()); // should not be activated
+    },
+
+    "Adding components", []
+    {
+        anax::World world;
+
+        auto e = world.createEntity();
+        e.addComponent<PositionComponent>();
+
+        EXPECT(e.hasComponent<PositionComponent>());
+    },
+
+    "Removing components", []
+    {
+        anax::World world;
+
+        auto e = world.createEntity();
+        e.addComponent<PositionComponent>();
+        e.removeComponent<PositionComponent>();
+
+        EXPECT(!e.hasComponent<PositionComponent>());
+    },
+
+    "Removing all components", []
+    {
+        anax::World world;
+
+        auto e = world.createEntity();
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+
+        e.removeAllComponents();
+
+        EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
+    },
+
+    "Removing components with a system attached to the world", []
+    {
+        anax::World world;
         MovementSystem moveSystem;
 
         world.addSystem(moveSystem);
-		
-		auto e = world.createEntity();
-		e.addComponent<PositionComponent>();
+
+        auto e = world.createEntity();
+        e.addComponent<PositionComponent>();
         e.addComponent<VelocityComponent>();
         e.activate();
 
@@ -156,41 +156,41 @@ const lest::test specification[] =
 
         std::cout << "updated movement system & refreshed world\n";
 
-		e.removeComponent<PositionComponent>();
+        e.removeComponent<PositionComponent>();
         e.activate();
         std::cout << "removed component and activated entity\n";
-		
-		EXPECT(!e.hasComponent<PositionComponent>());
+
+        EXPECT(!e.hasComponent<PositionComponent>());
 
         std::cout << "refreshed world\n";
 
         world.refresh();
         moveSystem.update();
-	},
-	
-	"Removing all components with a system attached to the world", []
-	{
-		anax::World world;
+    },
+
+    "Removing all components with a system attached to the world", []
+    {
+        anax::World world;
         MovementSystem moveSystem;
 
         world.addSystem(moveSystem);	
 
-		auto e = world.createEntity();
-		e.addComponent<PositionComponent>();
-		e.addComponent<VelocityComponent>();
+        auto e = world.createEntity();
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
 
         e.activate();
         world.refresh();
-		
-		e.removeAllComponents();
+
+        e.removeAllComponents();
         e.activate();
         world.refresh();
-		
-		EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
+
+        EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
 
         world.refresh();
         moveSystem.update();
-	},
+    },
 
     "Retrieving an Entity via ID index", []
     {
@@ -206,5 +206,5 @@ const lest::test specification[] =
 
 int main()
 {
-	return lest::run(specification);
+    return lest::run(specification);
 }

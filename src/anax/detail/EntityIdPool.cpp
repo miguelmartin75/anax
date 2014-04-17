@@ -29,10 +29,10 @@ namespace anax
 {
     namespace detail
     {
-        EntityIdPool::EntityIdPool(std::size_t poolSize)
-            : m_defaultPoolSize(poolSize),
-                m_nextId(0),
-                m_entities(poolSize)
+        EntityIdPool::EntityIdPool(std::size_t poolSize) : 
+            m_defaultPoolSize(poolSize),
+            m_nextId(0),
+            m_entities(poolSize)
         {
         }
 
@@ -45,7 +45,7 @@ namespace anax
             {
                 id = m_freeList.back();
                 m_freeList.pop_back();
-				
+
                 // Update the ID counter before issuing
                 //id.counter = m_entities[id.index];
             }
