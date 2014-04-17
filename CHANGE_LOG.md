@@ -3,14 +3,22 @@
 ## 1.x
 
 ### 1.1
-2013-08-04 Miguel Martin <miguel.martin7.5@hotmail.com>
+2014-03-17 Miguel Martin <miguel@miguel-martin.com>
 
 - Added `World::getEntities()`
 - Added `World::clear()`
 - Added Movement example
+- Added Collision example (thanks to [johnmarinelli](https://github.com/johnmarinelli))
+- Various bug fixes (thanks to [jabza](https://github.com/jabza) helping with these)
+	- Fixed Entity::Id's being re-cycled incorrectly.
+	- Fixed issue where re-activating Entities caused them to be re-added to
+their Systems.
+	- Added the ability for an empty Entity handle to check its validity
+without asserting.
+    - Removing Component caused crashes
 
 ### 1.0
-2013-08-04 Miguel Martin <miguel.martin7.5@hotmail.com>
+2013-08-04 Miguel Martin <miguel@miguel-martin.com>
 
 - Changed how Entities are stored
 - Added unit tests
@@ -25,7 +33,7 @@
 
 ### 0.2.4
 
-2013-03-25 Miguel Martin <miguel.martin7.5@hotmail.com>
+2013-03-25 Miguel Martin <miguel@miguel-martin.com>
 
 - Refractored ac::es to anax namespace
 - Removed examples (placing them in another repository)
@@ -36,7 +44,7 @@
 
 ### 0.2.3
 
-2013-01-13 Miguel Martin <miguel.martin7.5@hotmail.com>
+2013-01-13 Miguel Martin <miguel@miguel-martin.com>
 
 - Patch number increased to 3
 - No more macros!

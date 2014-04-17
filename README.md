@@ -6,7 +6,7 @@ anax is an open source C++ entity system designed to be portable, lightweight an
 
 An entity system, or entity component system is a pattern for building complex extensible projects (typically games). It seperates funcality into three major parts: components, systems and entities. Where entities are used to describe an object within the game, components are used to store data for the entities to describe them, and systems are used to contain game logic.
 
-You can read about them further [here](https://github.com/miguelishawt/anax/wiki/What-is-an-Entity-System%3F).
+You can read about them further [here](https://github.com/miguelmartin75/anax/wiki/What-is-an-Entity-System%3F).
 
 # Inspiration
 
@@ -23,7 +23,7 @@ The [Artemis] Framework and [entityx] helped drag this project to what it is at 
 
 There are multiple ways to download the library. Here are your options:
 
-- [clone] the repo: `git clone https://github.com/miguelishawt/anax.git`
+- [clone] the repo: `git clone https://github.com/miguelmartin75/anax.git`
 - Download the library ([zip]/[tar-gz])
 
 ## Dependencies
@@ -34,7 +34,7 @@ To compile, install, and use anax, the following libraries and C++ support is re
 
 ## Installation
 
-To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake. If you're on Mac/Linux or another Unix variation, then you can install the library quite simply via the [scripts](https://github.com/miguelishawt/clean_install) provided in the repository.
+To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake. If you're on Mac/Linux or another Unix variation, then you can install the library quite simply via the [scripts](https://github.com/miguelmartin75/clean_install) provided in the repository.
 
 ### Step 1: `cd`
 
@@ -56,11 +56,11 @@ Run the `install.sh` script to install the library automatically. The install sc
 > 1. For Windows, you may have to use the Visual Studio command line in order for it to build.
 > 2. In Windows, unless you have a bash command line, you cannot run the scripts provided in the repository (sorry; if someone wants to add batch scripts to do what I have done above, that would be appreciated).
 
-A more detailed tutorial on how to install will be avaliable on the [wiki](https://github.com/miguelishawt/anax/wiki/Getting-Started).
+A more detailed tutorial on how to install will be avaliable on the [wiki](https://github.com/miguelmartin75/anax/wiki/Getting-Started).
 
 # Quick Tutorial
 
-This section will explain how to use the library, but it will not go into much specific detail. If you want a more detailed guide, please refer to this [page](https://github.com/miguelishawt/anax/wiki/Using-the-Library) on the [wiki].
+This section will explain how to use the library, but it will not go into much specific detail. If you want a more detailed guide, please refer to this [page](https://github.com/miguelmartin75/anax/wiki/Using-the-Library) on the [wiki].
 
 > #### **NOTE:**
 > It is assumed you know what an Entity System is.
@@ -185,14 +185,14 @@ That is, a movement system requires entities with a `PositionComponent` and `Vel
 - `onEntityAdded(Entity&)`
 - `onEntityRemoved(Entity&)`
 
-That's basically it, you can pretty go and code. If you want more details, check the documentation or [this](https://github.com/miguelishawt/anax/wiki/Using-the-Library) getting started guide on the [wiki].
+That's basically it, you can pretty go and code. If you want more details, check the documentation or [this](https://github.com/miguelmartin75/anax/wiki/Using-the-Library) getting started guide on the [wiki].
 
 
 # Get Involved
 
 Want to get involved with the project? You are free to help out on the project, here are the possible methods to help out:
 
-- The Code
+- The Code*
 	- Implement requested features
 	- Implement new features
     - Optimise code
@@ -202,8 +202,10 @@ Want to get involved with the project? You are free to help out on the project, 
 	- Create video/written tutorials; this can be done by:
 		- Adding links to tutorials on the [wiki]
 		- Writing a tutorial on the [wiki]
+		
+*Please see the `CONTRIBUTING.md` file if you wish to contribute to the code.
 
-If you do help out, [email] me and I'll put your name in the contributers list.
+Don't be afraid to send pull requests, especially for those that fix bugs ([email] me if you're unsure)!
 
 # License
 
@@ -227,13 +229,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-[wiki]: https://github.com/miguelishawt/anax/wiki
+[wiki]: https://github.com/miguelmartin75/anax/wiki
 [CMake]: http://www.cmake.org/
 [Entity Systems]:http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
 [Artemis]: http://gamadu.com/artemis/
 [entityx]: https://github.com/alecthomas/entityx
 [boost]: http://boost.org/
-[email]: mailto:miguel.martin7.5@hotmail.com
-[clone]: github-mac://openRepo/https://github.com/miguelishawt/anax
-[zip]: https://api.github.com/repos/miguelishawt/anax/zipball
-[tar-gz]: https://api.github.com/repos/miguelishawt/anax/tarball
+[email]: mailto:miguel@miguel-martin.com
+[clone]: github-mac://openRepo/https://github.com/miguelmartin75/anax
+[zip]: https://api.github.com/repos/miguelmartin75/anax/zipball
+[tar-gz]: https://api.github.com/repos/miguelmartin75/anax/tarball
