@@ -8,15 +8,6 @@ An entity system, or entity component system is a pattern for building complex e
 
 You can read about them further [here](https://github.com/miguelmartin75/anax/wiki/What-is-an-Entity-System%3F).
 
-# Inspiration
-
-Multiple blog posts/articles about entity systems inspired me to create my own C++ entity system library. Such as:
-
-- [Entity Systems are the Future of MMORPG](http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
-- [Entity Systems](http://www.tomseysdavies.com/2011/01/23/entity-systems/)
-
-The [Artemis] Framework and [entityx] helped drag this project to what it is at the current moment.
-
 # Getting Started
 
 ## Downloading the Library
@@ -27,22 +18,23 @@ There are multiple ways to download the library. Here are your options:
 - Download the library ([zip]/[tar-gz])
 
 ## Dependencies
-To compile, install, and use anax, the following libraries and C++ support is required:
+To compile, install, and use anax, a C++11 compiliant compiler is required.
 
-- [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html)
-- C++11 variadic templates (this is optional, but is reccomended)
+and:
+
+- [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html) - TODO: remove
 
 ## Installation
 
 To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake. If you're on Mac/Linux or another Unix variation, then you can install the library quite simply via the [scripts](https://github.com/miguelmartin75/clean_install) provided in the repository.
 
-### Step 1: `cd`
+### Step 1: cd
 
 Ensure that the current directory is the repository's directory (i.e. `cd` into the repo). 
 
 ### Step 2: Clean
 
-Run the `clean.sh`.
+Run the `clean.sh` script.
 
 ### Step 3: Configure
 
@@ -56,14 +48,14 @@ Run the `install.sh` script to install the library automatically. The install sc
 > 1. For Windows, you may have to use the Visual Studio command line in order for it to build.
 > 2. In Windows, unless you have a bash command line, you cannot run the scripts provided in the repository (sorry; if someone wants to add batch scripts to do what I have done above, that would be appreciated).
 
-A more detailed tutorial on how to install will be avaliable on the [wiki](https://github.com/miguelmartin75/anax/wiki/Getting-Started).
+A more detailed tutorial on how to install is avaliable on the [wiki](https://github.com/miguelmartin75/anax/wiki/Getting-Started).
 
 # Quick Tutorial
 
 This section will explain how to use the library, but it will not go into much specific detail. If you want a more detailed guide, please refer to this [page](https://github.com/miguelmartin75/anax/wiki/Using-the-Library) on the [wiki].
 
 > #### **NOTE:**
-> It is assumed you know what an Entity System is.
+> It is assumed you know what an [Entity System](https://github.com/miguelmartin75/anax/wiki/What-is-an-Entity-System%3F) is.
 
 ### The World
 
@@ -190,22 +182,9 @@ That's basically it, you can pretty go and code. If you want more details, check
 
 # Get Involved
 
-Want to get involved with the project? You are free to help out on the project, here are the possible methods to help out:
+Want to get involved with the project? You are free to help out on the project, but please see the `CONTRIBUTING.md` file before doing so.
 
-- The Code*
-	- Implement requested features
-	- Implement new features
-    - Optimise code
-    - Fix bugs
-    - Help create/fix documentation
-- The [wiki]
-	- Create video/written tutorials; this can be done by:
-		- Adding links to tutorials on the [wiki]
-		- Writing a tutorial on the [wiki]
-		
-*Please see the `CONTRIBUTING.md` file if you wish to contribute to the code.
-
-Don't be afraid to send pull requests, especially for those that fix bugs ([email] me if you're unsure)!
+Also, don't be afraid to send pull requests, especially for those that fix bugs ([email] me if you're unsure)!
 
 # License
 
