@@ -51,7 +51,6 @@ namespace anax
             EntityIdPool& operator=(EntityIdPool&&) = delete;
 
 
-
             /// Creates an Entity ID
             /// \return The newly created Entity ID
             Entity::Id create();
@@ -72,7 +71,7 @@ namespace anax
             bool isValid(Entity::Id id) const;
 
             /// \return The amount of entities that this pool can store
-            std::size_t getSize() const { return m_entities.size(); }
+            std::size_t getSize() const;
 
             /// Resizes the pool
             /// \param amount The amount you wish to resize

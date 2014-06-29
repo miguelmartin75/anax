@@ -80,6 +80,11 @@ namespace anax
             return id.counter == m_entities[id.index];
         }
 
+        std::size_t EntityIdPool::getSize() const
+        {
+            return m_entities.size(); 
+        }
+
         void EntityIdPool::resize(std::size_t amount)
         {
             m_entities.resize(amount);
