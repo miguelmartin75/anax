@@ -42,16 +42,11 @@ namespace anax
             template <typename T>
             static TypeId GetTypeId()
             {
-                static const TypeId id = priv_GetNextTypeId();
+                static const TypeId id = m_nextTypeId++;
                 return id;
             }
 
         private:
-
-            static TypeId priv_GetNextTypeId()
-            {
-                return m_nextTypeId++;
-            }
 
             static TypeId m_nextTypeId;
         };
