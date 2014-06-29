@@ -25,7 +25,7 @@
 
 #include <anax/detail/EntityComponentStorage.hpp>
 
-#include <anax/detail/ContainerUtils.hpp>
+#include <anax/util/ContainerUtils.hpp>
 
 namespace anax
 {

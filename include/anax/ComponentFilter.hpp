@@ -30,20 +30,21 @@
 
 #include <boost/dynamic_bitset.hpp>
 
-#include <anax/detail/EntityIdPool.hpp>
-#include <anax/detail/ContainerUtils.hpp>
-
 #include <anax/config.hpp>
 #include <anax/Component.hpp>
 #include <anax/ComponentTypeList.hpp>
+
+#include <anax/detail/EntityIdPool.hpp>
+
+#include <anax/util/ContainerUtils.hpp>
 
 namespace anax
 {
     /// \brief A class used to filter out Components
     ///
     /// This class was designed to be used in conjuction
-    /// with systems in the entity systems. As it grants
-    /// the ability to filter out entities with specific
+    /// with systems within the entity system. ComponentFilter's 
+    /// grant the ability to filter out entities with specific
     /// components.
     ///
     /// \author Miguel Martin

@@ -30,6 +30,8 @@ namespace anax
 {
     namespace detail
     {
+        /// Ensures the capacity of a container
+        /// \param index The index you wish to access
         template <class TContainer>
         void EnsureCapacity(TContainer& container, typename TContainer::size_type index)
         {
