@@ -11,13 +11,12 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project (ANAX)
 
-set(SFML_ROOT "/usr/local/lib/SFML-2.1")
 set(CMAKE_MODULE_PATH "/usr/local/lib/SFML-2.1/share/SFML/cmake/Modules")
 
 set(ANAX_LIBRARY_NAME "anax")
 set(ANAX_VERSION_MAJOR 1)
-set(ANAX_VERSION_MINOR 0)
-set(ANAX_VERSION_PATCH 0)
+set(ANAX_VERSION_MINOR 1)
+set(ANAX_VERSION_PATCH 1)
 set(PROJECT_VERSION ${ANAX_VERSION_MAJOR}.${ANAX_VERSION_MINOR}.${ANAX_VERSION_PATCH})
 
 # ================= #
@@ -31,6 +30,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "Setting build type to 'Debug' as none was specified.")
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
+
     # Set the possible values of build type for cmake-gui
     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
         "MinSizeRel" "RelWithDebInfo")
