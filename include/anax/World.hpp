@@ -30,6 +30,7 @@
 #include <vector>
 #include <unordered_map>
 #include <type_traits>
+#include <utility>
 
 #include <boost/dynamic_bitset.hpp>
 
@@ -106,6 +107,19 @@ namespace anax
         /// Creates an Entity
         /// \return A new entity for which you can use.
         Entity createEntity();
+
+        /// Creates an entity and applies an entity template to the entity
+        /// \tparam EntityTemplateFn The type of template function you wish to apply
+        ///
+        /// \param fn The function you wish to apply to this entity
+        /// \param args The corresponding arguments to the entity template function
+        template <typename EntityTemplateFn, typename... Args>
+        Entity createEntity(EntityTemplateFn fn, Args&&... args)
+        {
+            Entity e = createEntity();
+            e.applyTemplate(fn, std::foward<Args>(args)...);
+            return e;
+        }
 
         /// Creates a specific amount of entities
         /// \param amount The amount of entities you wish to create
@@ -189,9 +203,9 @@ namespace anax
                 boost::dynamic_bitset<> systems;
             };
 
-            EntityAttributes(std::size_t amountOfEntities)
-            : componentStorage(amountOfEntities), 
-            attributes(amountOfEntities)
+            EntityAttributes(std::size_t amountOfEntities) :     
+                componentStorage(amountOfEntities), 
+                attributes(amountOfEntities)
             {
             }
 

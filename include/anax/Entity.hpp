@@ -27,6 +27,7 @@
 #define ANAX_ENTITY_HPP
 
 #include <type_traits>
+#include <utility>
 #include <cstdint>
 
 #include <anax/detail/ClassTypeId.hpp>
@@ -79,18 +80,18 @@ namespace anax
             /// Default constructor
             /// \note
             /// This constructor will automatically nullify the ID
-            Id()
-            : index(0),
-            counter(0)
+            Id() : 
+                index(0),
+                counter(0)
             {
             }
 
             /// Sets the index and counter variables of the ID
             /// \param Index The value for the index you wish to set
             /// \param Counter The value for the counter you wish to set
-            Id(int_type Index, int_type Counter)
-            : index(Index),
-            counter(Counter)
+            Id(int_type Index, int_type Counter) : 
+                index(Index),
+                counter(Counter)
             {
             }
 
@@ -128,6 +129,21 @@ namespace anax
         Entity& operator=(Entity&&) = default;
 
 
+        /// Applies an entity template to the entity
+        /// \tparam EntityTemplateFn The type of template function you wish to apply
+        ///
+        /// \param fn The function you wish to apply to this entity
+        /// \param args The corresponding arguments to the entity template function
+        ///
+        /// \note You could just call the entity template function, 
+        ///       however, the way that entity templates are implemnted
+        ///       at the moment could change in the future.
+        template <typename EntityTemplateFn, typename... Args>
+        void applyTemplate(EntityTemplateFn fn, Args&&... args)
+        {
+            fn(*this, std::foward<Args>(args)...)
+        }
+
         /// Determines if this Entity handle is valid & able to be used.
         /// \note You should only use this for DEBUG builds
         ///       as checking if an Entity is valid may/may not
@@ -155,14 +171,6 @@ namespace anax
         /// Kills this Entity
         /// \see World::killEntity for an alternate way to kill an Entity
         void kill();
-
-        /// Adds a component
-        /// \param component The component you wish to add
-        /// \note component must be dynamically allocated with new, as
-        /// it is stored as a unique_ptr. I may change this in the future
-        /// by adding an option to alter how it's stored or something
-        /// along those lines.
-        //void addComponent(BaseComponent* component);
 
         /// Adds a component to the Entity
         /// \tparam The type of component you wish to add
