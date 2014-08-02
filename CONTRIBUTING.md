@@ -26,9 +26,9 @@ an issue to be opened, I do not mind duplicate
 issues for this circumstance (as long as you reference
 to the issue you are fixing).
 
-To send a pull request, make sure you code changes
+To send a pull request, make sure your code changes
 are within another branch. This branch may be based
-off of master or develop, or another branch that is
+off of master or develop, or another branch that it is
 related to (e.g. experimental branches). Please
 see the [other branches section](#other-branches) in [git branches](#git-branches).
 
@@ -58,7 +58,7 @@ Experimental branches are for code that is experimental,
 for example trying opitmising some components of the library. 
 Experimental branches can be branched off any other branch.
 
-These branches should be named with the following pattern:
+The naming convention for experimental branches is:
 `experimental-<name>`, where `<name>` is a name for what
 you are experimenting with. 
 
