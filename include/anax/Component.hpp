@@ -47,22 +47,6 @@ namespace anax
 #	endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
 
         ~BaseComponent() {}
-
-        /*
-           BaseComponent(detail::TypeId typeId)
-           : _typeId(typeId)
-           {
-           }
-
-           detail::TypeId getTypeId() const
-           {
-           return _typeId;
-           }
-
-           private:
-
-           detail::TypeId _typeId;
-           */
     };
 
 
@@ -78,17 +62,9 @@ namespace anax
     ///
     /// \author Miguel Martin
     template <typename T>
-    class Component
-    : public BaseComponent
+    class Component : public BaseComponent
     {
     public:
-
-        /*
-           Component()
-           : BaseComponent{GetTypeId()}
-           {
-           }
-           */
 
         static detail::TypeId GetTypeId()
         {
