@@ -14,7 +14,7 @@ You can read about them further [here](https://github.com/miguelmartin75/anax/wi
 
 There are multiple ways to download the library. Here are your options:
 
-- [clone] the repo: `git clone https://github.com/miguelmartin75/anax.git`
+- clone the repo: `git clone https://github.com/miguelmartin75/anax.git`
 - Download the library ([zip]/[tar-gz])
 
 ## Dependencies
@@ -215,6 +215,5 @@ THE SOFTWARE.
 [entityx]: https://github.com/alecthomas/entityx
 [boost]: http://boost.org/
 [email]: mailto:miguel@miguel-martin.com
-[clone]: github-mac://openRepo/https://github.com/miguelmartin75/anax
 [zip]: https://api.github.com/repos/miguelmartin75/anax/zipball
 [tar-gz]: https://api.github.com/repos/miguelmartin75/anax/tarball
