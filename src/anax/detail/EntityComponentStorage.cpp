@@ -25,6 +25,10 @@
 
 #include <anax/detail/EntityComponentStorage.hpp>
 
+#include <cassert>
+
+#include <anax/config.hpp>
+
 #include <anax/util/ContainerUtils.hpp>
 
 namespace anax
@@ -43,10 +47,17 @@ namespace anax
             auto index = entity.getId().index;
             auto& componentDataForEntity = m_componentEntries[index];
 
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             detail::EnsureCapacity(componentDataForEntity.components, componentTypeId);
+
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+
             componentDataForEntity.components[componentTypeId].reset(component);
 
+
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             detail::EnsureCapacity(componentDataForEntity.componentTypeList, componentTypeId);
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             componentDataForEntity.componentTypeList[componentTypeId] = true;
         }
 
@@ -67,7 +78,7 @@ namespace anax
             auto& componentDataForEntity = m_componentEntries[index];
 
             componentDataForEntity.components.clear();
-            componentDataForEntity.componentTypeList.clear();
+            componentDataForEntity.componentTypeList.reset();
         }
 
         BaseComponent& EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const

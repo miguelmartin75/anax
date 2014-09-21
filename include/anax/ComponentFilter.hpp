@@ -28,15 +28,14 @@
 
 #include <type_traits>
 
-#include <boost/dynamic_bitset.hpp>
-
 #include <anax/config.hpp>
 #include <anax/Component.hpp>
 #include <anax/ComponentTypeList.hpp>
 
+#include <anax/util/ContainerUtils.hpp>
+
 #include <anax/detail/EntityIdPool.hpp>
 
-#include <anax/util/ContainerUtils.hpp>
 
 namespace anax
 {
@@ -65,7 +64,10 @@ namespace anax
         {
             static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
 
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             detail::EnsureCapacity(m_requiredComponentsList, C1::GetTypeId());
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+
             m_requiredComponentsList[C1::GetTypeId()] = true;
 
             return *this;
@@ -76,7 +78,10 @@ namespace anax
         {
             static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
 
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             detail::EnsureCapacity(m_requiresOneOfComponentsList, C1::GetTypeId());
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+
             m_requiresOneOfComponentsList[C1::GetTypeId()] = true;
 
             return *this;
@@ -87,7 +92,10 @@ namespace anax
         {
             static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
 
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             detail::EnsureCapacity(m_excludeComponentsList, C1::GetTypeId());
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+
             m_excludeComponentsList[C1::GetTypeId()] = true;
 
             return *this;

@@ -26,7 +26,13 @@
 #ifndef ANAX_COMPONENTTYPELIST_HPP
 #define ANAX_COMPONENTTYPELIST_HPP
 
-#include <boost/dynamic_bitset.hpp>
+#include <anax/config.hpp>
+
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS 
+    #include <boost/dynamic_bitset.hpp>
+#else
+    #include <bitset>
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS 
 
 namespace anax
 {
@@ -35,7 +41,13 @@ namespace anax
     /// the index of the bitset is the TypeId of the component.
     /// The component type is within the list if the bit at
     /// the TypeId index is true.
-    typedef boost::dynamic_bitset<> ComponentTypeList;
+    typedef
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+    boost::dynamic_bitset<> 
+#else 
+    std::bitset<MAX_AMOUNT_OF_COMPONENTS>
+#endif 
+    ComponentTypeList;
 }
 
 #endif // ANAX_COMPONENTTYPELIST_HPP

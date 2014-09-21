@@ -31,6 +31,7 @@
 #cmakedefine ANAX_32_BIT_ENTITY_IDS @ANAX_32_BIT_ENTITY_IDS@
 #cmakedefine ANAX_USE_VARIADIC_TEMPLATES @ANAX_USE_VARIADIC_TEMPLATES@
 #cmakedefine ANAX_VIRTUAL_DTORS_IN_COMPONENT @ANAX_VIRTUAL_DTORS_IN_COMPONENT@
+#cmakedefine ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS @ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS@
 
 #ifdef ANAX_32_BIT_ENTITY_IDS
 #	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
@@ -43,7 +44,16 @@
 namespace anax
 {
     /// The default size of a pool within a world  
-    constexpr std::size_t DEFAULT_ENTITY_POOL_SIZE = @ANAX_DEFAULT_ENTITY_POOL_SIZE@;  
+    constexpr const std::size_t DEFAULT_ENTITY_POOL_SIZE = @ANAX_DEFAULT_ENTITY_POOL_SIZE@;  
+
+#ifndef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+
+    /// The maximum amount of components an entity can
+    /// contain. Try to make this number even, or preferably
+    /// a power of 2.
+    constexpr const std::size_t MAX_AMOUNT_OF_COMPONENTS = @ANAX_MAX_AMOUNT_OF_COMPONENTS@;
+
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
 }
 
 #endif // ANAX_CONFIG_HPP

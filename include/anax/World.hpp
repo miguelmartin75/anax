@@ -117,7 +117,7 @@ namespace anax
         Entity createEntity(EntityTemplateFn fn, Args&&... args)
         {
             Entity e = createEntity();
-            e.applyTemplate(fn, std::foward<Args>(args)...);
+            e.applyTemplate(fn, std::forward<Args>(args)...);
             return e;
         }
 

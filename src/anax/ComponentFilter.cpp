@@ -29,20 +29,28 @@ namespace anax
 {
     void ComponentFilter::clear()
     {
-        m_requiredComponentsList.clear();
-        m_requiresOneOfComponentsList.clear();
-        m_excludeComponentsList.clear();
+        m_requiredComponentsList.reset();
+        m_requiresOneOfComponentsList.reset();
+        m_excludeComponentsList.reset();
     }
 
     bool ComponentFilter::doesPassFilter(const ComponentTypeList &componentTypeList) const
     {
         // loop through all the component type bits
-        std::size_t index = m_requiredComponentsList.find_first();
-        for(; index != ComponentTypeList::npos; index = m_requiredComponentsList.find_next(index))
+//#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS        
+//        std::size_t index = m_requiredComponentsList.find_first();
+//        for(; index != ComponentTypeList::npos; index = m_requiredComponentsList.find_next(index))
+//#else
+//#endif
+        for(std::size_t i = 0; i < m_requiredComponentsList.size(); ++i)
         {
             // ensure that the none of the component types at index
             // are false (i.e. ensure that it meets all of the requirement list)
-            if(index >= componentTypeList.size() || componentTypeList[index] == false)
+            if(
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS        
+                i >= componentTypeList.size() || 
+#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+               componentTypeList[i] == false)
             {
                 // we'll return false
                 return false;
@@ -50,9 +58,9 @@ namespace anax
         }
 
         // if the optional bitset is not empty
-        if(!m_requiresOneOfComponentsList.empty())
+        if(!m_requiresOneOfComponentsList.none())
         {
-            if(!m_requiresOneOfComponentsList.intersects(componentTypeList))
+            if((m_requiresOneOfComponentsList ^ componentTypeList).any())
             {
                 return false;
             }
@@ -62,12 +70,12 @@ namespace anax
         // then...
 
         // check if the exclude bitset is not empty
-        if(!m_excludeComponentsList.empty())
+        if(!m_excludeComponentsList.none())
         {
             // if there is AT LEAST one bit that interesects the excludeBitSet
             // then we shall set returnValue to false, indicating that it is NOT
             // interested in the Entity
-            if(m_excludeComponentsList.intersects(componentTypeList))
+            if((m_excludeComponentsList ^ componentTypeList).any())
             {
                 return false;
             }

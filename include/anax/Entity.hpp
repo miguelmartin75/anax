@@ -141,7 +141,7 @@ namespace anax
         template <typename EntityTemplateFn, typename... Args>
         void applyTemplate(EntityTemplateFn fn, Args&&... args)
         {
-            fn(*this, std::foward<Args>(args)...)
+            fn(*this, std::forward<Args>(args)...);
         }
 
         /// Determines if this Entity handle is valid & able to be used.

@@ -25,6 +25,8 @@
 
 #include <anax/detail/EntityIdPool.hpp>
 
+#include <cassert>
+
 namespace anax
 {
     namespace detail
