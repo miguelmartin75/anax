@@ -183,15 +183,11 @@ namespace anax
         template <typename T>
         T& addComponent(T* component);
 
-#ifdef ANAX_USE_VARIADIC_TEMPLATES
-
         /// Adds a component to the Entity
         /// \tparam The type of component you wish to add
         /// \param args The arguments for the constructor of the component
         template <typename T, typename... Args>
         T& addComponent(Args&&... args);
-
-#endif // ANAX_USE_VARIADIC_TEMPLATES
 
         /// Removes a component
         /// \tparam The type of component you wish to remove
@@ -253,15 +249,11 @@ namespace anax
         return *component;
     }
 
-#ifdef ANAX_USE_VARIADIC_TEMPLATES
-
     template <typename T, typename... Args>
     T& Entity::addComponent(Args&&... args)
     {
         return addComponent<T>(new T{std::forward<Args>(args)...});
     }
-
-#endif // ANAX_USE_VARIADIC_TEMPLATES
 
     template <typename T>
     void Entity::removeComponent()

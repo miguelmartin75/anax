@@ -93,9 +93,9 @@ namespace anax
                 // bug in clang? won't work w/o this
                 // http://stackoverflow.com/questions/8560994/stdmake-shared-stdunique-ptr-and-move-constructors
                 // I think it's due to ComponentTypeList (may have to update boost)
-                EntityComponents(EntityComponents&& e)
-                : components(std::move(e.components)),
-                componentTypeList(std::move(e.componentTypeList))
+                EntityComponents(EntityComponents&& e) : 
+                    components(std::move(e.components)), 
+                    componentTypeList(std::move(e.componentTypeList))
                 {
                 }
 
