@@ -22,7 +22,7 @@ To compile, install, and use anax, a C++11 compiliant compiler is required.
 
 and:
 
-- [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html) - TODO: remove
+- [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html)
 
 ## Installation
 
