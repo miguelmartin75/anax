@@ -188,7 +188,7 @@ Also, don't be afraid to send pull requests, especially for those that fix bugs 
 
 # License
 
-See [[LICENSE]].
+See [LICENSE](LICENSE).
 
 [wiki]: https://github.com/miguelmartin75/anax/wiki
 [CMake]: http://www.cmake.org/
