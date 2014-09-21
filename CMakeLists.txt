@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project (ANAX)
 
-set(CMAKE_MODULE_PATH "/usr/local/lib/SFML-2.1/share/SFML/cmake/Modules")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
 set(ANAX_LIBRARY_NAME "anax")
 set(ANAX_VERSION_MAJOR 1)
@@ -50,9 +50,17 @@ set(BUILD_EXAMPLES false CACHE BOOL "Enable to build the examples for anax")
 set(BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
 set(BUILD_SHARED_LIBS true CACHE BOOL "A flag to build shared (dynamic) libs")
 set(ANAX_USE_VARIADIC_TEMPLATES true CACHE BOOL "Enables use of variadic templates where appropriate in the library")
+set(ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS false CACHE BOOL "If true, uses a dynamic amount of components")
 set(ANAX_32_BIT_ENTITY_IDS false CACHE BOOL "Enables 32 bit IDs for the entity")
 set(ANAX_VIRTUAL_DTORS_IN_COMPONENT true CACHE BOOL "Enables virtual dtors in components")
 set(ANAX_DEFAULT_ENTITY_POOL_SIZE 1000 CACHE INTEGER "The default entity pool size, within a World object")
+
+if(NOT ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS)
+    set(ANAX_MAX_AMOUNT_OF_COMPONENTS 64 CACHE INTEGER "The maximum amount of components for an entity allowed")
+else()
+    unset(ANAX_MAX_AMOUNT_OF_COMPONENTS CACHE)
+endif()
+
 
 # set up the configure file for the library
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp.inl ${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp)
@@ -76,9 +84,11 @@ endif()
 # ======================== #
 
 # Find boost
-find_package(Boost REQUIRED)
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
+if(ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS)
+    find_package(Boost REQUIRED)
+    if(Boost_FOUND)
+        include_directories(${Boost_INCLUDE_DIRS})
+    endif()
 endif()
 
 
@@ -148,16 +158,17 @@ endif()
 # Headers for the library
 if(INSTALL_HEADERS)
     install(
-        DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
-        DESTINATION .
-        FILES_MATCHING PATTERN "*.hpp"
-        )
+            DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
+            DESTINATION .
+            FILES_MATCHING PATTERN "*.hpp"
+           )
 endif()
 
 # Set properties for the library
 set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES
-    VERSION ${PROJECT_VERSION}
-    SOVERSION ${ANAX_VERSION_MAJOR})
+                        VERSION ${PROJECT_VERSION}
+                        SOVERSION ${ANAX_VERSION_MAJOR}
+                     )
 
 if(APPLE)
     set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES OSX_ARCHITECTURES "i386;x86_64;")
@@ -165,7 +176,7 @@ endif()
 
 # Library files
 install(
-    TARGETS ${ANAX_LIBRARY_NAME}
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    )
+        TARGETS ${ANAX_LIBRARY_NAME}
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+       )
