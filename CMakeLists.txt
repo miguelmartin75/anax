@@ -5,6 +5,8 @@
 
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # ======================== #
 # Set Project Version/Name #
 # ======================== #
@@ -84,11 +86,9 @@ endif()
 # ======================== #
 
 # Find boost
-if(ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS)
-    find_package(Boost REQUIRED)
-    if(Boost_FOUND)
-        include_directories(${Boost_INCLUDE_DIRS})
-    endif()
+find_package(Boost REQUIRED)
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
 
