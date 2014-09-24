@@ -26,6 +26,7 @@
 #include <anax/Entity.hpp>
 
 #include <anax/World.hpp>
+#include <anax/detail/AnaxAssert.hpp>
 
 namespace anax
 {
@@ -42,7 +43,7 @@ namespace anax
 
     World& Entity::getWorld() const
     {
-        assert(m_world != nullptr);
+        ANAX_ASSERT(m_world != nullptr, "world reference in entity is null");
 
         return *m_world;
     }

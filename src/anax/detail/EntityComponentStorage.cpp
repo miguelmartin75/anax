@@ -25,11 +25,10 @@
 
 #include <anax/detail/EntityComponentStorage.hpp>
 
-#include <cassert>
 
 #include <anax/config.hpp>
-
 #include <anax/util/ContainerUtils.hpp>
+#include <anax/detail/AnaxAssert.hpp>
 
 namespace anax
 {
@@ -42,7 +41,7 @@ namespace anax
 
         void EntityComponentStorage::addComponent(Entity& entity, BaseComponent* component, TypeId componentTypeId)
         {
-            assert(entity.isValid());
+            ANAX_ASSERT(entity.isValid(), "invalid entity cannot have components added to it");
 
             auto index = entity.getId().index;
             auto& componentDataForEntity = m_componentEntries[index];
@@ -63,7 +62,7 @@ namespace anax
 
         void EntityComponentStorage::removeComponent(Entity& entity, TypeId componentTypeId)
         {
-            assert(entity.isValid());
+            ANAX_ASSERT(entity.isValid(), "invalid entity cannot remove components");
 
             auto index = entity.getId().index;
             auto& componentDataForEntity = m_componentEntries[index];
@@ -83,21 +82,21 @@ namespace anax
 
         BaseComponent& EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
         {
-            assert(entity.isValid() && hasComponent(entity, componentTypeId) && "Entity is not valid or does not contain component");
+            ANAX_ASSERT(entity.isValid() && hasComponent(entity, componentTypeId), "Entity is not valid or does not contain component");
 
             return *getComponentsImpl(entity)[componentTypeId];
         }
 
         ComponentTypeList EntityComponentStorage::getComponentTypeList(const Entity& entity) const
         {
-            assert(entity.isValid());
+            ANAX_ASSERT(entity.isValid(), "invalid entity cannot retrieve the component list");
 
             return m_componentEntries[entity.getId().index].componentTypeList;
         }
 
         ComponentArray EntityComponentStorage::getComponents(const Entity& entity)  const
         {
-            assert(entity.isValid());
+            ANAX_ASSERT(entity.isValid(), "invalid entity cannot retrieve components, as it has none");
 
             auto& componentsToConvert = getComponentsImpl(entity);
 
@@ -112,7 +111,7 @@ namespace anax
 
         bool EntityComponentStorage::hasComponent(const Entity& entity, TypeId componentTypeId) const
         {
-            assert(entity.isValid());
+            ANAX_ASSERT(entity.isValid(), "invalid entity cannot check if it has components");
 
             auto& components = getComponentsImpl(entity);
 

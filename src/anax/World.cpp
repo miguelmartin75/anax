@@ -26,7 +26,7 @@
 #include <anax/World.hpp>
 #include <anax/config.hpp>
 
-#include <cassert>
+#include <anax/detail/AnaxAssert.hpp>
 
 namespace anax
 {
@@ -96,21 +96,21 @@ namespace anax
 
     void World::activateEntity(Entity& entity)
     {
-        assert(isValid(entity));
+        ANAX_ASSERT(isValid(entity), "invalid entity tried to be activated");
 
         m_entityCache.activated.push_back(entity);
     }
 
     void World::deactivateEntity(Entity& entity)
     {
-        assert(isValid(entity));
+        ANAX_ASSERT(isValid(entity), "invalid entity tried to be deactivated");
 
         m_entityCache.deactivated.push_back(entity);
     }
 
     bool World::isActivated(const Entity& entity) const
     {
-        assert(isValid(entity));
+        ANAX_ASSERT(isValid(entity), "invalid entity passed to isActivated");
 
         return m_entityAttributes.attributes[entity.getId().index].activated;
     }
@@ -236,7 +236,7 @@ namespace anax
 
     void World::addSystem(BaseSystem& system, detail::TypeId systemTypeId)
     {
-        assert(!system.m_world && "System is already contained within a World");
+        ANAX_ASSERT(!system.m_world, "System is already contained within a World");
 
         m_systems[systemTypeId].reset(&system);
 
@@ -246,7 +246,7 @@ namespace anax
 
     void World::removeSystem(detail::TypeId systemTypeId)
     {
-        assert(doesSystemExist(systemTypeId) && "System does not exist in world");
+        ANAX_ASSERT(doesSystemExist(systemTypeId), "System does not exist in world");
         m_systems.erase(systemTypeId);
     }
 
