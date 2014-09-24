@@ -25,7 +25,7 @@
 
 #include <anax/detail/EntityIdPool.hpp>
 
-#include <cassert>
+#include <anax/detail/AnaxAssert.hpp>
 
 namespace anax
 {
@@ -73,7 +73,7 @@ namespace anax
 
         Entity::Id EntityIdPool::get(std::size_t index) const
         {
-            assert(!(m_entities[index] == 0) && "Entity ID does not exist");
+            ANAX_ASSERT(!(m_entities[index] == 0), "Entity ID does not exist");
             return Entity::Id{index, m_entities[index]};
         }
 
