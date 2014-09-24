@@ -1,0 +1,4 @@
+.DS_Store
+include/anax/config.hpp
+build/*
+.ycm_extra_conf*
