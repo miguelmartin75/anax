@@ -1,9 +1,16 @@
+# first we want to build another version of the library
+# specific for testing...
+set(ANAX_TESTING_LIBRARY_NAME "anax_test")
+
+add_definitions(-DANAX_TEST_CASE_BUILD)
+add_library(${ANAX_TESTING_LIBRARY_NAME} ${ANAX_LIBRARY_SOURCES})
+
 # neat little macro for creating tests
 macro(create_test TARGET_NAME SOURCE)
     add_executable(${TARGET_NAME} ${SOURCE})
     target_link_libraries(
         ${TARGET_NAME}
-        ${ANAX_LIBRARY_NAME}
+        ${ANAX_TESTING_LIBRARY_NAME}
     )
     add_test(${TARGET_NAME} ${TARGET_NAME})
 endmacro()
