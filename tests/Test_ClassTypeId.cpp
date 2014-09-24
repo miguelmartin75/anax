@@ -31,7 +31,7 @@ struct Type {};
 
 const lest::test specification[] =
 {
-    "Incremental IDs for types", []
+    CASE("Incremental IDs for types")
     {
         using namespace anax::detail;
 

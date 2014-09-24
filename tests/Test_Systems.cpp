@@ -39,7 +39,7 @@ void createNPCsAndPlayers(int amount, World& world);
 
 const lest::test specification[] =
 {
-    "MovementSystem", []
+    CASE("MovementSystem")
     {
         anax::World world;
         MovementSystem movementSystem;
@@ -57,7 +57,7 @@ const lest::test specification[] =
         }
     },
 
-    "PlayerSystem", []
+    CASE("PlayerSystem")
     {
         anax::World world;
         PlayerSystem playerSystem;
@@ -70,7 +70,7 @@ const lest::test specification[] =
         world.refresh();
     },
 
-    "if a system exists", []
+    CASE("if a system exists")
     {
         anax::World world;
         PlayerSystem playerSystem;
@@ -84,7 +84,7 @@ const lest::test specification[] =
         EXPECT(world.doesSystemExist(playerSystem));
     },
 
-    "if a system exists (clearing the world)", []
+    CASE("if a system exists (clearing the world)")
     {
         anax::World world;
         PlayerSystem playerSystem;
@@ -111,7 +111,7 @@ const lest::test specification[] =
         EXPECT(!world.doesSystemExist(movementSystem));
     }, 
 
-    "if a system exists (removing the system)", []
+    CASE("if a system exists (removing the system)")
     {
         anax::World world;
         PlayerSystem playerSystem;

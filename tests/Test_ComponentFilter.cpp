@@ -34,7 +34,7 @@ const int MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST = 3;
 
 const lest::test specification[] =
 {
-    "Using require (1)", []
+    CASE("Using require (1)")
     {
         anax::ComponentFilter filter;
         filter.requires<PositionComponent, VelocityComponent>();
@@ -48,7 +48,7 @@ const lest::test specification[] =
         EXPECT(filter.doesPassFilter(typeList));
     },
 
-    "Using require (2)", []
+    CASE("Using require (2)")
     {
         anax::ComponentFilter filter;
         filter.requires<PositionComponent, VelocityComponent>();
@@ -61,7 +61,7 @@ const lest::test specification[] =
         EXPECT(!filter.doesPassFilter(typeList));
     },
 
-    "Using require and requiresOneOf", []
+    CASE("Using require and requiresOneOf")
     {
         anax::ComponentFilter filter;
         filter.requiresOneOf<PositionComponent, VelocityComponent>();
@@ -74,7 +74,7 @@ const lest::test specification[] =
         EXPECT(filter.doesPassFilter(typeList));
     },
 
-    "Using exclude", []
+    CASE("Using exclude")
     {
         anax::ComponentFilter filter;
         filter.excludes<PositionComponent, VelocityComponent>();

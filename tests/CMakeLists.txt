@@ -5,6 +5,8 @@ set(ANAX_TESTING_LIBRARY_NAME "anax_test")
 add_definitions(-DANAX_TEST_CASE_BUILD)
 add_library(${ANAX_TESTING_LIBRARY_NAME} ${ANAX_LIBRARY_SOURCES})
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lest)
+
 # neat little macro for creating tests
 macro(create_test TARGET_NAME SOURCE)
     add_executable(${TARGET_NAME} ${SOURCE})

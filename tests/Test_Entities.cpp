@@ -35,7 +35,7 @@
 
 const lest::test specification[] =
 {
-    "Invalid entity handles (killing entities)", []
+    CASE("Invalid entity handles (killing entities)")
     {
         anax::World world;
 
@@ -49,7 +49,7 @@ const lest::test specification[] =
         EXPECT(!e1.isValid());
     },
 
-    "Invalid entity handles (clearing world)", []
+    CASE("Invalid entity handles (clearing world)")
     {
         anax::World world;
 
@@ -64,7 +64,7 @@ const lest::test specification[] =
         EXPECT(e1.isValid()); // now e1 should be valid
     },
 
-    "Duplicate invalid (killed) entity handles", []
+    CASE("Duplicate invalid (killed) entity handles")
     {
         anax::World world;
 
@@ -81,7 +81,7 @@ const lest::test specification[] =
         EXPECT(!e2.isValid()); // should be invalid
     },
 
-    "Activating and deactivating entities", []
+    CASE("Activating and deactivating entities")
     {
         anax::World world;
 
@@ -103,7 +103,7 @@ const lest::test specification[] =
         EXPECT(!e1.isActivated()); // should not be activated
     },
 
-    "Adding components", []
+    CASE("Adding components")
     {
         anax::World world;
 
@@ -113,7 +113,7 @@ const lest::test specification[] =
         EXPECT(e.hasComponent<PositionComponent>());
     },
 
-    "Removing components", []
+    CASE("Removing components")
     {
         anax::World world;
 
@@ -124,7 +124,7 @@ const lest::test specification[] =
         EXPECT(!e.hasComponent<PositionComponent>());
     },
 
-    "Removing all components", []
+    CASE("Removing all components")
     {
         anax::World world;
 
@@ -134,10 +134,11 @@ const lest::test specification[] =
 
         e.removeAllComponents();
 
-        EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
+        EXPECT(!e.hasComponent<PositionComponent>());
+        EXPECT(e.hasComponent<VelocityComponent>());
     },
 
-    "Removing components with a system attached to the world", []
+    CASE("Removing components with a system attached to the world")
     {
         anax::World world;
         MovementSystem moveSystem;
@@ -168,7 +169,7 @@ const lest::test specification[] =
         moveSystem.update();
     },
 
-    "Removing all components with a system attached to the world", []
+    CASE("Removing all components with a system attached to the world")
     {
         anax::World world;
         MovementSystem moveSystem;
@@ -186,20 +187,22 @@ const lest::test specification[] =
         e.activate();
         world.refresh();
 
-        EXPECT(!e.hasComponent<PositionComponent>() && !e.hasComponent<VelocityComponent>());
+        EXPECT(!e.hasComponent<PositionComponent>());
+        EXPECT(!e.hasComponent<VelocityComponent>());
 
         world.refresh();
         moveSystem.update();
     },
 
-    "Retrieving an Entity via ID index", []
+    CASE("Retrieving an Entity via ID index")
     {
         anax::World world;
 
         auto e1 = world.createEntity();
         auto e2 = world.getEntity(e1.getId().index);
 
-        EXPECT(e1.isValid() && e2.isValid());
+        EXPECT(e1.isValid());
+        EXPECT(e2.isValid());
         EXPECT(e1 == e2);
     }
 };
