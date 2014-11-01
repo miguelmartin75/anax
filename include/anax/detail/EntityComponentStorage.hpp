@@ -51,7 +51,7 @@ namespace anax
         {
         public:
 
-            EntityComponentStorage(std::size_t entityAmount);
+            explicit EntityComponentStorage(std::size_t entityAmount);
 
             EntityComponentStorage(const EntityComponentStorage&) = delete;
             EntityComponentStorage(EntityComponentStorage&&) = delete;

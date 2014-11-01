@@ -68,7 +68,7 @@ namespace anax
 
         /// Constructs the world with a custom entity pool size
         /// \param entityPoolSize The amount of entities you wish to have pooled ready to use by default
-        World(std::size_t entityPoolSize);
+        explicit World(std::size_t entityPoolSize);
 
         World(const World& world) = delete;
         World(World&& world) = delete;
@@ -126,7 +126,7 @@ namespace anax
         /// \return The entities you created
         EntityArray createEntities(std::size_t amount);
 
-        /// Kills and decativates an Entity
+        /// Kills and deactivates an Entity
         /// \param entity The Entity you wish to kill
         void killEntity(Entity& entity);
 
@@ -157,9 +157,9 @@ namespace anax
         /// Refreshes the World
         void refresh();
 
-        /// Instantiously clears the world, by removing
+        /// Instantaneously clears the world, by removing
         /// all systems and entities from the world.
-        /// \note It is no guareentee that the entities from the world
+        /// \note It is no guarantee that the entities from the world
         /// will be invalidated, as the counter of the entity may still be
         /// set to the same counter in the pool. However, it is expected
         /// that the entity will not have the same counter as long as you have not

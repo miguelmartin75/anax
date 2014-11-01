@@ -43,7 +43,7 @@ namespace anax
         {
         public:
 
-            EntityIdPool(std::size_t poolSize);
+            explicit EntityIdPool(std::size_t poolSize);
 
             EntityIdPool(const EntityIdPool&) = delete;
             EntityIdPool(EntityIdPool&&) = delete;
