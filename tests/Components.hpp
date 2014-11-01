@@ -26,30 +26,32 @@
 #ifndef ANAX_TESTS_COMPONENTS_HPP
 #define ANAX_TESTS_COMPONENTS_HPP
 
+/// This file is present in order to for some components
+/// to exist, so we can test the entity system properly
+
 #include <string>
+
 #include <anax/Component.hpp>
 
-class PositionComponent : public anax::Component<PositionComponent>
+struct vec3 { float x, y, z };
+
+struct PositionComponent : anax::Component<PositionComponent>
 {
-public:
-    float x, y, z;
+    vec3 position;
 };
 
-class VelocityComponent : public anax::Component<VelocityComponent>
+struct VelocityComponent : anax::Component<VelocityComponent>
 {
-public:
-    float x, y, z;
+    vec3 velocity;
 };
 
-class PlayerComponent : public anax::Component<PlayerComponent>
+struct PlayerComponent : anax::Component<PlayerComponent>
 {
-public:
     std::string name;
 };
 
-class NPCComponent : public anax::Component<NPCComponent>
+struct NPCComponent : anax::Component<NPCComponent>
 {
-public:
     std::string name;
 
     enum Type

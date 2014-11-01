@@ -26,8 +26,7 @@
 #ifndef ANAX_TESTS_SYSTEMS_HPP
 #define ANAX_TESTS_SYSTEMS_HPP
 
-#include <iostream>
-#include <exception>
+#include <stdexcept>
 
 #include <anax/System.hpp>
 
@@ -37,8 +36,8 @@ class MovementSystem : public anax::System<MovementSystem>
 {
 public:
 
-    MovementSystem()
-    : Base(anax::ComponentFilter().requires<PositionComponent, VelocityComponent>())
+    MovementSystem() : 
+        Base(anax::ComponentFilter().requires<PositionComponent, VelocityComponent>())
     {
     }
 
@@ -47,8 +46,8 @@ public:
         auto entities = getEntities();
         for(auto& e : entities)
         {			
-            auto position = e.getComponent<PositionComponent>();
-            auto velocity = e.getComponent<VelocityComponent>();
+            auto position = e.getComponent<PositionComponent>().position;
+            auto velocity = e.getComponent<VelocityComponent>().velocity;
 
             position.x += velocity.x;
             position.y += velocity.y;
@@ -60,16 +59,14 @@ private:
 
     virtual void onEntityAdded(anax::Entity& e) override
     {
-        std::cout << "Entity added to MovementSystem\n";
         if(e.hasComponent<NPCComponent>())
         {
-            throw std::logic_error("Player contains NPCComponent :(");
+            throw std::logic_error("Player contains NPCComponent, this goes against the component filter");
         }
     }
 
     virtual void onEntityRemoved(anax::Entity& e) override
     {
-        std::cout << "Entity removed from MovementSystem\n";
     }
 };
 
@@ -79,8 +76,8 @@ class PlayerSystem : public anax::System<PlayerSystem>
 {
 public:
 
-    PlayerSystem()
-    : Base(anax::ComponentFilter().requires<PlayerComponent>().excludes<NPCComponent>())
+    PlayerSystem() : 
+        Base(anax::ComponentFilter().requires<PlayerComponent>().excludes<NPCComponent>())
     {
     }
 
@@ -88,13 +85,11 @@ private:
 
     virtual void onEntityAdded(anax::Entity& e) override
     {
-        std::cout << "Entity added to PlayerSystem\n";
     }
 
 
     virtual void onEntityRemoved(anax::Entity& e) override
     {
-        std::cout << "Entity removed from PlayerSystem\n";
     }
 };
 

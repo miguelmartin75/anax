@@ -23,9 +23,7 @@
 /// THE SOFTWARE.
 ///
 
-#include <iostream>
-
-#include "lest.hpp"
+#include <lest.hpp>
 
 #include <anax/Entity.hpp>
 #include <anax/World.hpp>
@@ -39,13 +37,12 @@ const lest::test specification[] =
     {
         anax::World world;
 
-        auto e1 = world.createEntity(); // create an entity
-        e1.kill(); // kill it
+        auto e1 = world.createEntity(); 
+        e1.kill();
 
         EXPECT(e1.isValid());
 
         world.refresh();
-
         EXPECT(!e1.isValid());
     },
 
@@ -56,26 +53,20 @@ const lest::test specification[] =
         auto e1 = world.createEntity();
         world.clear();
 
-        EXPECT(!e1.isValid()); // I expect this to not be valid (until you create another entity)
-
-        auto e2 = world.createEntity();
-        e2.getId(); // to silence warning
-
-        EXPECT(e1.isValid()); // now e1 should be valid
+        EXPECT(!e1.isValid());
     },
 
     CASE("Duplicate invalid (killed) entity handles")
     {
         anax::World world;
 
-        auto e1 = world.createEntity(); // create an entity
-        e1.kill(); // kill it
+        auto e1 = world.createEntity(); 
+        e1.kill();
 
         // refresh the world (so that the ID will be invalid)
         world.refresh();
 
-        // create another handle,
-        // that is the same as the previous
+        // create another handle, that is the same as the previous
         anax::Entity e2 = e1;
 
         EXPECT(!e2.isValid()); // should be invalid
@@ -85,21 +76,18 @@ const lest::test specification[] =
     {
         anax::World world;
 
-        auto e1 = world.createEntity();
-        e1.activate();
+        auto e = world.createEntity();
 
-        EXPECT(!e1.isActivated()); // should not be activated
-
-        world.refresh();
-
-        EXPECT(e1.isActivated()); // should be activated
-
-        e1.deactivate();
-
-        EXPECT(e1.isActivated()); // should be still activated
+        e.activate();
+        EXPECT(!e.isActivated());  // should not be activated
 
         world.refresh();
+        EXPECT(e.isActivated());   // should be activated
 
+        e.deactivate();
+        EXPECT(e1.isActivated());  // should be still activated
+
+        world.refresh();
         EXPECT(!e1.isActivated()); // should not be activated
     },
 
@@ -121,7 +109,7 @@ const lest::test specification[] =
         e.addComponent<PositionComponent>();
         e.removeComponent<PositionComponent>();
 
-        EXPECT(!e.hasComponent<PositionComponent>());
+        EXPECT(e.hasComponent<PositionComponent>() == false);
     },
 
     CASE("Removing all components")
@@ -134,9 +122,24 @@ const lest::test specification[] =
 
         e.removeAllComponents();
 
-        EXPECT(!e.hasComponent<PositionComponent>());
-        EXPECT(e.hasComponent<VelocityComponent>());
+        EXPECT(e.hasComponent<PositionComponent>() == false);
+        EXPECT(e.hasComponent<VelocityComponent>() == false);
     },
+
+    CASE("Attempt to add an Entity that does not confine to a system's filter")
+    {
+        anax::World world;
+        MovementSystem movementSystem;
+        auto e = world.createEntity();
+
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+        e.addComponent<NPCComponent>();
+        e.activate();
+
+        world.addSystem(movementSystem);
+        world.refresh();
+    }
 
     CASE("Removing components with a system attached to the world")
     {
@@ -150,21 +153,16 @@ const lest::test specification[] =
         e.addComponent<VelocityComponent>();
         e.activate();
 
-        std::cout << "added components to entity\n";
-
+        // make sure we don't get any exceptions
         world.refresh();
         moveSystem.update(); 
 
-        std::cout << "updated movement system & refreshed world\n";
-
         e.removeComponent<PositionComponent>();
         e.activate();
-        std::cout << "removed component and activated entity\n";
 
-        EXPECT(!e.hasComponent<PositionComponent>());
+        EXPECT(e.hasComponent<PositionComponent>() == false);
 
-        std::cout << "refreshed world\n";
-
+        // make sure we don't get any exceptions (again)
         world.refresh();
         moveSystem.update();
     },
@@ -180,15 +178,15 @@ const lest::test specification[] =
         e.addComponent<PositionComponent>();
         e.addComponent<VelocityComponent>();
 
+        // make sure we don't get any exceptions
         e.activate();
         world.refresh();
 
         e.removeAllComponents();
         e.activate();
-        world.refresh();
 
-        EXPECT(!e.hasComponent<PositionComponent>());
-        EXPECT(!e.hasComponent<VelocityComponent>());
+        EXPECT(e.hasComponent<PositionComponent>() == false);
+        EXPECT(e.hasComponent<VelocityComponent>() == false);
 
         world.refresh();
         moveSystem.update();
