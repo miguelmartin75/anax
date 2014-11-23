@@ -218,3 +218,7 @@ THE SOFTWARE.
 [clone]: github-mac://openRepo/https://github.com/miguelmartin75/anax
 [zip]: https://api.github.com/repos/miguelmartin75/anax/zipball
 [tar-gz]: https://api.github.com/repos/miguelmartin75/anax/tarball
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/miguelmartin75/anax/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
