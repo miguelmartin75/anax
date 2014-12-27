@@ -23,7 +23,7 @@
 /// THE SOFTWARE.
 ///
 
-#include "lest.hpp"
+#include <lest.hpp>
 
 #include <anax/detail/ClassTypeId.hpp>
 

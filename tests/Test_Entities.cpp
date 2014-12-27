@@ -33,27 +33,34 @@
 
 const lest::test specification[] =
 {
+    CASE("Valid entity handles")
+    {
+        anax::World world;
+        auto e = world.createEntity();
+        EXPECT(e.isValid() == true);
+    },
+
     CASE("Invalid entity handles (killing entities)")
     {
         anax::World world;
 
-        auto e1 = world.createEntity(); 
-        e1.kill();
+        auto e = world.createEntity();
+        e.kill();
 
-        EXPECT(e1.isValid());
+        EXPECT(e.isValid()); // should only be invalid after a refresh
 
         world.refresh();
-        EXPECT(!e1.isValid());
+        EXPECT(e.isValid() == false);
     },
 
     CASE("Invalid entity handles (clearing world)")
     {
         anax::World world;
 
-        auto e1 = world.createEntity();
+        auto e = world.createEntity();
         world.clear();
 
-        EXPECT(!e1.isValid());
+        EXPECT(e.isValid() == false);
     },
 
     CASE("Duplicate invalid (killed) entity handles")
@@ -65,11 +72,13 @@ const lest::test specification[] =
 
         // refresh the world (so that the ID will be invalid)
         world.refresh();
+        EXPECT(e1.isValid() == false);
 
         // create another handle, that is the same as the previous
         anax::Entity e2 = e1;
 
-        EXPECT(!e2.isValid()); // should be invalid
+        // this handle should also be invalid
+        EXPECT(e2.isValid() == false);
     },
 
     CASE("Activating and deactivating entities")
@@ -80,15 +89,32 @@ const lest::test specification[] =
 
         e.activate();
         EXPECT(!e.isActivated());  // should not be activated
-
         world.refresh();
-        EXPECT(e.isActivated());   // should be activated
+        EXPECT(e.isActivated());   // should be activated after a refresh
 
         e.deactivate();
-        EXPECT(e1.isActivated());  // should be still activated
+        EXPECT(e.isActivated());  // should be still activated
+        world.refresh();
+        EXPECT(!e.isActivated()); // should not be activated after a refresh
+    },
+
+    CASE("Activating an entity multiple times")
+    {
+        anax::World world;
+        MovementSystem movementSystem;
+        world.addSystem(movementSystem);
+
+        auto e = world.createEntity();
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+        e.activate();
+        e.activate();
 
         world.refresh();
-        EXPECT(!e1.isActivated()); // should not be activated
+
+        auto entities = movementSystem.getEntities();
+
+        EXPECT(entities.size() == 1);
     },
 
     CASE("Adding components")
@@ -98,7 +124,7 @@ const lest::test specification[] =
         auto e = world.createEntity();
         e.addComponent<PositionComponent>();
 
-        EXPECT(e.hasComponent<PositionComponent>());
+        EXPECT(e.hasComponent<PositionComponent>() == true);
     },
 
     CASE("Removing components")
@@ -120,76 +146,13 @@ const lest::test specification[] =
         e.addComponent<PositionComponent>();
         e.addComponent<VelocityComponent>();
 
+        EXPECT(e.hasComponent<PositionComponent>() == true);
+        EXPECT(e.hasComponent<VelocityComponent>() == true);
+
         e.removeAllComponents();
 
         EXPECT(e.hasComponent<PositionComponent>() == false);
         EXPECT(e.hasComponent<VelocityComponent>() == false);
-    },
-
-    CASE("Attempt to add an Entity that does not confine to a system's filter")
-    {
-        anax::World world;
-        MovementSystem movementSystem;
-        auto e = world.createEntity();
-
-        e.addComponent<PositionComponent>();
-        e.addComponent<VelocityComponent>();
-        e.addComponent<NPCComponent>();
-        e.activate();
-
-        world.addSystem(movementSystem);
-        world.refresh();
-    }
-
-    CASE("Removing components with a system attached to the world")
-    {
-        anax::World world;
-        MovementSystem moveSystem;
-
-        world.addSystem(moveSystem);
-
-        auto e = world.createEntity();
-        e.addComponent<PositionComponent>();
-        e.addComponent<VelocityComponent>();
-        e.activate();
-
-        // make sure we don't get any exceptions
-        world.refresh();
-        moveSystem.update(); 
-
-        e.removeComponent<PositionComponent>();
-        e.activate();
-
-        EXPECT(e.hasComponent<PositionComponent>() == false);
-
-        // make sure we don't get any exceptions (again)
-        world.refresh();
-        moveSystem.update();
-    },
-
-    CASE("Removing all components with a system attached to the world")
-    {
-        anax::World world;
-        MovementSystem moveSystem;
-
-        world.addSystem(moveSystem);	
-
-        auto e = world.createEntity();
-        e.addComponent<PositionComponent>();
-        e.addComponent<VelocityComponent>();
-
-        // make sure we don't get any exceptions
-        e.activate();
-        world.refresh();
-
-        e.removeAllComponents();
-        e.activate();
-
-        EXPECT(e.hasComponent<PositionComponent>() == false);
-        EXPECT(e.hasComponent<VelocityComponent>() == false);
-
-        world.refresh();
-        moveSystem.update();
     },
 
     CASE("Retrieving an Entity via ID index")

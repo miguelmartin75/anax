@@ -43,7 +43,7 @@ namespace anax
 
     World& Entity::getWorld() const
     {
-        ANAX_ASSERT(m_world != nullptr, "world reference in entity is null");
+        ANAX_ASSERT(m_world, "world reference in entity is null");
 
         return *m_world;
     }
@@ -81,13 +81,6 @@ namespace anax
     {
         getWorld().killEntity(*this);
     }
-
-    /*
-       void addComponent(BaseComponent* component)
-       {
-       addComponent(component, component->getTypeId());
-       }
-       */
 
     void Entity::removeAllComponents()
     {
