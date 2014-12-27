@@ -37,51 +37,57 @@ namespace anax
     bool ComponentFilter::doesPassFilter(const ComponentTypeList &componentTypeList) const
     {
         // loop through all the component type bits
-//#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS        
-//        std::size_t index = m_requiredComponentsList.find_first();
-//        for(; index != ComponentTypeList::npos; index = m_requiredComponentsList.find_next(index))
-//#else
-//#endif
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS        
+        std::size_t i = m_requiredComponentsList.find_first();
+        for(; i != ComponentTypeList::npos; i = m_requiredComponentsList.find_next(i))
+#else
         for(std::size_t i = 0; i < m_requiredComponentsList.size(); ++i)
+#endif
         {
             // ensure that the none of the component types at index
             // are false (i.e. ensure that it meets all of the requirement list)
             if(
 #ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS        
-                i >= componentTypeList.size() || 
+               i >= componentTypeList.size() || 
+#else
+               m_requiredComponentsList[i] == true && 
 #endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-               componentTypeList[i] == false)
+
+                componentTypeList[i] == false)
             {
-                // we'll return false
                 return false;
             }
         }
 
-        // if the optional bitset is not empty
         if(!m_requiresOneOfComponentsList.none())
         {
-            if((m_requiresOneOfComponentsList ^ componentTypeList).any())
+            if(
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+                // NOTE: Can't use dynamic_bitset's operator^ as it causes a crash
+                !m_requiresOneOfComponentsList.intersects(componentTypeList)
+#else
+                !(m_requiresOneOfComponentsList ^ componentTypeList).any()
+#endif
+              )
             {
                 return false;
             }
         }
 
-        // however if we got this far...
-        // then...
-
-        // check if the exclude bitset is not empty
         if(!m_excludeComponentsList.none())
         {
-            // if there is AT LEAST one bit that interesects the excludeBitSet
-            // then we shall set returnValue to false, indicating that it is NOT
-            // interested in the Entity
-            if((m_excludeComponentsList ^ componentTypeList).any())
+            if(
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
+                m_excludeComponentsList.intersects(componentTypeList)
+#else
+                (m_excludeComponentsList ^ componentTypeList).any()
+#endif
+              )
             {
                 return false;
             }
         }
 
-        // otherwise, everything passed the test, so we will return true
         return true;
     }
 }

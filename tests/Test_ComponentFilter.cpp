@@ -54,7 +54,7 @@ const lest::test specification[] =
         typeList[PositionComponent::GetTypeId()] = true;
         typeList[VelocityComponent::GetTypeId()] = true;
 
-        EXPECT(filter.doesPassFilter(typeList));
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requires (fail)")
@@ -78,10 +78,10 @@ const lest::test specification[] =
 
         anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PlayerComponent::GetTypeId()] = true;
+        typeList[PositionComponent::GetTypeId()] = true;
         typeList[VelocityComponent::GetTypeId()] = false;
 
-        EXPECT(filter.doesPassFilter(typeList));
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requiesOneOf (pass with all)")
@@ -94,7 +94,7 @@ const lest::test specification[] =
         typeList[PlayerComponent::GetTypeId()] = true;
         typeList[VelocityComponent::GetTypeId()] = true;
 
-        EXPECT(filter.doesPassFilter(typeList));
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
 
@@ -121,7 +121,7 @@ const lest::test specification[] =
         typeList[PlayerComponent::GetTypeId()] = false;
         typeList[VelocityComponent::GetTypeId()] = false;
 
-        EXPECT(filter.doesPassFilter(typeList) == false);
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("excludes (fail via one)")
@@ -131,7 +131,7 @@ const lest::test specification[] =
 
         anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PlayerComponent::GetTypeId()] = true;
+        typeList[PositionComponent::GetTypeId()] = true;
         typeList[VelocityComponent::GetTypeId()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
@@ -162,7 +162,7 @@ const lest::test specification[] =
         typeList[VelocityComponent::GetTypeId()] = false;
         typeList[PlayerComponent::GetTypeId()] = false;
 
-        EXPECT(filter.doesPassFilter(typeList));
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requiresOneOf and excludes (fail)")
@@ -193,7 +193,7 @@ const lest::test specification[] =
 
         typeList[PlayerComponent::GetTypeId()] = true;
 
-        EXPECT(filter.doesPassFilter(typeList));
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requires and requiresOneOf (fail via requiresment)")
@@ -259,7 +259,7 @@ const lest::test specification[] =
 
         typeList[PlayerComponent::GetTypeId()] = false;
 
-        EXPECT(filter.doesPassFilter(typeList));
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requiresOneOf and excludes (fail via requiresOneOf)")
@@ -330,7 +330,7 @@ const lest::test specification[] =
         typeList[PositionComponent::GetTypeId()] = false;
         typeList[PlayerComponent::GetTypeId()] = false;
 
-        EXPECT(filter.doesPassFilter(typeList));
+        EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requires, requiresOneOf and excludes (fail via requires)")

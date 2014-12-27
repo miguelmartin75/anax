@@ -33,7 +33,7 @@
 
 #include <anax/Component.hpp>
 
-struct vec3 { float x, y, z };
+struct vec3 { float x, y, z; };
 
 struct PositionComponent : anax::Component<PositionComponent>
 {
