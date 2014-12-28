@@ -114,6 +114,8 @@ namespace anax
             int_type counter : ANAX_ENTITY_ID_COUNTER_BIT_COUNT;
         };
 
+        /// Default constructor
+        Entity();
 
         /// \param world The World the entity belongs to
         /// \param id The designated ID of the Entity
@@ -221,10 +223,6 @@ namespace anax
 
     private:
 
-        /// Default constructor
-        Entity();
-
-
         // wrappers to add components
         // so I may call them from templated public interfaces
         void addComponent(BaseComponent* component, detail::TypeId componentTypeId);
@@ -240,8 +238,6 @@ namespace anax
         /// to not be null, as long as this entity is not null.
         /// \see isNull() To determine if the entity is null or not.
         World* m_world;
-
-        friend class World;
     };
 
 
