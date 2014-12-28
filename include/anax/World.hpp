@@ -203,7 +203,7 @@ namespace anax
                 boost::dynamic_bitset<> systems;
             };
 
-            EntityAttributes(std::size_t amountOfEntities) :     
+            explicit EntityAttributes(std::size_t amountOfEntities) :     
                 componentStorage(amountOfEntities), 
                 attributes(amountOfEntities)
             {
