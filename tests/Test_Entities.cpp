@@ -112,9 +112,19 @@ const lest::test specification[] =
 
         world.refresh();
 
-        auto entities = movementSystem.getEntities();
+        {
+            auto entities = movementSystem.getEntities();
+            EXPECT(entities.size() == 1);
+        }
 
-        EXPECT(entities.size() == 1);
+        // try to add it again
+        e.activate();
+        world.refresh();
+
+        {
+            auto entities = movementSystem.getEntities();
+            EXPECT(entities.size() == 1);
+        }
     },
 
     CASE("Adding components")
