@@ -32,151 +32,125 @@ using namespace anax;
 
 #include "Systems.hpp"
 
-void createMoveableEntities(int amount, World& world);
-void createPlayers(int amount, World& world);
-void createNPCs(int amount, World& world);
-void createNPCsAndPlayers(int amount, World& world);
-
 const lest::test specification[] =
 {
-    CASE("MovementSystem")
+    CASE("Adding a system to a world")
+    {
+        World world;
+        MovementSystem system;
+        world.addSystem(system);
+
+        EXPECT(world.doesSystemExist(system) == true);
+    },
+
+    CASE("Removing a system from a world")
+    {
+        World world;
+        MovementSystem system;
+        world.addSystem(system);
+
+        world.removeSystem<decltype(system)>();
+
+        EXPECT(world.doesSystemExist(system) == false);
+    },
+
+    CASE("Removing all systems from the world")
+    {
+        World world;
+        MovementSystem movementSystem;
+        PlayerSystem playerSystem;
+        world.addSystem(movementSystem);
+        world.addSystem(playerSystem);
+
+        world.removeAllSystems();
+
+        EXPECT(world.doesSystemExist(movementSystem) == false);
+        EXPECT(world.doesSystemExist(playerSystem) == false);
+    },
+
+    CASE("Attempt to add an Entity that does confine to a system's filter")
     {
         anax::World world;
-        MovementSystem movementSystem;
-        world.addSystem(movementSystem);
+        MovementSystem system;
+        world.addSystem(system);
 
-        createMoveableEntities(rand() % 100 + 1, world);
-        createPlayers(rand() % 100 + 1, world);
+        auto e = world.createEntity();
+
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+        e.addComponent<NPCComponent>();
+        e.activate();
 
         world.refresh();
-
-        // update it a couple of times..
-        for(int i = 0; i < 5; ++i)
-        {
-            movementSystem.update();
-        }
     },
 
-    CASE("PlayerSystem")
+    CASE("Attempt to add an Entity that does NOT confine to a system's filter")
     {
         anax::World world;
-        PlayerSystem playerSystem;
-        world.addSystem(playerSystem);
+        PlayerSystem system;
+        world.addSystem(system);
+        auto e = world.createEntity();
 
-        createNPCsAndPlayers(rand() % 100 + 1, world);
-        createPlayers(rand() % 100 + 1, world);
-        createNPCs(rand() % 100 + 1, world);
+        e.addComponent<PlayerComponent>();
+        e.addComponent<NPCComponent>();
+        e.activate();
 
         world.refresh();
     },
 
-    CASE("if a system exists")
+    CASE("Removing components with a system attached to the world")
     {
         anax::World world;
-        PlayerSystem playerSystem;
+        MovementSystem moveSystem;
 
-        EXPECT(!world.doesSystemExist<PlayerSystem>());
-        EXPECT(!world.doesSystemExist(playerSystem));
+        world.addSystem(moveSystem);
 
-        world.addSystem(playerSystem);
-
-        EXPECT(world.doesSystemExist<PlayerSystem>());
-        EXPECT(world.doesSystemExist(playerSystem));
-    },
-
-    CASE("if a system exists (clearing the world)")
-    {
-        anax::World world;
-        PlayerSystem playerSystem;
-        MovementSystem movementSystem;
-
-        EXPECT(!world.doesSystemExist<PlayerSystem>());
-        EXPECT(!world.doesSystemExist(playerSystem));
-        EXPECT(!world.doesSystemExist<MovementSystem>());
-        EXPECT(!world.doesSystemExist(movementSystem));
-
-        world.addSystem(playerSystem);
-        world.addSystem(movementSystem);
-
-        EXPECT(world.doesSystemExist<PlayerSystem>());
-        EXPECT(world.doesSystemExist(playerSystem));
-        EXPECT(world.doesSystemExist<MovementSystem>());
-        EXPECT(world.doesSystemExist(movementSystem));
-
-        world.clear();
-
-        EXPECT(!world.doesSystemExist<PlayerSystem>());
-        EXPECT(!world.doesSystemExist(playerSystem));
-        EXPECT(!world.doesSystemExist<MovementSystem>());
-        EXPECT(!world.doesSystemExist(movementSystem));
-    }, 
-
-    CASE("if a system exists (removing the system)")
-    {
-        anax::World world;
-        PlayerSystem playerSystem;
-
-        EXPECT(!world.doesSystemExist<PlayerSystem>());
-        EXPECT(!world.doesSystemExist(playerSystem));
-
-        world.addSystem(playerSystem);
-
-        EXPECT(world.doesSystemExist<PlayerSystem>());
-        EXPECT(world.doesSystemExist(playerSystem));
-
-        world.removeSystem<PlayerSystem>();
-
-        EXPECT(!world.doesSystemExist<PlayerSystem>());
-        EXPECT(!world.doesSystemExist(playerSystem));
-    }
-};
-
-void createMoveableEntities(int amount, World& world)
-{
-    auto entities = world.createEntities(amount);
-    for(auto e : entities)
-    {
+        auto e = world.createEntity();
         e.addComponent<PositionComponent>();
         e.addComponent<VelocityComponent>();
         e.activate();
-    }
-}
-void createPlayers(int amount, World& world)
-{
-    std::ostringstream temp;
-    auto entities = world.createEntities(amount);
-    for(std::size_t i = 0; i < entities.size(); ++i)
-    {
-        temp << "Player " << i;
-        entities[i].addComponent<PlayerComponent>().name = temp.str();
-        temp.clear();
 
-        entities[i].activate();
-    }
-}
-void createNPCs(int amount, World& world)
-{
-    auto entities = world.createEntities(amount);
-    for(std::size_t i = 0; i < entities.size(); ++i)
-    {
-        entities[i].addComponent<NPCComponent>();
-        entities[i].activate();
-    }
-}
-void createNPCsAndPlayers(int amount, World& world)
-{
-    std::ostringstream temp;
-    auto entities = world.createEntities(amount);
-    for(std::size_t i = 0; i < entities.size(); ++i)
-    {
-        temp << "Player " << i;
-        entities[i].addComponent<PlayerComponent>().name = temp.str();
-        temp.clear();
-        entities[i].addComponent<NPCComponent>();
+        // make sure we don't get any exceptions
+        world.refresh();
+        moveSystem.update(); 
 
-        entities[i].activate();
-    }
-}
+        e.removeComponent<PositionComponent>();
+        e.activate();
+
+        EXPECT(e.hasComponent<PositionComponent>() == false);
+
+        // make sure we don't get any exceptions (again)
+        world.refresh();
+        moveSystem.update();
+    },
+
+    CASE("Removing all components with a system attached to the world")
+    {
+        anax::World world;
+        MovementSystem moveSystem;
+
+        world.addSystem(moveSystem);	
+
+        auto e = world.createEntity();
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+
+        // make sure we don't get any exceptions
+        e.activate();
+        world.refresh();
+
+        e.removeAllComponents();
+        e.activate();
+
+        EXPECT(e.hasComponent<PositionComponent>() == false);
+        EXPECT(e.hasComponent<VelocityComponent>() == false);
+
+        world.refresh();
+        moveSystem.update();
+    },
+
+
+};
 
 int main()
 {

@@ -35,6 +35,7 @@ const lest::test specification[] =
     {
         using namespace anax::detail;
 
+
         EXPECT(ClassTypeId<Type>::GetTypeId<bool>() == 0);
         EXPECT(ClassTypeId<Type>::GetTypeId<char>() == 1);
         EXPECT(ClassTypeId<Type>::GetTypeId<unsigned char>() == 2);

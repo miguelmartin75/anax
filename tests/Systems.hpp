@@ -59,10 +59,6 @@ private:
 
     virtual void onEntityAdded(anax::Entity& e) override
     {
-        if(e.hasComponent<NPCComponent>())
-        {
-            throw std::logic_error("Player contains NPCComponent, this goes against the component filter");
-        }
     }
 
     virtual void onEntityRemoved(anax::Entity& e) override
@@ -70,8 +66,6 @@ private:
     }
 };
 
-// note: this is a useless system, but I just made it for testing
-// purposes
 class PlayerSystem : public anax::System<PlayerSystem>
 {
 public:
@@ -85,6 +79,10 @@ private:
 
     virtual void onEntityAdded(anax::Entity& e) override
     {
+        if(e.hasComponent<NPCComponent>())
+        {
+            throw std::logic_error("Player contains NPCComponent, this goes against the component filter");
+        }
     }
 
 
