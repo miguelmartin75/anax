@@ -66,7 +66,7 @@ namespace anax
                 // NOTE: Can't use dynamic_bitset's operator^ as it causes a crash
                 !m_requiresOneOfComponentsList.intersects(componentTypeList)
 #else
-                !(m_requiresOneOfComponentsList ^ componentTypeList).any()
+                !(m_requiresOneOfComponentsList & componentTypeList).any()
 #endif
               )
             {
@@ -80,7 +80,7 @@ namespace anax
 #ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
                 m_excludeComponentsList.intersects(componentTypeList)
 #else
-                (m_excludeComponentsList ^ componentTypeList).any()
+                (m_excludeComponentsList & componentTypeList).any()
 #endif
               )
             {
