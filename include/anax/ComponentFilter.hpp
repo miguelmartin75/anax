@@ -32,8 +32,6 @@
 #include <anax/Component.hpp>
 #include <anax/ComponentTypeList.hpp>
 
-#include <anax/util/ContainerUtils.hpp>
-
 #include <anax/detail/EntityIdPool.hpp>
 
 
@@ -41,7 +39,7 @@ namespace anax
 {
     /// \brief A class used to filter out Components
     ///
-    /// This class was designed to be used in conjuction
+    /// This class was designed to be used in conduction
     /// with systems within the entity system. ComponentFilter's 
     /// grant the ability to filter out entities with specific
     /// components.
@@ -63,13 +61,7 @@ namespace anax
         ComponentFilter& requires()
         {
             static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
-
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-            detail::EnsureCapacity(m_requiredComponentsList, C1::GetTypeId());
-#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-
             m_requiredComponentsList[C1::GetTypeId()] = true;
-
             return *this;
         }
 
@@ -77,13 +69,7 @@ namespace anax
         ComponentFilter& requiresOneOf()
         {
             static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
-
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-            detail::EnsureCapacity(m_requiresOneOfComponentsList, C1::GetTypeId());
-#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-
             m_requiresOneOfComponentsList[C1::GetTypeId()] = true;
-
             return *this;
         }
 
@@ -91,13 +77,7 @@ namespace anax
         ComponentFilter& excludes()
         {
             static_assert(std::is_base_of<BaseComponent, C1>(), "C1 does not inherit from Component");
-
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-            detail::EnsureCapacity(m_excludeComponentsList, C1::GetTypeId());
-#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-
             m_excludeComponentsList[C1::GetTypeId()] = true;
-
             return *this;
         }
 

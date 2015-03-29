@@ -52,16 +52,10 @@ set(BUILD_EXAMPLES false CACHE BOOL "Enable to build the examples for anax")
 set(BUILD_TESTS false CACHE BOOL "Enable to build test for anax")
 set(BUILD_SHARED_LIBS true CACHE BOOL "A flag to build shared (dynamic) libs")
 set(ANAX_USE_VARIADIC_TEMPLATES true CACHE BOOL "Enables use of variadic templates where appropriate in the library")
-set(ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS false CACHE BOOL "If true, uses a dynamic amount of components")
 set(ANAX_32_BIT_ENTITY_IDS false CACHE BOOL "Enables 32 bit IDs for the entity")
 set(ANAX_VIRTUAL_DTORS_IN_COMPONENT true CACHE BOOL "Enables virtual dtors in components")
 set(ANAX_DEFAULT_ENTITY_POOL_SIZE 1000 CACHE INTEGER "The default entity pool size, within a World object")
-
-if(NOT ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS)
-    set(ANAX_MAX_AMOUNT_OF_COMPONENTS 64 CACHE INTEGER "The maximum amount of components for an entity allowed")
-else()
-    unset(ANAX_MAX_AMOUNT_OF_COMPONENTS CACHE)
-endif()
+set(ANAX_MAX_AMOUNT_OF_COMPONENTS 64 CACHE INTEGER "The maximum amount of components for an entity allowed")
 
 
 # set up the configure file for the library

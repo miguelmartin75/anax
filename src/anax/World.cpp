@@ -27,6 +27,7 @@
 #include <anax/config.hpp>
 
 #include <anax/detail/AnaxAssert.hpp>
+#include <anax/util/ContainerUtils.hpp>
 
 namespace anax
 {

@@ -85,11 +85,7 @@ namespace anax
 
         private:
 
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-            typedef std::vector<std::unique_ptr<BaseComponent> > ImplComponentArray;
-#else 
             typedef std::array<std::unique_ptr<BaseComponent>, anax::MAX_AMOUNT_OF_COMPONENTS> ImplComponentArray;
-#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             
             /// \brief A data structure to describe the components
             /// within an entity

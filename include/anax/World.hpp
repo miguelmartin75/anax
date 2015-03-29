@@ -26,13 +26,11 @@
 #ifndef ANAX_WORLD_HPP
 #define ANAX_WORLD_HPP
 
-#include <memory>
 #include <vector>
+#include <memory>
 #include <unordered_map>
 #include <type_traits>
 #include <utility>
-
-#include <boost/dynamic_bitset.hpp>
 
 #include <anax/detail/EntityIdPool.hpp>
 #include <anax/detail/EntityComponentStorage.hpp>
@@ -200,7 +198,7 @@ namespace anax
                 /// exists in a specific system.
                 /// The index specifies what system, 0 resembles
                 /// it is in the system, 1 is out of the system
-                boost::dynamic_bitset<> systems;
+                std::vector<bool> systems;
             };
 
             explicit EntityAttributes(std::size_t amountOfEntities) :     

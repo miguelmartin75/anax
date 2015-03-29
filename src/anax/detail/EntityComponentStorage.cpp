@@ -46,17 +46,7 @@ namespace anax
             auto index = entity.getId().index;
             auto& componentDataForEntity = m_componentEntries[index];
 
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-            detail::EnsureCapacity(componentDataForEntity.components, componentTypeId);
-
-#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-
             componentDataForEntity.components[componentTypeId].reset(component);
-
-
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-            detail::EnsureCapacity(componentDataForEntity.componentTypeList, componentTypeId);
-#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             componentDataForEntity.componentTypeList[componentTypeId] = true;
         }
 
@@ -76,11 +66,7 @@ namespace anax
             auto index = entity.getId().index;
             auto& componentDataForEntity = m_componentEntries[index];
 
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-            componentDataForEntity.components.clear();
-#else
             for(auto& c : componentDataForEntity.components) c.reset();
-#endif
             componentDataForEntity.componentTypeList.reset();
         }
 
