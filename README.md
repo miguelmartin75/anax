@@ -4,7 +4,7 @@ anax is an open source C++ entity system designed to be portable, lightweight an
 
 # What's an Entity System?
 
-An entity system, or entity component system is a pattern for building complex extensible projects (typically games). It seperates funcality into three major parts: components, systems and entities. Where entities are used to describe an object within the game, components are used to store data for the entities to describe them, and systems are used to contain game logic.
+An entity system, or entity component system is a pattern for building complex extensible projects (typically games). It separates functionality into three major parts: components, systems and entities. Where entities are used to describe an object within the game, components are used to store data for the entities to describe them, and systems are used to contain game logic.
 
 You can read about them further [here](https://github.com/miguelmartin75/anax/wiki/What-is-an-Entity-System%3F).
 
@@ -18,11 +18,7 @@ There are multiple ways to download the library. Here are your options:
 - Download the library ([zip]/[tar-gz])
 
 ## Dependencies
-To compile, install, and use anax, a C++11 compiliant compiler is required.
-
-and:
-
-- [`boost::dynamic_bitset`](http://www.boost.org/doc/libs/1_54_0/libs/dynamic_bitset/dynamic_bitset.html)
+To compile, install, and use anax, a C++11 compliant compiler is required.
 
 ## Installation
 
@@ -59,7 +55,7 @@ This section will explain how to use the library, but it will not go into much s
 
 ### The World
 
-A World is used to decsribe you game world. You must always have at least one World object allocated in order to use anax.
+A World is used to describe you game world. You must always have at least one World object allocated in order to use anax.
 
 You create World objects like any other object:
 
@@ -172,7 +168,7 @@ public:
 };
 ```
 
-That is, a movement system requires entities with a `PositionComponent` and `VelocityComponent`. You may determine if an entity is removed/added to the system via these two overrideable (virtual) methods:
+That is, a movement system requires entities with a `PositionComponent` and `VelocityComponent`. You may determine if an entity is removed/added to the system via these two override-able (virtual) methods:
 
 - `onEntityAdded(Entity&)`
 - `onEntityRemoved(Entity&)`
