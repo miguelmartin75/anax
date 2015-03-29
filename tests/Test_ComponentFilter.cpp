@@ -25,7 +25,9 @@
 
 #include <lest.hpp>
 
-#include <anax/ComponentFilter.hpp>
+#include <anax/detail/Filter.hpp>
+
+#include <anax/FilterOptions.hpp>
 
 #include "Components.hpp"
 
@@ -45,12 +47,10 @@ const lest::test specification[] =
 {
     CASE("requires (pass)")
     {
-        anax::ComponentFilter filter;
-        filter.requires<PositionComponent, VelocityComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PlayerComponent::GetTypeId()] = true;
         typeList[PositionComponent::GetTypeId()] = true;
         typeList[VelocityComponent::GetTypeId()] = true;
 
@@ -59,53 +59,11 @@ const lest::test specification[] =
 
     CASE("requires (fail)")
     {
-        anax::ComponentFilter filter;
-        filter.requires<PositionComponent, VelocityComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[PlayerComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requiesOneOf (pass with one)")
-    {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[PositionComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == true);
-    },
-
-    CASE("requiesOneOf (pass with all)")
-    {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
         typeList[PlayerComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = true;
-
-        EXPECT(filter.doesPassFilter(typeList) == true);
-    },
-
-
-    CASE("requiesOneOf (fail)")
-    {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[PlayerComponent::GetTypeId()] = false;
         typeList[VelocityComponent::GetTypeId()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
@@ -113,10 +71,9 @@ const lest::test specification[] =
 
     CASE("excludes (pass)")
     {
-        anax::ComponentFilter filter;
-        filter.excludes<PositionComponent, VelocityComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<>, anax::Exclude<PositionComponent, VelocityComponent>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
         typeList[PlayerComponent::GetTypeId()] = false;
         typeList[VelocityComponent::GetTypeId()] = false;
@@ -126,10 +83,9 @@ const lest::test specification[] =
 
     CASE("excludes (fail via one)")
     {
-        anax::ComponentFilter filter;
-        filter.excludes<PositionComponent, VelocityComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<>, anax::Exclude<PositionComponent, VelocityComponent>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
         typeList[PositionComponent::GetTypeId()] = true;
         typeList[VelocityComponent::GetTypeId()] = false;
@@ -139,10 +95,9 @@ const lest::test specification[] =
 
     CASE("excludes (fail via all)")
     {
-        anax::ComponentFilter filter;
-        filter.excludes<PositionComponent, VelocityComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<>, anax::Exclude<PositionComponent, VelocityComponent>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
         typeList[PlayerComponent::GetTypeId()] = true;
         typeList[VelocityComponent::GetTypeId()] = true;
@@ -150,75 +105,52 @@ const lest::test specification[] =
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
-    CASE("requiresOneOf and excludes (pass)")
+    CASE("requires and excludes (pass)")
     {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
         typeList[PositionComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
+        typeList[VelocityComponent::GetTypeId()] = true;
         typeList[PlayerComponent::GetTypeId()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
-    CASE("requiresOneOf and excludes (fail)")
+    CASE("requires and excludes (fail via requires)")
     {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PositionComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
-        typeList[PlayerComponent::GetTypeId()] = true;
+        typeList[VelocityComponent::GetTypeId()] = true;
+        typeList[PositionComponent::GetTypeId()] = false;
+
+        typeList[PlayerComponent::GetTypeId()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
-    CASE("requires and requiresOneOf (pass)")
+    CASE("requires and excludes (fail via excludes)")
     {
-        anax::ComponentFilter filter;
-        filter.requires<PlayerComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[PositionComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
-
-        typeList[PlayerComponent::GetTypeId()] = true;
-
-        EXPECT(filter.doesPassFilter(typeList) == true);
-    },
-
-    CASE("requires and requiresOneOf (fail via requiresment)")
-    {
-        anax::ComponentFilter filter;
-        filter.requires<PlayerComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
         typeList[VelocityComponent::GetTypeId()] = true;
         typeList[PositionComponent::GetTypeId()] = true;
 
-        typeList[PlayerComponent::GetTypeId()] = false;
+        typeList[PlayerComponent::GetTypeId()] = true;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
-    CASE("requires and requiresOneOf (fail via requiresOneOf)")
+    CASE("requires and excludes (fail via all)")
     {
-        anax::ComponentFilter filter;
-        filter.requires<PlayerComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
+        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
 
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
         typeList[VelocityComponent::GetTypeId()] = false;
         typeList[PositionComponent::GetTypeId()] = false;
@@ -228,178 +160,6 @@ const lest::test specification[] =
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
-    CASE("requires and requiresOneOf (fail via all)")
-    {
-        anax::ComponentFilter filter;
-        filter.requires<PlayerComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[VelocityComponent::GetTypeId()] = false;
-        typeList[PositionComponent::GetTypeId()] = false;
-
-        typeList[PlayerComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requiresOneOf and excludes (pass)")
-    {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[VelocityComponent::GetTypeId()] = true;
-
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PositionComponent::GetTypeId()] = false;
-
-        typeList[PlayerComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == true);
-    },
-
-    CASE("requiresOneOf and excludes (fail via requiresOneOf)")
-    {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[VelocityComponent::GetTypeId()] = true;
-
-        typeList[VelocityComponent::GetTypeId()] = false;
-        typeList[PositionComponent::GetTypeId()] = false;
-
-        typeList[PlayerComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requiresOneOf and excludes (fail via excludes)")
-    {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[VelocityComponent::GetTypeId()] = true;
-
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PositionComponent::GetTypeId()] = false;
-
-        typeList[PlayerComponent::GetTypeId()] = true;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requiresOneOf and excludes (fail via all)")
-    {
-        anax::ComponentFilter filter;
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[VelocityComponent::GetTypeId()] = true;
-
-        typeList[VelocityComponent::GetTypeId()] = false;
-        typeList[PositionComponent::GetTypeId()] = false;
-
-        typeList[PlayerComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requires, requiresOneOf and excludes (pass)")
-    {
-        anax::ComponentFilter filter;
-        filter.requires<NPCComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[NPCComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PositionComponent::GetTypeId()] = false;
-        typeList[PlayerComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == true);
-    },
-
-    CASE("requires, requiresOneOf and excludes (fail via requires)")
-    {
-        anax::ComponentFilter filter;
-        filter.requires<NPCComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[NPCComponent::GetTypeId()] = false;
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PositionComponent::GetTypeId()] = false;
-        typeList[PlayerComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requires, requiresOneOf and excludes (fail via requiresOneOf)")
-    {
-        anax::ComponentFilter filter;
-        filter.requires<NPCComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[NPCComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
-        typeList[PositionComponent::GetTypeId()] = false;
-        typeList[PlayerComponent::GetTypeId()] = false;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requires, requiresOneOf and excludes (fail via excludes)")
-    {
-        anax::ComponentFilter filter;
-        filter.requires<NPCComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[NPCComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PositionComponent::GetTypeId()] = false;
-        typeList[PlayerComponent::GetTypeId()] = true;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    },
-
-    CASE("requires, requiresOneOf and excludes (fail via all)")
-    {
-        anax::ComponentFilter filter;
-        filter.requires<NPCComponent>();
-        filter.requiresOneOf<PositionComponent, VelocityComponent>();
-        filter.excludes<PlayerComponent>();
-
-        anax::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[NPCComponent::GetTypeId()] = false;
-        typeList[VelocityComponent::GetTypeId()] = false;
-        typeList[PositionComponent::GetTypeId()] = false;
-        typeList[PlayerComponent::GetTypeId()] = true;
-
-        EXPECT(filter.doesPassFilter(typeList) == false);
-    }
 };
 
 int main(int argc, char* argv[])

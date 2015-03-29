@@ -32,14 +32,9 @@
 
 #include "Components.hpp"
 
-class MovementSystem : public anax::System<MovementSystem>
+class MovementSystem : public anax::System<MovementSystem, anax::Require<PositionComponent, VelocityComponent>>
 {
 public:
-
-    MovementSystem() : 
-        Base(anax::ComponentFilter().requires<PositionComponent, VelocityComponent>())
-    {
-    }
 
     void update()
     {
@@ -66,15 +61,8 @@ private:
     }
 };
 
-class PlayerSystem : public anax::System<PlayerSystem>
+class PlayerSystem : public anax::System<PlayerSystem, anax::Require<PlayerComponent>, anax::Exclude<NPCComponent>>
 {
-public:
-
-    PlayerSystem() : 
-        Base(anax::ComponentFilter().requires<PlayerComponent>().excludes<NPCComponent>())
-    {
-    }
-
 private:
 
     virtual void onEntityAdded(anax::Entity& e) override
