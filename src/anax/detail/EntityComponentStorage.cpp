@@ -25,8 +25,6 @@
 
 #include <anax/detail/EntityComponentStorage.hpp>
 
-
-#include <anax/config.hpp>
 #include <anax/util/ContainerUtils.hpp>
 #include <anax/detail/AnaxAssert.hpp>
 

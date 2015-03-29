@@ -92,7 +92,7 @@ namespace anax
         return getWorld().m_entityAttributes.componentStorage.getComponents(*this);
     }
 
-    ComponentTypeList Entity::getComponentTypeList() const
+    detail::ComponentTypeList Entity::getComponentTypeList() const
     {
         return getWorld().m_entityAttributes.componentStorage.getComponentTypeList(*this);
     }
@@ -102,7 +102,7 @@ namespace anax
         return m_id == entity.m_id && entity.m_world == m_world;
     }
 
-    void Entity::addComponent(BaseComponent* component, detail::TypeId componentTypeId)
+    void Entity::addComponent(detail::BaseComponent* component, detail::TypeId componentTypeId)
     {
         getWorld().m_entityAttributes.componentStorage.addComponent(*this, component, componentTypeId);
     }
@@ -112,7 +112,7 @@ namespace anax
         getWorld().m_entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
     }
 
-    BaseComponent& Entity::getComponent(detail::TypeId componentTypeId) const
+    detail::BaseComponent& Entity::getComponent(detail::TypeId componentTypeId) const
     {
         return getWorld().m_entityAttributes.componentStorage.getComponent(*this, componentTypeId);
     }

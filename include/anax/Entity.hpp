@@ -30,11 +30,11 @@
 #include <utility>
 #include <cstdint>
 
+#include <anax/detail/Config.hpp>
 #include <anax/detail/ClassTypeId.hpp>
+#include <anax/detail/ComponentTypeList.hpp>
 
-#include <anax/config.hpp>
 #include <anax/Component.hpp>
-#include <anax/ComponentTypeList.hpp>
 
 namespace anax
 {
@@ -214,7 +214,7 @@ namespace anax
 
         /// \return A component type list, which resembles the components
         /// this entity has attached to it
-        ComponentTypeList getComponentTypeList() const;
+        detail::ComponentTypeList getComponentTypeList() const;
 
 
         /// Comparrision operator
@@ -225,9 +225,9 @@ namespace anax
 
         // wrappers to add components
         // so I may call them from templated public interfaces
-        void addComponent(BaseComponent* component, detail::TypeId componentTypeId);
+        void addComponent(detail::BaseComponent* component, detail::TypeId componentTypeId);
         void removeComponent(detail::TypeId componentTypeId);
-        BaseComponent& getComponent(detail::TypeId componentTypeId) const;
+        detail::BaseComponent& getComponent(detail::TypeId componentTypeId) const;
         bool hasComponent(detail::TypeId componentTypeId) const;
 
 
@@ -244,7 +244,7 @@ namespace anax
     template <typename T>
     T& Entity::addComponent(T* component)
     {
-        static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot add T to entity");
+        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot add T to entity");
         addComponent(component, T::GetTypeId());
         return *component;
     }
@@ -258,21 +258,21 @@ namespace anax
     template <typename T>
     void Entity::removeComponent()
     {
-        static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot remove T from entity");
+        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot remove T from entity");
         removeComponent(T::GetTypeId());
     }
 
     template <typename T>
     T& Entity::getComponent() const
     {
-        static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot retrieve T from entity");
+        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot retrieve T from entity");
         return static_cast<T&>(getComponent(T::GetTypeId()));
     }
 
     template <typename T>
     bool Entity::hasComponent() const
     {
-        static_assert(std::is_base_of<BaseComponent, T>(), "T is not a component, cannot determine if entity has T");
+        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot determine if entity has T");
         return hasComponent(T::GetTypeId());
     }
 }

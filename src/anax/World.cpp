@@ -24,14 +24,15 @@
 ///
 
 #include <anax/World.hpp>
-#include <anax/config.hpp>
+
+#include <anax/util/ContainerUtils.hpp>
 
 #include <anax/detail/AnaxAssert.hpp>
-#include <anax/util/ContainerUtils.hpp>
+#include <anax/detail/Config.hpp>
 
 namespace anax
 {
-    void World::SystemDeleter::operator() (BaseSystem* system) const
+    void World::SystemDeleter::operator() (detail::BaseSystem* system) const
     {
         system->m_world = nullptr;
         system->m_entities.clear();
@@ -135,7 +136,7 @@ namespace anax
                 auto systemIndex = i.first;
 
                 // if the entity passes the filter the system has and is not already part of the system
-                if(i.second->getComponentFilter().doesPassFilter(m_entityAttributes.componentStorage.getComponentTypeList(entity)))
+                if(i.second->getFilter().doesPassFilter(m_entityAttributes.componentStorage.getComponentTypeList(entity)))
                 {
                     if(attribute.systems.size() <= systemIndex || !attribute.systems[systemIndex])
                     {
@@ -235,7 +236,7 @@ namespace anax
         m_entityAttributes.resize(amount);
     }
 
-    void World::addSystem(BaseSystem& system, detail::TypeId systemTypeId)
+    void World::addSystem(detail::BaseSystem& system, detail::TypeId systemTypeId)
     {
         ANAX_ASSERT(!system.m_world, "System is already contained within a World");
 

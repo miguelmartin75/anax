@@ -23,40 +23,20 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef ANAX_COMPONENT_HPP
-#define ANAX_COMPONENT_HPP
+#ifndef ANAX_FILTEROPTIONS_HPP
+#define ANAX_FILTEROPTIONS_HPP
 
-#include <cstddef>
-#include <vector>
-#include <functional> // for reference_wrapper
-
-#include <anax/detail/BaseComponent.hpp>
-#include <anax/detail/ClassTypeId.hpp>
+#include <anax/detail/Filter.hpp>
 
 namespace anax
 {
-    /// \brief A class that follows the CRTP pattern, used to define custom components
-    /// \tparam T The Component you are defining
-    ///
-    /// This class uses the CRTP pattern to make a unique identifier for each component
-    /// class
-    ///
-    /// \see detail::BaseComponent
-    /// If you wish to store components generically and for further documentation.
-    ///
-    /// \author Miguel Martin
-    template <typename T>
-    class Component : public detail::BaseComponent
-    {
-    public:
+    /// Requires a set of components
+    template <class... Args>
+    struct Require : detail::TypeList<Args...>, detail::BaseRequire {};
 
-        static detail::TypeId GetTypeId()
-        {
-            return detail::ClassTypeId<detail::BaseComponent>::GetTypeId<T>();
-        }
-    };
-
-    typedef std::vector<std::reference_wrapper<detail::BaseComponent>> ComponentArray;
+    /// Excludes a set of components
+    template <class... Args>
+    struct Exclude : detail::TypeList<Args...>, detail::BaseExclude {};
 }
 
-#endif // ANAX_COMPONENT_HPP
+#endif // ANAX_FILTEROPTIONS_HPP

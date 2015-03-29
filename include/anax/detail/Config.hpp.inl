@@ -23,40 +23,31 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef ANAX_COMPONENT_HPP
-#define ANAX_COMPONENT_HPP
+#ifndef ANAX_DETAIL_CONFIG_HPP
+#define ANAX_DETAIL_CONFIG_HPP
 
 #include <cstddef>
-#include <vector>
-#include <functional> // for reference_wrapper
 
-#include <anax/detail/BaseComponent.hpp>
-#include <anax/detail/ClassTypeId.hpp>
+#cmakedefine ANAX_32_BIT_ENTITY_IDS @ANAX_32_BIT_ENTITY_IDS@
+#cmakedefine ANAX_VIRTUAL_DTORS_IN_COMPONENT @ANAX_VIRTUAL_DTORS_IN_COMPONENT@
+
+#ifdef ANAX_32_BIT_ENTITY_IDS
+#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
+#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 12
+#else
+#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 48
+#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 16
+#endif
 
 namespace anax
 {
-    /// \brief A class that follows the CRTP pattern, used to define custom components
-    /// \tparam T The Component you are defining
-    ///
-    /// This class uses the CRTP pattern to make a unique identifier for each component
-    /// class
-    ///
-    /// \see detail::BaseComponent
-    /// If you wish to store components generically and for further documentation.
-    ///
-    /// \author Miguel Martin
-    template <typename T>
-    class Component : public detail::BaseComponent
-    {
-    public:
+    /// The default size of a pool within a world  
+    constexpr const std::size_t DEFAULT_ENTITY_POOL_SIZE = @ANAX_DEFAULT_ENTITY_POOL_SIZE@;  
 
-        static detail::TypeId GetTypeId()
-        {
-            return detail::ClassTypeId<detail::BaseComponent>::GetTypeId<T>();
-        }
-    };
-
-    typedef std::vector<std::reference_wrapper<detail::BaseComponent>> ComponentArray;
+    /// The maximum amount of components an entity can
+    /// contain. Try to make this number even, or preferably
+    /// a power of 2.
+    constexpr const std::size_t MAX_AMOUNT_OF_COMPONENTS = @ANAX_MAX_AMOUNT_OF_COMPONENTS@;
 }
 
-#endif // ANAX_COMPONENT_HPP
+#endif // ANAX_DETAIL_CONFIG_HPP

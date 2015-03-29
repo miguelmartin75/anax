@@ -23,31 +23,23 @@
 /// THE SOFTWARE.
 ///
 
-#ifndef ANAX_CONFIG_HPP
-#define ANAX_CONFIG_HPP
+#ifndef ANAX_DETAIL_COMPONENTTYPELIST_HPP
+#define ANAX_DETAIL_COMPONENTTYPELIST_HPP
 
-#include <cstddef>
+#include <anax/detail/Config.hpp>
 
-#cmakedefine ANAX_32_BIT_ENTITY_IDS @ANAX_32_BIT_ENTITY_IDS@
-#cmakedefine ANAX_VIRTUAL_DTORS_IN_COMPONENT @ANAX_VIRTUAL_DTORS_IN_COMPONENT@
-
-#ifdef ANAX_32_BIT_ENTITY_IDS
-#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 20
-#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 12
-#else
-#	define ANAX_ENTITY_ID_INDEX_BIT_COUNT 48
-#	define ANAX_ENTITY_ID_COUNTER_BIT_COUNT 16
-#endif
+#include <bitset>
 
 namespace anax
 {
-    /// The default size of a pool within a world  
-    constexpr const std::size_t DEFAULT_ENTITY_POOL_SIZE = @ANAX_DEFAULT_ENTITY_POOL_SIZE@;  
-
-    /// The maximum amount of components an entity can
-    /// contain. Try to make this number even, or preferably
-    /// a power of 2.
-    constexpr const std::size_t MAX_AMOUNT_OF_COMPONENTS = @ANAX_MAX_AMOUNT_OF_COMPONENTS@;
+    namespace detail
+    {
+        /// A type that describes a component type list
+        /// This is implemented as a bitset. Where the index of the bitset is the 
+        /// TypeId of the component. The component type is within the list if 
+        /// the bit at the TypeId index is true.
+        using ComponentTypeList = std::bitset<MAX_AMOUNT_OF_COMPONENTS>;
+    }
 }
 
-#endif // ANAX_CONFIG_HPP
+#endif // ANAX_DETAIL_COMPONENTTYPELIST_HPP

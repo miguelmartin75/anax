@@ -27,19 +27,14 @@
 #define ANAX_DETAIL_ENTITYCOMPONENTSTORAGE_HPP
 
 #include <memory>
-
-#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
-#include <vector>
-#else 
 #include <array>
-#endif // ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
 
 #include <anax/detail/ClassTypeId.hpp>
+#include <anax/detail/Config.hpp>
+#include <anax/detail/ComponentTypeList.hpp>
 
-#include <anax/config.hpp>
 #include <anax/Entity.hpp>
 #include <anax/Component.hpp>
-#include <anax/ComponentTypeList.hpp>
 
 namespace anax
 {

@@ -47,14 +47,14 @@ namespace anax
 
         struct SystemDeleter
         {
-            void operator() (BaseSystem* system) const;
+            void operator() (detail::BaseSystem* system) const;
         };
 
         /// Describes an array of Systems for storage within the world
         /// The index is the type ID of the system,
         /// thus systems of the same type can not be stored
         /// in the same World object.
-        typedef std::unordered_map<detail::TypeId, std::unique_ptr<BaseSystem, SystemDeleter>> SystemArray;
+        typedef std::unordered_map<detail::TypeId, std::unique_ptr<detail::BaseSystem, SystemDeleter>> SystemArray;
 
     public:
 
@@ -279,7 +279,7 @@ namespace anax
         void checkForResize(std::size_t amountOfEntitiesToBeAllocated);
         void resize(std::size_t amount);
 
-        void addSystem(BaseSystem& system, detail::TypeId systemTypeId);
+        void addSystem(detail::BaseSystem& system, detail::TypeId systemTypeId);
         void removeSystem(detail::TypeId systemTypeId);     
         bool doesSystemExist(detail::TypeId systemTypeId) const;
 
@@ -290,28 +290,28 @@ namespace anax
     template <typename TSystem>
     void World::addSystem(TSystem& system)
     { 
-        static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
+        static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
         addSystem(system, TSystem::GetTypeId()); 
     }
 
     template <typename TSystem>
     void World::removeSystem()
     {
-        static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
+        static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
         removeSystem(TSystem::GetTypeId());
     }
 
     template <typename TSystem>
     bool World::doesSystemExist() const
     {
-        static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
+        static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
         return doesSystemExist(TSystem::GetTypeId());
     }
 
     template <typename TSystem>
     bool World::doesSystemExist(const TSystem& system) const
     { 
-        static_assert(std::is_base_of<BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
+        static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
         return system.m_world == this && doesSystemExist<TSystem>();
     }
 }
