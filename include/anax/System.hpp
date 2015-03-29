@@ -65,7 +65,7 @@ namespace anax
         World& getWorld() const;
 
         /// \return All the entities that are within the System
-        std::vector<Entity> getEntities() const;
+        const std::vector<Entity>& getEntities() const;
 
     private:
 

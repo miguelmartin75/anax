@@ -54,7 +54,7 @@ namespace anax
         return *m_world;
     }
 
-    std::vector<Entity> BaseSystem::getEntities() const
+    const std::vector<Entity>& BaseSystem::getEntities() const
     {
         return m_entities;
     }
