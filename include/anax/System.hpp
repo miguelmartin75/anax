@@ -69,8 +69,7 @@ namespace anax
 
     private:
 
-        /// Initializes the system, when a world is succesfully
-        /// attached to it.
+        /// Initializes the system, when a world is successfully attached to it.
         virtual void initialize() {}
 
         /// Occurs when an Entity is added to the system
@@ -137,8 +136,8 @@ namespace anax
 
         /// Sets the ComponentFilter
         /// \param componentFilter The ComponentFilter you wish the system to have
-        System(const ComponentFilter& componentFilter)
-        : BaseSystem(componentFilter)
+        System(const ComponentFilter& componentFilter) : 
+            BaseSystem(componentFilter)
         {
         }
 

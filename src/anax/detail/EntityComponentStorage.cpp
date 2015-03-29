@@ -76,7 +76,11 @@ namespace anax
             auto index = entity.getId().index;
             auto& componentDataForEntity = m_componentEntries[index];
 
+#ifdef ANAX_USE_DYNAMIC_AMOUNT_OF_COMPONENTS
             componentDataForEntity.components.clear();
+#else
+            for(auto& c : componentDataForEntity.components) c.reset();
+#endif
             componentDataForEntity.componentTypeList.reset();
         }
 

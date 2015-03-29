@@ -46,7 +46,7 @@ namespace anax
     boost::dynamic_bitset<> 
 #else 
     std::bitset<MAX_AMOUNT_OF_COMPONENTS>
-#endif 
+#endif
     ComponentTypeList;
 }
 
