@@ -70,8 +70,6 @@ namespace anax
             return ComponentTypeList().set(ClassTypeId<BaseComponent>::GetTypeId<T>()) | types(detail::TypeList<Args...>());
         }
 
-        static ComponentTypeList types(detail::TypeList<> typeList) { return 0; }
-
         template <class RequireList, class ExcludeList> 
         Filter MakeFilter()
         {
