@@ -37,11 +37,10 @@
 #include <Systems/SpriteRenderingSystem.hpp>
 #include <Systems/MovementSystem.hpp>
 #include <Systems/CollisionSystem.hpp>
+#include <Systems/PlayerInputSystem.hpp>
 
-#include "PlayerInputSystem.hpp"
-
-class Game
-: public BaseGame,
+class Game : 
+    public BaseGame,
     public PlayerInputSystem::Listener,
     public CollisionSystem::Listener
 {

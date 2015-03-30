@@ -1,5 +1,5 @@
 ///
-/// Example1
+/// anax - Movement Example
 /// Copyright (C) 2013-2014 Miguel Martin (miguel@miguel-martin.com)
 ///
 ///
@@ -26,35 +26,61 @@
 ///    all copies or substantial portions of the Software.
 ///
 
-#ifndef ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP
-#define ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP
+#ifndef ANAX_EXAMPLES_MOVEMENT_PLAYERCOMPONENT_HPP
+#define ANAX_EXAMPLES_MOVEMENT_PLAYERCOMPONENT_HPP
 
-#include <anax/System.hpp>
+#include <anax/Component.hpp>
 
-#include "PlayerComponent.hpp"
+#include <SFML/Window/Keyboard.hpp>
 
-struct PlayerInputSystem : anax::System<PlayerInputSystem>
+struct PlayerComponent : anax::Component<PlayerComponent>
 {
-public:
-
-    struct Listener
+    PlayerComponent() : 
+        state(State::NO_STATE)
     {
-        virtual void onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state) = 0;
-    };
+    }
+
+    /// The base speed of the player
+    float baseSpeed;
+
+    /// The current state of the player
+    enum class State
+    {
+        NO_STATE = -1,
+        DEFAULT_STATE = 0,
+        MOVE_LEFT,
+        MOVE_RIGHT,
+        MOVE_LEFT_SHOOT,
+        MOVE_RIGHT_SHOOT,
+        JUMP,
+        SHOOT,
+        JUMP_SHOOT
+    } state;
 
 
-    PlayerInputSystem();
+    /// The controls the player has
+    struct Controls
+    {
+        typedef sf::Keyboard::Key Key;
 
-    void update(double deltaTime);
+        Controls()
+        : left(sf::Keyboard::Key::A),
+        right(sf::Keyboard::Key::D),
+        jump(sf::Keyboard::Key::W),
+        shoot(sf::Keyboard::Key::Space)
+        {
+        }
 
-    void addListener(Listener* listener) { m_listeners.push_back(listener); }
-    void removeListener(Listener* listener) { m_listeners.erase(std::remove(m_listeners.begin(), m_listeners.end(), listener), m_listeners.end()); }
+        Controls(Key Left, Key Right, Key Jump, Key Shoot)
+        : left(Left),
+        right(Right),
+        jump(Jump),
+        shoot(Shoot)
+        {
+        }
 
-private:
-
-    void setPlayerState(anax::Entity& e, PlayerComponent&, PlayerComponent::State);
-
-    std::vector<Listener*> m_listeners;
+        Key left, right, jump, shoot;
+    } controls;
 };
 
-#endif // ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP
+#endif // ANAX_EXAMPLES_MOVEMENT_PLAYERCOMPONENT_HPP

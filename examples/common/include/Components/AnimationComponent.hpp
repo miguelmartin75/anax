@@ -30,7 +30,6 @@
 #include <vector>
 #include <map>
 
-#include <anax/config.hpp>
 #include <anax/Component.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
@@ -60,10 +59,11 @@ struct AnimationComponent : anax::Component<AnimationComponent>
         unsigned int frameRate;
     };
 
-    AnimationComponent()
-    : currentFrame(0, 0), isPlaying(false), repeat(false)
+    AnimationComponent() : 
+        currentFrame(0, 0), isPlaying(false), repeat(false)
     {
     }
+
 #ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT
     virtual ~AnimationComponent() { }
 #endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT

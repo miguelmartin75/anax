@@ -30,6 +30,9 @@
 
 #include <anax/System.hpp>
 
+#include <Components/SpriteComponent.hpp>
+#include <Components/AnimationComponent.hpp>
+
 /// \brief A system that animates entities
 ///
 /// This system animates entities. It uses entities with the following components:
@@ -37,12 +40,10 @@
 ///		- Animation
 ///
 /// \author Miguel Martin
-struct AnimationSystem : anax::System<AnimationSystem>
+struct AnimationSystem : 
+    anax::System<AnimationSystem, anax::Require<SpriteComponent, AnimationComponent>>
 {
 public:
-
-    /// Default constructor
-    AnimationSystem();
 
     /// Updates the collision system
     /// \param deltaTime The change in time

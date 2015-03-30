@@ -30,13 +30,11 @@
 #include <Components/SpriteComponent.hpp>
 #include <Components/TransformComponent.hpp>
 
-    SpriteRenderingSystem::SpriteRenderingSystem()
-: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>())
+SpriteRenderingSystem::SpriteRenderingSystem()
 {
 }
 
-    SpriteRenderingSystem::SpriteRenderingSystem(sf::RenderTarget& renderTarget)
-: Base(anax::ComponentFilter().requires<SpriteComponent, TransformComponent>()), 
+SpriteRenderingSystem::SpriteRenderingSystem(sf::RenderTarget& renderTarget) :
     m_renderTarget(&renderTarget)
 {
 }

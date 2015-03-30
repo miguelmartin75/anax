@@ -27,15 +27,6 @@
 
 #include <iostream>
 
-#include <Components/SpriteComponent.hpp>
-#include <Components/AnimationComponent.hpp>
-
-    AnimationSystem::AnimationSystem()
-: Base(anax::ComponentFilter().requires<SpriteComponent, AnimationComponent>()),
-    m_fps(60)
-{
-}
-
 void AnimationSystem::update(double deltaTime)
 {
     auto entities = getEntities();

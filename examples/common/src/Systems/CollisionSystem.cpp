@@ -28,9 +28,6 @@
 #include <iostream>
 #include <algorithm>
 
-#include <Components/TransformComponent.hpp>
-#include <Components/CollisionComponent.hpp>
-
 CollisionSystem::Listener::~Listener()
 {
 }
@@ -46,11 +43,6 @@ static sf::FloatRect getBBoxRectFor(const anax::Entity& entity)
     auto& transform = entity.getComponent<TransformComponent>().transform;
     auto& bbox = collision.BBox;
     return getBBoxRectFor(transform, bbox);
-}
-
-    CollisionSystem::CollisionSystem()
-: Base(anax::ComponentFilter().requires<TransformComponent, CollisionComponent>())
-{
 }
 
 void CollisionSystem::update(double deltaTime)

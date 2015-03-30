@@ -30,6 +30,9 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
+struct SpriteComponent;
+struct TransformComponent;
+
 /// \brief A system that renders sprites
 ///
 /// This system renders sprites, using SFML.
@@ -38,7 +41,7 @@
 ///		- Sprite
 ///
 /// \author Miguel Martin
-struct SpriteRenderingSystem : anax::System<SpriteRenderingSystem>
+struct SpriteRenderingSystem : anax::System<SpriteRenderingSystem, anax::Require<SpriteComponent, TransformComponent>>
 {
     /// Construct a SpriteRenderingSystem with no render target
     SpriteRenderingSystem();

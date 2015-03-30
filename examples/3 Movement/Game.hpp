@@ -37,12 +37,12 @@
 #include <Systems/SpriteRenderingSystem.hpp>
 #include <Systems/AnimationSystem.hpp>
 #include <Systems/MovementSystem.hpp>
-#include "PlayerInputSystem.hpp"
+#include <Systems/PlayerInputSystem.hpp>
 
 /// \brief A class that the Game
 /// \author Miguel Martin
-class Game
-: public BaseGame,
+class Game : 
+    public BaseGame,
     public PlayerInputSystem::Listener
 {
 public:

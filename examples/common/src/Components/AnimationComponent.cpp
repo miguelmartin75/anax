@@ -56,7 +56,7 @@ enum class ErrorType
     Syntax
 };
 
-    template <typename T> 
+template <typename T>
 static void checkForVariables(std::istream& stream, const std::string& fullVarName, T& obj, const std::map<std::string, std::function<void (T&, unsigned int value)>> vars, ErrorType* error)
 {
     std::string buffer; // used temporarily
@@ -213,7 +213,7 @@ you declare different states (i.e. do width/height assignment at the TOP of the 
             // otherwise if we did see a statename,
             // we'll extract the statename
             stateName = buffer.substr(0, buffer.size() - 1);
-
+            
             // create/retrieve the state associated with the name
             state = &states[stateName];
         }

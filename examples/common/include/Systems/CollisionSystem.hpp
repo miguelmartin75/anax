@@ -30,6 +30,9 @@
 
 #include <anax/System.hpp>
 
+#include <Components/TransformComponent.hpp>
+#include <Components/CollisionComponent.hpp>
+
 /// \brief A system that handles collisions
 ///
 /// This system handles collisions. It uses entities with the following components:
@@ -37,7 +40,7 @@
 ///		- Collision
 ///
 /// \author Miguel Martin
-struct CollisionSystem : anax::System<CollisionSystem>
+struct CollisionSystem : anax::System<CollisionSystem, anax::Require<TransformComponent, CollisionComponent>>
 {
 public:
 
@@ -51,9 +54,6 @@ public:
         /// \note e1 Is guarenteed to have the causesEvent flag to be true
         virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) = 0;
     };
-
-    /// Default constructor
-    CollisionSystem();
 
     /// Updates the collision system
     /// \param deltaTime The change in time

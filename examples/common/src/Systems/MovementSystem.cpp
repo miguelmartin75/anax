@@ -25,14 +25,6 @@
 
 #include <Systems/MovementSystem.hpp>
 
-#include <Components/VelocityComponent.hpp>
-#include <Components/TransformComponent.hpp>
-
-    MovementSystem::MovementSystem()
-: Base(anax::ComponentFilter().requires<VelocityComponent, TransformComponent>())
-{
-}
-
 void MovementSystem::update(double deltaTime)
 {
     auto entities = getEntities();

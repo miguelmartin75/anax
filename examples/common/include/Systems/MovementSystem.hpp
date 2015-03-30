@@ -28,6 +28,9 @@
 
 #include <anax/System.hpp>
 
+#include <Components/VelocityComponent.hpp>
+#include <Components/TransformComponent.hpp>
+
 /// \brief A system that moves entities
 ///
 /// This system moves entities. It uses entities with the following components:
@@ -35,11 +38,9 @@
 ///		- Velocity
 ///
 /// \author Miguel Martin
-struct MovementSystem : anax::System<MovementSystem>
+struct MovementSystem : 
+    anax::System<MovementSystem, anax::Require<TransformComponent, VelocityComponent>>
 {
-    /// Default constructor
-    MovementSystem();
-
     /// Updates the MovementSystem
     /// \param deltaTime The change in time
     void update(double deltaTime);
