@@ -31,6 +31,7 @@
 #include <map>
 
 #include <anax/Component.hpp>
+#include <anax/Config.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 

@@ -128,7 +128,6 @@ e.g.
 ```c++
 // adding components
 entity.addComponent<PositionComponent>(2, 3, 5);
-entity.addComponent(new PositionComponent(2, 3, 5));
 
 // removing components
 entity.removeComponent<PositionComponent>();

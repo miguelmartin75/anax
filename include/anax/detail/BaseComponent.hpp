@@ -41,7 +41,6 @@ namespace anax
 #	ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT
             virtual
 #	endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
-
             ~BaseComponent() {}
         };
     }

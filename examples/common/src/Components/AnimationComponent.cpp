@@ -26,6 +26,7 @@
 #include <Components/AnimationComponent.hpp>
 
 #include <iostream>
+#include <unordered_map>
 #include <functional>
 #include <sstream>
 
@@ -57,7 +58,7 @@ enum class ErrorType
 };
 
 template <typename T>
-static void checkForVariables(std::istream& stream, const std::string& fullVarName, T& obj, const std::map<std::string, std::function<void (T&, unsigned int value)>> vars, ErrorType* error)
+static void checkForVariables(std::istream& stream, const std::string& fullVarName, T& obj, const std::unordered_map<std::string, std::function<void (T&, unsigned int value)>> vars, ErrorType* error)
 {
     std::string buffer; // used temporarily
 
@@ -122,7 +123,7 @@ NOTES:
 you declare different states (i.e. do width/height assignment at the TOP of the file).
 */
 
-    static const std::map<std::string, std::function<void (AnimationComponent& anim, unsigned int value)>> animation_variable_assign_map =
+    static const std::unordered_map<std::string, std::function<void (AnimationComponent& anim, unsigned int value)>> animation_variable_assign_map =
     {
         {
             "width",
@@ -140,7 +141,7 @@ you declare different states (i.e. do width/height assignment at the TOP of the 
         }
     };
 
-    static const std::map<std::string, std::function<void (State& state, unsigned int value)>> state_variable_assign_map =
+    static const std::unordered_map<std::string, std::function<void (State& state, unsigned int value)>> state_variable_assign_map =
     {
         {
             "fps",

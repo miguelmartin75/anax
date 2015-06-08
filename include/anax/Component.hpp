@@ -50,6 +50,11 @@ namespace anax
     {
     public:
 
+#	ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT
+        virtual
+#	endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
+        ~Component() {}
+
         static detail::TypeId GetTypeId()
         {
             return detail::ClassTypeId<detail::BaseComponent>::GetTypeId<T>();

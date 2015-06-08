@@ -59,7 +59,7 @@ set(ANAX_MAX_AMOUNT_OF_COMPONENTS 64 CACHE INTEGER "The maximum amount of compon
 
 
 # set up the configure file for the library
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/detail/Config.hpp.inl ${CMAKE_CURRENT_SOURCE_DIR}/include/anax/detail/Config.hpp)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/Config.hpp.inl ${CMAKE_CURRENT_SOURCE_DIR}/include/anax/Config.hpp)
 
 # Add include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

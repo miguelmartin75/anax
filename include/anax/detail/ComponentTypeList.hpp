@@ -26,7 +26,7 @@
 #ifndef ANAX_DETAIL_COMPONENTTYPELIST_HPP
 #define ANAX_DETAIL_COMPONENTTYPELIST_HPP
 
-#include <anax/detail/Config.hpp>
+#include <anax/Config.hpp>
 
 #include <bitset>
 

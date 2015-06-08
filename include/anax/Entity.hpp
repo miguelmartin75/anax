@@ -30,11 +30,11 @@
 #include <utility>
 #include <cstdint>
 
-#include <anax/detail/Config.hpp>
 #include <anax/detail/ClassTypeId.hpp>
 #include <anax/detail/ComponentTypeList.hpp>
 
 #include <anax/Component.hpp>
+#include <anax/Config.hpp>
 
 namespace anax
 {

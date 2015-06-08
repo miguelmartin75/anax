@@ -25,10 +25,11 @@
 
 #include <anax/World.hpp>
 
+#include <anax/Config.hpp>
+
 #include <anax/util/ContainerUtils.hpp>
 
 #include <anax/detail/AnaxAssert.hpp>
-#include <anax/detail/Config.hpp>
 
 namespace anax
 {
