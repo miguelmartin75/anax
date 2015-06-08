@@ -174,17 +174,6 @@ namespace anax
 
         /// Adds a component to the Entity
         /// \tparam The type of component you wish to add
-        /// \param component The component you wish to add
-        /// \note component must be dynamically allocated with new, as
-        /// it is stored as a unique_ptr. I may change this in the future
-        /// by adding an option to alter how it's stored or something
-        /// along those lines.
-        /// \return The entity you added
-        template <typename T>
-        T& addComponent(T* component);
-
-        /// Adds a component to the Entity
-        /// \tparam The type of component you wish to add
         /// \param args The arguments for the constructor of the component
         template <typename T, typename... Args>
         T& addComponent(Args&&... args);
@@ -240,19 +229,14 @@ namespace anax
         World* m_world;
     };
 
-
-    template <typename T>
-    T& Entity::addComponent(T* component)
-    {
-        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot add T to entity");
-        addComponent(component, T::GetTypeId());
-        return *component;
-    }
-
     template <typename T, typename... Args>
     T& Entity::addComponent(Args&&... args)
     {
-        return addComponent<T>(new T{std::forward<Args>(args)...});
+        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot add T to entity");
+        // TODO: align components by type
+        auto component = new T{std::forward<Args>(args)...};
+        addComponent(component, T::GetTypeId());
+        return *component;
     }
 
     template <typename T>
