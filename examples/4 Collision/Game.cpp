@@ -81,8 +81,15 @@ void Game::init()
     auto& playerCollision = m_player.addComponent<CollisionComponent>();
     playerCollision.causesEvents = true;
     // NOTE: should have this in a file, but this'll do for now
-    playerCollision.boundingBox = { 8 - 24, 8 - 24, 32, 32 };
-    playerSprite.setOrigin(24, 24);
+    playerSprite.setOrigin(playerAnimation.frameSize.x / 2, playerAnimation.frameSize.y / 2);
+    {
+        constexpr int COLLISION_WIDTH = 32;
+        constexpr int COLLISION_HEIGHT = 32;
+
+        playerCollision.boundingBox = { (playerAnimation.frameSize.x - COLLISION_WIDTH) / 2 - playerSprite.getOrigin().x, 
+                                        (playerAnimation.frameSize.y - COLLISION_HEIGHT) / 2 - playerSprite.getOrigin().y, 
+                                        COLLISION_WIDTH, COLLISION_HEIGHT };
+    }
 
     //set player position to be in middle of screen
     playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerAnimation.frameSize.x / 2, m_renderTarget->getView().getSize().y / 2 - playerAnimation.frameSize.y / 2);
