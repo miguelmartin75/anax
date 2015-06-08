@@ -1,4 +1,5 @@
 .DS_Store
 include/anax/config.hpp
 build/*
+*swp
 .ycm_extra_conf*
