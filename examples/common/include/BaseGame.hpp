@@ -42,32 +42,20 @@ class BaseGame
 public:
 
     /// Default constructor
-    BaseGame()
-    : m_isRunning(true)
-    {
-    }
+    BaseGame() : m_isRunning(true) { }
 
     /// Updates the game
     /// \param deltaTime The change in time
     /// \note You must define your own update method
-    void update(float deltaTime)
-    {
-        assert(0 && "Implement your own update() function!");
-    }
+    virtual void update(float deltaTime) = 0;
 
     /// Renders the game
     /// \note You must define your own render method
-    void render()
-    {
-        assert(0 && "Implement your own render() function!");
-    }
+    virtual void render() = 0;
 
     /// Handles SFML events
     /// \note You must define your own handleEvents method
-    void handleEvents(sf::Event events)
-    {
-        assert(0 && "Handle your own darn events!");
-    }
+    virtual void handleEvents(sf::Event events) = 0;
 
     /// \return true if this Game is running
     bool isRunning() const { return m_isRunning; }

@@ -65,29 +65,22 @@ private:
     virtual void onCollisionOccured(anax::Entity& e1, anax::Entity& e2) override;
 
     /// Window for game to render to
-    sf::RenderTarget* m_RenderTarget;
+    sf::RenderTarget* m_renderTarget;
 
     /// A texture cache
-    std::map<std::string, sf::Texture> m_TextureCache;
+    std::map<std::string, sf::Texture> m_textureCache;
 
     /// An anax entity world
-    anax::World m_World;
+    anax::World m_world;
 
-    SpriteRenderingSystem m_SpriteRenderingSystem;
+    SpriteRenderingSystem m_spriteRenderingSystem;
+    AnimationSystem m_animationSystem;
+    MovementSystem m_movementSystem;
+    PlayerInputSystem m_playerInputSystem;
+    CollisionSystem m_collisionSystem;
 
-    AnimationSystem m_AnimationSystem;
-
-    MovementSystem m_MovementSystem;
-
-    PlayerInputSystem m_PlayerInputSystem;
-
-    CollisionSystem m_CollisionSystem;
-
-    //the player of the game
-    anax::Entity m_Player;
-
-    //Object we'll collide into
-    anax::Entity m_Wall;
+    anax::Entity m_player;
+    anax::Entity m_wall;
 };
 
 #endif

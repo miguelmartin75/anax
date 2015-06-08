@@ -28,13 +28,15 @@
 
 #include <anax/Component.hpp>
 
+#include <SFML/Graphics/Rect.hpp>
+
 /// \brief A component used to store collision information
 ///
 /// \author Miguel Martin
 struct CollisionComponent : anax::Component<CollisionComponent>
 {
     /// The BBox rectangle for collision
-    sf::FloatRect BBox;
+    sf::FloatRect boundingBox;
 
     /// A dirty flag to determine whether this object causes events or not
     bool causesEvents;

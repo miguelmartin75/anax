@@ -192,13 +192,11 @@ you declare different states (i.e. do width/height assignment at the TOP of the 
             // for general variables of the animation, e.g. width/height
             if(state == nullptr)
             {
-                std::clog << "Looking for global animation variables\n";
                 checkForVariables(stream, buffer, *this, animation_variable_assign_map, &error);
             }
             // for the current state
             else
             {
-                std::clog << "Looking for local state variables in state: " << stateName << "\n";
                 checkForVariables(stream, buffer, *state, state_variable_assign_map, &error);
             }
 

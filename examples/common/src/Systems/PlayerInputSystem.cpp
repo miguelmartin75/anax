@@ -34,7 +34,6 @@
 
 #include <Components/VelocityComponent.hpp>
 
-#include <iostream>
 
 void PlayerInputSystem::update(double deltaTime)
 {
@@ -49,13 +48,11 @@ void PlayerInputSystem::update(double deltaTime)
 
         if(sf::Keyboard::isKeyPressed(playerComp.controls.left))
         {
-            std::cout << "Left key pressed\n";
             velocity.x = -playerComp.baseSpeed;
             setPlayerState(e, playerComp, shootKeyPressed ? PlayerComponent::State::MOVE_LEFT_SHOOT : PlayerComponent::State::MOVE_LEFT);
         }
         else if(sf::Keyboard::isKeyPressed(playerComp.controls.right))
         {
-            std::cout << "Right key pressed\n";
             velocity.x = playerComp.baseSpeed;
             setPlayerState(e, playerComp, shootKeyPressed ? PlayerComponent::State::MOVE_RIGHT_SHOOT : PlayerComponent::State::MOVE_RIGHT);
         }
@@ -64,7 +61,6 @@ void PlayerInputSystem::update(double deltaTime)
             velocity.x = 0;
             if(shootKeyPressed) 
             {
-                std::cout << "Shoot key pressed\n";
                 setPlayerState(e, playerComp, PlayerComponent::State::SHOOT);
             }
             else

@@ -46,7 +46,6 @@ void AnimationSystem::update(double deltaTime)
             animation.m_frameAccumulator += deltaTime * (animationState->frameRate == 0 ? getFps() : animationState->frameRate);
             animation.currentFrame.x = (int)animation.m_frameAccumulator;
 
-
             if(animation.currentFrame.x >= animationState->frameAmount.x)
             {
                 // go to the next row (if necessary)
