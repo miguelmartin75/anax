@@ -51,8 +51,8 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PositionComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = true;
+        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
 
         EXPECT(filter.doesPassFilter(typeList) == true);
     },
@@ -63,8 +63,8 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PlayerComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
+        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
@@ -75,8 +75,8 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PlayerComponent::GetTypeId()] = false;
-        typeList[VelocityComponent::GetTypeId()] = false;
+        typeList[anax::ComponentTypeId<PlayerComponent>()] = false;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == true);
     },
@@ -87,8 +87,8 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PositionComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = false;
+        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
@@ -99,8 +99,8 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PlayerComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = true;
+        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
@@ -111,9 +111,9 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[PositionComponent::GetTypeId()] = true;
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PlayerComponent::GetTypeId()] = false;
+        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
+        typeList[anax::ComponentTypeId<PlayerComponent>()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == true);
     },
@@ -124,10 +124,10 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PositionComponent::GetTypeId()] = false;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
+        typeList[anax::ComponentTypeId<PositionComponent>()] = false;
 
-        typeList[PlayerComponent::GetTypeId()] = false;
+        typeList[anax::ComponentTypeId<PlayerComponent>()] = false;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
@@ -138,10 +138,10 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[VelocityComponent::GetTypeId()] = true;
-        typeList[PositionComponent::GetTypeId()] = true;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
+        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
 
-        typeList[PlayerComponent::GetTypeId()] = true;
+        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
@@ -152,10 +152,10 @@ const lest::test specification[] =
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
-        typeList[VelocityComponent::GetTypeId()] = false;
-        typeList[PositionComponent::GetTypeId()] = false;
+        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
+        typeList[anax::ComponentTypeId<PositionComponent>()] = false;
 
-        typeList[PlayerComponent::GetTypeId()] = true;
+        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },

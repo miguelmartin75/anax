@@ -59,14 +59,13 @@ namespace anax
             EntityComponentStorage& operator=(EntityComponentStorage&&) = delete;
 
 
-
-            void addComponent(Entity& entity, BaseComponent* component, TypeId componentTypeId);
+            void addComponent(Entity& entity, Component* component, TypeId componentTypeId);
 
             void removeComponent(Entity& entity, TypeId componentTypeId);
 
             void removeAllComponents(Entity& entity);
 
-            BaseComponent& getComponent(const Entity& entity, TypeId componentTypeId) const;
+            Component& getComponent(const Entity& entity, TypeId componentTypeId) const;
 
             ComponentTypeList getComponentTypeList(const Entity& entity) const;
 
@@ -80,7 +79,7 @@ namespace anax
 
         private:
 
-            typedef std::array<std::unique_ptr<BaseComponent>, anax::MAX_AMOUNT_OF_COMPONENTS> ImplComponentArray;
+            typedef std::array<std::unique_ptr<Component>, anax::MAX_AMOUNT_OF_COMPONENTS> ImplComponentArray;
             
             /// \brief A data structure to describe the components
             /// within an entity

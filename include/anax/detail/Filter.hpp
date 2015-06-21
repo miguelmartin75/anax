@@ -29,9 +29,10 @@
 #include <type_traits>
 
 #include <anax/Config.hpp>
+#include <anax/Component.hpp>
+
 #include <anax/detail/ClassTypeId.hpp>
 #include <anax/detail/ComponentTypeList.hpp>
-#include <anax/detail/BaseComponent.hpp>
 
 namespace anax
 {
@@ -66,8 +67,8 @@ namespace anax
         template <class T, class... Args>
         static ComponentTypeList types(detail::TypeList<T, Args...> typeList)
         {
-            static_assert(std::is_base_of<BaseComponent, T>::value, "Invalid component");
-            return ComponentTypeList().set(ClassTypeId<BaseComponent>::GetTypeId<T>()) | types(detail::TypeList<Args...>());
+            static_assert(std::is_base_of<Component, T>::value, "Invalid component");
+            return ComponentTypeList().set(ComponentTypeId<T>()) | types(detail::TypeList<Args...>());
         }
 
         template <class RequireList, class ExcludeList> 

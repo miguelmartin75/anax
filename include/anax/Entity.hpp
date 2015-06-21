@@ -174,7 +174,7 @@ namespace anax
         /// \tparam The type of component you wish to retrieve
         /// \return A pointer to the component
         template <typename T>
-        T& getComponent() const;
+        ComponentPtr<T> getComponent() const;
 
         /// Determines if this Entity has a component or not
         /// \tparam The type of component you wish to check for
@@ -197,9 +197,9 @@ namespace anax
 
         // wrappers to add components
         // so I may call them from templated public interfaces
-        void addComponent(detail::BaseComponent* component, detail::TypeId componentTypeId);
+        void addComponent(Component* component, detail::TypeId componentTypeId);
         void removeComponent(detail::TypeId componentTypeId);
-        detail::BaseComponent& getComponent(detail::TypeId componentTypeId) const;
+        Component* getComponent(detail::TypeId componentTypeId) const;
         bool hasComponent(detail::TypeId componentTypeId) const;
 
 
@@ -215,32 +215,32 @@ namespace anax
     template <typename T, typename... Args>
     T& Entity::addComponent(Args&&... args)
     {
-        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot add T to entity");
+        static_assert(std::is_base_of<Component, T>(), "T is not a component, cannot add T to entity");
         // TODO: align components by type
         auto component = new T{std::forward<Args>(args)...};
-        addComponent(component, T::GetTypeId());
+        addComponent(component, ComponentTypeId<T>());
         return *component;
     }
 
     template <typename T>
     void Entity::removeComponent()
     {
-        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot remove T from entity");
-        removeComponent(T::GetTypeId());
+        static_assert(std::is_base_of<Component, T>(), "T is not a component, cannot remove T from entity");
+        removeComponent(ComponentTypeId<T>());
     }
 
     template <typename T>
-    T& Entity::getComponent() const
+    ComponentPtr<T> Entity::getComponent() const
     {
-        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot retrieve T from entity");
-        return static_cast<T&>(getComponent(T::GetTypeId()));
+        static_assert(std::is_base_of<Component, T>(), "T is not a component, cannot retrieve T from entity");
+        return static_cast<T*>(getComponent(ComponentTypeId<T>()));
     }
 
     template <typename T>
     bool Entity::hasComponent() const
     {
-        static_assert(std::is_base_of<detail::BaseComponent, T>(), "T is not a component, cannot determine if entity has T");
-        return hasComponent(T::GetTypeId());
+        static_assert(std::is_base_of<Component, T>(), "T is not a component, cannot determine if entity has T");
+        return hasComponent(ComponentTypeId<T>());
     }
 }
 

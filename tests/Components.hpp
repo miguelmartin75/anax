@@ -35,22 +35,15 @@
 
 struct vec3 { float x, y, z; };
 
-struct PositionComponent : anax::Component<PositionComponent>
-{
-    vec3 position;
-};
+struct PositionComponent : anax::Component, vec3 { }; 
+struct VelocityComponent : anax::Component, vec3 { };
 
-struct VelocityComponent : anax::Component<VelocityComponent>
-{
-    vec3 velocity;
-};
-
-struct PlayerComponent : anax::Component<PlayerComponent>
+struct PlayerComponent : anax::Component
 {
     std::string name;
 };
 
-struct NPCComponent : anax::Component<NPCComponent>
+struct NPCComponent : anax::Component
 {
     std::string name;
 

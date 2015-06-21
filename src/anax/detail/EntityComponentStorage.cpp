@@ -37,7 +37,7 @@ namespace anax
         {
         }
 
-        void EntityComponentStorage::addComponent(Entity& entity, BaseComponent* component, TypeId componentTypeId)
+        void EntityComponentStorage::addComponent(Entity& entity, Component* component, TypeId componentTypeId)
         {
             ANAX_ASSERT(entity.isValid(), "invalid entity cannot have components added to it");
 
@@ -68,7 +68,7 @@ namespace anax
             componentDataForEntity.componentTypeList.reset();
         }
 
-        BaseComponent& EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
+        Component& EntityComponentStorage::getComponent(const Entity& entity, TypeId componentTypeId) const
         {
             ANAX_ASSERT(entity.isValid() && hasComponent(entity, componentTypeId), "Entity is not valid or does not contain component");
 
@@ -88,11 +88,11 @@ namespace anax
 
             auto& componentsToConvert = getComponentsImpl(entity);
 
-            std::vector<std::reference_wrapper<BaseComponent>> temp;
+            ComponentArray temp;
             temp.reserve(componentsToConvert.size());
 
             for(auto& i : componentsToConvert)
-                temp.push_back(*i.get());
+                temp.emplace_back(i.get());
 
             return temp;
         }

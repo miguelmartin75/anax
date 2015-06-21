@@ -102,7 +102,7 @@ namespace anax
         return m_id == entity.m_id && entity.m_world == m_world;
     }
 
-    void Entity::addComponent(detail::BaseComponent* component, detail::TypeId componentTypeId)
+    void Entity::addComponent(Component* component, detail::TypeId componentTypeId)
     {
         getWorld().m_entityAttributes.componentStorage.addComponent(*this, component, componentTypeId);
     }
@@ -112,9 +112,9 @@ namespace anax
         getWorld().m_entityAttributes.componentStorage.removeComponent(*this, componentTypeId);
     }
 
-    detail::BaseComponent& Entity::getComponent(detail::TypeId componentTypeId) const
+    Component* Entity::getComponent(detail::TypeId componentTypeId) const
     {
-        return getWorld().m_entityAttributes.componentStorage.getComponent(*this, componentTypeId);
+        return &getWorld().m_entityAttributes.componentStorage.getComponent(*this, componentTypeId);
     }
 
     bool Entity::hasComponent(detail::TypeId componentTypeId) const

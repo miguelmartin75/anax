@@ -26,27 +26,14 @@
 #ifndef ANAX_COMPONENT_HPP
 #define ANAX_COMPONENT_HPP
 
-#include <cstddef>
+#include <type_traits>
 #include <vector>
-#include <functional> // for reference_wrapper
 
-#include <anax/detail/BaseComponent.hpp>
 #include <anax/detail/ClassTypeId.hpp>
 
 namespace anax
 {
-    /// \brief A class that follows the CRTP pattern, used to define custom components
-    /// \tparam T The Component you are defining
-    ///
-    /// This class uses the CRTP pattern to make a unique identifier for each component
-    /// class
-    ///
-    /// \see detail::BaseComponent
-    /// If you wish to store components generically and for further documentation.
-    ///
-    /// \author Miguel Martin
-    template <typename T>
-    class Component : public detail::BaseComponent
+    class Component
     {
     public:
 
@@ -54,14 +41,18 @@ namespace anax
         virtual
 #	endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
         ~Component() {}
-
-        static detail::TypeId GetTypeId()
-        {
-            return detail::ClassTypeId<detail::BaseComponent>::GetTypeId<T>();
-        }
     };
 
-    typedef std::vector<std::reference_wrapper<detail::BaseComponent>> ComponentArray;
+    template <class T, class = typename std::enable_if<std::is_base_of<Component, T>::value>::type>
+    using ComponentPtr = T*;
+
+    using ComponentArray = std::vector<Component*>;
+
+    template <class T>
+    detail::TypeId ComponentTypeId()
+    {
+        return detail::ClassTypeId<Component>::GetTypeId<T>();
+    }
 }
 
 #endif // ANAX_COMPONENT_HPP
