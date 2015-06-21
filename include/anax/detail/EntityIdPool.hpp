@@ -87,14 +87,14 @@ namespace anax
             std::size_t m_defaultPoolSize;
 
             /// The next ID to be used (if there is no IDs in the freelist)
-            std::size_t m_nextId;
+            Entity::Id::int_type m_nextId;
 
-            /// The entities ids that are avaliable to be used
+            /// The entities ids that are available to be used
             std::vector<Entity::Id> m_freeList;
 
             /// The Entities that are within the pool
             /// Stored as a counter and the index is the index part of the ID
-            std::vector<Entity::Id::int_type> m_entities;
+            std::vector<Entity::Id::int_type> m_counts;
         };
     }
 }

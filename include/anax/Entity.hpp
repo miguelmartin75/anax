@@ -128,22 +128,6 @@ namespace anax
         Entity& operator=(const Entity&) = default;
         Entity& operator=(Entity&&) = default;
 
-
-        /// Applies an entity template to the entity
-        /// \tparam EntityTemplateFn The type of template function you wish to apply
-        ///
-        /// \param fn The function you wish to apply to this entity
-        /// \param args The corresponding arguments to the entity template function
-        ///
-        /// \note You could just call the entity template function, 
-        ///       however, the way that entity templates are implemnted
-        ///       at the moment could change in the future.
-        template <typename EntityTemplateFn, typename... Args>
-        void applyTemplate(EntityTemplateFn fn, Args&&... args)
-        {
-            fn(*this, std::forward<Args>(args)...);
-        }
-
         /// Determines if this Entity handle is valid & able to be used.
         /// \note You should only use this for DEBUG builds
         ///       as checking if an Entity is valid may/may not
@@ -205,8 +189,7 @@ namespace anax
         /// this entity has attached to it
         detail::ComponentTypeList getComponentTypeList() const;
 
-
-        /// Comparrision operator
+        /// Comparison operator
         bool operator==(const Entity& entity) const;
         bool operator!=(const Entity& entity) const { return !operator==(entity); }
 

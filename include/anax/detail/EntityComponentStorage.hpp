@@ -114,8 +114,6 @@ namespace anax
             /// as the index component of an entity's ID.
             std::vector<EntityComponents> m_componentEntries;
 
-
-
             ImplComponentArray& getComponentsImpl(const Entity& e);
             const ImplComponentArray& getComponentsImpl(const Entity& e) const;
         };
