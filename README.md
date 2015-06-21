@@ -22,29 +22,11 @@ To compile, install, and use anax, a C++11 compliant compiler is required.
 
 ## Installation
 
-To install and build the library, you can use CMake or your own method of installation. However, it is recommended that you do use CMake. If you're on Mac/Linux or another Unix variation, then you can install the library quite simply via the [scripts](https://github.com/miguelmartin75/clean_install) provided in the repository.
+```
+(mkdir -p build && cmake .. && make install)
+```
 
-### Step 1: cd
-
-Ensure that the current directory is the repository's directory (i.e. `cd` into the repo). 
-
-### Step 2: Clean
-
-Run the `clean.sh` script.
-
-### Step 3: Configure
-
-Configure the libary via CMake. Whether this be via the command line (`cmake`), the command line GUI (`ccmake`), or the actual CMake GUI.
-
-### Step 4: Install
-
-Run the `install.sh` script to install the library automatically. The install script will build the library four times (two release and debug builds; both static and dynamic binaries) and install the header files once.
-
-> #### **NOTES:**
-> 1. For Windows, you may have to use the Visual Studio command line in order for it to build.
-> 2. In Windows, unless you have a bash command line, you cannot run the scripts provided in the repository (sorry; if someone wants to add batch scripts to do what I have done above, that would be appreciated).
-
-A more detailed tutorial on how to install is avaliable on the [wiki](https://github.com/miguelmartin75/anax/wiki/Getting-Started).
+A more detailed tutorial on how to install is available on the [wiki](https://github.com/miguelmartin75/anax/wiki/Getting-Started).
 
 # Quick Tutorial
 
@@ -55,44 +37,38 @@ This section will explain how to use the library, but it will not go into much s
 
 ### The World
 
-A World is used to describe you game world. You must always have at least one World object allocated in order to use anax.
-
-You create World objects like any other object:
+A World is used to describe you game world or 'entity system' if you will. You must always have at least have one World object in order to use anax. e.g.
 
 ```c++
 World world;
-// or
-World* world = new World;
 ```
 
 ### Entities
 
-An entity is what you use to describe an object in your game. e.g. a player, a gun, etc. To create entities, you must have a World object allocated, and call `createEntity()` on the World object.
+An entity is what you use to describe an object in your game. e.g. a player, a gun, etc. To create entities, you must have a World object, and call `createEntity()` on the World object.
 
 ```c++
 World world;
 // ... 
 Entity entity = world.createEntity();
 ```
-	
-Entities are implemented as an identifier (32 or 64 bits). The Entity objects have a reference to the World object, and may be accessed through the getter `getWorld()`. The `Entity` class acts as a handle to entities, you can think of it as a pointer. You may have multiple `Entity` handles to represent the same entity, e.g.
+
+Entities are implemented as an identifier (32 or 64 bits). The Entity objects have a reference to the World object, and may be accessed via `getWorld()`. The `Entity` class acts as a handle to entities, you can think of it as a pointer. You may have multiple `Entity` handles to represent the same entity, e.g.
 
 ```c++
 Entity entity1 = world.createEntity();
 Entity entity2 = entity1;
 ```
 
-There is no problem with that. To destroy/kill an entity, you can either call `World::killEntity` or `Entity::kill`. e.g.
+To destroy/kill an entity, you can either call `World::killEntity` or `Entity::kill`. e.g.
 
 ```c++
-Entity entity = world.createEntity();
-	
 entity.kill();
 // or
 world.killEntity(entity);
 ```
 
-Once you have killed an entity, other copies of your entity handles will automatically be invalidated and will not be of use (a run-time error will occur (an assertion), in DEBUG builds). e.g.
+Once you have killed an entity, other copies of your entity handles will automatically be invalidated and will not be of use (an assertion will occur if you attempt to use an invalidated entity). e.g.
 
 ```c++
 Entity entity1 = world.createEntity();
@@ -100,18 +76,17 @@ Entity entity2 = entity1;
 
 entity1.kill();
 
-// This will cause a run-time error
-entity2.addComponent<Position>(0, 3, 5); // see below for details about this method
+// This will cause an assertion
+// see below for details about this member function
+entity2.addComponent<Position>(0, 3, 5);
 ``` 
 	
 ### Components
 
 A Component is used to describe data for an Entity, for example: the position, velocity, etc. To define your own component, you simply inherit from `Component<T>` where `T` is the type of component you are defining.
 
-
 ```c++
-class PositionComponent
-	: public anax::Component<PositionComponent>
+class PositionComponent : public anax::Component<PositionComponent>
 {
 	// ...
 };
@@ -138,14 +113,16 @@ auto pos = entity.getComponent<PositionComponent>();
 
 ### Systems
 
-A System is used to contain entities with specific components. It usually is used to update/render these entities. You define a system much like you define a component, you inherit `System<T>` where `T` is the type of system you are defining.
+A System is used to contain on entities with specific components. It usually is used to update/render these entities. You define a system much like you define a component, however, you must also supply what type of components you want the entities to contain or the type of components you don't want them to contain.
 
 ```c++
-class MovementSystem
-	: public anax::System<MovementSystem>
+class MovementSystem 
+    : public anax::System<MovementSystem, anax::Requires<PositionComponent, VelocityComponent>>
 {
 	// ...
 };
+
+class Enemy
 ```
 
 In order to filter out entities, you must use create a `ComponentFilter` and hand it to the base class's ctor. There is a handy `Base` typedef defined in the `System<T>` class for you to use.

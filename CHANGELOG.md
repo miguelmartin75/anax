@@ -33,11 +33,11 @@ without asserting.
 
 2013-03-25 Miguel Martin <miguel@miguel-martin.com>
 
-- Refractored ac::es to anax namespace
+- Refractory ac::es to anax namespace
 - Removed examples (placing them in another repository)
 - Renamed Scene to World
 - Removed managers, and observer classes
-- Reogranised library and renamed some files in library
+- Reorganised library and renamed some files in library
 - Changed logo
 
 ### 0.2.3
