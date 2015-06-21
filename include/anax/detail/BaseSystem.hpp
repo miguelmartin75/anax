@@ -26,10 +26,10 @@
 #ifndef ANAX_DETAIL_BASESYSTEM_HPP
 #define ANAX_DETAIL_BASESYSTEM_HPP
 
+#include <vector>
 #include <anax/Entity.hpp>
 
 #include <anax/detail/Filter.hpp>
-#include <anax/detail/ClassTypeId.hpp>
 
 namespace anax
 {

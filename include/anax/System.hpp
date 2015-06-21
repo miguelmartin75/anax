@@ -7,6 +7,7 @@
 #include <anax/FilterOptions.hpp>
 
 #include <anax/detail/BaseSystem.hpp>
+#include <anax/detail/ClassTypeId.hpp>
 
 namespace anax
 {
@@ -21,7 +22,7 @@ namespace anax
     /// If you wish to store systems generically and for further documentation.
     ///
     /// \author Miguel Martin
-    template <class T, class RequireList, class ExcludeList = Exclude<>>
+    template <class RequireList, class ExcludeList = Exclude<>>
     class System : public detail::BaseSystem
     {
     public:
@@ -31,13 +32,13 @@ namespace anax
             BaseSystem{detail::MakeFilter<RequireList, ExcludeList>()}
         {
         }
-
-        /// \return A unique TypeId for this type of System
-        static detail::TypeId GetTypeId()
-        {
-            return detail::ClassTypeId<BaseSystem>::GetTypeId<T>();
-        }
     };
+
+    template<class T>
+    detail::TypeId SystemTypeId()
+    {
+        return detail::ClassTypeId<detail::BaseSystem>::GetTypeId<T>();
+    }
 }
 
 #endif // ANAX_SYSTEM_HPP

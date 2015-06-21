@@ -287,28 +287,28 @@ namespace anax
         friend class Entity;
     };
 
-    template <typename TSystem>
+    template <class TSystem>
     void World::addSystem(TSystem& system)
     { 
         static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
-        addSystem(system, TSystem::GetTypeId()); 
+        addSystem(system, SystemTypeId<TSystem>()); 
     }
 
-    template <typename TSystem>
+    template <class TSystem>
     void World::removeSystem()
     {
         static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
-        removeSystem(TSystem::GetTypeId());
+        removeSystem(SystemTypeId<TSystem>());
     }
 
-    template <typename TSystem>
+    template <class TSystem>
     bool World::doesSystemExist() const
     {
         static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
-        return doesSystemExist(TSystem::GetTypeId());
+        return doesSystemExist(SystemTypeId<TSystem>());
     }
 
-    template <typename TSystem>
+    template <class TSystem>
     bool World::doesSystemExist(const TSystem& system) const
     { 
         static_assert(std::is_base_of<detail::BaseSystem, TSystem>(), "Template argument does not inherit from BaseSystem"); 
