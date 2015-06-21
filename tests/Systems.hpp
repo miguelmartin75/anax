@@ -32,7 +32,7 @@
 
 #include "Components.hpp"
 
-class MovementSystem : public anax::System<anax::Require<PositionComponent, VelocityComponent>>
+class MovementSystem : public anax::System<anax::Requires<PositionComponent, VelocityComponent>>
 {
 public:
 
@@ -61,7 +61,7 @@ private:
     }
 };
 
-class PlayerSystem : public anax::System<anax::Require<PlayerComponent>, anax::Exclude<NPCComponent>>
+class PlayerSystem : public anax::System<anax::Requires<PlayerComponent>, anax::Excludes<NPCComponent>>
 {
 private:
 

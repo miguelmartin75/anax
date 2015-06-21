@@ -32,11 +32,11 @@ namespace anax
 {
     /// Requires a set of components
     template <class... Args>
-    struct Require : detail::TypeList<Args...>, detail::BaseRequire {};
+    struct Requires : detail::TypeList<Args...>, detail::BaseRequires {};
 
     /// Excludes a set of components
     template <class... Args>
-    struct Exclude : detail::TypeList<Args...>, detail::BaseExclude {};
+    struct Excludes : detail::TypeList<Args...>, detail::BaseExcludes {};
 }
 
 #endif // ANAX_FILTEROPTIONS_HPP

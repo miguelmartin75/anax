@@ -47,7 +47,7 @@ const lest::test specification[] =
 {
     CASE("requires (pass)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -59,7 +59,7 @@ const lest::test specification[] =
 
     CASE("requires (fail)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -71,7 +71,7 @@ const lest::test specification[] =
 
     CASE("excludes (pass)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<>, anax::Exclude<PositionComponent, VelocityComponent>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<>, anax::Excludes<PositionComponent, VelocityComponent>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -83,7 +83,7 @@ const lest::test specification[] =
 
     CASE("excludes (fail via one)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<>, anax::Exclude<PositionComponent, VelocityComponent>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<>, anax::Excludes<PositionComponent, VelocityComponent>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -95,7 +95,7 @@ const lest::test specification[] =
 
     CASE("excludes (fail via all)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<>, anax::Exclude<PositionComponent, VelocityComponent>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<>, anax::Excludes<PositionComponent, VelocityComponent>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -107,7 +107,7 @@ const lest::test specification[] =
 
     CASE("requires and excludes (pass)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -120,7 +120,7 @@ const lest::test specification[] =
 
     CASE("requires and excludes (fail via requires)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -134,7 +134,7 @@ const lest::test specification[] =
 
     CASE("requires and excludes (fail via excludes)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 
@@ -148,7 +148,7 @@ const lest::test specification[] =
 
     CASE("requires and excludes (fail via all)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Require<PositionComponent, VelocityComponent>, anax::Exclude<PlayerComponent>>();
+        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
 
         anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
 

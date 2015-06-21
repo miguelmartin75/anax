@@ -22,7 +22,7 @@ namespace anax
     /// If you wish to store systems generically and for further documentation.
     ///
     /// \author Miguel Martin
-    template <class RequireList, class ExcludeList = Exclude<>>
+    template <class RequireList, class ExcludeList = Excludes<>>
     class System : public detail::BaseSystem
     {
     public:

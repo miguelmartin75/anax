@@ -41,8 +41,8 @@ namespace anax
         template <class... Args>
         struct TypeList { };
 
-        struct BaseRequire { };
-        struct BaseExclude { };
+        struct BaseRequires { };
+        struct BaseExcludes { };
 
         struct Filter 
         {
@@ -74,8 +74,8 @@ namespace anax
         template <class RequireList, class ExcludeList> 
         Filter MakeFilter()
         {
-            static_assert(std::is_base_of<BaseRequire, RequireList>::value, "RequireList is not a requirement list");
-            static_assert(std::is_base_of<BaseExclude, ExcludeList>::value, "ExcludeList is not an excludes list");
+            static_assert(std::is_base_of<BaseRequires, RequireList>::value, "RequireList is not a requirement list");
+            static_assert(std::is_base_of<BaseExcludes, ExcludeList>::value, "ExcludeList is not an excludes list");
             return Filter{types(RequireList{}), types(ExcludeList{})};
         }
     }
