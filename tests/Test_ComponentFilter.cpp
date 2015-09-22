@@ -69,14 +69,23 @@ namespace
 }
 
 
-// All posibilities (with fail or pass):
-// requires 
-// requiresOneOf
-// excludes
-// requires and excludes
-// requires and requiresOneOf 
-// requiresOneOf and excludes
-// requires, requiresOneOf, and excludes
+// All possible test cases:
+// ========================
+// 1. requires
+//      - Test for:
+//          => filter should fail
+//          => filter should pass
+// 2 excludes
+//      - Test for:
+//          => filter should fail
+//          => filter should pass
+// 3 requires and excludes
+//      - Test for:
+//          => filter should pass
+//          => filter should fail via require
+//          => filter should fail via excludes
+//          => filter should fail via require and excludes
+//
 const lest::test specification[] =
 {
     CASE("requires (pass)")
@@ -143,7 +152,7 @@ const lest::test specification[] =
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
-    CASE("requires and excludes (fail via all)")
+    CASE("requires and excludes (fail via both)")
     {
         auto filter = MakeFilter<Requires<PositionComponent, VelocityComponent>, Excludes<PlayerComponent>>();
         auto typeList = createTypeList<PlayerComponent>();
