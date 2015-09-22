@@ -10,13 +10,6 @@ You can read about them further [here](https://github.com/miguelmartin75/anax/wi
 
 # Getting Started
 
-## Downloading the Library
-
-There are multiple ways to download the library. Here are your options:
-
-- clone the repo: `git clone https://github.com/miguelmartin75/anax.git`
-- Download the library ([zip]/[tar-gz])
-
 ## Dependencies
 To compile, install, and use anax, a C++11 compliant compiler is required.
 
@@ -57,7 +50,7 @@ Entities are implemented as an identifier (32 or 64 bits). The Entity objects ha
 
 ```c++
 Entity entity1 = world.createEntity();
-Entity entity2 = entity1;
+Entity entity2 = entity1; // entity2 and entity1 "point" to the same entity
 ```
 
 To destroy/kill an entity, you can either call `World::killEntity` or `Entity::kill`. e.g.
@@ -83,10 +76,10 @@ entity2.addComponent<Position>(0, 3, 5);
 	
 ### Components
 
-A Component is used to describe data for an Entity, for example: the position, velocity, etc. To define your own component, you simply inherit from `Component<T>` where `T` is the type of component you are defining.
+A Component is used to describe data for an Entity, for example: the position, velocity, etc. To define your own component, you simply inherit from `Component`.
 
 ```c++
-class PositionComponent : public anax::Component<PositionComponent>
+struct PositionComponent : anax::Component
 {
 	// ...
 };
@@ -113,33 +106,11 @@ auto pos = entity.getComponent<PositionComponent>();
 
 ### Systems
 
-A System is used to contain on entities with specific components. It usually is used to update/render these entities. You define a system much like you define a component, however, you must also supply what type of components you want the entities to contain or the type of components you don't want them to contain.
+A System is used to contain on entities with specific components (require or exclude a set of component types). It is typically used to update, render or perform some logic these entities. 
 
 ```c++
-class MovementSystem 
-    : public anax::System<MovementSystem, anax::Requires<PositionComponent, VelocityComponent>>
+struct MovementSystem : anax::System<anax::Requires<PositionComponent, VelocityComponent>>
 {
-	// ...
-};
-
-class Enemy
-```
-
-In order to filter out entities, you must use create a `ComponentFilter` and hand it to the base class's ctor. There is a handy `Base` typedef defined in the `System<T>` class for you to use.
-
-e.g.
-
-```c++
-class MovementSystem
-	: public anax::System<MovementSystem>
-{
-public:
-	
-	MovementSystem()
-		: Base(ComponentFilter().requires<PositionComponent, VelocityComponent>())
-	{
-	}
-	
 	// ...
 };
 ```
@@ -149,8 +120,7 @@ That is, a movement system requires entities with a `PositionComponent` and `Vel
 - `onEntityAdded(Entity&)`
 - `onEntityRemoved(Entity&)`
 
-That's basically it, you can pretty go and code. If you want more details, check the documentation or [this](https://github.com/miguelmartin75/anax/wiki/Using-the-Library) getting started guide on the [wiki].
-
+That's basically it, you can pretty much go and code. If you want more details, check the documentation or [this](https://github.com/miguelmartin75/anax/wiki/Using-the-Library) getting started guide on the [wiki].
 
 # Get Involved
 
@@ -166,8 +136,5 @@ See [LICENSE](LICENSE).
 [CMake]: http://www.cmake.org/
 [Entity Systems]:http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
 [Artemis]: http://gamadu.com/artemis/
-[entityx]: https://github.com/alecthomas/entityx
 [boost]: http://boost.org/
 [email]: mailto:miguel@miguel-martin.com
-[zip]: https://api.github.com/repos/miguelmartin75/anax/zipball
-[tar-gz]: https://api.github.com/repos/miguelmartin75/anax/tarball

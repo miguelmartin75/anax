@@ -25,137 +25,144 @@
 
 #include <lest.hpp>
 
-#include <anax/detail/Filter.hpp>
-
 #include <anax/FilterOptions.hpp>
 
 #include "Components.hpp"
 
 constexpr const unsigned MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST = 4;
 
-// All posibilities (with fail or pass):
-// requires 
-// requiresOneOf
-// excludes
-// requires and excludes
-// requires and requiresOneOf 
-// requiresOneOf and excludes
-// requires, requiresOneOf, and excludes
+using namespace anax;
+using namespace anax::detail;
+
+namespace 
+{
+    // I don't think this is possible with functions
+    template <class... Types>
+    struct Assigner { void operator()(ComponentTypeList& list) const; };
+
+    template <class Type>
+    struct Assigner<Type>
+    {
+        void operator()(ComponentTypeList& list) const 
+        {
+            list[ComponentTypeId<Type>()] = true;
+        }
+    };
+
+    template <class Type, class... Types>
+    struct Assigner<Type, Types...>
+    {
+        void operator()(ComponentTypeList& list) const 
+        {
+            Assigner<Type>()(list);
+            Assigner<Types...>()(list);
+        }
+    };
+
+    template <>
+    struct Assigner<> 
+    {
+        void operator()(ComponentTypeList& list) const {}
+    };
+
+    template <class... Types>
+    ComponentTypeList createTypeList()
+    {
+        ComponentTypeList temp(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
+        for(size_t i = 0; i < MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST; ++i) temp[i] = false;
+        Assigner<Types...>()(temp);
+        return temp;
+    }
+}
+
+
+// All possible test cases:
+// ========================
+// 1. requires
+//      - Test for:
+//          => filter should fail
+//          => filter should pass
+// 2 excludes
+//      - Test for:
+//          => filter should fail
+//          => filter should pass
+// 3 requires and excludes
+//      - Test for:
+//          => filter should pass
+//          => filter should fail via require
+//          => filter should fail via excludes
+//          => filter should fail via require and excludes
 //
-// TODO: fix maintainability of this code... It's just a lot of copy pasta atm
 const lest::test specification[] =
 {
     CASE("requires (pass)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
+        auto filter = MakeFilter<Requires<PositionComponent, VelocityComponent>, Excludes<>>();
+        auto typeList = createTypeList<PositionComponent, VelocityComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requires (fail)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
+        auto filter = MakeFilter<Requires<PositionComponent, VelocityComponent>, Excludes<>>();
+        auto typeList = createTypeList<PlayerComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
     CASE("excludes (pass)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<>, anax::Excludes<PositionComponent, VelocityComponent>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<PlayerComponent>()] = false;
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
+        auto filter = MakeFilter<Requires<>, Excludes<PositionComponent, VelocityComponent>>();
+        auto typeList = createTypeList();
 
         EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("excludes (fail via one)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<>, anax::Excludes<PositionComponent, VelocityComponent>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
+        auto filter = MakeFilter<Requires<>, Excludes<PositionComponent, VelocityComponent>>();
+        auto typeList = createTypeList<PositionComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
     CASE("excludes (fail via all)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<>, anax::Excludes<PositionComponent, VelocityComponent>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
+        auto filter = MakeFilter<anax::Requires<>, Excludes<PositionComponent, VelocityComponent>>();
+        auto typeList = createTypeList<PlayerComponent, VelocityComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
     CASE("requires and excludes (pass)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
-        typeList[anax::ComponentTypeId<PlayerComponent>()] = false;
+        auto filter = MakeFilter<Requires<PositionComponent, VelocityComponent>, Excludes<PlayerComponent>>();
+        auto typeList = createTypeList<PositionComponent, VelocityComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == true);
     },
 
     CASE("requires and excludes (fail via requires)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
-        typeList[anax::ComponentTypeId<PositionComponent>()] = false;
-
-        typeList[anax::ComponentTypeId<PlayerComponent>()] = false;
+        auto filter = MakeFilter<Requires<PositionComponent, VelocityComponent>, Excludes<PlayerComponent>>();
+        auto typeList = createTypeList<VelocityComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
     CASE("requires and excludes (fail via excludes)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = true;
-        typeList[anax::ComponentTypeId<PositionComponent>()] = true;
-
-        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
+        auto filter = MakeFilter<Requires<PositionComponent, VelocityComponent>, Excludes<PlayerComponent>>();
+        auto typeList = createTypeList<VelocityComponent, PositionComponent, PlayerComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },
 
-    CASE("requires and excludes (fail via all)")
+    CASE("requires and excludes (fail via both)")
     {
-        auto filter = anax::detail::MakeFilter<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<PlayerComponent>>();
-
-        anax::detail::ComponentTypeList typeList(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-
-        typeList[anax::ComponentTypeId<VelocityComponent>()] = false;
-        typeList[anax::ComponentTypeId<PositionComponent>()] = false;
-
-        typeList[anax::ComponentTypeId<PlayerComponent>()] = true;
+        auto filter = MakeFilter<Requires<PositionComponent, VelocityComponent>, Excludes<PlayerComponent>>();
+        auto typeList = createTypeList<PlayerComponent>();
 
         EXPECT(filter.doesPassFilter(typeList) == false);
     },

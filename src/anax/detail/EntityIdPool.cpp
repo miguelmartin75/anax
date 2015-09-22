@@ -69,6 +69,7 @@ namespace anax
 
         Entity::Id EntityIdPool::get(std::size_t index) const
         {
+            ANAX_ASSERT(index < m_counts.size(), "Entity index is out of range");
             ANAX_ASSERT(!(m_counts[index] == 0), "Entity ID does not exist");
             return Entity::Id{index, m_counts[index]};
         }

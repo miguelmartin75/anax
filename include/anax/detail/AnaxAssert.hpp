@@ -26,14 +26,24 @@
 #ifndef ANAX_DETAIL_ANAXASSERT_HPP
 #define ANAX_DETAIL_ANAXASSERT_HPP
 
+
 #ifndef ANAX_TEST_CASE_BUILD
-    #include <cassert>
-    #define ANAX_ASSERT(condition, failMessage) assert((condition) && failMessage)
+
+#include <cassert>
+#define ANAX_ASSERT(condition, failMessage) assert((condition) && failMessage)
+
 #else 
-    #include <string>
-    #include <exception>
+
+#include <string>
+#include <stdexcept>
+
+namespace anax
+{
+    using TestException = std::runtime_error;
+}
+
     // assertion failed: <file>:line: <function> <failMessage>
-    #define ANAX_ASSERT(condition, failMessage) if(!(condition)) throw std::runtime_error{std::string{"assertion failed: "} + std::string{__FILE__} + std::string{": "} + std::to_string(__LINE__) + " " + std::string{__func__} + " " + std::string{failMessage}};
+#define ANAX_ASSERT(condition, failMessage) if(!(condition)) throw anax::TestException{std::string{"assertion failed: "} + std::string{__FILE__} + std::string{": "} + std::to_string(__LINE__) + " " + std::string{__func__} + " " + std::string{failMessage}};
 #endif // ANAX_TEST_CASES
 
 #endif // ANAX_DETAIL_ANAXASSERT_HPP

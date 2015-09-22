@@ -35,7 +35,6 @@ const lest::test specification[] =
     {
         using namespace anax::detail;
 
-
         EXPECT(ClassTypeId<Type>::GetTypeId<bool>() == 0);
         EXPECT(ClassTypeId<Type>::GetTypeId<char>() == 1);
         EXPECT(ClassTypeId<Type>::GetTypeId<unsigned char>() == 2);
@@ -46,6 +45,8 @@ const lest::test specification[] =
         EXPECT(ClassTypeId<Type>::GetTypeId<float>() == 7);
         EXPECT(ClassTypeId<Type>::GetTypeId<double>() == 8);
     }
+
+    // TODO: multi-threaded test (how?)
 };
 
 int main()

@@ -32,6 +32,26 @@ using namespace anax;
 
 #include "Systems.hpp"
 
+// Since systems are tightly bound to the world attached to them, 
+// we will also be testing that the world.
+//
+// Here are the possible test cases we need to test for:
+// 1. Constructing a system
+//    - Does the getWorld() function assert?
+//    - Are there no entities attached to the System?
+// 2. Adding a system
+//    - Does the system exist in the world?
+//    - Is the system's getWorld() work appropriately? 
+//    - Are there no entities attached to the System?
+//    - Does adding multiple systems of the same time assert?
+//    - After a world refresh are: 
+//         - entities added (with appropriate entities activated)
+//         - no entities within the system
+// 3. Removing a system
+//    - Does the getWorld() function assert?
+//    - Does the system no longer exist in the world?
+//    - Are there no entities attached to the system?
+//
 const lest::test specification[] =
 {
     CASE("Adding a system to a world")
@@ -148,8 +168,6 @@ const lest::test specification[] =
         world.refresh();
         moveSystem.update();
     },
-
-
 };
 
 int main()
