@@ -160,7 +160,7 @@ namespace anax
         /// \tparam The type of component you wish to add
         /// \param args The arguments for the constructor of the component
         template <typename T, typename... Args>
-        T& addComponent(Args&&... args);
+        ComponentPtr<T> addComponent(Args&&... args);
 
         /// Removes a component
         /// \tparam The type of component you wish to remove
@@ -213,13 +213,13 @@ namespace anax
     };
 
     template <typename T, typename... Args>
-    T& Entity::addComponent(Args&&... args)
+    ComponentPtr<T> Entity::addComponent(Args&&... args)
     {
         static_assert(std::is_base_of<Component, T>(), "T is not a component, cannot add T to entity");
         // TODO: align components by type
         auto component = new T{std::forward<Args>(args)...};
         addComponent(component, ComponentTypeId<T>());
-        return *component;
+        return component;
     }
 
     template <typename T>
