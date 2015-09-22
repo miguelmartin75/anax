@@ -31,18 +31,48 @@
 #include "Components.hpp"
 #include "Systems.hpp"
 
+using namespace anax;
+
+// Since entities are heavily tied to a World, we are essentially also testing
+// the world.
+//
+// Here are the possible test cases we need to test for:
+//
+// 1. Valid/invalid entity handles
+//      - New entity => should be valid
+//      - Copy of entity => should both be valid
+//      - Copy entity and:
+//          - kill each copy (separate case) => both should be invalid
+//          - deactivate each copy (separate case) => both should be valid
+// 3. De/activating entities
+//      - Determining if a new entity is not activated
+//      - Activate entity => is activated?
+//      - Activate -> Deactivate => is de-activated 
+//          * where appropriate (before/after world refresh)?
+//      - Activate -> Deactivate -> Activate => is activated?
+//          * where appropriate
+// 5. Adding and removing components
+//      - Adding a component => does hasComponent return true?
+//      - Adding multiple components => does it assert?
+//      - Removing a component => does hasComponent return false?
+//      - Removing all components => does hasComponent return false?
+// 6. Retrieving an entity via index
+//      - Invalid index => assertion occurs?
+//      - Valid index => appropriate entity returned?
+//      - Multiple entities added/removed => appropriate entity returned?
+
 const lest::test specification[] =
 {
-    CASE("Valid entity handles")
+    CASE("Valid entity handle")
     {
-        anax::World world;
+        World world;
         auto e = world.createEntity();
         EXPECT(e.isValid() == true);
     },
 
     CASE("Invalid entity handles (killing entities)")
     {
-        anax::World world;
+        World world;
 
         auto e = world.createEntity();
         e.kill();
@@ -55,7 +85,7 @@ const lest::test specification[] =
 
     CASE("Invalid entity handles (clearing world)")
     {
-        anax::World world;
+        World world;
 
         auto e = world.createEntity();
         world.clear();
@@ -65,7 +95,7 @@ const lest::test specification[] =
 
     CASE("Duplicate invalid (killed) entity handles")
     {
-        anax::World world;
+        World world;
 
         auto e1 = world.createEntity(); 
         e1.kill();
@@ -75,7 +105,7 @@ const lest::test specification[] =
         EXPECT(e1.isValid() == false);
 
         // create another handle, that is the same as the previous
-        anax::Entity e2 = e1;
+        Entity e2 = e1;
 
         // this handle should also be invalid
         EXPECT(e2.isValid() == false);
@@ -83,7 +113,7 @@ const lest::test specification[] =
 
     CASE("Activating and deactivating entities")
     {
-        anax::World world;
+        World world;
 
         auto e = world.createEntity();
 
@@ -100,7 +130,7 @@ const lest::test specification[] =
 
     CASE("Activating an entity multiple times")
     {
-        anax::World world;
+        World world;
         MovementSystem movementSystem;
         world.addSystem(movementSystem);
 
