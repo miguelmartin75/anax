@@ -59,11 +59,18 @@ namespace
         }
     };
 
-    template <class Type, class... Types>
+    template <>
+    struct Assigner<> 
+    {
+        void operator()(ComponentTypeList& list) const {}
+    };
+
+    template <class... Types>
     ComponentTypeList createTypeList()
     {
         ComponentTypeList temp(MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST);
-        Assigner<Type, Types...>()(temp);
+        for(size_t i = 0; i < MAXIMUM_AMOUNT_OF_COMPONENT_TYPES_TO_TEST; ++i) temp[i] = false;
+        Assigner<Types...>()(temp);
         return temp;
     }
 }
