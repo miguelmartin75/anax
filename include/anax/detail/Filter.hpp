@@ -50,8 +50,7 @@ namespace anax
 
             Filter(ComponentTypeList requires, ComponentTypeList excludes) :
                 m_requires(requires), m_excludes(excludes)
-            {
-            }
+            { }
 
             bool doesPassFilter(const ComponentTypeList& typeList) const;
 

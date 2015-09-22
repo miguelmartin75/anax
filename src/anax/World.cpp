@@ -143,7 +143,7 @@ namespace anax
                     {
                         i.second->add(entity); // add it to the system
 
-                        detail::EnsureCapacity(attribute.systems, systemIndex); 
+                        util::EnsureCapacity(attribute.systems, systemIndex); 
                         attribute.systems[systemIndex] = true;
                     }
                 }

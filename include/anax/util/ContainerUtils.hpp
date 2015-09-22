@@ -28,7 +28,7 @@
 
 namespace anax
 {
-    namespace detail
+    namespace util
     {
         /// Ensures the capacity of a container
         /// \param index The index you wish to access
