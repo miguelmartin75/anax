@@ -1,4 +1,4 @@
-# anax
+# anax ![travis-ci](https://travis-ci.org/miguelmartin75/anax.svg?branch=develop)
 
 anax is an open source C++ entity system designed to be portable, lightweight and easy to use. It is aimed toward Game Development, however it would be possible to use it for other projects.
 
