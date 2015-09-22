@@ -40,7 +40,7 @@
 ///		- Collision
 ///
 /// \author Miguel Martin
-struct CollisionSystem : anax::System<CollisionSystem, anax::Require<TransformComponent, CollisionComponent>>
+struct CollisionSystem : anax::System<anax::Requires<TransformComponent, CollisionComponent>>
 {
 public:
 

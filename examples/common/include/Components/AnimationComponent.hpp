@@ -43,7 +43,7 @@ struct AnimationSystem;
 /// you must change that.
 ///
 /// \author Miguel Martin
-struct AnimationComponent : anax::Component<AnimationComponent>
+struct AnimationComponent : anax::Component
 {
     struct State
     {

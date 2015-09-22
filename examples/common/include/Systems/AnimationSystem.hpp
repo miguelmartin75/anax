@@ -40,8 +40,7 @@
 ///		- Animation
 ///
 /// \author Miguel Martin
-struct AnimationSystem : 
-    anax::System<AnimationSystem, anax::Require<SpriteComponent, AnimationComponent>>
+struct AnimationSystem : anax::System<anax::Requires<SpriteComponent, AnimationComponent>>
 {
 public:
 

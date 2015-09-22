@@ -32,7 +32,7 @@
 /// \brief A component used to store transform information
 ///
 /// \author Miguel Martin
-struct TransformComponent : anax::Component<TransformComponent>
+struct TransformComponent : anax::Component
 {
     sf::Transformable transform;
 };

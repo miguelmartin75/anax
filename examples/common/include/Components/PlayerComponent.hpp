@@ -33,7 +33,7 @@
 
 #include <SFML/Window/Keyboard.hpp>
 
-struct PlayerComponent : anax::Component<PlayerComponent>
+struct PlayerComponent : anax::Component
 {
     PlayerComponent() : 
         state(State::NO_STATE)

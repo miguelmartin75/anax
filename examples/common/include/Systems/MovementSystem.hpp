@@ -38,8 +38,7 @@
 ///		- Velocity
 ///
 /// \author Miguel Martin
-struct MovementSystem : 
-    anax::System<MovementSystem, anax::Require<TransformComponent, VelocityComponent>>
+struct MovementSystem : anax::System<anax::Requires<TransformComponent, VelocityComponent>>
 {
     /// Updates the MovementSystem
     /// \param deltaTime The change in time

@@ -33,7 +33,7 @@
 /// \brief A component used to store collision information
 ///
 /// \author Miguel Martin
-struct CollisionComponent : anax::Component<CollisionComponent>
+struct CollisionComponent : anax::Component
 {
     /// The BBox rectangle for collision
     sf::FloatRect boundingBox;

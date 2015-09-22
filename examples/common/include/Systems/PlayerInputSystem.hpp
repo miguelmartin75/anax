@@ -36,7 +36,7 @@
 struct VelocityComponent;
 
 struct PlayerInputSystem : 
-    anax::System<PlayerInputSystem, anax::Require<PlayerComponent, VelocityComponent>>
+    anax::System<anax::Requires<PlayerComponent, VelocityComponent>>
 {
 public:
 

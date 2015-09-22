@@ -50,10 +50,10 @@ void Game::init()
     // create the player
     auto player = m_world.createEntity();
 
-    auto& playerSprite = player.addComponent<SpriteComponent>().sprite;
+    auto& playerSprite = player.addComponent<SpriteComponent>()->sprite;
     playerSprite.setTexture(m_textureCache[PLAYER_TEXTURE_ID]);
 
-    auto& playerTransform = player.addComponent<TransformComponent>().transform;
+    auto& playerTransform = player.addComponent<TransformComponent>()->transform;
     playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerSprite.getLocalBounds().width / 2, m_renderTarget->getView().getSize().y / 2 - playerSprite.getLocalBounds().height / 2);
 
     // activate the player

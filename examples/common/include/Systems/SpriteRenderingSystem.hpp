@@ -41,7 +41,7 @@ struct TransformComponent;
 ///		- Sprite
 ///
 /// \author Miguel Martin
-struct SpriteRenderingSystem : anax::System<SpriteRenderingSystem, anax::Require<SpriteComponent, TransformComponent>>
+struct SpriteRenderingSystem : anax::System<anax::Requires<SpriteComponent, TransformComponent>>
 {
     /// Construct a SpriteRenderingSystem with no render target
     SpriteRenderingSystem();

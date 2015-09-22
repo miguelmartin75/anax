@@ -60,23 +60,23 @@ void Game::init()
     // create the player
     m_player = m_world.createEntity();
 
-    auto& playerSprite = m_player.addComponent<SpriteComponent>().sprite;
+    auto& playerSprite = m_player.addComponent<SpriteComponent>()->sprite;
     playerSprite.setTexture(m_textureCache[PLAYER_TEXTURE_ID]);
 
     // load the animations
-    if(!m_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
+    if(!m_player.addComponent<AnimationComponent>()->loadData("resources/meta/playerSpriteSheetFrames.txt"))
     {
         std::cerr << "Failed to load animation data\n";
         quit();
     }
 
-    auto& playerAnimaton = m_player.getComponent<AnimationComponent>();
-    auto& playerTransform = m_player.addComponent<TransformComponent>().transform;
+    auto& playerAnimaton = *m_player.getComponent<AnimationComponent>();
+    auto& playerTransform = m_player.addComponent<TransformComponent>()->transform;
     playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, m_renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
 
     m_player.addComponent<VelocityComponent>();
 
-    auto& playerComp = m_player.addComponent<PlayerComponent>();
+    auto& playerComp = *m_player.addComponent<PlayerComponent>();
     playerComp.baseSpeed = 100;
 
     // activate the player
@@ -123,11 +123,11 @@ void Game::onPlayerStateChanged(anax::Entity& e, PlayerComponent::State state)
 {
     static const std::string stateNames[] = { "idle", "run", "run", "shoot_run", "shoot_run", "jump", "shoot", "shoot_jump" };
 
-    auto& spriteComp = e.getComponent<SpriteComponent>();
+    auto& spriteComp = *e.getComponent<SpriteComponent>();
 
     if(e.hasComponent<AnimationComponent>())
     {
-        auto& animationComp = e.getComponent<AnimationComponent>();
+        auto& animationComp = *e.getComponent<AnimationComponent>();
         auto& stateName = stateNames[static_cast<unsigned>(state)];
 
         auto width = animationComp.frameSize.x;

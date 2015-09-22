@@ -32,7 +32,7 @@
 /// \brief A component used to describe the velocity of an entity
 ///
 /// \author Miguel Martin
-struct VelocityComponent : anax::Component<VelocityComponent>
+struct VelocityComponent : anax::Component
 {
     sf::Vector2f velocity;
 };

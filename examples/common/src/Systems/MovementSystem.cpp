@@ -30,8 +30,8 @@ void MovementSystem::update(double deltaTime)
     auto entities = getEntities();
     for(auto& entity : entities)
     {
-        auto& transform = entity.getComponent<TransformComponent>().transform;
-        auto& velocity = entity.getComponent<VelocityComponent>().velocity;
+        auto& transform = entity.getComponent<TransformComponent>()->transform;
+        auto& velocity = entity.getComponent<VelocityComponent>()->velocity;
 
         velocity *= (float)deltaTime;		
 

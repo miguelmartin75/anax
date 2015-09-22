@@ -32,7 +32,7 @@
 /// \brief A component used to describe a sprite
 ///
 /// \author Miguel Martin
-struct SpriteComponent : anax::Component<SpriteComponent>
+struct SpriteComponent : anax::Component
 {
     sf::Sprite sprite;
 };
