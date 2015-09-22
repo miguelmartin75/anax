@@ -1,0 +1,13 @@
+language: cpp
+
+compiler:
+    - clang
+
+before_script:
+    - mkdir build
+    - cd build
+    - cmake .. -DBUILD_TESTS=YES
+
+script:
+    - make
+    - make test
