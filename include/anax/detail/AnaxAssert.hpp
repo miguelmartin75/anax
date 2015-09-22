@@ -35,7 +35,7 @@
 #else 
 
 #include <string>
-#include <exception>
+#include <stdexcept>
 
 namespace anax
 {
