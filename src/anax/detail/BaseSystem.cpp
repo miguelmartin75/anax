@@ -1,4 +1,5 @@
 #include <anax/detail/BaseSystem.hpp>
+#include <anax/detail/AnaxAssert.hpp>
 
 #include <algorithm>
 
@@ -23,6 +24,7 @@ namespace anax
 
         World& BaseSystem::getWorld() const
         {
+            ANAX_ASSERT(m_world != nullptr, "No world attached to system");
             return *m_world;
         }
 

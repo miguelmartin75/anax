@@ -241,6 +241,7 @@ namespace anax
     void World::addSystem(detail::BaseSystem& system, detail::TypeId systemTypeId)
     {
         ANAX_ASSERT(!system.m_world, "System is already contained within a World");
+        ANAX_ASSERT(m_systems.count(systemTypeId) == 0, "System of this type is already contained within the world");
 
         m_systems[systemTypeId].reset(&system);
 

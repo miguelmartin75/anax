@@ -28,6 +28,7 @@
 #include <sstream>
 
 #include <anax/anax.hpp>
+#include <anax/detail/AnaxAssert.hpp>
 using namespace anax;
 
 #include "Systems.hpp"
@@ -37,23 +38,27 @@ using namespace anax;
 //
 // Here are the possible test cases we need to test for:
 // 1. Constructing a system
-//    - Does the getWorld() function assert?
-//    - Are there no entities attached to the System?
+//    ✓  Does the getWorld() function assert?
+//    ✓  Are there no entities attached to the System?
 // 2. Adding a system
-//    - Does the system exist in the world?
-//    - Is the system's getWorld() work appropriately? 
-//    - Are there no entities attached to the System?
-//    - Does adding multiple systems of the same time assert?
-//    - After a world refresh are: 
-//         - entities added (with appropriate entities activated)
-//         - no entities within the system
+//    ✓ Does the system exist in the world?
+//    ✓ Is the system's getWorld() work appropriately? 
+//    ✓ Are there no entities attached to the System?
+//    ✓ Does adding multiple systems of the same type assert?
 // 3. Removing a system
-//    - Does the getWorld() function assert?
-//    - Does the system no longer exist in the world?
-//    - Are there no entities attached to the system?
+//    ✓ Does the getWorld() function assert?
+//    ✓ Does the system no longer exist in the world?
+//    ✓ Are there no entities attached to the system?
 //
 const lest::test specification[] =
 {
+    CASE("New system")
+    {
+        MovementSystem system;
+        EXPECT(system.getEntities().size() == 0);
+        EXPECT_THROWS_AS(system.getWorld(), anax::TestException);
+    },
+
     CASE("Adding a system to a world")
     {
         World world;
@@ -61,6 +66,19 @@ const lest::test specification[] =
         world.addSystem(system);
 
         EXPECT(world.doesSystemExist(system) == true);
+        EXPECT(system.getEntities().size() == 0);
+        EXPECT(&system.getWorld() == &world);
+    },
+
+    CASE("Adding multiple systems of the same type")
+    {
+        World world;
+        MovementSystem m1;
+        MovementSystem m2;
+
+        world.addSystem(m1);
+
+        EXPECT_THROWS_AS(world.addSystem(m2), anax::TestException);
     },
 
     CASE("Removing a system from a world")
@@ -69,9 +87,29 @@ const lest::test specification[] =
         MovementSystem system;
         world.addSystem(system);
 
+        Entity e = world.createEntity();
+        e.addComponent<PositionComponent>();
+        e.addComponent<VelocityComponent>();
+        e.activate();
+
+        world.refresh();
+
+        EXPECT(system.getEntities().size() == 1);
+
         world.removeSystem<decltype(system)>();
 
+        EXPECT_THROWS_AS(system.getWorld(), anax::TestException);
         EXPECT(world.doesSystemExist(system) == false);
+        EXPECT(system.getEntities().size() == 0);
+    },
+
+    CASE("Removing a system that is not in the world")
+    {
+        World world;
+        MovementSystem system;
+
+        EXPECT(world.doesSystemExist(system) == false);
+        EXPECT_THROWS_AS(world.removeSystem<decltype(system)>(), anax::TestException);
     },
 
     CASE("Removing all systems from the world")

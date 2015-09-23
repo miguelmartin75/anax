@@ -54,12 +54,12 @@ namespace anax
         /// The index is the type ID of the system,
         /// thus systems of the same type can not be stored
         /// in the same World object.
-        typedef std::unordered_map<detail::TypeId, std::unique_ptr<detail::BaseSystem, SystemDeleter>> SystemArray;
+        using SystemArray = std::unordered_map<detail::TypeId, std::unique_ptr<detail::BaseSystem, SystemDeleter>>;
 
     public:
 
         /// Describes an array of Entities
-        typedef std::vector<Entity> EntityArray;
+        using EntityArray = std::vector<Entity>;
 
         /// Default Constructor
         World();
