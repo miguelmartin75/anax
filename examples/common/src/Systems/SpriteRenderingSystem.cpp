@@ -44,8 +44,8 @@ void SpriteRenderingSystem::render()
     auto entities = getEntities();
     for(auto& entity : entities)
     {
-        auto& sprite = entity.getComponent<SpriteComponent>()->sprite;
-        auto& transform = entity.getComponent<TransformComponent>()->transform;
+        auto& sprite = entity.getComponent<SpriteComponent>().sprite;
+        auto& transform = entity.getComponent<TransformComponent>().transform;
 
         getRenderTarget().draw(sprite, transform.getTransform());
     }

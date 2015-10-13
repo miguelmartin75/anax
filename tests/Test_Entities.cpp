@@ -341,7 +341,7 @@ const lest::test specification[] =
         e.addComponent<PositionComponent>();
 
         EXPECT(e.hasComponent<PositionComponent>() == true);
-        EXPECT(e.getComponent<PositionComponent>() != nullptr);
+        EXPECT_NO_THROW(e.getComponent<PositionComponent>());
         EXPECT(countNonNull(e.getComponents()) == 1);
     },
 
@@ -368,8 +368,8 @@ const lest::test specification[] =
 
         EXPECT(e.hasComponent<PositionComponent>() == true);
         EXPECT(e.hasComponent<VelocityComponent>() == true);
-        EXPECT(e.getComponent<PositionComponent>() != nullptr);
-        EXPECT(e.getComponent<VelocityComponent>() != nullptr);
+        EXPECT_NO_THROW(e.getComponent<PositionComponent>());
+        EXPECT_NO_THROW(e.getComponent<VelocityComponent>());
 
         e.removeAllComponents();
 

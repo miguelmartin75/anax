@@ -39,8 +39,8 @@ static sf::FloatRect getBBoxRectFor(const sf::Transformable& transformable, cons
 
 static sf::FloatRect getBBoxRectFor(const anax::Entity& entity)
 {
-    auto& transform = entity.getComponent<TransformComponent>()->transform;
-    auto& bbox = entity.getComponent<CollisionComponent>()->boundingBox;
+    auto& transform = entity.getComponent<TransformComponent>().transform;
+    auto& bbox = entity.getComponent<CollisionComponent>().boundingBox;
     return getBBoxRectFor(transform, bbox);
 }
 
@@ -58,7 +58,7 @@ void CollisionSystem::update(double)
     for(std::size_t i = 0; i < colliders.size(); ++i)
     {
         auto& e1 = colliders[i];
-        if(!e1.getComponent<CollisionComponent>()->causesEvents)
+        if(!e1.getComponent<CollisionComponent>().causesEvents)
         {
             continue;
         }

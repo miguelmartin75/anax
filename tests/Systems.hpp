@@ -41,8 +41,8 @@ public:
         auto entities = getEntities();
         for(auto& e : entities)
         {			
-            auto& position = *e.getComponent<PositionComponent>();
-            auto& velocity = *e.getComponent<VelocityComponent>();
+            auto& position = e.getComponent<PositionComponent>();
+            auto& velocity = e.getComponent<VelocityComponent>();
 
             position.x += velocity.x;
             position.y += velocity.y;

@@ -40,8 +40,8 @@ void PlayerInputSystem::update(double deltaTime)
     auto entities = getEntities();
     for(auto e : entities)
     {
-        auto& playerComp = *e.getComponent<PlayerComponent>();
-        auto& velocity = e.getComponent<VelocityComponent>()->velocity;
+        auto& playerComp = e.getComponent<PlayerComponent>();
+        auto& velocity = e.getComponent<VelocityComponent>().velocity;
 
         bool shootKeyPressed = sf::Keyboard::isKeyPressed(playerComp.controls.shoot);
 

@@ -32,8 +32,8 @@ void AnimationSystem::update(double deltaTime)
     auto entities = getEntities();
     for(auto& e : entities)
     {		
-        auto& animation = *e.getComponent<AnimationComponent>();
-        auto& sprite = e.getComponent<SpriteComponent>()->sprite;
+        auto& animation = e.getComponent<AnimationComponent>();
+        auto& sprite = e.getComponent<SpriteComponent>().sprite;
 
         AnimationComponent::State* animationState = nullptr;
         if(!animation.playingState.empty())

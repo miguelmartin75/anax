@@ -60,25 +60,25 @@ void Game::init()
     // create the player
     m_player = m_world.createEntity();
 
-    auto& playerSprite = m_player.addComponent<SpriteComponent>()->sprite;
+    auto& playerSprite = m_player.addComponent<SpriteComponent>().sprite;
     playerSprite.setTexture(m_textureCache[PLAYER_TEXTURE_ID]);
 
     // load the animations
-    if(!m_player.addComponent<AnimationComponent>()->loadData("resources/meta/playerSpriteSheetFrames.txt"))
+    if(!m_player.addComponent<AnimationComponent>().loadData("resources/meta/playerSpriteSheetFrames.txt"))
     {
         std::cerr << "Failed to load animation data\n";
         quit();
     }
 
-    auto& playerAnimaton = *m_player.getComponent<AnimationComponent>();
+    auto& playerAnimaton = m_player.getComponent<AnimationComponent>();
     playerAnimaton.repeat = true;
     playerAnimaton.isPlaying = true;
 
-    auto& playerTransform = m_player.addComponent<TransformComponent>()->transform;
+    auto& playerTransform = m_player.addComponent<TransformComponent>().transform;
     playerTransform.setPosition(m_renderTarget->getView().getSize().x / 2 - playerAnimaton.frameSize.x / 2, m_renderTarget->getView().getSize().y / 2 - playerAnimaton.frameSize.y / 2);
 
-    animationStateNames.reserve(m_player.getComponent<AnimationComponent>()->states.size());
-    for(auto& state : m_player.getComponent<AnimationComponent>()->states)
+    animationStateNames.reserve(m_player.getComponent<AnimationComponent>().states.size());
+    for(auto& state : m_player.getComponent<AnimationComponent>().states)
     {
         animationStateNames.emplace_back(state.first);
     }
@@ -118,20 +118,20 @@ void Game::handleEvents(sf::Event event)
                 case sf::Keyboard::Key::Space:
                     {
                         // pause/play animation
-                        bool isPlaying = m_player.getComponent<AnimationComponent>()->isPlaying = !m_player.getComponent<AnimationComponent>()->isPlaying;
+                        bool isPlaying = m_player.getComponent<AnimationComponent>().isPlaying = !m_player.getComponent<AnimationComponent>().isPlaying;
                         std::cout << (isPlaying ? "Playing" : "Paused") << " animation\n";					
                     }
                     break;
                 case sf::Keyboard::Key::S:
                     {
                         std::cout << "Stopped animation\n";
-                        m_player.getComponent<AnimationComponent>()->stop();
+                        m_player.getComponent<AnimationComponent>().stop();
                     }
                     break;
                 case sf::Keyboard::Key::R:
                     {
                         // toggle repeat
-                        bool repeat = m_player.getComponent<AnimationComponent>()->repeat = !m_player.getComponent<AnimationComponent>()->repeat;
+                        bool repeat = m_player.getComponent<AnimationComponent>().repeat = !m_player.getComponent<AnimationComponent>().repeat;
                         std::cout << "Turned repeat " << (repeat ? "on" : "off") << '\n';
                     }
                     break;
@@ -151,8 +151,8 @@ void Game::handleEvents(sf::Event event)
                     if(index >= animationStateNames.size()) index = animationStateNames.size() - 1;
                     std::cout << "Set animation: " << index <<  " - " << animationStateNames[index] << '\n';
 
-                    m_player.getComponent<AnimationComponent>()->playingState = animationStateNames[index];
-                    m_player.getComponent<AnimationComponent>()->reset();
+                    m_player.getComponent<AnimationComponent>().playingState = animationStateNames[index];
+                    m_player.getComponent<AnimationComponent>().reset();
                     break;
             }
             break;

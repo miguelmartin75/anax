@@ -160,7 +160,7 @@ namespace anax
         /// \tparam The type of component you wish to add
         /// \param args The arguments for the constructor of the component
         template <typename T, typename... Args>
-        ComponentPtr<T> addComponent(Args&&... args);
+        T& addComponent(Args&&... args);
 
         /// Removes a component
         /// \tparam The type of component you wish to remove
@@ -174,7 +174,7 @@ namespace anax
         /// \tparam The type of component you wish to retrieve
         /// \return A pointer to the component
         template <typename T>
-        ComponentPtr<T> getComponent() const;
+        T& getComponent() const;
 
         /// Determines if this Entity has a component or not
         /// \tparam The type of component you wish to check for
@@ -199,7 +199,7 @@ namespace anax
         // so I may call them from templated public interfaces
         void addComponent(Component* component, detail::TypeId componentTypeId);
         void removeComponent(detail::TypeId componentTypeId);
-        Component* getComponent(detail::TypeId componentTypeId) const;
+        Component& getComponent(detail::TypeId componentTypeId) const;
         bool hasComponent(detail::TypeId componentTypeId) const;
 
 
@@ -213,13 +213,13 @@ namespace anax
     };
 
     template <typename T, typename... Args>
-    ComponentPtr<T> Entity::addComponent(Args&&... args)
+    T& Entity::addComponent(Args&&... args)
     {
         static_assert(std::is_base_of<Component, T>(), "T is not a component, cannot add T to entity");
         // TODO: align components by type
         auto component = new T{std::forward<Args>(args)...};
         addComponent(component, ComponentTypeId<T>());
-        return component;
+        return *component;
     }
 
     template <typename T>
@@ -230,10 +230,10 @@ namespace anax
     }
 
     template <typename T>
-    ComponentPtr<T> Entity::getComponent() const
+    T& Entity::getComponent() const
     {
         static_assert(std::is_base_of<Component, T>(), "T is not a component, cannot retrieve T from entity");
-        return static_cast<T*>(getComponent(ComponentTypeId<T>()));
+        return static_cast<T&>(getComponent(ComponentTypeId<T>()));
     }
 
     template <typename T>
