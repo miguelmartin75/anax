@@ -30,6 +30,7 @@
 #include <vector>
 
 #include <anax/detail/ClassTypeId.hpp>
+#include <anax/Config.hpp>
 
 namespace anax
 {
