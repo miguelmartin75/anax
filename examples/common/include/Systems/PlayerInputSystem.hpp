@@ -29,6 +29,8 @@
 #ifndef ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP
 #define ANAX_EXAMPLES_MOVEMENT_PLAYERINPUTSYSTEM_HPP
 
+#include <algorithm>
+
 #include <anax/System.hpp>
 
 #include <Components/PlayerComponent.hpp>
