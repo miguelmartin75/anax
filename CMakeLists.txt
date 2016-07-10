@@ -147,6 +147,11 @@ if(INSTALL_HEADERS)
             DESTINATION .
             FILES_MATCHING PATTERN "*.hpp"
            )
+    install(
+            DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include
+            DESTINATION .
+            FILES_MATCHING PATTERN "*.hpp"
+           )
 endif()
 
 # Set properties for the library
