@@ -56,10 +56,11 @@ set(ANAX_MAX_AMOUNT_OF_COMPONENTS 64 CACHE INTEGER "The maximum amount of compon
 
 
 # set up the configure file for the library
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/Config.hpp.inl ${CMAKE_CURRENT_SOURCE_DIR}/include/anax/Config.hpp)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/Config.hpp.inl ${CMAKE_CURRENT_BINARY_DIR}/include/anax/Config.hpp)
 
 # Add include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 
 # Determine if we're building a shared (dynamic) library
 # And set appropriate suffixes for the executables
@@ -143,6 +144,11 @@ endif()
 if(INSTALL_HEADERS)
     install(
             DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
+            DESTINATION .
+            FILES_MATCHING PATTERN "*.hpp"
+           )
+    install(
+            DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include
             DESTINATION .
             FILES_MATCHING PATTERN "*.hpp"
            )
