@@ -114,7 +114,7 @@ namespace anax
 
     bool World::isActivated(const Entity& entity) const
     {
-        if( isValid(entity) )
+        if(isValid(entity))
             return m_entityAttributes.attributes[entity.getId().index].activated;
         else
             return false;

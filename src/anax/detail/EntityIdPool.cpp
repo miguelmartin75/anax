@@ -69,15 +69,15 @@ namespace anax
 
         Entity::Id EntityIdPool::get(std::size_t index) const
         {
-            if( index < m_counts.size() )
-                return Entity::Id(index, m_counts[index]);
+            if(index < m_counts.size())
+                return Entity::Id{index, m_counts[index]};
             else
                 return Entity::Id{index, 0};
         }
 
         bool EntityIdPool::isValid(Entity::Id id) const
         {
-            if( id.index >= m_counts.size() )
+            if(id.index >= m_counts.size())
                 return false;
             else
                 return (id.counter == m_counts[id.index]) && (id.counter > 0);
