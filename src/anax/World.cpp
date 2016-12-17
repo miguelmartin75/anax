@@ -114,9 +114,10 @@ namespace anax
 
     bool World::isActivated(const Entity& entity) const
     {
-        ANAX_ASSERT(isValid(entity), "invalid entity passed to isActivated");
-
-        return m_entityAttributes.attributes[entity.getId().index].activated;
+        if(isValid(entity))
+            return m_entityAttributes.attributes[entity.getId().index].activated;
+        else
+            return false;
     }
 
     bool World::isValid(const anax::Entity &entity) const

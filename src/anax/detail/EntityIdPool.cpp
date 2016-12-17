@@ -69,14 +69,18 @@ namespace anax
 
         Entity::Id EntityIdPool::get(std::size_t index) const
         {
-            ANAX_ASSERT(index < m_counts.size(), "Entity index is out of range");
-            ANAX_ASSERT(!(m_counts[index] == 0), "Entity ID does not exist");
-            return Entity::Id{index, m_counts[index]};
+            if(index < m_counts.size())
+                return Entity::Id{index, m_counts[index]};
+            else
+                return Entity::Id{index, 0};
         }
 
         bool EntityIdPool::isValid(Entity::Id id) const
         {
-            return id.counter == m_counts[id.index];
+            if(id.index >= m_counts.size())
+                return false;
+            else
+                return (id.counter == m_counts[id.index]) && (id.counter > 0);
         }
 
         std::size_t EntityIdPool::getSize() const
@@ -94,8 +98,6 @@ namespace anax
             m_counts.clear();
             m_freeList.clear();
             m_nextId = 0;
-
-            m_counts.resize(m_defaultPoolSize);
         }
     }
 }

@@ -67,7 +67,7 @@ using namespace anax;
 //      ✓ Removing a component => does hasComponent return false?
 //      ✓ Removing all components => does hasComponent return false?
 // 6. Retrieving an entity via index
-//      ✓ Invalid index => assertion occurs?
+//      ✓ Invalid index => invalid entity returned?
 //      ✓  Valid index => appropriate entity returned?
 //      ✓ Multiple entities added/removed => appropriate entity returned?
 
@@ -414,7 +414,7 @@ const lest::test specification[] =
         anax::World world;
 
         auto e = world.createEntity();
-        EXPECT_THROWS_AS(world.getEntity(-1), anax::TestException);
+        EXPECT(!(world.getEntity(-1).isValid()));
     }
 };
 
