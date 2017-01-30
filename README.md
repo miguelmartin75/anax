@@ -30,7 +30,7 @@ This section will explain how to use the library, but it will not go into much s
 
 ### The World
 
-A World is used to describe you game world or 'entity system' if you will. You must always have at least have one World object in order to use anax. e.g.
+A World is used to describe you game world or 'entity system' if you will. You must always have at least one World object in order to use anax. e.g.
 
 ```c++
 World world;
