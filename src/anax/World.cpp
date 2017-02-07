@@ -84,6 +84,8 @@ namespace anax
     void World::killEntity(Entity& entity)
     {
         ANAX_ASSERT(!isRefreshing(), "cannot kill entities while refreshing");
+	ANAX_ASSERT(isValid(entity), "invalid entity tried to kill");
+	ANAX_ASSERT(std::find(std::cbegin(m_entityCache.killed), std::cend(m_entityCache.killed), entity) == std::cend(m_entityCache.killed), "entity tried to kill multiple times");
 
         // deactivate the entity
         deactivateEntity(entity);
