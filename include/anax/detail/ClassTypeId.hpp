@@ -27,6 +27,7 @@
 #define ANAX_DETAIL_CLASSTYPEID_HPP
 
 #include <cstddef>
+#include <atomic>
 
 namespace anax
 {
@@ -48,11 +49,11 @@ namespace anax
 
         private:
 
-            static TypeId m_nextTypeId;
+            static std::atomic<TypeId> m_nextTypeId;
         };
 
         template <typename TBase>
-        TypeId ClassTypeId<TBase>::m_nextTypeId = 0;
+        std::atomic<TypeId> ClassTypeId<TBase>::m_nextTypeId{0};
     }
 }
 
