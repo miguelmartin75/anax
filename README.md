@@ -109,13 +109,13 @@ auto pos = entity.getComponent<PositionComponent>();
 A System is used to contain on entities with specific components (require or exclude a set of component types). It is typically used to update, render or perform some logic these entities. 
 
 ```c++
-struct MovementSystem : anax::System<anax::Requires<PositionComponent, VelocityComponent>>
+struct MovementSystem : anax::System<anax::Requires<PositionComponent, VelocityComponent>, anax::Excludes<ParalizedComponent>>
 {
 	// ...
 };
 ```
 
-That is, a movement system requires entities with a `PositionComponent` and `VelocityComponent`. You may determine if an entity is removed/added to the system via these two override-able (virtual) methods:
+That is, a movement system requires entities with a `PositionComponent` and `VelocityComponent`, also excludes entities with a `ParalizedComponent`. You may determine if an entity is removed/added to the system via these two override-able (virtual) methods:
 
 - `onEntityAdded(Entity&)`
 - `onEntityRemoved(Entity&)`
