@@ -165,6 +165,7 @@ endif()
 # Library files
 install(
         TARGETS ${ANAX_LIBRARY_NAME}
+        RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib
        )
