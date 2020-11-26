@@ -159,7 +159,7 @@ set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES
                      )
 
 if(APPLE)
-    set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES OSX_ARCHITECTURES "i386;x86_64;")
+    set_target_properties(${ANAX_LIBRARY_NAME} PROPERTIES OSX_ARCHITECTURES "x86_64;")
 endif()
 
 # Library files
