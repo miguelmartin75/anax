@@ -1,5 +1,7 @@
 # anax [![Build Status](https://travis-ci.org/miguelmartin75/anax.svg?branch=master)](https://travis-ci.org/miguelmartin75/anax)
 
+**ARCHIVED: as I haven't maintained this library for at least a couple of years. I don't have the time or interest to work on this. Please use another library or just write your game without an ECS ;)**
+
 anax is an open source C++ entity system designed to be portable, lightweight and easy to use. It is aimed toward Game Development, however it would be possible to use it for other projects.
 
 # What's an Entity System?
