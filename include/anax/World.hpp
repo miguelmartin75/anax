@@ -178,6 +178,13 @@ namespace anax
         Entity getEntity(std::size_t index);
 
     private:
+	/// World is currenctly refreshing and blocking calls that might interfere 
+	/// with that.
+	bool m_refreshing = false;
+
+	/// \return True if world is currently refreshing.
+	/// \note This checks if world is currently refreshing.
+	bool isRefreshing() const;
 
         /// Systems attached with the world.
         SystemArray m_systems;

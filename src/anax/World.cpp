@@ -83,6 +83,10 @@ namespace anax
 
     void World::killEntity(Entity& entity)
     {
+        ANAX_ASSERT(!isRefreshing(), "cannot kill entities while refreshing");
+	ANAX_ASSERT(isValid(entity), "invalid entity tried to kill");
+	ANAX_ASSERT(std::find(m_entityCache.killed.begin(), m_entityCache.killed.end(), entity) == m_entityCache.killed.end(), "entity tried to kill multiple times");
+
         // deactivate the entity
         deactivateEntity(entity);
 
@@ -101,6 +105,7 @@ namespace anax
     void World::activateEntity(Entity& entity)
     {
         ANAX_ASSERT(isValid(entity), "invalid entity tried to be activated");
+        ANAX_ASSERT(!isRefreshing(), "cannot activate entities while refreshing");
 
         m_entityCache.activated.push_back(entity);
     }
@@ -108,6 +113,7 @@ namespace anax
     void World::deactivateEntity(Entity& entity)
     {
         ANAX_ASSERT(isValid(entity), "invalid entity tried to be deactivated");
+        ANAX_ASSERT(!isRefreshing(), "cannot deactivate entities while refreshing");
 
         m_entityCache.deactivated.push_back(entity);
     }
@@ -125,8 +131,15 @@ namespace anax
         return m_entityIdPool.isValid(entity.getId());
     }
 
+    bool World::isRefreshing() const
+    {
+        return m_refreshing;
+    }
+
     void World::refresh()
     {
+	m_refreshing = true;
+
         // go through all the activated entities from last call to refresh
         for(auto& entity : m_entityCache.activated)
         {
@@ -198,6 +211,8 @@ namespace anax
 
         // clear the temp cache
         m_entityCache.clearTemp();
+
+	m_refreshing = false;
     }
 
     void World::clear()
